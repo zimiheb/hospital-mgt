@@ -153,30 +153,30 @@ padding:0 0 0 15px;
 clear:both;
 }
 .box_content{
-width:267px;
-height:auto;
+width:845px;
+height:360px;
 float:left;
 margin:10px 10px 30px 10px;
 background:url(../images/box_bg.gif) no-repeat top center;
 }
 .box_title{
-padding:10px 0 10px 0;
+padding:10px 0 10px 5px;
 }
 .title_icon{
 float:left;
 padding:0 5px 0 10px;
 }
 .box_text_content{
-width:250px;
+width:815px;
 float:left;
-padding:15px 0 0 15px;
+padding:15px 0 0 10px;
 }
 .box_icon{
 float:left;
 padding:0 5px 0 0 ;
 }
 .box_text{
-width:190px;
+width:815px;
 float:left;
 text-align:justify;
 padding:0 0 0 10px;
