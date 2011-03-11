@@ -17,6 +17,6 @@ class LoginActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    echo "This is the Login Module.";//$this->forward('default', 'module');
+    //$this->forward('default', 'module');
   }
 }
