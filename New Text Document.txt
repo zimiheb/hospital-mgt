@@ -1,3 +1,4 @@
-https://hospital-mgt.googlecode.com/svn/trunk/ hospital-mgt --username why.m.i.so.lonely@gmail.com
+https://hospital-mgt.googlecode.com/svn/trunk/ 
 
-password: uE4fe5Gv5WB2
+why.m.i.so.lonely@gmail.com
+Password: uE4fe5Gv5WB2
