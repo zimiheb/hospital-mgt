@@ -1,0 +1,69 @@
+propel:
+  _attributes:
+    package: lib.model
+    defaultIdMethod: native
+  department:
+    _attributes: { phpName: Department }
+    id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }
+    title: { type: VARCHAR, size: '100', required: false }
+    status: { type: VARCHAR, size: '10', required: false }
+    created_at: { type: DATE, required: false }
+    updated_at: { type: DATE, required: false }
+  designation:
+    _attributes: { phpName: Designation }
+    id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }
+    department_id: { type: INTEGER, size: '11', required: false }
+    title: { type: VARCHAR, size: '100', required: true }
+    status: { type: VARCHAR, size: '10', required: false }
+    created_at: { type: DATE, required: false }
+    updated_at: { type: DATE, required: false }
+  patient:
+    _attributes: { phpName: Patient }
+    id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }
+    id_number: { type: VARCHAR, size: '20', required: false }
+    cnic: { type: VARCHAR, size: '25', required: false }
+    name: { type: VARCHAR, size: '100', required: false }
+    dob: { type: DATE, required: false }
+    gender: { type: VARCHAR, size: '10', required: false }
+    address: { type: VARCHAR, size: '255', required: false }
+    phone: { type: VARCHAR, size: '20', required: false }
+    mobile: { type: VARCHAR, size: '20', required: false }
+    emergency_contact: { type: VARCHAR, size: '20', required: false }
+    email: { type: VARCHAR, size: '100', required: false }
+    blood_group: { type: VARCHAR, size: '5', required: false }
+    disease: { type: VARCHAR, size: '255', required: false }
+    allergy: { type: VARCHAR, size: '255', required: false }
+    drug_allergy: { type: VARCHAR, size: '255', required: false }
+    status: { type: VARCHAR, size: '10', required: false }
+    created_at: { type: DATE, required: false }
+    updated_at: { type: DATE, required: false }
+  staff:
+    _attributes: { phpName: Staff }
+    id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }
+    department_id: { type: INTEGER, size: '11', required: false }
+    designation_id: { type: INTEGER, size: '11', required: false }
+    role_id: { type: INTEGER, size: '11', required: false }
+    name: { type: VARCHAR, size: '100', required: false }
+    cnic: { type: VARCHAR, size: '50', required: false }
+    dob: { type: DATE, required: false }
+    gender: { type: VARCHAR, size: '10', required: false }
+    permanent_address: { type: VARCHAR, size: '255', required: false }
+    contact_res: { type: VARCHAR, size: '50', required: false }
+    contact_cell: { type: VARCHAR, size: '50', required: false }
+    contact_off: { type: VARCHAR, size: '50', required: false }
+    emergency_contact: { type: VARCHAR, size: '50', required: false }
+    employment_date: { type: DATE, required: false }
+    local_resident: { type: VARCHAR, size: '3', required: false }
+    qualification: { type: VARCHAR, size: '1000', required: false }
+    status: { type: VARCHAR, size: '10', required: false }
+    created_at: { type: DATE, required: false }
+    updated_at: { type: DATE, required: false }
+  user:
+    _attributes: { phpName: User }
+    id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }
+    role_id: { type: INTEGER, size: '11', required: false }
+    username: { type: VARCHAR, size: '50', required: false }
+    password: { type: VARCHAR, size: '50', required: false }
+    status: { type: VARCHAR, size: '10', required: false }
+    created_at: { type: DATE, required: false }
+    updated_at: { type: DATE, required: false }
