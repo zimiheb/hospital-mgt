@@ -37,6 +37,9 @@
                 <ul>                                              
                     <li><a class="current" href="#" title="">Home</a></li>
                     <li><a href="#" title="">About Us</a></li>
+					 <li><a href="#" title="">About Us</a></li>
+					  <li><a href="#" title="">About Us</a></li>
+					   <li><a href="#" title="">About Us</a></li>
                     <li><a href="#" title="">Services</a></li>
                     <li><a href="#" title="">Contact Us</a></li>
                 </ul>
