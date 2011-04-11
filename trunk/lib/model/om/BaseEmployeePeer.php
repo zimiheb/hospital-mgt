@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Base static class for performing query and update operations on the 'designation' table.
+ * Base static class for performing query and update operations on the 'employee' table.
  *
  * 
  *
@@ -11,46 +11,85 @@
  *
  * @package    lib.model.om
  */
-abstract class BaseDesignationPeer {
+abstract class BaseEmployeePeer {
 
 	/** the default database name for this class */
 	const DATABASE_NAME = 'propel';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'designation';
+	const TABLE_NAME = 'employee';
 
 	/** A class that can be returned by this peer. */
-	const CLASS_DEFAULT = 'lib.model.Designation';
+	const CLASS_DEFAULT = 'lib.model.Employee';
 
 	/** The total number of columns. */
-	const NUM_COLUMNS = 6;
+	const NUM_COLUMNS = 19;
 
 	/** The number of lazy-loaded columns. */
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 	/** the column name for the ID field */
-	const ID = 'designation.ID';
+	const ID = 'employee.ID';
 
 	/** the column name for the DEPARTMENT_ID field */
-	const DEPARTMENT_ID = 'designation.DEPARTMENT_ID';
+	const DEPARTMENT_ID = 'employee.DEPARTMENT_ID';
 
-	/** the column name for the TITLE field */
-	const TITLE = 'designation.TITLE';
+	/** the column name for the DESIGNATION_ID field */
+	const DESIGNATION_ID = 'employee.DESIGNATION_ID';
+
+	/** the column name for the ROLE_ID field */
+	const ROLE_ID = 'employee.ROLE_ID';
+
+	/** the column name for the NAME field */
+	const NAME = 'employee.NAME';
+
+	/** the column name for the CNIC field */
+	const CNIC = 'employee.CNIC';
+
+	/** the column name for the DOB field */
+	const DOB = 'employee.DOB';
+
+	/** the column name for the GENDER field */
+	const GENDER = 'employee.GENDER';
+
+	/** the column name for the PERMANENT_ADDRESS field */
+	const PERMANENT_ADDRESS = 'employee.PERMANENT_ADDRESS';
+
+	/** the column name for the CONTACT_RES field */
+	const CONTACT_RES = 'employee.CONTACT_RES';
+
+	/** the column name for the CONTACT_CELL field */
+	const CONTACT_CELL = 'employee.CONTACT_CELL';
+
+	/** the column name for the CONTACT_OFF field */
+	const CONTACT_OFF = 'employee.CONTACT_OFF';
+
+	/** the column name for the EMERGENCY_CONTACT field */
+	const EMERGENCY_CONTACT = 'employee.EMERGENCY_CONTACT';
+
+	/** the column name for the EMPLOYMENT_DATE field */
+	const EMPLOYMENT_DATE = 'employee.EMPLOYMENT_DATE';
+
+	/** the column name for the LOCAL_RESIDENT field */
+	const LOCAL_RESIDENT = 'employee.LOCAL_RESIDENT';
+
+	/** the column name for the QUALIFICATION field */
+	const QUALIFICATION = 'employee.QUALIFICATION';
 
 	/** the column name for the STATUS field */
-	const STATUS = 'designation.STATUS';
+	const STATUS = 'employee.STATUS';
 
 	/** the column name for the CREATED_AT field */
-	const CREATED_AT = 'designation.CREATED_AT';
+	const CREATED_AT = 'employee.CREATED_AT';
 
 	/** the column name for the UPDATED_AT field */
-	const UPDATED_AT = 'designation.UPDATED_AT';
+	const UPDATED_AT = 'employee.UPDATED_AT';
 
 	/**
-	 * An identiy map to hold any loaded instances of Designation objects.
+	 * An identiy map to hold any loaded instances of Employee objects.
 	 * This must be public so that other peer classes can access this when hydrating from JOIN
 	 * queries.
-	 * @var        array Designation[]
+	 * @var        array Employee[]
 	 */
 	public static $instances = array();
 
@@ -67,11 +106,11 @@ abstract class BaseDesignationPeer {
 	 * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
 	 */
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Id', 'DepartmentId', 'Title', 'Status', 'CreatedAt', 'UpdatedAt', ),
-		BasePeer::TYPE_STUDLYPHPNAME => array ('id', 'departmentId', 'title', 'status', 'createdAt', 'updatedAt', ),
-		BasePeer::TYPE_COLNAME => array (self::ID, self::DEPARTMENT_ID, self::TITLE, self::STATUS, self::CREATED_AT, self::UPDATED_AT, ),
-		BasePeer::TYPE_FIELDNAME => array ('id', 'department_id', 'title', 'status', 'created_at', 'updated_at', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Id', 'DepartmentId', 'DesignationId', 'RoleId', 'Name', 'Cnic', 'Dob', 'Gender', 'PermanentAddress', 'ContactRes', 'ContactCell', 'ContactOff', 'EmergencyContact', 'EmploymentDate', 'LocalResident', 'Qualification', 'Status', 'CreatedAt', 'UpdatedAt', ),
+		BasePeer::TYPE_STUDLYPHPNAME => array ('id', 'departmentId', 'designationId', 'roleId', 'name', 'cnic', 'dob', 'gender', 'permanentAddress', 'contactRes', 'contactCell', 'contactOff', 'emergencyContact', 'employmentDate', 'localResident', 'qualification', 'status', 'createdAt', 'updatedAt', ),
+		BasePeer::TYPE_COLNAME => array (self::ID, self::DEPARTMENT_ID, self::DESIGNATION_ID, self::ROLE_ID, self::NAME, self::CNIC, self::DOB, self::GENDER, self::PERMANENT_ADDRESS, self::CONTACT_RES, self::CONTACT_CELL, self::CONTACT_OFF, self::EMERGENCY_CONTACT, self::EMPLOYMENT_DATE, self::LOCAL_RESIDENT, self::QUALIFICATION, self::STATUS, self::CREATED_AT, self::UPDATED_AT, ),
+		BasePeer::TYPE_FIELDNAME => array ('id', 'department_id', 'designation_id', 'role_id', 'name', 'cnic', 'dob', 'gender', 'permanent_address', 'contact_res', 'contact_cell', 'contact_off', 'emergency_contact', 'employment_date', 'local_resident', 'qualification', 'status', 'created_at', 'updated_at', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, )
 	);
 
 	/**
@@ -81,11 +120,11 @@ abstract class BaseDesignationPeer {
 	 * e.g. self::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
 	 */
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'DepartmentId' => 1, 'Title' => 2, 'Status' => 3, 'CreatedAt' => 4, 'UpdatedAt' => 5, ),
-		BasePeer::TYPE_STUDLYPHPNAME => array ('id' => 0, 'departmentId' => 1, 'title' => 2, 'status' => 3, 'createdAt' => 4, 'updatedAt' => 5, ),
-		BasePeer::TYPE_COLNAME => array (self::ID => 0, self::DEPARTMENT_ID => 1, self::TITLE => 2, self::STATUS => 3, self::CREATED_AT => 4, self::UPDATED_AT => 5, ),
-		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'department_id' => 1, 'title' => 2, 'status' => 3, 'created_at' => 4, 'updated_at' => 5, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'DepartmentId' => 1, 'DesignationId' => 2, 'RoleId' => 3, 'Name' => 4, 'Cnic' => 5, 'Dob' => 6, 'Gender' => 7, 'PermanentAddress' => 8, 'ContactRes' => 9, 'ContactCell' => 10, 'ContactOff' => 11, 'EmergencyContact' => 12, 'EmploymentDate' => 13, 'LocalResident' => 14, 'Qualification' => 15, 'Status' => 16, 'CreatedAt' => 17, 'UpdatedAt' => 18, ),
+		BasePeer::TYPE_STUDLYPHPNAME => array ('id' => 0, 'departmentId' => 1, 'designationId' => 2, 'roleId' => 3, 'name' => 4, 'cnic' => 5, 'dob' => 6, 'gender' => 7, 'permanentAddress' => 8, 'contactRes' => 9, 'contactCell' => 10, 'contactOff' => 11, 'emergencyContact' => 12, 'employmentDate' => 13, 'localResident' => 14, 'qualification' => 15, 'status' => 16, 'createdAt' => 17, 'updatedAt' => 18, ),
+		BasePeer::TYPE_COLNAME => array (self::ID => 0, self::DEPARTMENT_ID => 1, self::DESIGNATION_ID => 2, self::ROLE_ID => 3, self::NAME => 4, self::CNIC => 5, self::DOB => 6, self::GENDER => 7, self::PERMANENT_ADDRESS => 8, self::CONTACT_RES => 9, self::CONTACT_CELL => 10, self::CONTACT_OFF => 11, self::EMERGENCY_CONTACT => 12, self::EMPLOYMENT_DATE => 13, self::LOCAL_RESIDENT => 14, self::QUALIFICATION => 15, self::STATUS => 16, self::CREATED_AT => 17, self::UPDATED_AT => 18, ),
+		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'department_id' => 1, 'designation_id' => 2, 'role_id' => 3, 'name' => 4, 'cnic' => 5, 'dob' => 6, 'gender' => 7, 'permanent_address' => 8, 'contact_res' => 9, 'contact_cell' => 10, 'contact_off' => 11, 'emergency_contact' => 12, 'employment_date' => 13, 'local_resident' => 14, 'qualification' => 15, 'status' => 16, 'created_at' => 17, 'updated_at' => 18, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, )
 	);
 
 	/**
@@ -95,7 +134,7 @@ abstract class BaseDesignationPeer {
 	public static function getMapBuilder()
 	{
 		if (self::$mapBuilder === null) {
-			self::$mapBuilder = new DesignationMapBuilder();
+			self::$mapBuilder = new EmployeeMapBuilder();
 		}
 		return self::$mapBuilder;
 	}
@@ -145,12 +184,12 @@ abstract class BaseDesignationPeer {
 	 *		$c->addJoin(TablePeer::alias("alias1", TablePeer::PRIMARY_KEY_COLUMN), TablePeer::PRIMARY_KEY_COLUMN);
 	 * </code>
 	 * @param      string $alias The alias for the current table.
-	 * @param      string $column The column name for current table. (i.e. DesignationPeer::COLUMN_NAME).
+	 * @param      string $column The column name for current table. (i.e. EmployeePeer::COLUMN_NAME).
 	 * @return     string
 	 */
 	public static function alias($alias, $column)
 	{
-		return str_replace(DesignationPeer::TABLE_NAME.'.', $alias.'.', $column);
+		return str_replace(EmployeePeer::TABLE_NAME.'.', $alias.'.', $column);
 	}
 
 	/**
@@ -167,17 +206,43 @@ abstract class BaseDesignationPeer {
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
-		$criteria->addSelectColumn(DesignationPeer::ID);
+		$criteria->addSelectColumn(EmployeePeer::ID);
 
-		$criteria->addSelectColumn(DesignationPeer::DEPARTMENT_ID);
+		$criteria->addSelectColumn(EmployeePeer::DEPARTMENT_ID);
 
-		$criteria->addSelectColumn(DesignationPeer::TITLE);
+		$criteria->addSelectColumn(EmployeePeer::DESIGNATION_ID);
 
-		$criteria->addSelectColumn(DesignationPeer::STATUS);
+		$criteria->addSelectColumn(EmployeePeer::ROLE_ID);
 
-		$criteria->addSelectColumn(DesignationPeer::CREATED_AT);
+		$criteria->addSelectColumn(EmployeePeer::NAME);
 
-		$criteria->addSelectColumn(DesignationPeer::UPDATED_AT);
+		$criteria->addSelectColumn(EmployeePeer::CNIC);
+
+		$criteria->addSelectColumn(EmployeePeer::DOB);
+
+		$criteria->addSelectColumn(EmployeePeer::GENDER);
+
+		$criteria->addSelectColumn(EmployeePeer::PERMANENT_ADDRESS);
+
+		$criteria->addSelectColumn(EmployeePeer::CONTACT_RES);
+
+		$criteria->addSelectColumn(EmployeePeer::CONTACT_CELL);
+
+		$criteria->addSelectColumn(EmployeePeer::CONTACT_OFF);
+
+		$criteria->addSelectColumn(EmployeePeer::EMERGENCY_CONTACT);
+
+		$criteria->addSelectColumn(EmployeePeer::EMPLOYMENT_DATE);
+
+		$criteria->addSelectColumn(EmployeePeer::LOCAL_RESIDENT);
+
+		$criteria->addSelectColumn(EmployeePeer::QUALIFICATION);
+
+		$criteria->addSelectColumn(EmployeePeer::STATUS);
+
+		$criteria->addSelectColumn(EmployeePeer::CREATED_AT);
+
+		$criteria->addSelectColumn(EmployeePeer::UPDATED_AT);
 
 	}
 
@@ -197,27 +262,27 @@ abstract class BaseDesignationPeer {
 		// We need to set the primary table name, since in the case that there are no WHERE columns
 		// it will be impossible for the BasePeer::createSelectSql() method to determine which
 		// tables go into the FROM clause.
-		$criteria->setPrimaryTableName(DesignationPeer::TABLE_NAME);
+		$criteria->setPrimaryTableName(EmployeePeer::TABLE_NAME);
 
 		if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
 			$criteria->setDistinct();
 		}
 
 		if (!$criteria->hasSelectClause()) {
-			DesignationPeer::addSelectColumns($criteria);
+			EmployeePeer::addSelectColumns($criteria);
 		}
 
 		$criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
 		$criteria->setDbName(self::DATABASE_NAME); // Set the correct dbName
 
 		if ($con === null) {
-			$con = Propel::getConnection(DesignationPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(EmployeePeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 
 
-    foreach (sfMixer::getCallables('BaseDesignationPeer:doCount:doCount') as $callable)
+    foreach (sfMixer::getCallables('BaseEmployeePeer:doCount:doCount') as $callable)
     {
-      call_user_func($callable, 'BaseDesignationPeer', $criteria, $con);
+      call_user_func($callable, 'BaseEmployeePeer', $criteria, $con);
     }
 
 
@@ -237,7 +302,7 @@ abstract class BaseDesignationPeer {
 	 *
 	 * @param      Criteria $criteria object used to create the SELECT statement.
 	 * @param      PropelPDO $con
-	 * @return     Designation
+	 * @return     Employee
 	 * @throws     PropelException Any exceptions caught during processing will be
 	 *		 rethrown wrapped into a PropelException.
 	 */
@@ -245,7 +310,7 @@ abstract class BaseDesignationPeer {
 	{
 		$critcopy = clone $criteria;
 		$critcopy->setLimit(1);
-		$objects = DesignationPeer::doSelect($critcopy, $con);
+		$objects = EmployeePeer::doSelect($critcopy, $con);
 		if ($objects) {
 			return $objects[0];
 		}
@@ -262,7 +327,7 @@ abstract class BaseDesignationPeer {
 	 */
 	public static function doSelect(Criteria $criteria, PropelPDO $con = null)
 	{
-		return DesignationPeer::populateObjects(DesignationPeer::doSelectStmt($criteria, $con));
+		return EmployeePeer::populateObjects(EmployeePeer::doSelectStmt($criteria, $con));
 	}
 	/**
 	 * Prepares the Criteria object and uses the parent doSelect() method to execute a PDOStatement.
@@ -280,19 +345,19 @@ abstract class BaseDesignationPeer {
 	public static function doSelectStmt(Criteria $criteria, PropelPDO $con = null)
 	{
 
-    foreach (sfMixer::getCallables('BaseDesignationPeer:doSelectStmt:doSelectStmt') as $callable)
+    foreach (sfMixer::getCallables('BaseEmployeePeer:doSelectStmt:doSelectStmt') as $callable)
     {
-      call_user_func($callable, 'BaseDesignationPeer', $criteria, $con);
+      call_user_func($callable, 'BaseEmployeePeer', $criteria, $con);
     }
 
 
 		if ($con === null) {
-			$con = Propel::getConnection(DesignationPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(EmployeePeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 
 		if (!$criteria->hasSelectClause()) {
 			$criteria = clone $criteria;
-			DesignationPeer::addSelectColumns($criteria);
+			EmployeePeer::addSelectColumns($criteria);
 		}
 
 		// Set the correct dbName
@@ -310,10 +375,10 @@ abstract class BaseDesignationPeer {
 	 * to the cache in order to ensure that the same objects are always returned by doSelect*()
 	 * and retrieveByPK*() calls.
 	 *
-	 * @param      Designation $value A Designation object.
+	 * @param      Employee $value A Employee object.
 	 * @param      string $key (optional) key to use for instance map (for performance boost if key was already calculated externally).
 	 */
-	public static function addInstanceToPool(Designation $obj, $key = null)
+	public static function addInstanceToPool(Employee $obj, $key = null)
 	{
 		if (Propel::isInstancePoolingEnabled()) {
 			if ($key === null) {
@@ -331,18 +396,18 @@ abstract class BaseDesignationPeer {
 	 * methods in your stub classes -- you may need to explicitly remove objects
 	 * from the cache in order to prevent returning objects that no longer exist.
 	 *
-	 * @param      mixed $value A Designation object or a primary key value.
+	 * @param      mixed $value A Employee object or a primary key value.
 	 */
 	public static function removeInstanceFromPool($value)
 	{
 		if (Propel::isInstancePoolingEnabled() && $value !== null) {
-			if (is_object($value) && $value instanceof Designation) {
+			if (is_object($value) && $value instanceof Employee) {
 				$key = (string) $value->getId();
 			} elseif (is_scalar($value)) {
 				// assume we've been passed a primary key
 				$key = (string) $value;
 			} else {
-				$e = new PropelException("Invalid value passed to removeInstanceFromPool().  Expected primary key or Designation object; got " . (is_object($value) ? get_class($value) . ' object.' : var_export($value,true)));
+				$e = new PropelException("Invalid value passed to removeInstanceFromPool().  Expected primary key or Employee object; got " . (is_object($value) ? get_class($value) . ' object.' : var_export($value,true)));
 				throw $e;
 			}
 
@@ -357,7 +422,7 @@ abstract class BaseDesignationPeer {
 	 * a multi-column primary key, a serialize()d version of the primary key will be returned.
 	 *
 	 * @param      string $key The key (@see getPrimaryKeyHash()) for this instance.
-	 * @return     Designation Found object or NULL if 1) no instance exists for specified key or 2) instance pooling has been disabled.
+	 * @return     Employee Found object or NULL if 1) no instance exists for specified key or 2) instance pooling has been disabled.
 	 * @see        getPrimaryKeyHash()
 	 */
 	public static function getInstanceFromPool($key)
@@ -411,12 +476,12 @@ abstract class BaseDesignationPeer {
 		$results = array();
 	
 		// set the class once to avoid overhead in the loop
-		$cls = DesignationPeer::getOMClass();
+		$cls = EmployeePeer::getOMClass();
 		$cls = substr('.'.$cls, strrpos('.'.$cls, '.') + 1);
 		// populate the object(s)
 		while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-			$key = DesignationPeer::getPrimaryKeyHashFromRow($row, 0);
-			if (null !== ($obj = DesignationPeer::getInstanceFromPool($key))) {
+			$key = EmployeePeer::getPrimaryKeyHashFromRow($row, 0);
+			if (null !== ($obj = EmployeePeer::getInstanceFromPool($key))) {
 				// We no longer rehydrate the object, since this can cause data loss.
 				// See http://propel.phpdb.org/trac/ticket/509
 				// $obj->hydrate($row, 0, true); // rehydrate
@@ -426,7 +491,7 @@ abstract class BaseDesignationPeer {
 				$obj = new $cls();
 				$obj->hydrate($row);
 				$results[] = $obj;
-				DesignationPeer::addInstanceToPool($obj, $key);
+				EmployeePeer::addInstanceToPool($obj, $key);
 			} // if key exists
 		}
 		$stmt->closeCursor();
@@ -460,13 +525,13 @@ abstract class BaseDesignationPeer {
 	 */
 	public static function getOMClass()
 	{
-		return DesignationPeer::CLASS_DEFAULT;
+		return EmployeePeer::CLASS_DEFAULT;
 	}
 
 	/**
-	 * Method perform an INSERT on the database, given a Designation or Criteria object.
+	 * Method perform an INSERT on the database, given a Employee or Criteria object.
 	 *
-	 * @param      mixed $values Criteria or Designation object containing data that is used to create the INSERT statement.
+	 * @param      mixed $values Criteria or Employee object containing data that is used to create the INSERT statement.
 	 * @param      PropelPDO $con the PropelPDO connection to use
 	 * @return     mixed The new primary key.
 	 * @throws     PropelException Any exceptions caught during processing will be
@@ -475,9 +540,9 @@ abstract class BaseDesignationPeer {
 	public static function doInsert($values, PropelPDO $con = null)
 	{
 
-    foreach (sfMixer::getCallables('BaseDesignationPeer:doInsert:pre') as $callable)
+    foreach (sfMixer::getCallables('BaseEmployeePeer:doInsert:pre') as $callable)
     {
-      $ret = call_user_func($callable, 'BaseDesignationPeer', $values, $con);
+      $ret = call_user_func($callable, 'BaseEmployeePeer', $values, $con);
       if (false !== $ret)
       {
         return $ret;
@@ -486,17 +551,17 @@ abstract class BaseDesignationPeer {
 
 
 		if ($con === null) {
-			$con = Propel::getConnection(DesignationPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+			$con = Propel::getConnection(EmployeePeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; // rename for clarity
 		} else {
-			$criteria = $values->buildCriteria(); // build Criteria from Designation object
+			$criteria = $values->buildCriteria(); // build Criteria from Employee object
 		}
 
-		if ($criteria->containsKey(DesignationPeer::ID) && $criteria->keyContainsValue(DesignationPeer::ID) ) {
-			throw new PropelException('Cannot insert a value for auto-increment primary key ('.DesignationPeer::ID.')');
+		if ($criteria->containsKey(EmployeePeer::ID) && $criteria->keyContainsValue(EmployeePeer::ID) ) {
+			throw new PropelException('Cannot insert a value for auto-increment primary key ('.EmployeePeer::ID.')');
 		}
 
 
@@ -515,18 +580,18 @@ abstract class BaseDesignationPeer {
 		}
 
 		
-    foreach (sfMixer::getCallables('BaseDesignationPeer:doInsert:post') as $callable)
+    foreach (sfMixer::getCallables('BaseEmployeePeer:doInsert:post') as $callable)
     {
-      call_user_func($callable, 'BaseDesignationPeer', $values, $con, $pk);
+      call_user_func($callable, 'BaseEmployeePeer', $values, $con, $pk);
     }
 
     return $pk;
 	}
 
 	/**
-	 * Method perform an UPDATE on the database, given a Designation or Criteria object.
+	 * Method perform an UPDATE on the database, given a Employee or Criteria object.
 	 *
-	 * @param      mixed $values Criteria or Designation object containing data that is used to create the UPDATE statement.
+	 * @param      mixed $values Criteria or Employee object containing data that is used to create the UPDATE statement.
 	 * @param      PropelPDO $con The connection to use (specify PropelPDO connection object to exert more control over transactions).
 	 * @return     int The number of affected rows (if supported by underlying database driver).
 	 * @throws     PropelException Any exceptions caught during processing will be
@@ -535,9 +600,9 @@ abstract class BaseDesignationPeer {
 	public static function doUpdate($values, PropelPDO $con = null)
 	{
 
-    foreach (sfMixer::getCallables('BaseDesignationPeer:doUpdate:pre') as $callable)
+    foreach (sfMixer::getCallables('BaseEmployeePeer:doUpdate:pre') as $callable)
     {
-      $ret = call_user_func($callable, 'BaseDesignationPeer', $values, $con);
+      $ret = call_user_func($callable, 'BaseEmployeePeer', $values, $con);
       if (false !== $ret)
       {
         return $ret;
@@ -546,7 +611,7 @@ abstract class BaseDesignationPeer {
 
 
 		if ($con === null) {
-			$con = Propel::getConnection(DesignationPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+			$con = Propel::getConnection(EmployeePeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
 
 		$selectCriteria = new Criteria(self::DATABASE_NAME);
@@ -554,10 +619,10 @@ abstract class BaseDesignationPeer {
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; // rename for clarity
 
-			$comparison = $criteria->getComparison(DesignationPeer::ID);
-			$selectCriteria->add(DesignationPeer::ID, $criteria->remove(DesignationPeer::ID), $comparison);
+			$comparison = $criteria->getComparison(EmployeePeer::ID);
+			$selectCriteria->add(EmployeePeer::ID, $criteria->remove(EmployeePeer::ID), $comparison);
 
-		} else { // $values is Designation object
+		} else { // $values is Employee object
 			$criteria = $values->buildCriteria(); // gets full criteria
 			$selectCriteria = $values->buildPkeyCriteria(); // gets criteria w/ primary key(s)
 		}
@@ -568,30 +633,30 @@ abstract class BaseDesignationPeer {
 		$ret = BasePeer::doUpdate($selectCriteria, $criteria, $con);
 	
 
-    foreach (sfMixer::getCallables('BaseDesignationPeer:doUpdate:post') as $callable)
+    foreach (sfMixer::getCallables('BaseEmployeePeer:doUpdate:post') as $callable)
     {
-      call_user_func($callable, 'BaseDesignationPeer', $values, $con, $ret);
+      call_user_func($callable, 'BaseEmployeePeer', $values, $con, $ret);
     }
 
     return $ret;
   }
 
 	/**
-	 * Method to DELETE all rows from the designation table.
+	 * Method to DELETE all rows from the employee table.
 	 *
 	 * @return     int The number of affected rows (if supported by underlying database driver).
 	 */
 	public static function doDeleteAll($con = null)
 	{
 		if ($con === null) {
-			$con = Propel::getConnection(DesignationPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+			$con = Propel::getConnection(EmployeePeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
 		$affectedRows = 0; // initialize var to track total num of affected rows
 		try {
 			// use transaction because $criteria could contain info
 			// for more than one table or we could emulating ON DELETE CASCADE, etc.
 			$con->beginTransaction();
-			$affectedRows += BasePeer::doDeleteAll(DesignationPeer::TABLE_NAME, $con);
+			$affectedRows += BasePeer::doDeleteAll(EmployeePeer::TABLE_NAME, $con);
 			$con->commit();
 			return $affectedRows;
 		} catch (PropelException $e) {
@@ -601,9 +666,9 @@ abstract class BaseDesignationPeer {
 	}
 
 	/**
-	 * Method perform a DELETE on the database, given a Designation or Criteria object OR a primary key value.
+	 * Method perform a DELETE on the database, given a Employee or Criteria object OR a primary key value.
 	 *
-	 * @param      mixed $values Criteria or Designation object or primary key or array of primary keys
+	 * @param      mixed $values Criteria or Employee object or primary key or array of primary keys
 	 *              which is used to create the DELETE statement
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int 	The number of affected rows (if supported by underlying database driver).  This includes CASCADE-related rows
@@ -614,20 +679,20 @@ abstract class BaseDesignationPeer {
 	 public static function doDelete($values, PropelPDO $con = null)
 	 {
 		if ($con === null) {
-			$con = Propel::getConnection(DesignationPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+			$con = Propel::getConnection(EmployeePeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
 
 		if ($values instanceof Criteria) {
 			// invalidate the cache for all objects of this type, since we have no
 			// way of knowing (without running a query) what objects should be invalidated
 			// from the cache based on this Criteria.
-			DesignationPeer::clearInstancePool();
+			EmployeePeer::clearInstancePool();
 
 			// rename for clarity
 			$criteria = clone $values;
-		} elseif ($values instanceof Designation) {
+		} elseif ($values instanceof Employee) {
 			// invalidate the cache for this single object
-			DesignationPeer::removeInstanceFromPool($values);
+			EmployeePeer::removeInstanceFromPool($values);
 			// create criteria based on pk values
 			$criteria = $values->buildPkeyCriteria();
 		} else {
@@ -636,11 +701,11 @@ abstract class BaseDesignationPeer {
 
 
 			$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(DesignationPeer::ID, (array) $values, Criteria::IN);
+			$criteria->add(EmployeePeer::ID, (array) $values, Criteria::IN);
 
 			foreach ((array) $values as $singleval) {
 				// we can invalidate the cache for this single object
-				DesignationPeer::removeInstanceFromPool($singleval);
+				EmployeePeer::removeInstanceFromPool($singleval);
 			}
 		}
 
@@ -665,24 +730,24 @@ abstract class BaseDesignationPeer {
 	}
 
 	/**
-	 * Validates all modified columns of given Designation object.
+	 * Validates all modified columns of given Employee object.
 	 * If parameter $columns is either a single column name or an array of column names
 	 * than only those columns are validated.
 	 *
 	 * NOTICE: This does not apply to primary or foreign keys for now.
 	 *
-	 * @param      Designation $obj The object to validate.
+	 * @param      Employee $obj The object to validate.
 	 * @param      mixed $cols Column name or array of column names.
 	 *
 	 * @return     mixed TRUE if all columns are valid or the error message of the first invalid column.
 	 */
-	public static function doValidate(Designation $obj, $cols = null)
+	public static function doValidate(Employee $obj, $cols = null)
 	{
 		$columns = array();
 
 		if ($cols) {
-			$dbMap = Propel::getDatabaseMap(DesignationPeer::DATABASE_NAME);
-			$tableMap = $dbMap->getTable(DesignationPeer::TABLE_NAME);
+			$dbMap = Propel::getDatabaseMap(EmployeePeer::DATABASE_NAME);
+			$tableMap = $dbMap->getTable(EmployeePeer::TABLE_NAME);
 
 			if (! is_array($cols)) {
 				$cols = array($cols);
@@ -698,11 +763,11 @@ abstract class BaseDesignationPeer {
 
 		}
 
-		$res =  BasePeer::doValidate(DesignationPeer::DATABASE_NAME, DesignationPeer::TABLE_NAME, $columns);
+		$res =  BasePeer::doValidate(EmployeePeer::DATABASE_NAME, EmployeePeer::TABLE_NAME, $columns);
     if ($res !== true) {
         $request = sfContext::getInstance()->getRequest();
         foreach ($res as $failed) {
-            $col = DesignationPeer::translateFieldname($failed->getColumn(), BasePeer::TYPE_COLNAME, BasePeer::TYPE_PHPNAME);
+            $col = EmployeePeer::translateFieldname($failed->getColumn(), BasePeer::TYPE_COLNAME, BasePeer::TYPE_PHPNAME);
         }
     }
 
@@ -714,23 +779,23 @@ abstract class BaseDesignationPeer {
 	 *
 	 * @param      int $pk the primary key.
 	 * @param      PropelPDO $con the connection to use
-	 * @return     Designation
+	 * @return     Employee
 	 */
 	public static function retrieveByPK($pk, PropelPDO $con = null)
 	{
 
-		if (null !== ($obj = DesignationPeer::getInstanceFromPool((string) $pk))) {
+		if (null !== ($obj = EmployeePeer::getInstanceFromPool((string) $pk))) {
 			return $obj;
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(DesignationPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(EmployeePeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 
-		$criteria = new Criteria(DesignationPeer::DATABASE_NAME);
-		$criteria->add(DesignationPeer::ID, $pk);
+		$criteria = new Criteria(EmployeePeer::DATABASE_NAME);
+		$criteria->add(EmployeePeer::ID, $pk);
 
-		$v = DesignationPeer::doSelect($criteria, $con);
+		$v = EmployeePeer::doSelect($criteria, $con);
 
 		return !empty($v) > 0 ? $v[0] : null;
 	}
@@ -746,30 +811,30 @@ abstract class BaseDesignationPeer {
 	public static function retrieveByPKs($pks, PropelPDO $con = null)
 	{
 		if ($con === null) {
-			$con = Propel::getConnection(DesignationPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(EmployeePeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 
 		$objs = null;
 		if (empty($pks)) {
 			$objs = array();
 		} else {
-			$criteria = new Criteria(DesignationPeer::DATABASE_NAME);
-			$criteria->add(DesignationPeer::ID, $pks, Criteria::IN);
-			$objs = DesignationPeer::doSelect($criteria, $con);
+			$criteria = new Criteria(EmployeePeer::DATABASE_NAME);
+			$criteria->add(EmployeePeer::ID, $pks, Criteria::IN);
+			$objs = EmployeePeer::doSelect($criteria, $con);
 		}
 		return $objs;
 	}
 
-} // BaseDesignationPeer
+} // BaseEmployeePeer
 
 // This is the static code needed to register the MapBuilder for this table with the main Propel class.
 //
-// NOTE: This static code cannot call methods on the DesignationPeer class, because it is not defined yet.
-// If you need to use overridden methods, you can add this code to the bottom of the DesignationPeer class:
+// NOTE: This static code cannot call methods on the EmployeePeer class, because it is not defined yet.
+// If you need to use overridden methods, you can add this code to the bottom of the EmployeePeer class:
 //
-// Propel::getDatabaseMap(DesignationPeer::DATABASE_NAME)->addTableBuilder(DesignationPeer::TABLE_NAME, DesignationPeer::getMapBuilder());
+// Propel::getDatabaseMap(EmployeePeer::DATABASE_NAME)->addTableBuilder(EmployeePeer::TABLE_NAME, EmployeePeer::getMapBuilder());
 //
 // Doing so will effectively overwrite the registration below.
 
-Propel::getDatabaseMap(BaseDesignationPeer::DATABASE_NAME)->addTableBuilder(BaseDesignationPeer::TABLE_NAME, BaseDesignationPeer::getMapBuilder());
+Propel::getDatabaseMap(BaseEmployeePeer::DATABASE_NAME)->addTableBuilder(BaseEmployeePeer::TABLE_NAME, BaseEmployeePeer::getMapBuilder());
 

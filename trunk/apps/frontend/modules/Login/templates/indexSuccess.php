@@ -8,12 +8,10 @@
                     <div class="box_text_content">
                     	<img src="<?php image_tag('calendar.gif','border="0"')?>" alt="" title="" class="box_icon" />
                         <div class="box_text">
-                        Welcome to the Hospital Management System. This web based system is intended to facilitate the hosptial administration as well as the patients coming to the hospital to provide them with accurate and timely information. 
+                       Welcome to the Hospital Management System. This web based system is intended to facilitate the hosptial administration as well as the patients coming to the hospital to provide them with accurate and timely information. 
                         </div>
                         <!--<a href="#" class="details"></a>-->
                     </div>
-
-                    
 	
             </div>
             

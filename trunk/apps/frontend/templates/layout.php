@@ -6,6 +6,9 @@
     <?php include_metas() ?>
     <?php include_title() ?>
 	<?php include_javascripts() ?>
+	<script language="JavaScript" src="<?php echo _compute_public_path('livevalidation_standalone.compressed', 'js', 'js', false);  ?>"></script>
+<script language="JavaScript" src="<?php echo _compute_public_path('json2', 'js', 'js', false);  ?>"></script>
+
 
 <!--FOR Favicon-->
 <link rel="favicon" href="<?php echo _compute_public_path('favicon', 'images', 'ico', true);  ?>"/> 
@@ -24,23 +27,18 @@
 	
 	<div id="main_container">
 	<div class="header">
-    	<div id="logo"><a href="index.html"><img src="<?php echo _compute_public_path('logo', 'images', 'png', true);  ?>" alt="" title="" width="162" height="54" border="0" /></a></div>
+    	<div id="logo"><img src="<?php echo _compute_public_path('logo', 'images', 'png', true);  ?>" alt="" title="" width="162" height="54" border="0" /></div>
     
     	<div class="right_header">
         	
             <div class="top_menu">
             <a href="#" class="login">login</a>
-            <a href="#" class="sign_up">signup</a>
+            <!--<a href="#" class="sign_up">signup</a>-->
             </div>
         
             <div id="menu">
                 <ul>                                              
                     <li><a class="current" href="#" title="">Home</a></li>
-                    <li><a href="#" title="">About Us</a></li>
-					 <li><a href="#" title="">About Us</a></li>
-					  <li><a href="#" title="">About Us</a></li>
-					   <li><a href="#" title="">About Us</a></li>
-                    <li><a href="#" title="">Services</a></li>
                     <li><a href="#" title="">Contact Us</a></li>
                 </ul>
             </div>
@@ -105,7 +103,7 @@
      	<div class="copyright">
         <img src="images/footer_logo.gif" alt="" title="" />
         </div>
-        <div class="center_footer">&copy; Hospital Management System 2011. All Rights Reserved <br />COMSATS Institute of Information Technology</div>
+        <div class="center_footer">&copy; Hospital Management System 2011. All Rights Reserved <br />COMSATS Institute of Information Technology, Wah Campus</div>
     </div>
 
 
