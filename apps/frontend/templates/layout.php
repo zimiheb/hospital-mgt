@@ -6,9 +6,8 @@
     <?php include_metas() ?>
     <?php include_title() ?>
 	<?php include_javascripts() ?>
-	<script language="JavaScript" src="<?php echo _compute_public_path('livevalidation_standalone.compressed', 'js', 'js', false);  ?>"></script>
+<script language="JavaScript" src="<?php echo _compute_public_path('livevalidation_standalone.compressed', 'js', 'js', false);  ?>"></script>
 <script language="JavaScript" src="<?php echo _compute_public_path('json2', 'js', 'js', false);  ?>"></script>
-
 
 <!--FOR Favicon-->
 <link rel="favicon" href="<?php echo _compute_public_path('favicon', 'images', 'ico', true);  ?>"/> 
@@ -100,9 +99,9 @@
           <?php echo $sf_content ?>  
             
      <div id="footer">
-     	<div class="copyright">
+     	<!--<div class="copyright">
         <img src="images/footer_logo.gif" alt="" title="" />
-        </div>
+        </div>-->
         <div class="center_footer">&copy; Hospital Management System 2011. All Rights Reserved <br />COMSATS Institute of Information Technology, Wah Campus</div>
     </div>
 
