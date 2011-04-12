@@ -3,15 +3,17 @@ default:
     content-type: text/html
 
   metas:
-    #title:        symfony project
+    #title:        Hospital Management System (HMIS)
     #description:  symfony project
-    #keywords:     symfony, project
+    #keywords:     symfony, HMIS, hmis
     #language:     en
     #robots:       index, follow
 
   stylesheets:    [main.css]
+  stylesheets:    [style.css]
+  stylesheets:    [iecss.css]
 
-  javascripts:    []
+  javascripts:    [livevalidation_standalone.compressed.js]
 
   has_layout:     on
   layout:         layout

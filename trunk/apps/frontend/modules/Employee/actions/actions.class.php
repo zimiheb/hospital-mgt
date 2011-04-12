@@ -25,7 +25,7 @@ class EmployeeActions extends sfActions
 	if ($request->isMethod('Post'))
 		{
 		
-		// Varialbes for Redirecting 
+		/* Varialbes for Redirecting 
 		$user_name = $this->getRequestParameter('user_name');
 		$password = $this->getRequestParameter('password');
 		
@@ -103,11 +103,11 @@ class EmployeeActions extends sfActions
 			$this->getUser ()->setFlash ( 'SUCCESS_MESSAGE', Constant::REGISTRATION_ACCOUNT_APPROVAL );
 			$this->redirect('Register/list');
 			
-			
+			*/
 		
 		}// end IF
 
 	
 } // - END - executeAdd
-  
-}
+
+}// END class EmployeeActions
