@@ -6,15 +6,21 @@
 <?php use_javascript('dragdrop.js') ?>		
 <?php use_javascript('popup.js') ?>		
 <link href="<?php echo _compute_public_path('popup', 'css', 'css', false);  ?>" rel="stylesheet" type="text/css" />	
+<div id="main_content">
+	<div class="box_content">
+	<div class="box_title">
+	
+	
+	<h2><span class="dark_blue">Department Information</span></h2>
+	<span style="float:right"><?php echo image_tag('icon_addRight.jpg', 'width="2"', 'height="22"')?></span>
+			<a class="addNew" id="popup_link_add" href="#">Add New Department</a>
+			</h2>
+	
+	</div>
+	<div class="box_text_content">
+	<div class="box_text">
 
-<table width="100%" border="0" cellspacing="0" cellpadding="0" class="heading_table">
-	<tr>
-		<td height="30"><span class="heading">Department Information</span></td>
-		<td align="right" height="30" valign="bottom">
-			<span style="float:right"><?php echo image_tag('icon_addRight.jpg', 'width="2"', 'height="22"')?></span>
-			<a class="addNew" id="popup_link_add" href="#">Add New Department</a></td>
-	</tr>
-</table>
+		
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="datagrid">
              
@@ -58,6 +64,14 @@
 					
 			  <?php endif; ?>
             </table>
+			</div>
+	<!--<a href="#" class="details">erawer</a>-->
+	</div>
+	
+	</div>
+
+<div class="clear"></div>    
+</div>
 			
 <div id="popup_add" class="popup" style="width:600px" >
 

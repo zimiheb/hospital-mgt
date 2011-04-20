@@ -17,6 +17,7 @@ propel:
     status: { type: VARCHAR, size: '10', required: false }
     created_at: { type: DATE, required: false }
     updated_at: { type: DATE, required: false }
+    _indexes: { FK_designation_department: [department_id] }
   employee:
     _attributes: { phpName: Employee }
     id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }
