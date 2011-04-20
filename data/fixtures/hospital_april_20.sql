@@ -1,6 +1,6 @@
 -- DBTools Manager Professional (Enterprise Edition)
 -- Database Dump for: hospital
--- Backup Generated in: 4/11/2011 1:35:40 PM
+-- Backup Generated in: 4/20/2011 9:43:51 AM
 -- Database Server Version: MySQL 5.1.33
 
 -- USEGO
@@ -56,6 +56,12 @@ CREATE TABLE `designation`
 BEGIN;
 -- GO
 COMMIT;
+-- GO
+
+--
+-- Index: FK_designation_department
+--
+ALTER TABLE `hospital`.`designation` ADD INDEX `FK_designation_department` (`department_id` );
 -- GO
 
 --
