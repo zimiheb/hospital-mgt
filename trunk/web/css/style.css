@@ -154,7 +154,7 @@ clear:both;
 }
 .box_content{
 width:845px;
-height:340px;
+min-height:340px;
 float:left;
 margin:10px 10px 30px 10px;
 background:url(../images/box_bg.gif) no-repeat top center;

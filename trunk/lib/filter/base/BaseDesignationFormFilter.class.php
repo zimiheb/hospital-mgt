@@ -14,7 +14,7 @@ class BaseDesignationFormFilter extends BaseFormFilterPropel
   public function setup()
   {
     $this->setWidgets(array(
-      'department_id' => new sfWidgetFormFilterInput(),
+      'department_id' => new sfWidgetFormPropelChoice(array('model' => 'Department', 'add_empty' => true)),
       'title'         => new sfWidgetFormFilterInput(),
       'status'        => new sfWidgetFormFilterInput(),
       'created_at'    => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => true)),
@@ -22,7 +22,7 @@ class BaseDesignationFormFilter extends BaseFormFilterPropel
     ));
 
     $this->setValidators(array(
-      'department_id' => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'department_id' => new sfValidatorPropelChoice(array('required' => false, 'model' => 'Department', 'column' => 'id')),
       'title'         => new sfValidatorPass(array('required' => false)),
       'status'        => new sfValidatorPass(array('required' => false)),
       'created_at'    => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
@@ -45,7 +45,7 @@ class BaseDesignationFormFilter extends BaseFormFilterPropel
   {
     return array(
       'id'            => 'Number',
-      'department_id' => 'Number',
+      'department_id' => 'ForeignKey',
       'title'         => 'Text',
       'status'        => 'Text',
       'created_at'    => 'Date',

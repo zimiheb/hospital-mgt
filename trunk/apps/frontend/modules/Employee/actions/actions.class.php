@@ -20,12 +20,21 @@ class EmployeeActions extends sfActions
     $this->forward('default', 'module');
   }
   
+   public function executeList(sfWebRequest $request)
+	{
+	$c = new Criteria();
+	$c->add(EmployeePeer::STATUS, Constant::RECORD_STATUS_DELETED, Criteria::NOT_EQUAL);
+	//$c->add(EmployeePeer::ROLE_ID, 1 , Criteria::NOT_EQUAL);
+	$c->addAscendingOrderByColumn(EmployeePeer::DEPARTMENT_ID);
+	$this->employees = EmployeePeer::doSelect($c);
+	} // - END - executeList
+  
   public function executeAddEmployee(sfWebRequest $request)
 	{
 	if ($request->isMethod('Post'))
 		{
 		
-		/* Varialbes for Redirecting 
+		/*Varialbes for Redirecting 
 		$user_name = $this->getRequestParameter('user_name');
 		$password = $this->getRequestParameter('password');
 		
@@ -34,7 +43,7 @@ class EmployeeActions extends sfActions
 			$password = md5($password);
 			}
 		
-		else $password = '';
+		else $password = '';*/
 		
 		// Setting Department from Selected Designation
 		$a = new Criteria();
@@ -43,7 +52,7 @@ class EmployeeActions extends sfActions
 		$department_id = $designation_record->getDepartmentId();
 		
 		// Checking if Entered Username already exist
-		if($user_name != NULL)
+		/*if($user_name != NULL)
 		{
 			$c = new Criteria ( );
 			$c->add(UserPeer::STATUS, Constant::RECORD_STATUS_DELETED, Criteria::NOT_EQUAL );
@@ -55,38 +64,40 @@ class EmployeeActions extends sfActions
 				$this->getUser ()->setFlash ( 'ERROR_MESSAGE', 'Username Already exist. Please Choose Different Username.' );
 				$this->redirect ('Register/add');
 				}
-		}
+		}*/
 		
 			$employee = new Employee();
 			
 			$employee->setName($this->getRequestParameter('name'));
-			$employee->setFatherName($this->getRequestParameter('father_name'));
+			//$employee->setFatherName($this->getRequestParameter('father_name'));
 			$employee->setCnic($this->getRequestParameter('cnic'));
 			$employee->setDob($this->getRequestParameter('dob'));
-			$employee->setBloodGroup($this->getRequestParameter('blood_group'));
-			$employee->setDisease($this->getRequestParameter('disease'));
+			//$employee->setBloodGroup($this->getRequestParameter('blood_group'));
+			//$employee->setDisease($this->getRequestParameter('disease'));
 			$employee->setGender($this->getRequestParameter('gender[0]'));
 			$employee->setContactCell($this->getRequestParameter('contact_cell'));
 			$employee->setContactRes($this->getRequestParameter('contact_res'));
 			$employee->setContactOff($this->getRequestParameter('contact_off'));
 			$employee->setEmergencyContact($this->getRequestParameter('emergency_contact'));
 			$employee->setMailAddress($this->getRequestParameter('mail_address'));
-			$employee->setPermanentAddress($this->getRequestParameter('permanent_address'));
+			//$employee->setPermanentAddress($this->getRequestParameter('permanent_address'));
 			$employee->setDesignationId($this->getRequestParameter('designation_id'));
 			$employee->setDepartmentId($department_id);
-			$employee->setRoleId(2);
-			$employee->setBeltNo($this->getRequestParameter('belt_no'));
+			//$employee->setRoleId(2);
+			//$employee->setBeltNo($this->getRequestParameter('belt_no'));
 			$employee->setEmploymentDate($this->getRequestParameter('employment_date'));
 			$employee->setLocalResident($this->getRequestParameter('local[0]'));
-			$employee->setExperienceYear($this->getRequestParameter('experience_year'));
+			//$employee->setExperienceYear($this->getRequestParameter('experience_year'));
 			$employee->setQualification($this->getRequestParameter('qualification'));
 			$employee->setStatus(Constant::RECORD_STATUS_ACTIVE);
 			
 			$employee->save();
 			
-			$employee_id = $employee->getId();
 			
-			if($user_name != NULL)
+			$this->getUser ()->setFlash ( 'SUCCESS_MESSAGE', Constant::REGISTRATION_ACCOUNT_APPROVAL );
+			$this->redirect('Employee/list');
+			
+			/*if($user_name != NULL)
 			{
 				
 				$user = new User();
@@ -108,6 +119,99 @@ class EmployeeActions extends sfActions
 		}// end IF
 
 	
-} // - END - executeAdd
+	} // - END - executeAdd
+	
+	public function executeEdit(sfWebRequest $request)
+	{
+	if ($request->isMethod('Post'))
+	{
+		$employee = EmployeePeer::retrieveByPk($this->getRequestParameter('employee_id'));
+		
+		
+		// Setting Department from Selected Designation
+		$a = new Criteria();
+		$a->add (DesignationPeer::ID, $this->getRequestParameter('designation_id'));
+		$designation_record = DesignationPeer::DoSelectOne($a);
+		$department_id = $designation_record->getDepartmentId();
+		
+			
+		$employee->setName($this->getRequestParameter('name'));
+		$employee->setCnic($this->getRequestParameter('cnic'));
+		$employee->setDob($this->getRequestParameter('dob'));
+		$employee->setGender($this->getRequestParameter('gender[0]'));
+		$employee->setContactCell($this->getRequestParameter('contact_cell'));
+		$employee->setContactRes($this->getRequestParameter('contact_res'));
+		$employee->setContactOff($this->getRequestParameter('contact_off'));
+		$employee->setEmergencyContact($this->getRequestParameter('emergency_contact'));
+		$employee->setMailAddress($this->getRequestParameter('mail_address'));
+		$employee->setDesignationId($this->getRequestParameter('designation_id'));
+		$employee->setDepartmentId($department_id);
+		$employee->setEmploymentDate($this->getRequestParameter('employment_date'));
+		$employee->setLocalResident($this->getRequestParameter('local[0]'));
+		$employee->setQualification($this->getRequestParameter('qualification'));
+
+	
+			if($employee->save())
+				{
+				$this->getUser()->setFlash('SUCCESS_MESSAGE', Constant::RECORD_EDITED_SUCCESSFULLY);
+				}
+			
+			else
+				{
+				$this->getUser()->setFlash('ERROR_MESSAGE', Constant::DB_ERROR);
+				}
+		
+		$this->redirect ('Employee/list');
+		
+		}// end if
+
+	else
+	{
+	
+	$this->employee = EmployeePeer::retrieveByPk(Utility::DecryptQueryString($request->getParameter('employee')));
+	
+/*	$this->region_id = Utility::DecryptQueryString($request->getParameter('region'));
+	$this->office_id = Utility::DecryptQueryString($request->getParameter('office'));
+	$this->partner_id = Utility::DecryptQueryString($request->getParameter('partner'));
+*/			
+	} // end else
+	 } // - END - executeEdit	
+
+public function executeDelete (sfWebRequest $request)
+	{
+
+		$user = EmployeePeer::retrieveByPk(Utility::DecryptQueryString($request->getParameter('id')));
+		
+		
+		if($user)
+		{
+			$user->setStatus(Constant::RECORD_STATUS_DELETED);
+			if(	$user->save())
+			$this->getUser()->setFlash('SUCCESS_MESSAGE', Constant::RECORD_STATUS_DELETED_SUCCESSFULLY);
+			else
+			$this->getUser()->setFlash('ERROR_MESSAGE', Constant::DB_ERROR);
+
+		}
+		else
+		{
+			$this->getUser()->setFlash('ERROR_MESSAGE', Constant::INVALID_REQUEST);
+		}
+	
+		$this->redirect ('Employee/list');
+
+	 } //- END - executeDelete
+
+public function executeDetail(sfWebRequest $request)
+	{
+		$this->employee = EmployeePeer::retrieveByPk(Utility::DecryptQueryString($request->getParameter('employee')));
+		
+		$emp = EmployeePeer::retrieveByPk(Utility::DecryptQueryString($request->getParameter('employee')));
+		$employee_id = $emp->getId();
+		
+		$c = new Criteria;
+		//$c->add(UserPeer::EMPLOYEE_ID, $employee_id);
+		$this->user = UserPeer::doSelectOne($c);
+	} // - END - executeDetail
+
 
 }// END class EmployeeActions

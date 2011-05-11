@@ -13,9 +13,8 @@ class BaseEmployeeForm extends BaseFormPropel
   {
     $this->setWidgets(array(
       'id'                => new sfWidgetFormInputHidden(),
-      'department_id'     => new sfWidgetFormInput(),
-      'designation_id'    => new sfWidgetFormInput(),
-      'role_id'           => new sfWidgetFormInput(),
+      'department_id'     => new sfWidgetFormPropelChoice(array('model' => 'Department', 'add_empty' => true)),
+      'designation_id'    => new sfWidgetFormPropelChoice(array('model' => 'Designation', 'add_empty' => true)),
       'name'              => new sfWidgetFormInput(),
       'cnic'              => new sfWidgetFormInput(),
       'dob'               => new sfWidgetFormDate(),
@@ -35,9 +34,8 @@ class BaseEmployeeForm extends BaseFormPropel
 
     $this->setValidators(array(
       'id'                => new sfValidatorPropelChoice(array('model' => 'Employee', 'column' => 'id', 'required' => false)),
-      'department_id'     => new sfValidatorInteger(array('required' => false)),
-      'designation_id'    => new sfValidatorInteger(array('required' => false)),
-      'role_id'           => new sfValidatorInteger(array('required' => false)),
+      'department_id'     => new sfValidatorPropelChoice(array('model' => 'Department', 'column' => 'id', 'required' => false)),
+      'designation_id'    => new sfValidatorPropelChoice(array('model' => 'Designation', 'column' => 'id', 'required' => false)),
       'name'              => new sfValidatorString(array('max_length' => 100, 'required' => false)),
       'cnic'              => new sfValidatorString(array('max_length' => 50, 'required' => false)),
       'dob'               => new sfValidatorDate(array('required' => false)),

@@ -12,7 +12,7 @@ propel:
   designation:
     _attributes: { phpName: Designation }
     id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }
-    department_id: { type: INTEGER, size: '11', required: false }
+    department_id: { type: INTEGER, size: '11', required: false, foreignTable: department, foreignReference: id, onDelete: CASCADE, onUpdate: CASCADE }
     title: { type: VARCHAR, size: '100', required: true }
     status: { type: VARCHAR, size: '10', required: false }
     created_at: { type: DATE, required: false }
@@ -21,14 +21,13 @@ propel:
   employee:
     _attributes: { phpName: Employee }
     id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }
-    department_id: { type: INTEGER, size: '11', required: false }
-    designation_id: { type: INTEGER, size: '11', required: false }
-    role_id: { type: INTEGER, size: '11', required: false }
+    department_id: { type: INTEGER, size: '11', required: false, foreignTable: department, foreignReference: id, onDelete: CASCADE, onUpdate: CASCADE }
+    designation_id: { type: INTEGER, size: '11', required: false, foreignTable: designation, foreignReference: id, onDelete: CASCADE, onUpdate: CASCADE }
     name: { type: VARCHAR, size: '100', required: false }
     cnic: { type: VARCHAR, size: '50', required: false }
     dob: { type: DATE, required: false }
     gender: { type: VARCHAR, size: '10', required: false }
-    permanent_address: { type: VARCHAR, size: '255', required: false }
+    mail_address: { type: VARCHAR, size: '255', required: false }
     contact_res: { type: VARCHAR, size: '50', required: false }
     contact_cell: { type: VARCHAR, size: '50', required: false }
     contact_off: { type: VARCHAR, size: '50', required: false }
@@ -39,6 +38,7 @@ propel:
     status: { type: VARCHAR, size: '10', required: false }
     created_at: { type: DATE, required: false }
     updated_at: { type: DATE, required: false }
+    _indexes: { FK_employee_department: [department_id], FK_employee_designation: [designation_id] }
   patient:
     _attributes: { phpName: Patient }
     id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }
@@ -56,6 +56,14 @@ propel:
     disease: { type: VARCHAR, size: '255', required: false }
     allergy: { type: VARCHAR, size: '255', required: false }
     drug_allergy: { type: VARCHAR, size: '255', required: false }
+    status: { type: VARCHAR, size: '10', required: false }
+    created_at: { type: DATE, required: false }
+    updated_at: { type: DATE, required: false }
+  pharma:
+    _attributes: { phpName: Pharma }
+    id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }
+    name: { type: VARCHAR, size: '100', required: false }
+    company: { type: VARCHAR, size: '100', required: false }
     status: { type: VARCHAR, size: '10', required: false }
     created_at: { type: DATE, required: false }
     updated_at: { type: DATE, required: false }

@@ -13,7 +13,7 @@ class BaseDesignationForm extends BaseFormPropel
   {
     $this->setWidgets(array(
       'id'            => new sfWidgetFormInputHidden(),
-      'department_id' => new sfWidgetFormInput(),
+      'department_id' => new sfWidgetFormPropelChoice(array('model' => 'Department', 'add_empty' => true)),
       'title'         => new sfWidgetFormInput(),
       'status'        => new sfWidgetFormInput(),
       'created_at'    => new sfWidgetFormDate(),
@@ -22,7 +22,7 @@ class BaseDesignationForm extends BaseFormPropel
 
     $this->setValidators(array(
       'id'            => new sfValidatorPropelChoice(array('model' => 'Designation', 'column' => 'id', 'required' => false)),
-      'department_id' => new sfValidatorInteger(array('required' => false)),
+      'department_id' => new sfValidatorPropelChoice(array('model' => 'Department', 'column' => 'id', 'required' => false)),
       'title'         => new sfValidatorString(array('max_length' => 100)),
       'status'        => new sfValidatorString(array('max_length' => 10, 'required' => false)),
       'created_at'    => new sfValidatorDate(array('required' => false)),
