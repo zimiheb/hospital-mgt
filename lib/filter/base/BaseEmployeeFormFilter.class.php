@@ -14,9 +14,8 @@ class BaseEmployeeFormFilter extends BaseFormFilterPropel
   public function setup()
   {
     $this->setWidgets(array(
-      'department_id'     => new sfWidgetFormFilterInput(),
-      'designation_id'    => new sfWidgetFormFilterInput(),
-      'role_id'           => new sfWidgetFormFilterInput(),
+      'department_id'     => new sfWidgetFormPropelChoice(array('model' => 'Department', 'add_empty' => true)),
+      'designation_id'    => new sfWidgetFormPropelChoice(array('model' => 'Designation', 'add_empty' => true)),
       'name'              => new sfWidgetFormFilterInput(),
       'cnic'              => new sfWidgetFormFilterInput(),
       'dob'               => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => true)),
@@ -35,9 +34,8 @@ class BaseEmployeeFormFilter extends BaseFormFilterPropel
     ));
 
     $this->setValidators(array(
-      'department_id'     => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
-      'designation_id'    => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
-      'role_id'           => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'department_id'     => new sfValidatorPropelChoice(array('required' => false, 'model' => 'Department', 'column' => 'id')),
+      'designation_id'    => new sfValidatorPropelChoice(array('required' => false, 'model' => 'Designation', 'column' => 'id')),
       'name'              => new sfValidatorPass(array('required' => false)),
       'cnic'              => new sfValidatorPass(array('required' => false)),
       'dob'               => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
@@ -71,9 +69,8 @@ class BaseEmployeeFormFilter extends BaseFormFilterPropel
   {
     return array(
       'id'                => 'Number',
-      'department_id'     => 'Number',
-      'designation_id'    => 'Number',
-      'role_id'           => 'Number',
+      'department_id'     => 'ForeignKey',
+      'designation_id'    => 'ForeignKey',
       'name'              => 'Text',
       'cnic'              => 'Text',
       'dob'               => 'Date',

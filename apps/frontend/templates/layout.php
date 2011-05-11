@@ -37,8 +37,10 @@
         
             <div id="menu">
                 <ul>                                              
-                    <li><a class="current" href="#" title="">Home</a></li>
-                    <li><a href="#" title="">Contact Us</a></li>
+                    <li><?php echo link_to ('Home', 'Home/index', array(/*'class'=>'current'*/)); ?></li>
+                    <li><?php echo link_to ('Employee', 'Employee/list'); ?></li>
+					<li><?php echo link_to ('Settings', 'Home/settings'); ?></li>
+					
                 </ul>
             </div>
         

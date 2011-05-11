@@ -1,6 +1,6 @@
 <?php use_helper ('Form','DateForm','Object') ?>
 <?php use_javascript('jquery-1.3.2.min.js') ?>
-<?php echo form_tag('Register/addEmployee') ?>
+<?php echo form_tag('Employee/addEmployee') ?>
 
 <div id="main_content">
 	<div class="box_content">
@@ -13,21 +13,25 @@
 	<div class="box_text_content">
 	<!--<img src="<?php image_tag('calendar.gif','border="0"')?>" alt="cal" title="" class="box_icon" />-->
 	<div class="box_text">
-	<table width="100%" cellpadding="0" cellspacing="0"  align="left" border="0">
-		<tr height="30">
+	<table width="100%" cellpadding="0" cellspacing="0"  align="left" border="0" class="form">
+		<tr>
+			<th colspan="4">Bio Data</td>
+		</tr>
+		
+		<tr height="40">
 			<td width="13%">Name: <span class="error">*</span></td>
-			<td width="39%"> <?php echo input_tag('name','','60'); ?>
+			<td width="36%"> <?php echo input_tag('name','','60'); ?>
 			<script type="text/javascript">
 			var name = new LiveValidation('name', { validMessage: "<?php echo Constant::VALIDATION_SUCCESS;?>", wait:500});
 			name.add( Validate.Presence,{ failureMessage: "<?php echo Constant::VALIDATION_REQUIRED_FIELD;?>"});
 			</script>
 			</td>
 			
-			<td width="16%">CNIC:</td>
-			<td width="32%"><?php echo input_tag('cnic','','60'); ?></td>
+			<td width="17%">CNIC:</td>
+			<td width="34%"><?php echo input_tag('cnic','','60'); ?></td>
 		</tr>
 		
-		<tr height="30">
+		<tr height="40">
 			<td>Date of Birth:</td>
 			<td><?php echo input_date_tag('dob','','rich=true, size=20'); ?></td>
 			
@@ -37,14 +41,20 @@
 			<?php echo radiobutton_tag('gender[]', 'Female', false, array('class'=>'checkbox')) ?>Female
 			</td>
 		</tr>
-		
+
+<tr>
+	<th colspan="4">Employee Information</th>
+</tr>
+
+<tr>
+	<td height="15"></td>
+</tr>		
 	
 		<tr>
 			<td>Designation:</td>
-			<td> <?php //echo object_select_tag('', '', array ( 'name'=>'designation_id', 'id'=>'designation_id', 'related_class' => 'Designation' , 'peer_method' => 'GetDesignation')); ?> </td>
-			<td>Local Resident:</td>
-			<td> <?php echo radiobutton_tag('local[]', '1', true, array('class'=>'checkbox')) ?>Yes &nbsp;&nbsp;&nbsp;
-	<?php echo radiobutton_tag('local[]', '0', false, array('class'=>'checkbox')) ?>No </td>
+			<td> <?php echo object_select_tag('', '', array ( 'name'=>'designation_id', 'id'=>'designation_id', 'related_class' => 'Designation' , 'peer_method' => 'GetDesignation')); ?> </td>
+			<td>Employment Date:</td>
+			<td><?php echo input_date_tag('employment_date','','rich=true, size=20'); ?></td>
 		</tr>
 		
 		
@@ -53,7 +63,33 @@
 			<td colspan="4"><h2><span class="dark_blue">Employee Registration</span></h2></td>
 		</tr>-->
 		
-		<tr height="30">
+		
+		
+		<tr height="40">
+			<td>Local Resident:</td>
+			<td> <?php echo radiobutton_tag('local[]', '1', true, array('class'=>'checkbox')) ?>Yes &nbsp;&nbsp;&nbsp;
+	<?php echo radiobutton_tag('local[]', '0', false, array('class'=>'checkbox')) ?>No </td>
+			
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+		</tr>
+		
+		<tr height="40">
+			<td valign="top">Last Qualification:</td>
+			<td colspan="3"> <?php echo textarea_tag('qualification', '', array('style'=>'width:592px')) ?></td>
+	
+		</tr>
+		
+		<tr>
+			<th colspan="4">Contact Information</td>
+		</tr>
+
+		<tr>
+			<td height="15"></td>
+		</tr>
+
+		
+		<tr height="40">
 			<td>Mobile Number:</td>
 			<td><?php echo input_tag('contact_cell','','60'); ?>
 			<script type="text/javascript">
@@ -68,7 +104,7 @@
 				</script></td>
 		</tr>
 
-		<tr height="30">
+		<tr height="40">
 			<td >Office Number:</td>
 			<td><?php echo input_tag('contact_off','','60'); ?>
 			<script type="text/javascript">
@@ -83,10 +119,26 @@
 				</script></td>
 		</tr>
 		
-		<tr height="30">
-			<td valign="top">Last Qualification:</td>
-			<td colspan="3"> <?php echo textarea_tag('qualification', '', array('style'=>'width:592px')) ?></td>
+		<tr height="40">
+			<td valign="top">Mailing Address:</td>
+			<td colspan="3"> <?php echo textarea_tag('mail_address', '', array('style'=>'width:592px')) ?></td>
+	
 		</tr>
+		
+		
+			
+			<tr>
+			<td>&nbsp;</td>
+			<td colspan="2">
+			<table width="100%" align="left" border="0">
+				<tr>
+					<td width="2%"><?php echo submit_tag(' ', array('class'=>'btn_add', 'style'=>'border:none')); ?> </td>
+					<td width="98%"><?php echo link_to(' ', (isset($_SERVER['HTTP_REFERER'])) ? $_SERVER['HTTP_REFERER'] : 'Home/index', array('class' => 'btn_cancel'));
+	 ?></td>
+				</tr>
+			</table>
+			</td>
+	  </tr>
 
 	</table>
 	</div>
