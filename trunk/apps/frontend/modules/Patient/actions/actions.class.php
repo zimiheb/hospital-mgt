@@ -52,30 +52,19 @@ class PatientActions extends sfActions
 	{
 		$patient = PatientPeer::retrieveByPk($this->getRequestParameter('patient_id'));
 		
-		
-		// Setting Department from Selected Designation
-		$a = new Criteria();
-		$a->add (DesignationPeer::ID, $this->getRequestParameter('designation_id'));
-		$designation_record = DesignationPeer::DoSelectOne($a);
-		$department_id = $designation_record->getDepartmentId();
-		
-			
 		$patient->setName($this->getRequestParameter('name'));
 		$patient->setCnic($this->getRequestParameter('cnic'));
 		$patient->setDob($this->getRequestParameter('dob'));
 		$patient->setGender($this->getRequestParameter('gender[0]'));
 		$patient->setContactCell($this->getRequestParameter('contact_cell'));
 		$patient->setContactRes($this->getRequestParameter('contact_res'));
-		$patient->setContactOff($this->getRequestParameter('contact_off'));
 		$patient->setEmergencyContact($this->getRequestParameter('emergency_contact'));
-		$patient->setMailAddress($this->getRequestParameter('mail_address'));
-		$patient->setDesignationId($this->getRequestParameter('designation_id'));
-		$patient->setDepartmentId($department_id);
-		$patient->setEmploymentDate($this->getRequestParameter('employment_date'));
-		$patient->setLocalResident($this->getRequestParameter('local[0]'));
-		$patient->setQualification($this->getRequestParameter('qualification'));
-
-	
+		$patient->setAddress($this->getRequestParameter('mail_address'));
+		$patient->setDisease($this->getRequestParameter('disease'));
+		$patient->setAllergy($this->getRequestParameter('allergy'));
+		$patient->setDrugAllergy($this->getRequestParameter('drug_allergy'));
+		//$patient->set($this->getRequestParameter('local[0]'));
+			
 			if($patient->save())
 				{
 				$this->getUser()->setFlash('SUCCESS_MESSAGE', Constant::RECORD_EDITED_SUCCESSFULLY);
