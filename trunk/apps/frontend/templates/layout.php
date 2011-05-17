@@ -39,6 +39,7 @@
                 <ul>                                              
                     <li><?php echo link_to ('Home', 'Home/index', array(/*'class'=>'current'*/)); ?></li>
                     <li><?php echo link_to ('Employee', 'Employee/list'); ?></li>
+					 <li><?php echo link_to ('Patient', 'Patient/list'); ?></li>
 					<li><?php echo link_to ('Settings', 'Home/settings'); ?></li>
 					
                 </ul>

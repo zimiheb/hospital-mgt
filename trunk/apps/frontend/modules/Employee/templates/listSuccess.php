@@ -11,7 +11,7 @@
 	<div class="box_title">
 		<h2><span class="dark_blue">Employee Information</span></h2>
 		<span style="float:right"><?php echo image_tag('icon_addRight.jpg', 'width="2"', 'height="22"')?></span>
-			<?php echo link_to('Add New Employee', 'Employee/addEmployee', array('class'=>'addNew'))?>
+			<a class="addNew" id="popup_link_add" href="#">Add New Employee</a><?php //echo link_to('Add New Employee', 'Employee/addEmployee', array('class'=>'addNew'))?>
 		</h2>
 	</div>
 	<div class="box_text_content">
@@ -82,7 +82,7 @@
 			
 <div id="popup_add" class="popup" style="width:600px" >
 
-<?php echo form_tag('Document/add') ?>
+<?php //echo form_tag('Document/add') ?>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
@@ -95,33 +95,19 @@
 <table width="100%"  cellpadding="0" cellspacing="0" align="left" border="0" class="form" bgcolor="#eeeeee">
   
  
-  <tr>
-    <td width="155" align="left" height="30" style="padding-left:10px; padding-top:10px">Document Name:<span class="error"> *</span></td>
-	<td width="445" align="left" height="30" style="padding-left:10px; padding-top:10px"> <?php echo input_tag('title','','size=38') ?></td>
-	<script type="text/javascript">
-	var title = new LiveValidation('title', { validMessage: "<?php echo Constant::VALIDATION_SUCCESS; ?>"});
-	title.add( Validate.Presence,{ failureMessage: "<?php echo Constant::VALIDATION_REQUIRED_FIELD; ?>"});
-	</script>
-  </tr>
-  
-  <!--<tr>
-    <td valign="top" align="left" height="30" style="padding-left:10px;">Description:</td>
-	<td align="left" height="30" style="padding-left:10px;"> <?php //echo textarea_tag('description', '', 'size=40x6') ?></td>
-  </tr>-->
+  	<tr height="30px">
+  		<td> <?php echo link_to('1. Add a Doctor', 'Employee/addDoctor');?></td>
+	</tr>
+	
+	<tr  height="30px">
+		<td> <?php echo link_to('2. Add a Staff Member', 'Employee/addStaff');?></td> 
+  	</tr>  
  
-  <tr>
-    <td colspan="2">&nbsp;</td>
-  </tr>
-  
-  <tr>
-		<td>&nbsp;</td>
-		<td colspan="2">
+  <tr height="60px">
+		<td>
 		<table width="100%" align="left" border="0" class="form">
 			<tr>
-				<td width="2%"><?php echo submit_tag('', array('class'=>'btn_add', 'style'=>'border:none'))
-
-; ?> </td>
-				<td width="98%"><a class="popup_closebox" href="#"><?php echo image_tag('btn_cancel.gif', 'border=0'); ?></a></td>
+				<td><a class="popup_closebox" href="#"><?php echo image_tag('btn_cancel.gif', 'border=0'); ?></a></td>
 			</tr>
     	</table>
 		</td>

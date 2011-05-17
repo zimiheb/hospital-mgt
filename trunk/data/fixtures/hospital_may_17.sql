@@ -1,6 +1,6 @@
 -- DBTools Manager Professional (Enterprise Edition)
 -- Database Dump for: hospital
--- Backup Generated in: 5/12/2011 1:40:02 AM
+-- Backup Generated in: 5/17/2011 6:55:38 AM
 -- Database Server Version: MySQL 5.1.33
 
 -- USEGO
@@ -34,6 +34,8 @@ BEGIN;
 -- GO
 INSERT INTO `department` (`id`, `title`, `status`, `created_at`, `updated_at`) VALUES(1, 'Cardiology...', '1', '2011-05-11', '2011-05-11');
 -- GO
+INSERT INTO `department` (`id`, `title`, `status`, `created_at`, `updated_at`) VALUES(2, 'Front Desk', '1', '2011-05-17', '2011-05-17');
+-- GO
 COMMIT;
 -- GO
 
@@ -59,6 +61,8 @@ BEGIN;
 -- GO
 INSERT INTO `designation` (`id`, `department_id`, `title`, `status`, `created_at`, `updated_at`) VALUES(1, 1, 'Surgen...', '1', '2011-05-11', '2011-05-11');
 -- GO
+INSERT INTO `designation` (`id`, `department_id`, `title`, `status`, `created_at`, `updated_at`) VALUES(2, 2, 'Receptionist', '1', '2011-05-17', '2011-05-17');
+-- GO
 COMMIT;
 -- GO
 
@@ -76,6 +80,7 @@ CREATE TABLE `employee`
 	`id` integer (11) NOT NULL AUTO_INCREMENT , 
 	`department_id` integer (11), 
 	`designation_id` integer (11), 
+	`emp_category` varchar (10), 
 	`name` varchar (100), 
 	`cnic` varchar (50), 
 	`dob` date, 
@@ -100,7 +105,11 @@ CREATE TABLE `employee`
 --
 BEGIN;
 -- GO
-INSERT INTO `employee` (`id`, `department_id`, `designation_id`, `name`, `cnic`, `dob`, `gender`, `mail_address`, `contact_res`, `contact_cell`, `contact_off`, `emergency_contact`, `employment_date`, `local_resident`, `qualification`, `status`, `created_at`, `updated_at`) VALUES(1, 1, 1, 'Zeeshan Cheema', '61101-5487541-5', '1980-05-01', 'Male', 'sadfsadf', '654321', '123456', '1111111', '2222222', '2011-05-12', '1', 'hgjghjryfu', '1', '2011-05-12', '2011-05-12');
+INSERT INTO `employee` (`id`, `department_id`, `designation_id`, `emp_category`, `name`, `cnic`, `dob`, `gender`, `mail_address`, `contact_res`, `contact_cell`, `contact_off`, `emergency_contact`, `employment_date`, `local_resident`, `qualification`, `status`, `created_at`, `updated_at`) VALUES(1, 1, 1, 'doc', 'Zeeshan Cheema', '61101-5487541-5', '1980-05-01', 'Male', 'sadfsadf', '654321', '123456', '1111111', '2222222', '2011-05-12', '1', 'hgjghjryfu', '1', '2011-05-12', '2011-05-12');
+-- GO
+INSERT INTO `employee` (`id`, `department_id`, `designation_id`, `emp_category`, `name`, `cnic`, `dob`, `gender`, `mail_address`, `contact_res`, `contact_cell`, `contact_off`, `emergency_contact`, `employment_date`, `local_resident`, `qualification`, `status`, `created_at`, `updated_at`) VALUES(2, 1, 1, 'doc', 'Kashif Hussain', '61246-58457875-5', '1987-05-17', 'Male', '', '', '', '', '', '2011-05-17', '0', '', '1', '2011-05-17', '2011-05-17');
+-- GO
+INSERT INTO `employee` (`id`, `department_id`, `designation_id`, `emp_category`, `name`, `cnic`, `dob`, `gender`, `mail_address`, `contact_res`, `contact_cell`, `contact_off`, `emergency_contact`, `employment_date`, `local_resident`, `qualification`, `status`, `created_at`, `updated_at`) VALUES(3, 2, 2, 'staff', 'Fareeha Khan', '', NULL, 'Male', '', '', '', '', '', NULL, '1', '', '1', '2011-05-17', '2011-05-17');
 -- GO
 COMMIT;
 -- GO
@@ -126,11 +135,12 @@ CREATE TABLE `patient`
 	`id_number` varchar (20), 
 	`cnic` varchar (25), 
 	`name` varchar (100), 
+	`father_name` varchar (50), 
 	`dob` date, 
 	`gender` varchar (10), 
 	`address` varchar (255), 
-	`phone` varchar (20), 
-	`mobile` varchar (20), 
+	`contact_res` varchar (20), 
+	`contact_cell` varchar (20), 
 	`emergency_contact` varchar (20), 
 	`email` varchar (100), 
 	`blood_group` varchar (5), 
@@ -148,6 +158,8 @@ CREATE TABLE `patient`
 -- Dumping Table Data: patient
 --
 BEGIN;
+-- GO
+INSERT INTO `patient` (`id`, `id_number`, `cnic`, `name`, `father_name`, `dob`, `gender`, `address`, `contact_res`, `contact_cell`, `emergency_contact`, `email`, `blood_group`, `disease`, `allergy`, `drug_allergy`, `status`, `created_at`, `updated_at`) VALUES(1, '01', '61145-5847592-5', 'Nazeer Hussain', NULL, '1985-03-08', 'Male', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, '1', '2011-05-17', '2011-05-17');
 -- GO
 COMMIT;
 -- GO
