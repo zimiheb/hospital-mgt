@@ -23,6 +23,7 @@ propel:
     id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }
     department_id: { type: INTEGER, size: '11', required: false, foreignTable: department, foreignReference: id, onDelete: CASCADE, onUpdate: CASCADE }
     designation_id: { type: INTEGER, size: '11', required: false, foreignTable: designation, foreignReference: id, onDelete: CASCADE, onUpdate: CASCADE }
+    emp_category: { type: VARCHAR, size: '10', required: false }
     name: { type: VARCHAR, size: '100', required: false }
     cnic: { type: VARCHAR, size: '50', required: false }
     dob: { type: DATE, required: false }
@@ -45,11 +46,12 @@ propel:
     id_number: { type: VARCHAR, size: '20', required: false }
     cnic: { type: VARCHAR, size: '25', required: false }
     name: { type: VARCHAR, size: '100', required: false }
+    father_name: { type: VARCHAR, size: '50', required: false }
     dob: { type: DATE, required: false }
     gender: { type: VARCHAR, size: '10', required: false }
     address: { type: VARCHAR, size: '255', required: false }
-    phone: { type: VARCHAR, size: '20', required: false }
-    mobile: { type: VARCHAR, size: '20', required: false }
+    contact_res: { type: VARCHAR, size: '20', required: false }
+    contact_cell: { type: VARCHAR, size: '20', required: false }
     emergency_contact: { type: VARCHAR, size: '20', required: false }
     email: { type: VARCHAR, size: '100', required: false }
     blood_group: { type: VARCHAR, size: '5', required: false }

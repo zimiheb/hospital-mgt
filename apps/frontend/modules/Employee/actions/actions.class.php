@@ -29,7 +29,94 @@ class EmployeeActions extends sfActions
 	$this->employees = EmployeePeer::doSelect($c);
 	} // - END - executeList
   
-  public function executeAddEmployee(sfWebRequest $request)
+  public function executeAddDoctor(sfWebRequest $request)
+	{
+	if ($request->isMethod('Post'))
+		{
+		
+		/*Varialbes for Redirecting 
+		$user_name = $this->getRequestParameter('user_name');
+		$password = $this->getRequestParameter('password');
+		
+		if (strlen($password) != 0)
+			{
+			$password = md5($password);
+			}
+		
+		else $password = '';*/
+		
+		// Setting Department from Selected Designation
+		$a = new Criteria();
+		$a->add (DesignationPeer::ID, $this->getRequestParameter('designation_id'));
+		$designation_record = DesignationPeer::DoSelectOne($a);
+		$department_id = $designation_record->getDepartmentId();
+		
+		// Checking if Entered Username already exist
+		/*if($user_name != NULL)
+		{
+			$c = new Criteria ( );
+			$c->add(UserPeer::STATUS, Constant::RECORD_STATUS_DELETED, Criteria::NOT_EQUAL );
+			$c->add(UserPeer::USER, $user_name);
+			$check_username = UserPeer::doSelectOne($c);
+			
+			if ($check_username)
+				{
+				$this->getUser ()->setFlash ( 'ERROR_MESSAGE', 'Username Already exist. Please Choose Different Username.' );
+				$this->redirect ('Register/add');
+				}
+		}*/
+		
+			$employee = new Employee();
+			
+			$employee->setName($this->getRequestParameter('name'));
+			$employee->setCnic($this->getRequestParameter('cnic'));
+			$employee->setDob($this->getRequestParameter('dob'));
+			$employee->setGender($this->getRequestParameter('gender[0]'));
+			$employee->setContactCell($this->getRequestParameter('contact_cell'));
+			$employee->setContactRes($this->getRequestParameter('contact_res'));
+			$employee->setContactOff($this->getRequestParameter('contact_off'));
+			$employee->setEmergencyContact($this->getRequestParameter('emergency_contact'));
+			$employee->setMailAddress($this->getRequestParameter('mail_address'));
+			$employee->setDesignationId($this->getRequestParameter('designation_id'));
+			$employee->setDepartmentId($department_id);
+			$employee->setEmploymentDate($this->getRequestParameter('employment_date'));
+			$employee->setLocalResident($this->getRequestParameter('local[0]'));
+			//$employee->setExperienceYear($this->getRequestParameter('experience_year'));
+			$employee->setQualification($this->getRequestParameter('qualification'));
+			$employee->setEmpCategory('doc');
+			$employee->setStatus(Constant::RECORD_STATUS_ACTIVE);
+			
+			$employee->save();
+			
+			
+			$this->getUser ()->setFlash ( 'SUCCESS_MESSAGE', Constant::REGISTRATION_ACCOUNT_APPROVAL );
+			$this->redirect('Employee/list');
+			
+			/*if($user_name != NULL)
+			{
+				
+				$user = new User();
+				$user->setEmployeeId($employee_id);
+				$user->setUser($user_name);
+				$user->setPassword($password);
+				$user->setStatus(Constant::RECORD_STATUS_ACTIVE);
+				$user->save();
+	
+				// TODO: Default Rights here
+				
+			}// END if
+				
+			$this->getUser ()->setFlash ( 'SUCCESS_MESSAGE', Constant::REGISTRATION_ACCOUNT_APPROVAL );
+			$this->redirect('Register/list');
+			
+			*/
+		
+		}// end IF
+
+	
+	} // - END - executeAdd
+	
+  public function executeAddStaff(sfWebRequest $request)
 	{
 	if ($request->isMethod('Post'))
 		{
@@ -89,6 +176,7 @@ class EmployeeActions extends sfActions
 			$employee->setLocalResident($this->getRequestParameter('local[0]'));
 			//$employee->setExperienceYear($this->getRequestParameter('experience_year'));
 			$employee->setQualification($this->getRequestParameter('qualification'));
+			$employee->setEmpCategory('staff');
 			$employee->setStatus(Constant::RECORD_STATUS_ACTIVE);
 			
 			$employee->save();
