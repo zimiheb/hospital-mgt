@@ -1,6 +1,6 @@
 -- DBTools Manager Professional (Enterprise Edition)
 -- Database Dump for: hospital
--- Backup Generated in: 5/17/2011 6:55:38 AM
+-- Backup Generated in: 5/24/2011 12:26:22 PM
 -- Database Server Version: MySQL 5.1.33
 
 -- USEGO
@@ -159,7 +159,9 @@ CREATE TABLE `patient`
 --
 BEGIN;
 -- GO
-INSERT INTO `patient` (`id`, `id_number`, `cnic`, `name`, `father_name`, `dob`, `gender`, `address`, `contact_res`, `contact_cell`, `emergency_contact`, `email`, `blood_group`, `disease`, `allergy`, `drug_allergy`, `status`, `created_at`, `updated_at`) VALUES(1, '01', '61145-5847592-5', 'Nazeer Hussain', NULL, '1985-03-08', 'Male', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, '1', '2011-05-17', '2011-05-17');
+INSERT INTO `patient` (`id`, `id_number`, `cnic`, `name`, `father_name`, `dob`, `gender`, `address`, `contact_res`, `contact_cell`, `emergency_contact`, `email`, `blood_group`, `disease`, `allergy`, `drug_allergy`, `status`, `created_at`, `updated_at`) VALUES(1, '01', '61145-5847592-5', 'Nazeer Hussain', NULL, '1985-03-08', 'Male', ' kug uy rfuy tf j h', '0515548365', '03122354618', '021835246', NULL, NULL, 'dfgdsfg dfg sdfdsf gsd fgs dfg', 'lk kjuh lk j lkj yg poitg kjh bk', ' lk hiy t hgvkj htr i ygkl ujh ploi yp', '1', '2011-05-17', '2011-05-17');
+-- GO
+INSERT INTO `patient` (`id`, `id_number`, `cnic`, `name`, `father_name`, `dob`, `gender`, `address`, `contact_res`, `contact_cell`, `emergency_contact`, `email`, `blood_group`, `disease`, `allergy`, `drug_allergy`, `status`, `created_at`, `updated_at`) VALUES(2, NULL, '514244-8528483-8', 'Shakeela Khanum', NULL, '1969-09-15', 'Female', NULL, NULL, '0333-5642147', NULL, NULL, NULL, NULL, NULL, NULL, '1', '2011-05-17', '2011-05-17');
 -- GO
 COMMIT;
 -- GO
@@ -171,6 +173,7 @@ CREATE TABLE `pharma`
 (
 	`id` integer (11) NOT NULL AUTO_INCREMENT , 
 	`name` varchar (100), 
+	`strength` varchar (10), 
 	`company` varchar (100), 
 	`status` varchar (10), 
 	`created_at` date, 
@@ -183,6 +186,8 @@ CREATE TABLE `pharma`
 -- Dumping Table Data: pharma
 --
 BEGIN;
+-- GO
+INSERT INTO `pharma` (`id`, `name`, `strength`, `company`, `status`, `created_at`, `updated_at`) VALUES(1, 'Paracetamol', '100 mg', 'Werrik', '1', '2011-05-23', '2011-05-23');
 -- GO
 COMMIT;
 -- GO
@@ -205,6 +210,53 @@ CREATE TABLE `user`
 
 --
 -- Dumping Table Data: user
+--
+BEGIN;
+-- GO
+COMMIT;
+-- GO
+
+--
+-- Table: ward
+--
+CREATE TABLE `ward` 
+(
+	`id` integer (11) NOT NULL AUTO_INCREMENT , 
+	`title` varchar (255), 
+	`status` varchar (10),
+	PRIMARY KEY (`id`)
+) TYPE=InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
+-- GO
+
+--
+-- Dumping Table Data: ward
+--
+BEGIN;
+-- GO
+INSERT INTO `ward` (`id`, `title`, `status`) VALUES(1, 'Medical Ward', '1');
+-- GO
+INSERT INTO `ward` (`id`, `title`, `status`) VALUES(2, 'Surgecial Ward', '1');
+-- GO
+INSERT INTO `ward` (`id`, `title`, `status`) VALUES(3, 'Burn Center', '1');
+-- GO
+COMMIT;
+-- GO
+
+--
+-- Table: ward_bed
+--
+CREATE TABLE `ward_bed` 
+(
+	`id` integer (11) NOT NULL, 
+	`ward_id` integer (11), 
+	`bed` varchar (100), 
+	`status` varchar (10),
+	PRIMARY KEY (`id`)
+) TYPE=InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
+-- GO
+
+--
+-- Dumping Table Data: ward_bed
 --
 BEGIN;
 -- GO

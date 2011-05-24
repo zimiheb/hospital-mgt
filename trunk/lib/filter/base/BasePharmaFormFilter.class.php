@@ -15,6 +15,7 @@ class BasePharmaFormFilter extends BaseFormFilterPropel
   {
     $this->setWidgets(array(
       'name'       => new sfWidgetFormFilterInput(),
+      'strength'   => new sfWidgetFormFilterInput(),
       'company'    => new sfWidgetFormFilterInput(),
       'status'     => new sfWidgetFormFilterInput(),
       'created_at' => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => true)),
@@ -23,6 +24,7 @@ class BasePharmaFormFilter extends BaseFormFilterPropel
 
     $this->setValidators(array(
       'name'       => new sfValidatorPass(array('required' => false)),
+      'strength'   => new sfValidatorPass(array('required' => false)),
       'company'    => new sfValidatorPass(array('required' => false)),
       'status'     => new sfValidatorPass(array('required' => false)),
       'created_at' => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
@@ -46,6 +48,7 @@ class BasePharmaFormFilter extends BaseFormFilterPropel
     return array(
       'id'         => 'Number',
       'name'       => 'Text',
+      'strength'   => 'Text',
       'company'    => 'Text',
       'status'     => 'Text',
       'created_at' => 'Date',
