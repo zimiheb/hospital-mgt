@@ -17,7 +17,7 @@ class DesignationActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    $this->forward('default', 'module');
+    $this->forward('Designation', 'list');
   } // END executeIndex
   
   public function executeList()

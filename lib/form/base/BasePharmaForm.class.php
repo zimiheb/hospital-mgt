@@ -14,6 +14,7 @@ class BasePharmaForm extends BaseFormPropel
     $this->setWidgets(array(
       'id'         => new sfWidgetFormInputHidden(),
       'name'       => new sfWidgetFormInput(),
+      'strength'   => new sfWidgetFormInput(),
       'company'    => new sfWidgetFormInput(),
       'status'     => new sfWidgetFormInput(),
       'created_at' => new sfWidgetFormDate(),
@@ -23,6 +24,7 @@ class BasePharmaForm extends BaseFormPropel
     $this->setValidators(array(
       'id'         => new sfValidatorPropelChoice(array('model' => 'Pharma', 'column' => 'id', 'required' => false)),
       'name'       => new sfValidatorString(array('max_length' => 100, 'required' => false)),
+      'strength'   => new sfValidatorString(array('max_length' => 10, 'required' => false)),
       'company'    => new sfValidatorString(array('max_length' => 100, 'required' => false)),
       'status'     => new sfValidatorString(array('max_length' => 10, 'required' => false)),
       'created_at' => new sfValidatorDate(array('required' => false)),

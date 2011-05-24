@@ -9,6 +9,10 @@
 <script language="JavaScript" src="<?php echo _compute_public_path('livevalidation_standalone.compressed', 'js', 'js', false);  ?>"></script>
 <script language="JavaScript" src="<?php echo _compute_public_path('json2', 'js', 'js', false);  ?>"></script>
 
+<link href="<?php echo _compute_public_path('chromestyle', 'css', 'css', false);  ?>" rel="stylesheet" type="text/css" />
+<script language="JavaScript" src="<?php echo _compute_public_path('chrome', 'js', 'js', false);  ?>"></script>
+
+
 <!--FOR Favicon-->
 <link rel="favicon" href="<?php echo _compute_public_path('favicon', 'images', 'ico', true);  ?>"/> 
 <link rel="shortcut icon" href="<?php echo _compute_public_path('favicon', 'images', 'ico', true);  ?>" />
@@ -36,13 +40,37 @@
             </div>
         
             <div id="menu">
-                <ul>                                              
+			
+			<div class="chromestyle" id="chromemenu">
+				<ul>
+					<li><?php echo link_to ('Home', 'Home/index', array(/*'class'=>'current'*/)); ?></li>
+                    <li><?php echo link_to ('Employee', 'Employee/list'); ?></li>
+					 <li><?php echo link_to ('Patient', 'Patient/list'); ?></li>
+					<li><?php echo link_to ('Settings', 'Home/settings', 'rel=dropmenu_1'); ?></li>
+				
+				</ul>
+			</div>
+	
+										   
+			<div id="dropmenu_1" class="dropmenudiv" style="width: 150px; height:30px;">
+				<?php echo link_to ('Department', 'Department/list'); ?>
+				<?php echo link_to ('Designation', 'Designation/list'); ?>
+				<?php echo link_to ('Pharma', 'Pharma/list'); ?>
+				<?php echo link_to ('Ward', 'Ward/list'); ?>
+				<?php echo link_to ('Beds in Ward', 'Home/settings'); ?>
+			</div>
+	
+	
+			<script type="text/javascript">
+				cssdropdown.startchrome("chromemenu")
+			</script>
+                <!--<ul>                                              
                     <li><?php echo link_to ('Home', 'Home/index', array(/*'class'=>'current'*/)); ?></li>
                     <li><?php echo link_to ('Employee', 'Employee/list'); ?></li>
 					 <li><?php echo link_to ('Patient', 'Patient/list'); ?></li>
 					<li><?php echo link_to ('Settings', 'Home/settings'); ?></li>
 					
-                </ul>
+                </ul>-->
             </div>
         
         </div>

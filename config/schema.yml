@@ -65,6 +65,7 @@ propel:
     _attributes: { phpName: Pharma }
     id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }
     name: { type: VARCHAR, size: '100', required: false }
+    strength: { type: VARCHAR, size: '10', required: false }
     company: { type: VARCHAR, size: '100', required: false }
     status: { type: VARCHAR, size: '10', required: false }
     created_at: { type: DATE, required: false }
@@ -78,3 +79,14 @@ propel:
     status: { type: VARCHAR, size: '10', required: false }
     created_at: { type: DATE, required: false }
     updated_at: { type: DATE, required: false }
+  ward:
+    _attributes: { phpName: Ward }
+    id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }
+    title: { type: VARCHAR, size: '255', required: false }
+    status: { type: VARCHAR, size: '10', required: false }
+  ward_bed:
+    _attributes: { phpName: WardBed }
+    id: { type: INTEGER, size: '11', primaryKey: true, required: true }
+    ward_id: { type: INTEGER, size: '11', required: false }
+    bed: { type: VARCHAR, size: '100', required: false }
+    status: { type: VARCHAR, size: '10', required: false }
