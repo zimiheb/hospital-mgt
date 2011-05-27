@@ -2,7 +2,6 @@
 
 class Constant 
 {
-
 	/*
 	Production or Test enviorment
 	const APPLICATION_PATH_PROD = "/dil/web/";
@@ -30,7 +29,6 @@ class Constant
 	const ROLE_ADMINISTRATOR_TITLE = "Administrator";	
 	const ROLE_EMPLOYEE = 3;	
 	const ROLE_EMPLOYEE_TITLE = "Employee";	
-	
 	
 	//Login Constants
 	const LOGIN_INVALID_USER_EMAIL_PASSWORD = "Seems like you have forgotten your EMAIL or PASSWORD";
@@ -91,10 +89,8 @@ class Constant
 	const PASSWORD_MATCH_ERROR = " Passwords doesn't match";
 	const PASSWORD_MINIMUM_LENGTH_ERROR = " Password should be atleast 6 charactors long";
 	const PASSWORD_RESET_SUCCESSFULLY = "Password reset successfully";
-	
-	
+
 	const ALL_QUESTIONS_ALREADY_ADDED = "No more questions left to add, All questions already added.";
-	
 	
 	//General
 	const PAGE_SIZE_GENERAL = 10;
@@ -103,12 +99,7 @@ class Constant
 	const DB_ERROR = "Some problem occurred, please try again later";	
 	const RATING_HIDDEN = ":)";
 	
-	
-	
-	
-	
 	//Boolean Words YES or No
-	
 	const BOOLEAN_WORD_YES = 1;
 	const BOOLEAN_WORD_YES_TITLE = 'Yes';
 	const BOOLEAN_WORD_NO = 0;
@@ -132,14 +123,12 @@ class Constant
 	const TICKET_OUT_STANDING = 4;
 	const TICKET_OUT_STANDING_TITLE = 'Out Standing';
 	
-	
 	static public function GetTicketStatusArray ()
 	{
 		$statuses = array (	self::TICKET_PENDING => self::TICKET_PENDING_TITLE,
 							self::TICKET_PAID => self::TICKET_PAID_TITLE,
 							self::TICKET_SENT_TO_COURT => self::TICKET_SENT_TO_COURT_TITLE);
 							//self::TICKET_OUT_STANDING => self::TICKET_OUT_STANDING_TITLE);
-			
 		return $statuses;	
 	}
 	
@@ -148,7 +137,6 @@ class Constant
 	//Compare Status and return appropriate title.
 		switch ($ticket)
 		{
-			
 			case self::TICKET_PENDING:
 				$title = self::TICKET_PENDING_TITLE;
 				break;
@@ -171,7 +159,6 @@ class Constant
 		return $title;
 	}
 	
-	
 	static public function GetReviewStatusArray ()
 	{
 		$statuses = array (	self::REVIEW_STATUS_COMPLETED => self::REVIEW_STATUS_COMPLETED_TITLE,
@@ -179,8 +166,6 @@ class Constant
 			
 		return $statuses;	
 	}
-	
-	
 	
 	
 	static public function GetRecordStatusTitle($status)
@@ -212,17 +197,13 @@ class Constant
 				$title = self::UNKNOWN_STATUS_TITLE;
 		}			
 		return $title;
-				
 	}
-	
-	
 	
 	static public function GetBooleanWord($boolean)
 	{
 	//Compare Status and return appropriate title.
 		switch ($boolean)
 		{
-			
 			case self::BOOLEAN_WORD_YES:
 				$title = self::BOOLEAN_WORD_YES_TITLE;
 				break;
@@ -256,18 +237,11 @@ class Constant
 		return $title;		
 	}
 	
-	
-	
-	
 	static public function GetRecordStatusArray ()
 	{
 		$statuses = array (	self::RECORD_STATUS_ACTIVE => self::RECORD_STATUS_ACTIVE_TITLE,
 							self::RECORD_STATUS_DEACTIVE => self::RECORD_STATUS_DEACTIVE_TITLE);
-			
 		return $statuses;	
 	}
 }
-
-
-
 ?>

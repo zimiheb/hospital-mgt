@@ -1,6 +1,6 @@
 -- DBTools Manager Professional (Enterprise Edition)
 -- Database Dump for: hospital
--- Backup Generated in: 5/24/2011 12:26:22 PM
+-- Backup Generated in: 5/27/2011 2:18:06 PM
 -- Database Server Version: MySQL 5.1.33
 
 -- USEGO
@@ -111,6 +111,8 @@ INSERT INTO `employee` (`id`, `department_id`, `designation_id`, `emp_category`,
 -- GO
 INSERT INTO `employee` (`id`, `department_id`, `designation_id`, `emp_category`, `name`, `cnic`, `dob`, `gender`, `mail_address`, `contact_res`, `contact_cell`, `contact_off`, `emergency_contact`, `employment_date`, `local_resident`, `qualification`, `status`, `created_at`, `updated_at`) VALUES(3, 2, 2, 'staff', 'Fareeha Khan', '', NULL, 'Male', '', '', '', '', '', NULL, '1', '', '1', '2011-05-17', '2011-05-17');
 -- GO
+INSERT INTO `employee` (`id`, `department_id`, `designation_id`, `emp_category`, `name`, `cnic`, `dob`, `gender`, `mail_address`, `contact_res`, `contact_cell`, `contact_off`, `emergency_contact`, `employment_date`, `local_resident`, `qualification`, `status`, `created_at`, `updated_at`) VALUES(4, NULL, NULL, '1', 'Administrator', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '2011-05-27', '2011-05-27');
+-- GO
 COMMIT;
 -- GO
 
@@ -199,7 +201,8 @@ CREATE TABLE `user`
 (
 	`id` integer (11) NOT NULL AUTO_INCREMENT , 
 	`role_id` integer (11), 
-	`username` varchar (50), 
+	`employee_id` integer (11), 
+	`user` varchar (50), 
 	`password` varchar (50), 
 	`status` varchar (10), 
 	`created_at` date, 
@@ -213,7 +216,15 @@ CREATE TABLE `user`
 --
 BEGIN;
 -- GO
+INSERT INTO `user` (`id`, `role_id`, `employee_id`, `user`, `password`, `status`, `created_at`, `updated_at`) VALUES(1, 1, 4, 'admin', '4e075844d2e00e4c800c8c62716bed8c', '1', '2011-05-27', '2011-05-27');
+-- GO
 COMMIT;
+-- GO
+
+--
+-- Index: FK_user_employee
+--
+ALTER TABLE `hospital`.`user` ADD INDEX `FK_user_employee` (`employee_id` );
 -- GO
 
 --
@@ -247,7 +258,7 @@ COMMIT;
 --
 CREATE TABLE `ward_bed` 
 (
-	`id` integer (11) NOT NULL, 
+	`id` integer (11) NOT NULL AUTO_INCREMENT , 
 	`ward_id` integer (11), 
 	`bed` varchar (100), 
 	`status` varchar (10),
@@ -260,7 +271,21 @@ CREATE TABLE `ward_bed`
 --
 BEGIN;
 -- GO
+INSERT INTO `ward_bed` (`id`, `ward_id`, `bed`, `status`) VALUES(1, 1, 'Medical 1', '1');
+-- GO
+INSERT INTO `ward_bed` (`id`, `ward_id`, `bed`, `status`) VALUES(2, 2, 'Surgical 1', '1');
+-- GO
+INSERT INTO `ward_bed` (`id`, `ward_id`, `bed`, `status`) VALUES(3, 1, 'Medical 2', '1');
+-- GO
+INSERT INTO `ward_bed` (`id`, `ward_id`, `bed`, `status`) VALUES(4, 3, 'Burn 1', '1');
+-- GO
 COMMIT;
+-- GO
+
+--
+-- Index: FK_ward_bed_ward
+--
+ALTER TABLE `hospital`.`ward_bed` ADD INDEX `FK_ward_bed_ward` (`ward_id` );
 -- GO
 
 --
@@ -283,6 +308,18 @@ ALTER TABLE `employee` ADD CONSTRAINT `FK_employee_department` FOREIGN KEY (`dep
 -- Foreign Key Constraint: FK_employee_designation
 --
 ALTER TABLE `employee` ADD CONSTRAINT `FK_employee_designation` FOREIGN KEY (`designation_id`) REFERENCES `designation`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+-- GO
+
+--
+-- Foreign Key Constraint: FK_user_employee
+--
+ALTER TABLE `user` ADD CONSTRAINT `FK_user_employee` FOREIGN KEY (`employee_id`) REFERENCES `employee`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+-- GO
+
+--
+-- Foreign Key Constraint: FK_ward_bed_ward
+--
+ALTER TABLE `ward_bed` ADD CONSTRAINT `FK_ward_bed_ward` FOREIGN KEY (`ward_id`) REFERENCES `ward`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 -- GO
 
 --

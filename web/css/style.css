@@ -97,11 +97,11 @@ background:url(../images/middle_banner.gif) no-repeat center;
 padding:30px 0 0 20px;
 }
 .top_menu{
-width:105px;
+width:200px;
 float:right;
 }
 a.login {
-width:49px;
+width:45px;
 height:35px;
 display:block;
 background:url(../images/login.gif) no-repeat center;
@@ -111,7 +111,7 @@ font-size:10px;
 font-weight:bold;
 text-decoration:none;
 padding:0 0 0 40px;
-float:left;
+float:right;
 margin:0 3px 0 3px;
 }
 a.sign_up {

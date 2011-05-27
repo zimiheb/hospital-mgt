@@ -71,12 +71,12 @@ class PharmaActions extends sfActions
 public function executeDelete (sfWebRequest $request)
 	{
 
-		$department = DepartmentPeer::retrieveByPk(Utility::DecryptQueryString($request->getParameter('id')));
+		$pharma = PharmaPeer::retrieveByPk(Utility::DecryptQueryString($request->getParameter('id')));
 
-		if($department)
+		if($pharma)
 		{
-			$department->setStatus(Constant::RECORD_STATUS_DELETED);
-			if(	$department->save())
+			$pharma->setStatus(Constant::RECORD_STATUS_DELETED);
+			if(	$pharma->save())
 			$this->getUser()->setFlash('SUCCESS_MESSAGE', Constant::RECORD_STATUS_DELETED_SUCCESSFULLY);
 			else
 			$this->getUser()->setFlash('ERROR_MESSAGE', Constant::DB_ERROR);
@@ -87,7 +87,7 @@ public function executeDelete (sfWebRequest $request)
 			$this->getUser()->setFlash('ERROR_MESSAGE', Constant::INVALID_REQUEST);
 		}
 	
-		$this->redirect ('Department/list');
+		$this->redirect ('Pharma/list');
 
 	} //- END - executeDelete
 

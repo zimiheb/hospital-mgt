@@ -74,11 +74,13 @@ propel:
     _attributes: { phpName: User }
     id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }
     role_id: { type: INTEGER, size: '11', required: false }
-    username: { type: VARCHAR, size: '50', required: false }
+    employee_id: { type: INTEGER, size: '11', required: false, foreignTable: employee, foreignReference: id, onDelete: CASCADE, onUpdate: CASCADE }
+    user: { type: VARCHAR, size: '50', required: false }
     password: { type: VARCHAR, size: '50', required: false }
     status: { type: VARCHAR, size: '10', required: false }
     created_at: { type: DATE, required: false }
     updated_at: { type: DATE, required: false }
+    _indexes: { FK_user_employee: [employee_id] }
   ward:
     _attributes: { phpName: Ward }
     id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }
@@ -86,7 +88,8 @@ propel:
     status: { type: VARCHAR, size: '10', required: false }
   ward_bed:
     _attributes: { phpName: WardBed }
-    id: { type: INTEGER, size: '11', primaryKey: true, required: true }
-    ward_id: { type: INTEGER, size: '11', required: false }
+    id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }
+    ward_id: { type: INTEGER, size: '11', required: false, foreignTable: ward, foreignReference: id, onDelete: CASCADE, onUpdate: CASCADE }
     bed: { type: VARCHAR, size: '100', required: false }
     status: { type: VARCHAR, size: '10', required: false }
+    _indexes: { FK_ward_bed_ward: [ward_id] }
