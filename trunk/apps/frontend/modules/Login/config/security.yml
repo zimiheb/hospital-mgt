@@ -1,0 +1,11 @@
+default:
+  is_secure: off
+
+
+all:
+  .actions:
+    login_module:  Login
+    login_action:  index
+
+    secure_module: Login
+    secure_action: index

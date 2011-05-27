@@ -30,18 +30,31 @@
 	
 	<div id="main_container">
 	<div class="header">
-    	<div id="logo"><img src="<?php echo _compute_public_path('logo', 'images', 'png', true);  ?>" alt="" title="" width="162" height="54" border="0" /></div>
+    	<div id="logo">
+		<?php if ($sf_user->isAuthenticated()): ?>
+			<?php echo link_to (image_tag('logo.png',array('borber'=>'0','width'=>'162', 'height'=>'54')),'Home/index');?>
+			<?php else: ?>
+			<?php echo link_to (image_tag('logo.png',array('borber'=>'0','width'=>'162', 'height'=>'54')),'Login/index');?>
+		<?php endif; ?>
+		</div>
     
     	<div class="right_header">
-        	
-            <div class="top_menu">
-            <a href="#" class="login">login</a>
+        	<div class="top_menu">
+			<?php if ($sf_user->isAuthenticated()): ?>
+			<?php echo 'Welcome <strong>'.$sf_user->getAttribute('NAME').'</strong>'; ?><br />
+
+			<?php echo link_to ('Change Password', 'Login/changePassword'); ?>&nbsp;|&nbsp;<?php echo link_to ('Logout', 'Login/logout'); ?>
+			<!--<a href="#" class="login">login</a>-->
             <!--<a href="#" class="sign_up">signup</a>-->
-            </div>
-        
+			<?php else:?>
+			<?php echo link_to('Login','Login/index', array('class'=>'login')) ;?>
+            
+			<?php //echo 'Welcome '.$sf_user->getAttribute('NAME'); ?>
+        	<?php endif ?>
+			</div>
             <div id="menu">
-			
 			<div class="chromestyle" id="chromemenu">
+				<?php if ($sf_user->isAuthenticated()): ?>
 				<ul>
 					<li><?php echo link_to ('Home', 'Home/index', array(/*'class'=>'current'*/)); ?></li>
                     <li><?php echo link_to ('Employee', 'Employee/list'); ?></li>
@@ -51,24 +64,29 @@
 				</ul>
 			</div>
 	
-										   
 			<div id="dropmenu_1" class="dropmenudiv" style="width: 150px; height:30px;">
 				<?php echo link_to ('Department', 'Department/list'); ?>
 				<?php echo link_to ('Designation', 'Designation/list'); ?>
 				<?php echo link_to ('Pharma', 'Pharma/list'); ?>
 				<?php echo link_to ('Ward', 'Ward/list'); ?>
-				<?php echo link_to ('Beds in Ward', 'Home/settings'); ?>
+				<?php echo link_to ('Beds in Ward', 'WardBed/list'); ?>
 			</div>
+				<?php else: ?>
+					<ul>
+					  <li><?php echo link_to ('Home', 'Home/index', array(/*'class'=>'current'*/)); ?></li>
+                    </ul>
+			</div>
+				<?php endif ?>
 	
 	
 			<script type="text/javascript">
 				cssdropdown.startchrome("chromemenu")
 			</script>
                 <!--<ul>                                              
-                    <li><?php echo link_to ('Home', 'Home/index', array(/*'class'=>'current'*/)); ?></li>
-                    <li><?php echo link_to ('Employee', 'Employee/list'); ?></li>
-					 <li><?php echo link_to ('Patient', 'Patient/list'); ?></li>
-					<li><?php echo link_to ('Settings', 'Home/settings'); ?></li>
+                    <li><?php //echo link_to ('Home', 'Home/index', array(/*'class'=>'current'*/)); ?></li>
+                    <li><?php //echo link_to ('Employee', 'Employee/list'); ?></li>
+					 <li><?php //echo link_to ('Patient', 'Patient/list'); ?></li>
+					<li><?php //echo link_to ('Settings', 'Home/settings'); ?></li>
 					
                 </ul>-->
             </div>

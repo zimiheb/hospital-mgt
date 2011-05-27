@@ -13,14 +13,14 @@ class BaseWardBedForm extends BaseFormPropel
   {
     $this->setWidgets(array(
       'id'      => new sfWidgetFormInputHidden(),
-      'ward_id' => new sfWidgetFormInput(),
+      'ward_id' => new sfWidgetFormPropelChoice(array('model' => 'Ward', 'add_empty' => true)),
       'bed'     => new sfWidgetFormInput(),
       'status'  => new sfWidgetFormInput(),
     ));
 
     $this->setValidators(array(
       'id'      => new sfValidatorPropelChoice(array('model' => 'WardBed', 'column' => 'id', 'required' => false)),
-      'ward_id' => new sfValidatorInteger(array('required' => false)),
+      'ward_id' => new sfValidatorPropelChoice(array('model' => 'Ward', 'column' => 'id', 'required' => false)),
       'bed'     => new sfValidatorString(array('max_length' => 100, 'required' => false)),
       'status'  => new sfValidatorString(array('max_length' => 10, 'required' => false)),
     ));

@@ -3,7 +3,7 @@
 /**
  * Login actions.
  *
- * @package    hospital
+ * @package    itp
  * @subpackage Login
  * @author     Your name here
  * @version    SVN: $Id: actions.class.php 12479 2008-10-31 10:54:40Z fabien $
@@ -15,8 +15,79 @@ class LoginActions extends sfActions
   *
   * @param sfRequest $request A request object
   */
-  public function executeIndex(sfWebRequest $request)
+
+public function executeIndex(sfWebRequest $request)
   {
-    //$this->forward('default', 'module');
-  }
+    
+	if ($this->getRequest ()->getMethod () == sfRequest::POST)
+	{
+		$username = $request->getParameter ( 'username' );
+		$password = $request->getParameter ( 'password' );
+		
+		$password = Login::EncryptPassword ( $password );
+		
+		// Get Record From Database
+		$c = new Criteria ( );
+		$c->add ( UserPeer::USER, $username );
+		$c->add ( UserPeer::PASSWORD, $password );
+		$user = UserPeer::doSelectOne ( $c );
+
+		//Set Global Attributes
+		if ($user)
+			{
+			//$this->getUser ()->setFlash ( 'SUCCESS_MESSAGE', Constant::LOGIN_OK );
+			sfContext::getInstance ()->getUser ()->setAttribute ( 'USER_ID', $user->getId() );
+			sfContext::getInstance ()->getUser ()->setAttribute ( 'USERNAME', $user->getUser() );
+			sfContext::getInstance ()->getUser ()->setAttribute ( 'NAME', $user->getEmployee()->getName() );
+			sfContext::getInstance ()->getUser ()->setAttribute ( 'ROLE', 'OTHER' );
+			sfContext::getInstance ()->getUser ()->setAttribute ( 'LOGGED_IN', true );
+			sfContext::getInstance ()->getUser ()->setAuthenticated ( true );
+			// - TODO - Set Permissions
+			$this->redirect ( 'Home/index' );
+			}
+		
+		else
+			{
+			$this->getUser ()->setFlash ( 'ERROR_MESSAGE', Constant::LOGIN_INVALID_USER_EMAIL_PASSWORD );
+			sfContext::getInstance ()->getUser ()->setAuthenticated ( false );
+			} 
+	}// end if
+
+} // - END - executeIndex
+  
+public function executeLogout()
+{
+		Login::Logout ();
+		$this->redirect ( 'Login/index' );
 }
+	
+	
+public function executeChangePassword(sfWebRequest $request)
+{
+		//$this->response->setTitle ( Constant::TITLE_CHANGE_PASSWORD );
+		if ($request->isMethod ( 'Post' ))
+		{
+			$old_password = $request->getParameter ( 'old_password' );
+			$new_password = $request->getParameter ( 'new_password' );
+			
+			$response = Login::ChangePassword ( $old_password, $new_password );
+			if ($response == Constant::LOGIN_PASSWORD_CHANGED_SUCCESS)
+			{
+				$this->getUser ()->setFlash ( 'SUCCESS_MESSAGE', Constant::LOGIN_PASSWORD_CHANGED_SUCCESS );
+				$this->redirect ( 'Home/index' );
+			}
+			else if ($response == Constant::DB_ERROR)
+			{
+				$this->getUser ()->setFlash ( 'ERROR_MESSAGE', Constant::DB_ERROR );
+				$this->redirect ( 'Login/changePassword' );
+			}
+			else if ($response == Constant::LOGIN_INVALID_OLD_PASSWORD)
+			{
+				$this->getUser ()->setFlash ( 'ERROR_MESSAGE', Constant::LOGIN_INVALID_OLD_PASSWORD );
+				$this->redirect ( 'Login/changePassword' );
+			}
+		}
+	
+} // - END - executeChangePassword
+  
+} // - END - class LoginActions
