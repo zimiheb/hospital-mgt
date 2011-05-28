@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Base static class for performing query and update operations on the 'ward_bed' table.
+ * Base static class for performing query and update operations on the 'visit' table.
  *
  * 
  *
@@ -11,40 +11,82 @@
  *
  * @package    lib.model.om
  */
-abstract class BaseWardBedPeer {
+abstract class BaseVisitPeer {
 
 	/** the default database name for this class */
 	const DATABASE_NAME = 'propel';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'ward_bed';
+	const TABLE_NAME = 'visit';
 
 	/** A class that can be returned by this peer. */
-	const CLASS_DEFAULT = 'lib.model.WardBed';
+	const CLASS_DEFAULT = 'lib.model.Visit';
 
 	/** The total number of columns. */
-	const NUM_COLUMNS = 4;
+	const NUM_COLUMNS = 18;
 
 	/** The number of lazy-loaded columns. */
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 	/** the column name for the ID field */
-	const ID = 'ward_bed.ID';
+	const ID = 'visit.ID';
 
-	/** the column name for the WARD_ID field */
-	const WARD_ID = 'ward_bed.WARD_ID';
+	/** the column name for the PATIENT_ID field */
+	const PATIENT_ID = 'visit.PATIENT_ID';
 
-	/** the column name for the BED field */
-	const BED = 'ward_bed.BED';
+	/** the column name for the DOCTOR_ID field */
+	const DOCTOR_ID = 'visit.DOCTOR_ID';
+
+	/** the column name for the WARD_BED_ID field */
+	const WARD_BED_ID = 'visit.WARD_BED_ID';
+
+	/** the column name for the WARD_DOC_ID field */
+	const WARD_DOC_ID = 'visit.WARD_DOC_ID';
+
+	/** the column name for the VISIT_TYPE field */
+	const VISIT_TYPE = 'visit.VISIT_TYPE';
+
+	/** the column name for the MEDICINE field */
+	const MEDICINE = 'visit.MEDICINE';
+
+	/** the column name for the BP field */
+	const BP = 'visit.BP';
+
+	/** the column name for the TEMP field */
+	const TEMP = 'visit.TEMP';
+
+	/** the column name for the PULSE field */
+	const PULSE = 'visit.PULSE';
+
+	/** the column name for the INJECTION field */
+	const INJECTION = 'visit.INJECTION';
+
+	/** the column name for the DIET field */
+	const DIET = 'visit.DIET';
+
+	/** the column name for the DESCRIPTION field */
+	const DESCRIPTION = 'visit.DESCRIPTION';
+
+	/** the column name for the FEE field */
+	const FEE = 'visit.FEE';
+
+	/** the column name for the FEE_PAID field */
+	const FEE_PAID = 'visit.FEE_PAID';
 
 	/** the column name for the STATUS field */
-	const STATUS = 'ward_bed.STATUS';
+	const STATUS = 'visit.STATUS';
+
+	/** the column name for the CREATED_AT field */
+	const CREATED_AT = 'visit.CREATED_AT';
+
+	/** the column name for the UPDATED_AT field */
+	const UPDATED_AT = 'visit.UPDATED_AT';
 
 	/**
-	 * An identiy map to hold any loaded instances of WardBed objects.
+	 * An identiy map to hold any loaded instances of Visit objects.
 	 * This must be public so that other peer classes can access this when hydrating from JOIN
 	 * queries.
-	 * @var        array WardBed[]
+	 * @var        array Visit[]
 	 */
 	public static $instances = array();
 
@@ -61,11 +103,11 @@ abstract class BaseWardBedPeer {
 	 * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
 	 */
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Id', 'WardId', 'Bed', 'Status', ),
-		BasePeer::TYPE_STUDLYPHPNAME => array ('id', 'wardId', 'bed', 'status', ),
-		BasePeer::TYPE_COLNAME => array (self::ID, self::WARD_ID, self::BED, self::STATUS, ),
-		BasePeer::TYPE_FIELDNAME => array ('id', 'ward_id', 'bed', 'status', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
+		BasePeer::TYPE_PHPNAME => array ('Id', 'PatientId', 'DoctorId', 'WardBedId', 'WardDocId', 'VisitType', 'Medicine', 'Bp', 'Temp', 'Pulse', 'Injection', 'Diet', 'Description', 'Fee', 'FeePaid', 'Status', 'CreatedAt', 'UpdatedAt', ),
+		BasePeer::TYPE_STUDLYPHPNAME => array ('id', 'patientId', 'doctorId', 'wardBedId', 'wardDocId', 'visitType', 'medicine', 'bp', 'temp', 'pulse', 'injection', 'diet', 'description', 'fee', 'feePaid', 'status', 'createdAt', 'updatedAt', ),
+		BasePeer::TYPE_COLNAME => array (self::ID, self::PATIENT_ID, self::DOCTOR_ID, self::WARD_BED_ID, self::WARD_DOC_ID, self::VISIT_TYPE, self::MEDICINE, self::BP, self::TEMP, self::PULSE, self::INJECTION, self::DIET, self::DESCRIPTION, self::FEE, self::FEE_PAID, self::STATUS, self::CREATED_AT, self::UPDATED_AT, ),
+		BasePeer::TYPE_FIELDNAME => array ('id', 'patient_id', 'doctor_id', 'ward_bed_id', 'ward_doc_id', 'visit_type', 'medicine', 'bp', 'temp', 'pulse', 'injection', 'diet', 'description', 'fee', 'fee_paid', 'status', 'created_at', 'updated_at', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, )
 	);
 
 	/**
@@ -75,11 +117,11 @@ abstract class BaseWardBedPeer {
 	 * e.g. self::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
 	 */
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'WardId' => 1, 'Bed' => 2, 'Status' => 3, ),
-		BasePeer::TYPE_STUDLYPHPNAME => array ('id' => 0, 'wardId' => 1, 'bed' => 2, 'status' => 3, ),
-		BasePeer::TYPE_COLNAME => array (self::ID => 0, self::WARD_ID => 1, self::BED => 2, self::STATUS => 3, ),
-		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'ward_id' => 1, 'bed' => 2, 'status' => 3, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
+		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'PatientId' => 1, 'DoctorId' => 2, 'WardBedId' => 3, 'WardDocId' => 4, 'VisitType' => 5, 'Medicine' => 6, 'Bp' => 7, 'Temp' => 8, 'Pulse' => 9, 'Injection' => 10, 'Diet' => 11, 'Description' => 12, 'Fee' => 13, 'FeePaid' => 14, 'Status' => 15, 'CreatedAt' => 16, 'UpdatedAt' => 17, ),
+		BasePeer::TYPE_STUDLYPHPNAME => array ('id' => 0, 'patientId' => 1, 'doctorId' => 2, 'wardBedId' => 3, 'wardDocId' => 4, 'visitType' => 5, 'medicine' => 6, 'bp' => 7, 'temp' => 8, 'pulse' => 9, 'injection' => 10, 'diet' => 11, 'description' => 12, 'fee' => 13, 'feePaid' => 14, 'status' => 15, 'createdAt' => 16, 'updatedAt' => 17, ),
+		BasePeer::TYPE_COLNAME => array (self::ID => 0, self::PATIENT_ID => 1, self::DOCTOR_ID => 2, self::WARD_BED_ID => 3, self::WARD_DOC_ID => 4, self::VISIT_TYPE => 5, self::MEDICINE => 6, self::BP => 7, self::TEMP => 8, self::PULSE => 9, self::INJECTION => 10, self::DIET => 11, self::DESCRIPTION => 12, self::FEE => 13, self::FEE_PAID => 14, self::STATUS => 15, self::CREATED_AT => 16, self::UPDATED_AT => 17, ),
+		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'patient_id' => 1, 'doctor_id' => 2, 'ward_bed_id' => 3, 'ward_doc_id' => 4, 'visit_type' => 5, 'medicine' => 6, 'bp' => 7, 'temp' => 8, 'pulse' => 9, 'injection' => 10, 'diet' => 11, 'description' => 12, 'fee' => 13, 'fee_paid' => 14, 'status' => 15, 'created_at' => 16, 'updated_at' => 17, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, )
 	);
 
 	/**
@@ -89,7 +131,7 @@ abstract class BaseWardBedPeer {
 	public static function getMapBuilder()
 	{
 		if (self::$mapBuilder === null) {
-			self::$mapBuilder = new WardBedMapBuilder();
+			self::$mapBuilder = new VisitMapBuilder();
 		}
 		return self::$mapBuilder;
 	}
@@ -139,12 +181,12 @@ abstract class BaseWardBedPeer {
 	 *		$c->addJoin(TablePeer::alias("alias1", TablePeer::PRIMARY_KEY_COLUMN), TablePeer::PRIMARY_KEY_COLUMN);
 	 * </code>
 	 * @param      string $alias The alias for the current table.
-	 * @param      string $column The column name for current table. (i.e. WardBedPeer::COLUMN_NAME).
+	 * @param      string $column The column name for current table. (i.e. VisitPeer::COLUMN_NAME).
 	 * @return     string
 	 */
 	public static function alias($alias, $column)
 	{
-		return str_replace(WardBedPeer::TABLE_NAME.'.', $alias.'.', $column);
+		return str_replace(VisitPeer::TABLE_NAME.'.', $alias.'.', $column);
 	}
 
 	/**
@@ -161,13 +203,41 @@ abstract class BaseWardBedPeer {
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
-		$criteria->addSelectColumn(WardBedPeer::ID);
+		$criteria->addSelectColumn(VisitPeer::ID);
 
-		$criteria->addSelectColumn(WardBedPeer::WARD_ID);
+		$criteria->addSelectColumn(VisitPeer::PATIENT_ID);
 
-		$criteria->addSelectColumn(WardBedPeer::BED);
+		$criteria->addSelectColumn(VisitPeer::DOCTOR_ID);
 
-		$criteria->addSelectColumn(WardBedPeer::STATUS);
+		$criteria->addSelectColumn(VisitPeer::WARD_BED_ID);
+
+		$criteria->addSelectColumn(VisitPeer::WARD_DOC_ID);
+
+		$criteria->addSelectColumn(VisitPeer::VISIT_TYPE);
+
+		$criteria->addSelectColumn(VisitPeer::MEDICINE);
+
+		$criteria->addSelectColumn(VisitPeer::BP);
+
+		$criteria->addSelectColumn(VisitPeer::TEMP);
+
+		$criteria->addSelectColumn(VisitPeer::PULSE);
+
+		$criteria->addSelectColumn(VisitPeer::INJECTION);
+
+		$criteria->addSelectColumn(VisitPeer::DIET);
+
+		$criteria->addSelectColumn(VisitPeer::DESCRIPTION);
+
+		$criteria->addSelectColumn(VisitPeer::FEE);
+
+		$criteria->addSelectColumn(VisitPeer::FEE_PAID);
+
+		$criteria->addSelectColumn(VisitPeer::STATUS);
+
+		$criteria->addSelectColumn(VisitPeer::CREATED_AT);
+
+		$criteria->addSelectColumn(VisitPeer::UPDATED_AT);
 
 	}
 
@@ -187,27 +257,27 @@ abstract class BaseWardBedPeer {
 		// We need to set the primary table name, since in the case that there are no WHERE columns
 		// it will be impossible for the BasePeer::createSelectSql() method to determine which
 		// tables go into the FROM clause.
-		$criteria->setPrimaryTableName(WardBedPeer::TABLE_NAME);
+		$criteria->setPrimaryTableName(VisitPeer::TABLE_NAME);
 
 		if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
 			$criteria->setDistinct();
 		}
 
 		if (!$criteria->hasSelectClause()) {
-			WardBedPeer::addSelectColumns($criteria);
+			VisitPeer::addSelectColumns($criteria);
 		}
 
 		$criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
 		$criteria->setDbName(self::DATABASE_NAME); // Set the correct dbName
 
 		if ($con === null) {
-			$con = Propel::getConnection(WardBedPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(VisitPeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 
 
-    foreach (sfMixer::getCallables('BaseWardBedPeer:doCount:doCount') as $callable)
+    foreach (sfMixer::getCallables('BaseVisitPeer:doCount:doCount') as $callable)
     {
-      call_user_func($callable, 'BaseWardBedPeer', $criteria, $con);
+      call_user_func($callable, 'BaseVisitPeer', $criteria, $con);
     }
 
 
@@ -227,7 +297,7 @@ abstract class BaseWardBedPeer {
 	 *
 	 * @param      Criteria $criteria object used to create the SELECT statement.
 	 * @param      PropelPDO $con
-	 * @return     WardBed
+	 * @return     Visit
 	 * @throws     PropelException Any exceptions caught during processing will be
 	 *		 rethrown wrapped into a PropelException.
 	 */
@@ -235,7 +305,7 @@ abstract class BaseWardBedPeer {
 	{
 		$critcopy = clone $criteria;
 		$critcopy->setLimit(1);
-		$objects = WardBedPeer::doSelect($critcopy, $con);
+		$objects = VisitPeer::doSelect($critcopy, $con);
 		if ($objects) {
 			return $objects[0];
 		}
@@ -252,7 +322,7 @@ abstract class BaseWardBedPeer {
 	 */
 	public static function doSelect(Criteria $criteria, PropelPDO $con = null)
 	{
-		return WardBedPeer::populateObjects(WardBedPeer::doSelectStmt($criteria, $con));
+		return VisitPeer::populateObjects(VisitPeer::doSelectStmt($criteria, $con));
 	}
 	/**
 	 * Prepares the Criteria object and uses the parent doSelect() method to execute a PDOStatement.
@@ -270,19 +340,19 @@ abstract class BaseWardBedPeer {
 	public static function doSelectStmt(Criteria $criteria, PropelPDO $con = null)
 	{
 
-    foreach (sfMixer::getCallables('BaseWardBedPeer:doSelectStmt:doSelectStmt') as $callable)
+    foreach (sfMixer::getCallables('BaseVisitPeer:doSelectStmt:doSelectStmt') as $callable)
     {
-      call_user_func($callable, 'BaseWardBedPeer', $criteria, $con);
+      call_user_func($callable, 'BaseVisitPeer', $criteria, $con);
     }
 
 
 		if ($con === null) {
-			$con = Propel::getConnection(WardBedPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(VisitPeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 
 		if (!$criteria->hasSelectClause()) {
 			$criteria = clone $criteria;
-			WardBedPeer::addSelectColumns($criteria);
+			VisitPeer::addSelectColumns($criteria);
 		}
 
 		// Set the correct dbName
@@ -300,10 +370,10 @@ abstract class BaseWardBedPeer {
 	 * to the cache in order to ensure that the same objects are always returned by doSelect*()
 	 * and retrieveByPK*() calls.
 	 *
-	 * @param      WardBed $value A WardBed object.
+	 * @param      Visit $value A Visit object.
 	 * @param      string $key (optional) key to use for instance map (for performance boost if key was already calculated externally).
 	 */
-	public static function addInstanceToPool(WardBed $obj, $key = null)
+	public static function addInstanceToPool(Visit $obj, $key = null)
 	{
 		if (Propel::isInstancePoolingEnabled()) {
 			if ($key === null) {
@@ -321,18 +391,18 @@ abstract class BaseWardBedPeer {
 	 * methods in your stub classes -- you may need to explicitly remove objects
 	 * from the cache in order to prevent returning objects that no longer exist.
 	 *
-	 * @param      mixed $value A WardBed object or a primary key value.
+	 * @param      mixed $value A Visit object or a primary key value.
 	 */
 	public static function removeInstanceFromPool($value)
 	{
 		if (Propel::isInstancePoolingEnabled() && $value !== null) {
-			if (is_object($value) && $value instanceof WardBed) {
+			if (is_object($value) && $value instanceof Visit) {
 				$key = (string) $value->getId();
 			} elseif (is_scalar($value)) {
 				// assume we've been passed a primary key
 				$key = (string) $value;
 			} else {
-				$e = new PropelException("Invalid value passed to removeInstanceFromPool().  Expected primary key or WardBed object; got " . (is_object($value) ? get_class($value) . ' object.' : var_export($value,true)));
+				$e = new PropelException("Invalid value passed to removeInstanceFromPool().  Expected primary key or Visit object; got " . (is_object($value) ? get_class($value) . ' object.' : var_export($value,true)));
 				throw $e;
 			}
 
@@ -347,7 +417,7 @@ abstract class BaseWardBedPeer {
 	 * a multi-column primary key, a serialize()d version of the primary key will be returned.
 	 *
 	 * @param      string $key The key (@see getPrimaryKeyHash()) for this instance.
-	 * @return     WardBed Found object or NULL if 1) no instance exists for specified key or 2) instance pooling has been disabled.
+	 * @return     Visit Found object or NULL if 1) no instance exists for specified key or 2) instance pooling has been disabled.
 	 * @see        getPrimaryKeyHash()
 	 */
 	public static function getInstanceFromPool($key)
@@ -401,12 +471,12 @@ abstract class BaseWardBedPeer {
 		$results = array();
 	
 		// set the class once to avoid overhead in the loop
-		$cls = WardBedPeer::getOMClass();
+		$cls = VisitPeer::getOMClass();
 		$cls = substr('.'.$cls, strrpos('.'.$cls, '.') + 1);
 		// populate the object(s)
 		while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-			$key = WardBedPeer::getPrimaryKeyHashFromRow($row, 0);
-			if (null !== ($obj = WardBedPeer::getInstanceFromPool($key))) {
+			$key = VisitPeer::getPrimaryKeyHashFromRow($row, 0);
+			if (null !== ($obj = VisitPeer::getInstanceFromPool($key))) {
 				// We no longer rehydrate the object, since this can cause data loss.
 				// See http://propel.phpdb.org/trac/ticket/509
 				// $obj->hydrate($row, 0, true); // rehydrate
@@ -416,276 +486,12 @@ abstract class BaseWardBedPeer {
 				$obj = new $cls();
 				$obj->hydrate($row);
 				$results[] = $obj;
-				WardBedPeer::addInstanceToPool($obj, $key);
+				VisitPeer::addInstanceToPool($obj, $key);
 			} // if key exists
 		}
 		$stmt->closeCursor();
 		return $results;
 	}
-
-	/**
-	 * Returns the number of rows matching criteria, joining the related Ward table
-	 *
-	 * @param      Criteria $c
-	 * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
-	 * @param      PropelPDO $con
-	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
-	 * @return     int Number of matching rows.
-	 */
-	public static function doCountJoinWard(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
-	{
-		// we're going to modify criteria, so copy it first
-		$criteria = clone $criteria;
-
-		// We need to set the primary table name, since in the case that there are no WHERE columns
-		// it will be impossible for the BasePeer::createSelectSql() method to determine which
-		// tables go into the FROM clause.
-		$criteria->setPrimaryTableName(WardBedPeer::TABLE_NAME);
-
-		if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->setDistinct();
-		}
-
-		if (!$criteria->hasSelectClause()) {
-			WardBedPeer::addSelectColumns($criteria);
-		}
-
-		$criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
-
-		// Set the correct dbName
-		$criteria->setDbName(self::DATABASE_NAME);
-
-		if ($con === null) {
-			$con = Propel::getConnection(WardBedPeer::DATABASE_NAME, Propel::CONNECTION_READ);
-		}
-
-		$criteria->addJoin(array(WardBedPeer::WARD_ID,), array(WardPeer::ID,), $join_behavior);
-
-
-    foreach (sfMixer::getCallables('BaseWardBedPeer:doCount:doCount') as $callable)
-    {
-      call_user_func($callable, 'BaseWardBedPeer', $criteria, $con);
-    }
-
-
-		$stmt = BasePeer::doCount($criteria, $con);
-
-		if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-			$count = (int) $row[0];
-		} else {
-			$count = 0; // no rows returned; we infer that means 0 matches.
-		}
-		$stmt->closeCursor();
-		return $count;
-	}
-
-
-	/**
-	 * Selects a collection of WardBed objects pre-filled with their Ward objects.
-	 * @param      Criteria  $c
-	 * @param      PropelPDO $con
-	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
-	 * @return     array Array of WardBed objects.
-	 * @throws     PropelException Any exceptions caught during processing will be
-	 *		 rethrown wrapped into a PropelException.
-	 */
-	public static function doSelectJoinWard(Criteria $c, $con = null, $join_behavior = Criteria::LEFT_JOIN)
-	{
-
-    foreach (sfMixer::getCallables('BaseWardBedPeer:doSelectJoin:doSelectJoin') as $callable)
-    {
-      call_user_func($callable, 'BaseWardBedPeer', $c, $con);
-    }
-
-
-		$c = clone $c;
-
-		// Set the correct dbName if it has not been overridden
-		if ($c->getDbName() == Propel::getDefaultDB()) {
-			$c->setDbName(self::DATABASE_NAME);
-		}
-
-		WardBedPeer::addSelectColumns($c);
-		$startcol = (WardBedPeer::NUM_COLUMNS - WardBedPeer::NUM_LAZY_LOAD_COLUMNS);
-		WardPeer::addSelectColumns($c);
-
-		$c->addJoin(array(WardBedPeer::WARD_ID,), array(WardPeer::ID,), $join_behavior);
-		$stmt = BasePeer::doSelect($c, $con);
-		$results = array();
-
-		while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-			$key1 = WardBedPeer::getPrimaryKeyHashFromRow($row, 0);
-			if (null !== ($obj1 = WardBedPeer::getInstanceFromPool($key1))) {
-				// We no longer rehydrate the object, since this can cause data loss.
-				// See http://propel.phpdb.org/trac/ticket/509
-				// $obj1->hydrate($row, 0, true); // rehydrate
-			} else {
-
-				$omClass = WardBedPeer::getOMClass();
-
-				$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
-				$obj1 = new $cls();
-				$obj1->hydrate($row);
-				WardBedPeer::addInstanceToPool($obj1, $key1);
-			} // if $obj1 already loaded
-
-			$key2 = WardPeer::getPrimaryKeyHashFromRow($row, $startcol);
-			if ($key2 !== null) {
-				$obj2 = WardPeer::getInstanceFromPool($key2);
-				if (!$obj2) {
-
-					$omClass = WardPeer::getOMClass();
-
-					$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
-					$obj2 = new $cls();
-					$obj2->hydrate($row, $startcol);
-					WardPeer::addInstanceToPool($obj2, $key2);
-				} // if obj2 already loaded
-
-				// Add the $obj1 (WardBed) to $obj2 (Ward)
-				$obj2->addWardBed($obj1);
-
-			} // if joined row was not null
-
-			$results[] = $obj1;
-		}
-		$stmt->closeCursor();
-		return $results;
-	}
-
-
-	/**
-	 * Returns the number of rows matching criteria, joining all related tables
-	 *
-	 * @param      Criteria $c
-	 * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
-	 * @param      PropelPDO $con
-	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
-	 * @return     int Number of matching rows.
-	 */
-	public static function doCountJoinAll(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
-	{
-		// we're going to modify criteria, so copy it first
-		$criteria = clone $criteria;
-
-		// We need to set the primary table name, since in the case that there are no WHERE columns
-		// it will be impossible for the BasePeer::createSelectSql() method to determine which
-		// tables go into the FROM clause.
-		$criteria->setPrimaryTableName(WardBedPeer::TABLE_NAME);
-
-		if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->setDistinct();
-		}
-
-		if (!$criteria->hasSelectClause()) {
-			WardBedPeer::addSelectColumns($criteria);
-		}
-
-		$criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
-
-		// Set the correct dbName
-		$criteria->setDbName(self::DATABASE_NAME);
-
-		if ($con === null) {
-			$con = Propel::getConnection(WardBedPeer::DATABASE_NAME, Propel::CONNECTION_READ);
-		}
-
-		$criteria->addJoin(array(WardBedPeer::WARD_ID,), array(WardPeer::ID,), $join_behavior);
-
-    foreach (sfMixer::getCallables('BaseWardBedPeer:doCount:doCount') as $callable)
-    {
-      call_user_func($callable, 'BaseWardBedPeer', $criteria, $con);
-    }
-
-
-		$stmt = BasePeer::doCount($criteria, $con);
-
-		if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-			$count = (int) $row[0];
-		} else {
-			$count = 0; // no rows returned; we infer that means 0 matches.
-		}
-		$stmt->closeCursor();
-		return $count;
-	}
-
-	/**
-	 * Selects a collection of WardBed objects pre-filled with all related objects.
-	 *
-	 * @param      Criteria  $c
-	 * @param      PropelPDO $con
-	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
-	 * @return     array Array of WardBed objects.
-	 * @throws     PropelException Any exceptions caught during processing will be
-	 *		 rethrown wrapped into a PropelException.
-	 */
-	public static function doSelectJoinAll(Criteria $c, $con = null, $join_behavior = Criteria::LEFT_JOIN)
-	{
-
-    foreach (sfMixer::getCallables('BaseWardBedPeer:doSelectJoinAll:doSelectJoinAll') as $callable)
-    {
-      call_user_func($callable, 'BaseWardBedPeer', $c, $con);
-    }
-
-
-		$c = clone $c;
-
-		// Set the correct dbName if it has not been overridden
-		if ($c->getDbName() == Propel::getDefaultDB()) {
-			$c->setDbName(self::DATABASE_NAME);
-		}
-
-		WardBedPeer::addSelectColumns($c);
-		$startcol2 = (WardBedPeer::NUM_COLUMNS - WardBedPeer::NUM_LAZY_LOAD_COLUMNS);
-
-		WardPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + (WardPeer::NUM_COLUMNS - WardPeer::NUM_LAZY_LOAD_COLUMNS);
-
-		$c->addJoin(array(WardBedPeer::WARD_ID,), array(WardPeer::ID,), $join_behavior);
-		$stmt = BasePeer::doSelect($c, $con);
-		$results = array();
-
-		while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-			$key1 = WardBedPeer::getPrimaryKeyHashFromRow($row, 0);
-			if (null !== ($obj1 = WardBedPeer::getInstanceFromPool($key1))) {
-				// We no longer rehydrate the object, since this can cause data loss.
-				// See http://propel.phpdb.org/trac/ticket/509
-				// $obj1->hydrate($row, 0, true); // rehydrate
-			} else {
-				$omClass = WardBedPeer::getOMClass();
-
-				$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
-				$obj1 = new $cls();
-				$obj1->hydrate($row);
-				WardBedPeer::addInstanceToPool($obj1, $key1);
-			} // if obj1 already loaded
-
-			// Add objects for joined Ward rows
-
-			$key2 = WardPeer::getPrimaryKeyHashFromRow($row, $startcol2);
-			if ($key2 !== null) {
-				$obj2 = WardPeer::getInstanceFromPool($key2);
-				if (!$obj2) {
-
-					$omClass = WardPeer::getOMClass();
-
-
-					$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
-					$obj2 = new $cls();
-					$obj2->hydrate($row, $startcol2);
-					WardPeer::addInstanceToPool($obj2, $key2);
-				} // if obj2 loaded
-
-				// Add the $obj1 (WardBed) to the collection in $obj2 (Ward)
-				$obj2->addWardBed($obj1);
-			} // if joined row not null
-
-			$results[] = $obj1;
-		}
-		$stmt->closeCursor();
-		return $results;
-	}
-
 
   static public function getUniqueColumnNames()
   {
@@ -714,13 +520,13 @@ abstract class BaseWardBedPeer {
 	 */
 	public static function getOMClass()
 	{
-		return WardBedPeer::CLASS_DEFAULT;
+		return VisitPeer::CLASS_DEFAULT;
 	}
 
 	/**
-	 * Method perform an INSERT on the database, given a WardBed or Criteria object.
+	 * Method perform an INSERT on the database, given a Visit or Criteria object.
 	 *
-	 * @param      mixed $values Criteria or WardBed object containing data that is used to create the INSERT statement.
+	 * @param      mixed $values Criteria or Visit object containing data that is used to create the INSERT statement.
 	 * @param      PropelPDO $con the PropelPDO connection to use
 	 * @return     mixed The new primary key.
 	 * @throws     PropelException Any exceptions caught during processing will be
@@ -729,9 +535,9 @@ abstract class BaseWardBedPeer {
 	public static function doInsert($values, PropelPDO $con = null)
 	{
 
-    foreach (sfMixer::getCallables('BaseWardBedPeer:doInsert:pre') as $callable)
+    foreach (sfMixer::getCallables('BaseVisitPeer:doInsert:pre') as $callable)
     {
-      $ret = call_user_func($callable, 'BaseWardBedPeer', $values, $con);
+      $ret = call_user_func($callable, 'BaseVisitPeer', $values, $con);
       if (false !== $ret)
       {
         return $ret;
@@ -740,17 +546,17 @@ abstract class BaseWardBedPeer {
 
 
 		if ($con === null) {
-			$con = Propel::getConnection(WardBedPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+			$con = Propel::getConnection(VisitPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; // rename for clarity
 		} else {
-			$criteria = $values->buildCriteria(); // build Criteria from WardBed object
+			$criteria = $values->buildCriteria(); // build Criteria from Visit object
 		}
 
-		if ($criteria->containsKey(WardBedPeer::ID) && $criteria->keyContainsValue(WardBedPeer::ID) ) {
-			throw new PropelException('Cannot insert a value for auto-increment primary key ('.WardBedPeer::ID.')');
+		if ($criteria->containsKey(VisitPeer::ID) && $criteria->keyContainsValue(VisitPeer::ID) ) {
+			throw new PropelException('Cannot insert a value for auto-increment primary key ('.VisitPeer::ID.')');
 		}
 
 
@@ -769,18 +575,18 @@ abstract class BaseWardBedPeer {
 		}
 
 		
-    foreach (sfMixer::getCallables('BaseWardBedPeer:doInsert:post') as $callable)
+    foreach (sfMixer::getCallables('BaseVisitPeer:doInsert:post') as $callable)
     {
-      call_user_func($callable, 'BaseWardBedPeer', $values, $con, $pk);
+      call_user_func($callable, 'BaseVisitPeer', $values, $con, $pk);
     }
 
     return $pk;
 	}
 
 	/**
-	 * Method perform an UPDATE on the database, given a WardBed or Criteria object.
+	 * Method perform an UPDATE on the database, given a Visit or Criteria object.
 	 *
-	 * @param      mixed $values Criteria or WardBed object containing data that is used to create the UPDATE statement.
+	 * @param      mixed $values Criteria or Visit object containing data that is used to create the UPDATE statement.
 	 * @param      PropelPDO $con The connection to use (specify PropelPDO connection object to exert more control over transactions).
 	 * @return     int The number of affected rows (if supported by underlying database driver).
 	 * @throws     PropelException Any exceptions caught during processing will be
@@ -789,9 +595,9 @@ abstract class BaseWardBedPeer {
 	public static function doUpdate($values, PropelPDO $con = null)
 	{
 
-    foreach (sfMixer::getCallables('BaseWardBedPeer:doUpdate:pre') as $callable)
+    foreach (sfMixer::getCallables('BaseVisitPeer:doUpdate:pre') as $callable)
     {
-      $ret = call_user_func($callable, 'BaseWardBedPeer', $values, $con);
+      $ret = call_user_func($callable, 'BaseVisitPeer', $values, $con);
       if (false !== $ret)
       {
         return $ret;
@@ -800,7 +606,7 @@ abstract class BaseWardBedPeer {
 
 
 		if ($con === null) {
-			$con = Propel::getConnection(WardBedPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+			$con = Propel::getConnection(VisitPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
 
 		$selectCriteria = new Criteria(self::DATABASE_NAME);
@@ -808,10 +614,10 @@ abstract class BaseWardBedPeer {
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; // rename for clarity
 
-			$comparison = $criteria->getComparison(WardBedPeer::ID);
-			$selectCriteria->add(WardBedPeer::ID, $criteria->remove(WardBedPeer::ID), $comparison);
+			$comparison = $criteria->getComparison(VisitPeer::ID);
+			$selectCriteria->add(VisitPeer::ID, $criteria->remove(VisitPeer::ID), $comparison);
 
-		} else { // $values is WardBed object
+		} else { // $values is Visit object
 			$criteria = $values->buildCriteria(); // gets full criteria
 			$selectCriteria = $values->buildPkeyCriteria(); // gets criteria w/ primary key(s)
 		}
@@ -822,30 +628,30 @@ abstract class BaseWardBedPeer {
 		$ret = BasePeer::doUpdate($selectCriteria, $criteria, $con);
 	
 
-    foreach (sfMixer::getCallables('BaseWardBedPeer:doUpdate:post') as $callable)
+    foreach (sfMixer::getCallables('BaseVisitPeer:doUpdate:post') as $callable)
     {
-      call_user_func($callable, 'BaseWardBedPeer', $values, $con, $ret);
+      call_user_func($callable, 'BaseVisitPeer', $values, $con, $ret);
     }
 
     return $ret;
   }
 
 	/**
-	 * Method to DELETE all rows from the ward_bed table.
+	 * Method to DELETE all rows from the visit table.
 	 *
 	 * @return     int The number of affected rows (if supported by underlying database driver).
 	 */
 	public static function doDeleteAll($con = null)
 	{
 		if ($con === null) {
-			$con = Propel::getConnection(WardBedPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+			$con = Propel::getConnection(VisitPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
 		$affectedRows = 0; // initialize var to track total num of affected rows
 		try {
 			// use transaction because $criteria could contain info
 			// for more than one table or we could emulating ON DELETE CASCADE, etc.
 			$con->beginTransaction();
-			$affectedRows += BasePeer::doDeleteAll(WardBedPeer::TABLE_NAME, $con);
+			$affectedRows += BasePeer::doDeleteAll(VisitPeer::TABLE_NAME, $con);
 			$con->commit();
 			return $affectedRows;
 		} catch (PropelException $e) {
@@ -855,9 +661,9 @@ abstract class BaseWardBedPeer {
 	}
 
 	/**
-	 * Method perform a DELETE on the database, given a WardBed or Criteria object OR a primary key value.
+	 * Method perform a DELETE on the database, given a Visit or Criteria object OR a primary key value.
 	 *
-	 * @param      mixed $values Criteria or WardBed object or primary key or array of primary keys
+	 * @param      mixed $values Criteria or Visit object or primary key or array of primary keys
 	 *              which is used to create the DELETE statement
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int 	The number of affected rows (if supported by underlying database driver).  This includes CASCADE-related rows
@@ -868,20 +674,20 @@ abstract class BaseWardBedPeer {
 	 public static function doDelete($values, PropelPDO $con = null)
 	 {
 		if ($con === null) {
-			$con = Propel::getConnection(WardBedPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+			$con = Propel::getConnection(VisitPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
 
 		if ($values instanceof Criteria) {
 			// invalidate the cache for all objects of this type, since we have no
 			// way of knowing (without running a query) what objects should be invalidated
 			// from the cache based on this Criteria.
-			WardBedPeer::clearInstancePool();
+			VisitPeer::clearInstancePool();
 
 			// rename for clarity
 			$criteria = clone $values;
-		} elseif ($values instanceof WardBed) {
+		} elseif ($values instanceof Visit) {
 			// invalidate the cache for this single object
-			WardBedPeer::removeInstanceFromPool($values);
+			VisitPeer::removeInstanceFromPool($values);
 			// create criteria based on pk values
 			$criteria = $values->buildPkeyCriteria();
 		} else {
@@ -890,11 +696,11 @@ abstract class BaseWardBedPeer {
 
 
 			$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(WardBedPeer::ID, (array) $values, Criteria::IN);
+			$criteria->add(VisitPeer::ID, (array) $values, Criteria::IN);
 
 			foreach ((array) $values as $singleval) {
 				// we can invalidate the cache for this single object
-				WardBedPeer::removeInstanceFromPool($singleval);
+				VisitPeer::removeInstanceFromPool($singleval);
 			}
 		}
 
@@ -919,24 +725,24 @@ abstract class BaseWardBedPeer {
 	}
 
 	/**
-	 * Validates all modified columns of given WardBed object.
+	 * Validates all modified columns of given Visit object.
 	 * If parameter $columns is either a single column name or an array of column names
 	 * than only those columns are validated.
 	 *
 	 * NOTICE: This does not apply to primary or foreign keys for now.
 	 *
-	 * @param      WardBed $obj The object to validate.
+	 * @param      Visit $obj The object to validate.
 	 * @param      mixed $cols Column name or array of column names.
 	 *
 	 * @return     mixed TRUE if all columns are valid or the error message of the first invalid column.
 	 */
-	public static function doValidate(WardBed $obj, $cols = null)
+	public static function doValidate(Visit $obj, $cols = null)
 	{
 		$columns = array();
 
 		if ($cols) {
-			$dbMap = Propel::getDatabaseMap(WardBedPeer::DATABASE_NAME);
-			$tableMap = $dbMap->getTable(WardBedPeer::TABLE_NAME);
+			$dbMap = Propel::getDatabaseMap(VisitPeer::DATABASE_NAME);
+			$tableMap = $dbMap->getTable(VisitPeer::TABLE_NAME);
 
 			if (! is_array($cols)) {
 				$cols = array($cols);
@@ -952,11 +758,11 @@ abstract class BaseWardBedPeer {
 
 		}
 
-		$res =  BasePeer::doValidate(WardBedPeer::DATABASE_NAME, WardBedPeer::TABLE_NAME, $columns);
+		$res =  BasePeer::doValidate(VisitPeer::DATABASE_NAME, VisitPeer::TABLE_NAME, $columns);
     if ($res !== true) {
         $request = sfContext::getInstance()->getRequest();
         foreach ($res as $failed) {
-            $col = WardBedPeer::translateFieldname($failed->getColumn(), BasePeer::TYPE_COLNAME, BasePeer::TYPE_PHPNAME);
+            $col = VisitPeer::translateFieldname($failed->getColumn(), BasePeer::TYPE_COLNAME, BasePeer::TYPE_PHPNAME);
         }
     }
 
@@ -968,23 +774,23 @@ abstract class BaseWardBedPeer {
 	 *
 	 * @param      int $pk the primary key.
 	 * @param      PropelPDO $con the connection to use
-	 * @return     WardBed
+	 * @return     Visit
 	 */
 	public static function retrieveByPK($pk, PropelPDO $con = null)
 	{
 
-		if (null !== ($obj = WardBedPeer::getInstanceFromPool((string) $pk))) {
+		if (null !== ($obj = VisitPeer::getInstanceFromPool((string) $pk))) {
 			return $obj;
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(WardBedPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(VisitPeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 
-		$criteria = new Criteria(WardBedPeer::DATABASE_NAME);
-		$criteria->add(WardBedPeer::ID, $pk);
+		$criteria = new Criteria(VisitPeer::DATABASE_NAME);
+		$criteria->add(VisitPeer::ID, $pk);
 
-		$v = WardBedPeer::doSelect($criteria, $con);
+		$v = VisitPeer::doSelect($criteria, $con);
 
 		return !empty($v) > 0 ? $v[0] : null;
 	}
@@ -1000,30 +806,30 @@ abstract class BaseWardBedPeer {
 	public static function retrieveByPKs($pks, PropelPDO $con = null)
 	{
 		if ($con === null) {
-			$con = Propel::getConnection(WardBedPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(VisitPeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 
 		$objs = null;
 		if (empty($pks)) {
 			$objs = array();
 		} else {
-			$criteria = new Criteria(WardBedPeer::DATABASE_NAME);
-			$criteria->add(WardBedPeer::ID, $pks, Criteria::IN);
-			$objs = WardBedPeer::doSelect($criteria, $con);
+			$criteria = new Criteria(VisitPeer::DATABASE_NAME);
+			$criteria->add(VisitPeer::ID, $pks, Criteria::IN);
+			$objs = VisitPeer::doSelect($criteria, $con);
 		}
 		return $objs;
 	}
 
-} // BaseWardBedPeer
+} // BaseVisitPeer
 
 // This is the static code needed to register the MapBuilder for this table with the main Propel class.
 //
-// NOTE: This static code cannot call methods on the WardBedPeer class, because it is not defined yet.
-// If you need to use overridden methods, you can add this code to the bottom of the WardBedPeer class:
+// NOTE: This static code cannot call methods on the VisitPeer class, because it is not defined yet.
+// If you need to use overridden methods, you can add this code to the bottom of the VisitPeer class:
 //
-// Propel::getDatabaseMap(WardBedPeer::DATABASE_NAME)->addTableBuilder(WardBedPeer::TABLE_NAME, WardBedPeer::getMapBuilder());
+// Propel::getDatabaseMap(VisitPeer::DATABASE_NAME)->addTableBuilder(VisitPeer::TABLE_NAME, VisitPeer::getMapBuilder());
 //
 // Doing so will effectively overwrite the registration below.
 
-Propel::getDatabaseMap(BaseWardBedPeer::DATABASE_NAME)->addTableBuilder(BaseWardBedPeer::TABLE_NAME, BaseWardBedPeer::getMapBuilder());
+Propel::getDatabaseMap(BaseVisitPeer::DATABASE_NAME)->addTableBuilder(BaseVisitPeer::TABLE_NAME, BaseVisitPeer::getMapBuilder());
 

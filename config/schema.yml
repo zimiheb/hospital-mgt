@@ -18,6 +18,14 @@ propel:
     created_at: { type: DATE, required: false }
     updated_at: { type: DATE, required: false }
     _indexes: { FK_designation_department: [department_id] }
+  duty_place:
+    _attributes: { phpName: DutyPlace }
+    id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }
+    title: { type: VARCHAR, size: '100', required: false }
+    description: { type: VARCHAR, size: '255', required: false }
+    status: { type: VARCHAR, size: '10', required: false }
+    created_at: { type: DATE, required: false }
+    updated_at: { type: DATE, required: false }
   employee:
     _attributes: { phpName: Employee }
     id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }
@@ -40,6 +48,24 @@ propel:
     created_at: { type: DATE, required: false }
     updated_at: { type: DATE, required: false }
     _indexes: { FK_employee_department: [department_id], FK_employee_designation: [designation_id] }
+  lab_report:
+    _attributes: { phpName: LabReport }
+    id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }
+    patient_id: { type: INTEGER, size: '11', required: false }
+    visit_id: { type: INTEGER, size: '11', required: false }
+    lab_test_id: { type: INTEGER, size: '11', required: false }
+    description: { type: VARCHAR, size: '1024', required: false }
+    status: { type: VARCHAR, size: '10', required: false }
+    created_at: { type: DATE, required: false }
+    updated_at: { type: DATE, required: false }
+  lab_test:
+    _attributes: { phpName: LabTest }
+    id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }
+    title: { type: VARCHAR, size: '255', required: false }
+    description: { type: VARCHAR, size: '500', required: false }
+    status: { type: VARCHAR, size: '10', required: false }
+    created_at: { type: DATE, required: false }
+    updated_at: { type: DATE, required: false }
   patient:
     _attributes: { phpName: Patient }
     id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }
@@ -81,6 +107,26 @@ propel:
     created_at: { type: DATE, required: false }
     updated_at: { type: DATE, required: false }
     _indexes: { FK_user_employee: [employee_id] }
+  visit:
+    _attributes: { phpName: Visit }
+    id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }
+    patient_id: { type: INTEGER, size: '11', required: false }
+    doctor_id: { type: INTEGER, size: '11', required: false }
+    ward_bed_id: { type: INTEGER, size: '11', required: false }
+    ward_doc_id: { type: INTEGER, size: '11', required: false }
+    visit_type: { type: VARCHAR, size: '10', required: false }
+    medicine: { type: VARCHAR, size: '500', required: false }
+    bp: { type: VARCHAR, size: '10', required: false }
+    temp: { type: VARCHAR, size: '10', required: false }
+    pulse: { type: VARCHAR, size: '10', required: false }
+    injection: { type: VARCHAR, size: '500', required: false }
+    diet: { type: VARCHAR, size: '500', required: false }
+    description: { type: VARCHAR, size: '1024', required: false }
+    fee: { type: VARCHAR, size: '10', required: false }
+    fee_paid: { type: VARCHAR, size: '10', required: false }
+    status: { type: VARCHAR, size: '10', required: false }
+    created_at: { type: DATE, required: false }
+    updated_at: { type: DATE, required: false }
   ward:
     _attributes: { phpName: Ward }
     id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }

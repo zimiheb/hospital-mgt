@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Base class that represents a row from the 'patient' table.
+ * Base class that represents a row from the 'visit' table.
  *
  * 
  *
@@ -11,16 +11,16 @@
  *
  * @package    lib.model.om
  */
-abstract class BasePatient extends BaseObject  implements Persistent {
+abstract class BaseVisit extends BaseObject  implements Persistent {
 
 
-  const PEER = 'PatientPeer';
+  const PEER = 'VisitPeer';
 
 	/**
 	 * The Peer class.
 	 * Instance provides a convenient way of calling static methods on a class
 	 * that calling code may not be able to identify.
-	 * @var        PatientPeer
+	 * @var        VisitPeer
 	 */
 	protected static $peer;
 
@@ -31,94 +31,88 @@ abstract class BasePatient extends BaseObject  implements Persistent {
 	protected $id;
 
 	/**
-	 * The value for the id_number field.
-	 * @var        string
+	 * The value for the patient_id field.
+	 * @var        int
 	 */
-	protected $id_number;
+	protected $patient_id;
 
 	/**
-	 * The value for the cnic field.
-	 * @var        string
+	 * The value for the doctor_id field.
+	 * @var        int
 	 */
-	protected $cnic;
+	protected $doctor_id;
 
 	/**
-	 * The value for the name field.
-	 * @var        string
+	 * The value for the ward_bed_id field.
+	 * @var        int
 	 */
-	protected $name;
+	protected $ward_bed_id;
 
 	/**
-	 * The value for the father_name field.
-	 * @var        string
+	 * The value for the ward_doc_id field.
+	 * @var        int
 	 */
-	protected $father_name;
+	protected $ward_doc_id;
 
 	/**
-	 * The value for the dob field.
+	 * The value for the visit_type field.
 	 * @var        string
 	 */
-	protected $dob;
+	protected $visit_type;
 
 	/**
-	 * The value for the gender field.
+	 * The value for the medicine field.
 	 * @var        string
 	 */
-	protected $gender;
+	protected $medicine;
 
 	/**
-	 * The value for the address field.
+	 * The value for the bp field.
 	 * @var        string
 	 */
-	protected $address;
+	protected $bp;
 
 	/**
-	 * The value for the contact_res field.
+	 * The value for the temp field.
 	 * @var        string
 	 */
-	protected $contact_res;
+	protected $temp;
 
 	/**
-	 * The value for the contact_cell field.
+	 * The value for the pulse field.
 	 * @var        string
 	 */
-	protected $contact_cell;
+	protected $pulse;
 
 	/**
-	 * The value for the emergency_contact field.
+	 * The value for the injection field.
 	 * @var        string
 	 */
-	protected $emergency_contact;
+	protected $injection;
 
 	/**
-	 * The value for the email field.
+	 * The value for the diet field.
 	 * @var        string
 	 */
-	protected $email;
+	protected $diet;
 
 	/**
-	 * The value for the blood_group field.
+	 * The value for the description field.
 	 * @var        string
 	 */
-	protected $blood_group;
+	protected $description;
 
 	/**
-	 * The value for the disease field.
+	 * The value for the fee field.
 	 * @var        string
 	 */
-	protected $disease;
+	protected $fee;
 
 	/**
-	 * The value for the allergy field.
+	 * The value for the fee_paid field.
 	 * @var        string
 	 */
-	protected $allergy;
-
-	/**
-	 * The value for the drug_allergy field.
-	 * @var        string
-	 */
-	protected $drug_allergy;
+	protected $fee_paid;
 
 	/**
 	 * The value for the status field.
@@ -153,7 +147,7 @@ abstract class BasePatient extends BaseObject  implements Persistent {
 	protected $alreadyInValidation = false;
 
 	/**
-	 * Initializes internal state of BasePatient object.
+	 * Initializes internal state of BaseVisit object.
 	 * @see        applyDefaults()
 	 */
 	public function __construct()
@@ -183,181 +177,143 @@ abstract class BasePatient extends BaseObject  implements Persistent {
 	}
 
 	/**
-	 * Get the [id_number] column value.
+	 * Get the [patient_id] column value.
 	 * 
-	 * @return     string
+	 * @return     int
 	 */
-	public function getIdNumber()
+	public function getPatientId()
 	{
-		return $this->id_number;
+		return $this->patient_id;
 	}
 
 	/**
-	 * Get the [cnic] column value.
+	 * Get the [doctor_id] column value.
 	 * 
-	 * @return     string
+	 * @return     int
 	 */
-	public function getCnic()
+	public function getDoctorId()
 	{
-		return $this->cnic;
+		return $this->doctor_id;
 	}
 
 	/**
-	 * Get the [name] column value.
+	 * Get the [ward_bed_id] column value.
 	 * 
-	 * @return     string
+	 * @return     int
 	 */
-	public function getName()
+	public function getWardBedId()
 	{
-		return $this->name;
+		return $this->ward_bed_id;
 	}
 
 	/**
-	 * Get the [father_name] column value.
+	 * Get the [ward_doc_id] column value.
 	 * 
-	 * @return     string
+	 * @return     int
 	 */
-	public function getFatherName()
+	public function getWardDocId()
 	{
-		return $this->father_name;
+		return $this->ward_doc_id;
 	}
 
 	/**
-	 * Get the [optionally formatted] temporal [dob] column value.
-	 * 
-	 *
-	 * @param      string $format The date/time format string (either date()-style or strftime()-style).
-	 *							If format is NULL, then the raw DateTime object will be returned.
-	 * @return     mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL, and 0 if column value is 0000-00-00
-	 * @throws     PropelException - if unable to parse/validate the date/time value.
-	 */
-	public function getDob($format = 'Y-m-d')
-	{
-		if ($this->dob === null) {
-			return null;
-		}
-
-
-		if ($this->dob === '0000-00-00') {
-			// while technically this is not a default value of NULL,
-			// this seems to be closest in meaning.
-			return null;
-		} else {
-			try {
-				$dt = new DateTime($this->dob);
-			} catch (Exception $x) {
-				throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->dob, true), $x);
-			}
-		}
-
-		if ($format === null) {
-			// Because propel.useDateTimeClass is TRUE, we return a DateTime object.
-			return $dt;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $dt->format('U'));
-		} else {
-			return $dt->format($format);
-		}
-	}
-
-	/**
-	 * Get the [gender] column value.
+	 * Get the [visit_type] column value.
 	 * 
 	 * @return     string
 	 */
-	public function getGender()
+	public function getVisitType()
 	{
-		return $this->gender;
+		return $this->visit_type;
 	}
 
 	/**
-	 * Get the [address] column value.
+	 * Get the [medicine] column value.
 	 * 
 	 * @return     string
 	 */
-	public function getAddress()
+	public function getMedicine()
 	{
-		return $this->address;
+		return $this->medicine;
 	}
 
 	/**
-	 * Get the [contact_res] column value.
+	 * Get the [bp] column value.
 	 * 
 	 * @return     string
 	 */
-	public function getContactRes()
+	public function getBp()
 	{
-		return $this->contact_res;
+		return $this->bp;
 	}
 
 	/**
-	 * Get the [contact_cell] column value.
+	 * Get the [temp] column value.
 	 * 
 	 * @return     string
 	 */
-	public function getContactCell()
+	public function getTemp()
 	{
-		return $this->contact_cell;
+		return $this->temp;
 	}
 
 	/**
-	 * Get the [emergency_contact] column value.
+	 * Get the [pulse] column value.
 	 * 
 	 * @return     string
 	 */
-	public function getEmergencyContact()
+	public function getPulse()
 	{
-		return $this->emergency_contact;
+		return $this->pulse;
 	}
 
 	/**
-	 * Get the [email] column value.
+	 * Get the [injection] column value.
 	 * 
 	 * @return     string
 	 */
-	public function getEmail()
+	public function getInjection()
 	{
-		return $this->email;
+		return $this->injection;
 	}
 
 	/**
-	 * Get the [blood_group] column value.
+	 * Get the [diet] column value.
 	 * 
 	 * @return     string
 	 */
-	public function getBloodGroup()
+	public function getDiet()
 	{
-		return $this->blood_group;
+		return $this->diet;
 	}
 
 	/**
-	 * Get the [disease] column value.
+	 * Get the [description] column value.
 	 * 
 	 * @return     string
 	 */
-	public function getDisease()
+	public function getDescription()
 	{
-		return $this->disease;
+		return $this->description;
 	}
 
 	/**
-	 * Get the [allergy] column value.
+	 * Get the [fee] column value.
 	 * 
 	 * @return     string
 	 */
-	public function getAllergy()
+	public function getFee()
 	{
-		return $this->allergy;
+		return $this->fee;
 	}
 
 	/**
-	 * Get the [drug_allergy] column value.
+	 * Get the [fee_paid] column value.
 	 * 
 	 * @return     string
 	 */
-	public function getDrugAllergy()
+	public function getFeePaid()
 	{
-		return $this->drug_allergy;
+		return $this->fee_paid;
 	}
 
 	/**
@@ -450,7 +406,7 @@ abstract class BasePatient extends BaseObject  implements Persistent {
 	 * Set the value of [id] column.
 	 * 
 	 * @param      int $v new value
-	 * @return     Patient The current object (for fluent API support)
+	 * @return     Visit The current object (for fluent API support)
 	 */
 	public function setId($v)
 	{
@@ -460,346 +416,297 @@ abstract class BasePatient extends BaseObject  implements Persistent {
 
 		if ($this->id !== $v) {
 			$this->id = $v;
-			$this->modifiedColumns[] = PatientPeer::ID;
+			$this->modifiedColumns[] = VisitPeer::ID;
 		}
 
 		return $this;
 	} // setId()
 
 	/**
-	 * Set the value of [id_number] column.
+	 * Set the value of [patient_id] column.
+	 * 
+	 * @param      int $v new value
+	 * @return     Visit The current object (for fluent API support)
+	 */
+	public function setPatientId($v)
+	{
+		if ($v !== null) {
+			$v = (int) $v;
+		}
+
+		if ($this->patient_id !== $v) {
+			$this->patient_id = $v;
+			$this->modifiedColumns[] = VisitPeer::PATIENT_ID;
+		}
+
+		return $this;
+	} // setPatientId()
+
+	/**
+	 * Set the value of [doctor_id] column.
+	 * 
+	 * @param      int $v new value
+	 * @return     Visit The current object (for fluent API support)
+	 */
+	public function setDoctorId($v)
+	{
+		if ($v !== null) {
+			$v = (int) $v;
+		}
+
+		if ($this->doctor_id !== $v) {
+			$this->doctor_id = $v;
+			$this->modifiedColumns[] = VisitPeer::DOCTOR_ID;
+		}
+
+		return $this;
+	} // setDoctorId()
+
+	/**
+	 * Set the value of [ward_bed_id] column.
+	 * 
+	 * @param      int $v new value
+	 * @return     Visit The current object (for fluent API support)
+	 */
+	public function setWardBedId($v)
+	{
+		if ($v !== null) {
+			$v = (int) $v;
+		}
+
+		if ($this->ward_bed_id !== $v) {
+			$this->ward_bed_id = $v;
+			$this->modifiedColumns[] = VisitPeer::WARD_BED_ID;
+		}
+
+		return $this;
+	} // setWardBedId()
+
+	/**
+	 * Set the value of [ward_doc_id] column.
+	 * 
+	 * @param      int $v new value
+	 * @return     Visit The current object (for fluent API support)
+	 */
+	public function setWardDocId($v)
+	{
+		if ($v !== null) {
+			$v = (int) $v;
+		}
+
+		if ($this->ward_doc_id !== $v) {
+			$this->ward_doc_id = $v;
+			$this->modifiedColumns[] = VisitPeer::WARD_DOC_ID;
+		}
+
+		return $this;
+	} // setWardDocId()
+
+	/**
+	 * Set the value of [visit_type] column.
 	 * 
 	 * @param      string $v new value
-	 * @return     Patient The current object (for fluent API support)
+	 * @return     Visit The current object (for fluent API support)
 	 */
-	public function setIdNumber($v)
+	public function setVisitType($v)
 	{
 		if ($v !== null) {
 			$v = (string) $v;
 		}
 
-		if ($this->id_number !== $v) {
-			$this->id_number = $v;
-			$this->modifiedColumns[] = PatientPeer::ID_NUMBER;
+		if ($this->visit_type !== $v) {
+			$this->visit_type = $v;
+			$this->modifiedColumns[] = VisitPeer::VISIT_TYPE;
 		}
 
 		return $this;
-	} // setIdNumber()
+	} // setVisitType()
 
 	/**
-	 * Set the value of [cnic] column.
+	 * Set the value of [medicine] column.
 	 * 
 	 * @param      string $v new value
-	 * @return     Patient The current object (for fluent API support)
+	 * @return     Visit The current object (for fluent API support)
 	 */
-	public function setCnic($v)
+	public function setMedicine($v)
 	{
 		if ($v !== null) {
 			$v = (string) $v;
 		}
 
-		if ($this->cnic !== $v) {
-			$this->cnic = $v;
-			$this->modifiedColumns[] = PatientPeer::CNIC;
+		if ($this->medicine !== $v) {
+			$this->medicine = $v;
+			$this->modifiedColumns[] = VisitPeer::MEDICINE;
 		}
 
 		return $this;
-	} // setCnic()
+	} // setMedicine()
 
 	/**
-	 * Set the value of [name] column.
+	 * Set the value of [bp] column.
 	 * 
 	 * @param      string $v new value
-	 * @return     Patient The current object (for fluent API support)
+	 * @return     Visit The current object (for fluent API support)
 	 */
-	public function setName($v)
+	public function setBp($v)
 	{
 		if ($v !== null) {
 			$v = (string) $v;
 		}
 
-		if ($this->name !== $v) {
-			$this->name = $v;
-			$this->modifiedColumns[] = PatientPeer::NAME;
+		if ($this->bp !== $v) {
+			$this->bp = $v;
+			$this->modifiedColumns[] = VisitPeer::BP;
 		}
 
 		return $this;
-	} // setName()
+	} // setBp()
 
 	/**
-	 * Set the value of [father_name] column.
+	 * Set the value of [temp] column.
 	 * 
 	 * @param      string $v new value
-	 * @return     Patient The current object (for fluent API support)
+	 * @return     Visit The current object (for fluent API support)
 	 */
-	public function setFatherName($v)
+	public function setTemp($v)
 	{
 		if ($v !== null) {
 			$v = (string) $v;
 		}
 
-		if ($this->father_name !== $v) {
-			$this->father_name = $v;
-			$this->modifiedColumns[] = PatientPeer::FATHER_NAME;
+		if ($this->temp !== $v) {
+			$this->temp = $v;
+			$this->modifiedColumns[] = VisitPeer::TEMP;
 		}
 
 		return $this;
-	} // setFatherName()
+	} // setTemp()
 
 	/**
-	 * Sets the value of [dob] column to a normalized version of the date/time value specified.
-	 * 
-	 * @param      mixed $v string, integer (timestamp), or DateTime value.  Empty string will
-	 *						be treated as NULL for temporal objects.
-	 * @return     Patient The current object (for fluent API support)
-	 */
-	public function setDob($v)
-	{
-		// we treat '' as NULL for temporal objects because DateTime('') == DateTime('now')
-		// -- which is unexpected, to say the least.
-		if ($v === null || $v === '') {
-			$dt = null;
-		} elseif ($v instanceof DateTime) {
-			$dt = $v;
-		} else {
-			// some string/numeric value passed; we normalize that so that we can
-			// validate it.
-			try {
-				if (is_numeric($v)) { // if it's a unix timestamp
-					$dt = new DateTime('@'.$v, new DateTimeZone('UTC'));
-					// We have to explicitly specify and then change the time zone because of a
-					// DateTime bug: http://bugs.php.net/bug.php?id=43003
-					$dt->setTimeZone(new DateTimeZone(date_default_timezone_get()));
-				} else {
-					$dt = new DateTime($v);
-				}
-			} catch (Exception $x) {
-				throw new PropelException('Error parsing date/time value: ' . var_export($v, true), $x);
-			}
-		}
-
-		if ( $this->dob !== null || $dt !== null ) {
-			// (nested ifs are a little easier to read in this case)
-
-			$currNorm = ($this->dob !== null && $tmpDt = new DateTime($this->dob)) ? $tmpDt->format('Y-m-d') : null;
-			$newNorm = ($dt !== null) ? $dt->format('Y-m-d') : null;
-
-			if ( ($currNorm !== $newNorm) // normalized values don't match 
-					)
-			{
-				$this->dob = ($dt ? $dt->format('Y-m-d') : null);
-				$this->modifiedColumns[] = PatientPeer::DOB;
-			}
-		} // if either are not null
-
-		return $this;
-	} // setDob()
-
-	/**
-	 * Set the value of [gender] column.
+	 * Set the value of [pulse] column.
 	 * 
 	 * @param      string $v new value
-	 * @return     Patient The current object (for fluent API support)
+	 * @return     Visit The current object (for fluent API support)
 	 */
-	public function setGender($v)
+	public function setPulse($v)
 	{
 		if ($v !== null) {
 			$v = (string) $v;
 		}
 
-		if ($this->gender !== $v) {
-			$this->gender = $v;
-			$this->modifiedColumns[] = PatientPeer::GENDER;
+		if ($this->pulse !== $v) {
+			$this->pulse = $v;
+			$this->modifiedColumns[] = VisitPeer::PULSE;
 		}
 
 		return $this;
-	} // setGender()
+	} // setPulse()
 
 	/**
-	 * Set the value of [address] column.
+	 * Set the value of [injection] column.
 	 * 
 	 * @param      string $v new value
-	 * @return     Patient The current object (for fluent API support)
+	 * @return     Visit The current object (for fluent API support)
 	 */
-	public function setAddress($v)
+	public function setInjection($v)
 	{
 		if ($v !== null) {
 			$v = (string) $v;
 		}
 
-		if ($this->address !== $v) {
-			$this->address = $v;
-			$this->modifiedColumns[] = PatientPeer::ADDRESS;
+		if ($this->injection !== $v) {
+			$this->injection = $v;
+			$this->modifiedColumns[] = VisitPeer::INJECTION;
 		}
 
 		return $this;
-	} // setAddress()
+	} // setInjection()
 
 	/**
-	 * Set the value of [contact_res] column.
+	 * Set the value of [diet] column.
 	 * 
 	 * @param      string $v new value
-	 * @return     Patient The current object (for fluent API support)
+	 * @return     Visit The current object (for fluent API support)
 	 */
-	public function setContactRes($v)
+	public function setDiet($v)
 	{
 		if ($v !== null) {
 			$v = (string) $v;
 		}
 
-		if ($this->contact_res !== $v) {
-			$this->contact_res = $v;
-			$this->modifiedColumns[] = PatientPeer::CONTACT_RES;
+		if ($this->diet !== $v) {
+			$this->diet = $v;
+			$this->modifiedColumns[] = VisitPeer::DIET;
 		}
 
 		return $this;
-	} // setContactRes()
+	} // setDiet()
 
 	/**
-	 * Set the value of [contact_cell] column.
+	 * Set the value of [description] column.
 	 * 
 	 * @param      string $v new value
-	 * @return     Patient The current object (for fluent API support)
+	 * @return     Visit The current object (for fluent API support)
 	 */
-	public function setContactCell($v)
+	public function setDescription($v)
 	{
 		if ($v !== null) {
 			$v = (string) $v;
 		}
 
-		if ($this->contact_cell !== $v) {
-			$this->contact_cell = $v;
-			$this->modifiedColumns[] = PatientPeer::CONTACT_CELL;
+		if ($this->description !== $v) {
+			$this->description = $v;
+			$this->modifiedColumns[] = VisitPeer::DESCRIPTION;
 		}
 
 		return $this;
-	} // setContactCell()
+	} // setDescription()
 
 	/**
-	 * Set the value of [emergency_contact] column.
+	 * Set the value of [fee] column.
 	 * 
 	 * @param      string $v new value
-	 * @return     Patient The current object (for fluent API support)
+	 * @return     Visit The current object (for fluent API support)
 	 */
-	public function setEmergencyContact($v)
+	public function setFee($v)
 	{
 		if ($v !== null) {
 			$v = (string) $v;
 		}
 
-		if ($this->emergency_contact !== $v) {
-			$this->emergency_contact = $v;
-			$this->modifiedColumns[] = PatientPeer::EMERGENCY_CONTACT;
+		if ($this->fee !== $v) {
+			$this->fee = $v;
+			$this->modifiedColumns[] = VisitPeer::FEE;
 		}
 
 		return $this;
-	} // setEmergencyContact()
+	} // setFee()
 
 	/**
-	 * Set the value of [email] column.
+	 * Set the value of [fee_paid] column.
 	 * 
 	 * @param      string $v new value
-	 * @return     Patient The current object (for fluent API support)
+	 * @return     Visit The current object (for fluent API support)
 	 */
-	public function setEmail($v)
+	public function setFeePaid($v)
 	{
 		if ($v !== null) {
 			$v = (string) $v;
 		}
 
-		if ($this->email !== $v) {
-			$this->email = $v;
-			$this->modifiedColumns[] = PatientPeer::EMAIL;
+		if ($this->fee_paid !== $v) {
+			$this->fee_paid = $v;
+			$this->modifiedColumns[] = VisitPeer::FEE_PAID;
 		}
 
 		return $this;
-	} // setEmail()
-
-	/**
-	 * Set the value of [blood_group] column.
-	 * 
-	 * @param      string $v new value
-	 * @return     Patient The current object (for fluent API support)
-	 */
-	public function setBloodGroup($v)
-	{
-		if ($v !== null) {
-			$v = (string) $v;
-		}
-
-		if ($this->blood_group !== $v) {
-			$this->blood_group = $v;
-			$this->modifiedColumns[] = PatientPeer::BLOOD_GROUP;
-		}
-
-		return $this;
-	} // setBloodGroup()
-
-	/**
-	 * Set the value of [disease] column.
-	 * 
-	 * @param      string $v new value
-	 * @return     Patient The current object (for fluent API support)
-	 */
-	public function setDisease($v)
-	{
-		if ($v !== null) {
-			$v = (string) $v;
-		}
-
-		if ($this->disease !== $v) {
-			$this->disease = $v;
-			$this->modifiedColumns[] = PatientPeer::DISEASE;
-		}
-
-		return $this;
-	} // setDisease()
-
-	/**
-	 * Set the value of [allergy] column.
-	 * 
-	 * @param      string $v new value
-	 * @return     Patient The current object (for fluent API support)
-	 */
-	public function setAllergy($v)
-	{
-		if ($v !== null) {
-			$v = (string) $v;
-		}
-
-		if ($this->allergy !== $v) {
-			$this->allergy = $v;
-			$this->modifiedColumns[] = PatientPeer::ALLERGY;
-		}
-
-		return $this;
-	} // setAllergy()
-
-	/**
-	 * Set the value of [drug_allergy] column.
-	 * 
-	 * @param      string $v new value
-	 * @return     Patient The current object (for fluent API support)
-	 */
-	public function setDrugAllergy($v)
-	{
-		if ($v !== null) {
-			$v = (string) $v;
-		}
-
-		if ($this->drug_allergy !== $v) {
-			$this->drug_allergy = $v;
-			$this->modifiedColumns[] = PatientPeer::DRUG_ALLERGY;
-		}
-
-		return $this;
-	} // setDrugAllergy()
+	} // setFeePaid()
 
 	/**
 	 * Set the value of [status] column.
 	 * 
 	 * @param      string $v new value
-	 * @return     Patient The current object (for fluent API support)
+	 * @return     Visit The current object (for fluent API support)
 	 */
 	public function setStatus($v)
 	{
@@ -809,7 +716,7 @@ abstract class BasePatient extends BaseObject  implements Persistent {
 
 		if ($this->status !== $v) {
 			$this->status = $v;
-			$this->modifiedColumns[] = PatientPeer::STATUS;
+			$this->modifiedColumns[] = VisitPeer::STATUS;
 		}
 
 		return $this;
@@ -820,7 +727,7 @@ abstract class BasePatient extends BaseObject  implements Persistent {
 	 * 
 	 * @param      mixed $v string, integer (timestamp), or DateTime value.  Empty string will
 	 *						be treated as NULL for temporal objects.
-	 * @return     Patient The current object (for fluent API support)
+	 * @return     Visit The current object (for fluent API support)
 	 */
 	public function setCreatedAt($v)
 	{
@@ -857,7 +764,7 @@ abstract class BasePatient extends BaseObject  implements Persistent {
 					)
 			{
 				$this->created_at = ($dt ? $dt->format('Y-m-d') : null);
-				$this->modifiedColumns[] = PatientPeer::CREATED_AT;
+				$this->modifiedColumns[] = VisitPeer::CREATED_AT;
 			}
 		} // if either are not null
 
@@ -869,7 +776,7 @@ abstract class BasePatient extends BaseObject  implements Persistent {
 	 * 
 	 * @param      mixed $v string, integer (timestamp), or DateTime value.  Empty string will
 	 *						be treated as NULL for temporal objects.
-	 * @return     Patient The current object (for fluent API support)
+	 * @return     Visit The current object (for fluent API support)
 	 */
 	public function setUpdatedAt($v)
 	{
@@ -906,7 +813,7 @@ abstract class BasePatient extends BaseObject  implements Persistent {
 					)
 			{
 				$this->updated_at = ($dt ? $dt->format('Y-m-d') : null);
-				$this->modifiedColumns[] = PatientPeer::UPDATED_AT;
+				$this->modifiedColumns[] = VisitPeer::UPDATED_AT;
 			}
 		} // if either are not null
 
@@ -951,24 +858,23 @@ abstract class BasePatient extends BaseObject  implements Persistent {
 		try {
 
 			$this->id = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
-			$this->id_number = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
-			$this->cnic = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
-			$this->name = ($row[$startcol + 3] !== null) ? (string) $row[$startcol + 3] : null;
-			$this->father_name = ($row[$startcol + 4] !== null) ? (string) $row[$startcol + 4] : null;
-			$this->dob = ($row[$startcol + 5] !== null) ? (string) $row[$startcol + 5] : null;
-			$this->gender = ($row[$startcol + 6] !== null) ? (string) $row[$startcol + 6] : null;
-			$this->address = ($row[$startcol + 7] !== null) ? (string) $row[$startcol + 7] : null;
-			$this->contact_res = ($row[$startcol + 8] !== null) ? (string) $row[$startcol + 8] : null;
-			$this->contact_cell = ($row[$startcol + 9] !== null) ? (string) $row[$startcol + 9] : null;
-			$this->emergency_contact = ($row[$startcol + 10] !== null) ? (string) $row[$startcol + 10] : null;
-			$this->email = ($row[$startcol + 11] !== null) ? (string) $row[$startcol + 11] : null;
-			$this->blood_group = ($row[$startcol + 12] !== null) ? (string) $row[$startcol + 12] : null;
-			$this->disease = ($row[$startcol + 13] !== null) ? (string) $row[$startcol + 13] : null;
-			$this->allergy = ($row[$startcol + 14] !== null) ? (string) $row[$startcol + 14] : null;
-			$this->drug_allergy = ($row[$startcol + 15] !== null) ? (string) $row[$startcol + 15] : null;
-			$this->status = ($row[$startcol + 16] !== null) ? (string) $row[$startcol + 16] : null;
-			$this->created_at = ($row[$startcol + 17] !== null) ? (string) $row[$startcol + 17] : null;
-			$this->updated_at = ($row[$startcol + 18] !== null) ? (string) $row[$startcol + 18] : null;
+			$this->patient_id = ($row[$startcol + 1] !== null) ? (int) $row[$startcol + 1] : null;
+			$this->doctor_id = ($row[$startcol + 2] !== null) ? (int) $row[$startcol + 2] : null;
+			$this->ward_bed_id = ($row[$startcol + 3] !== null) ? (int) $row[$startcol + 3] : null;
+			$this->ward_doc_id = ($row[$startcol + 4] !== null) ? (int) $row[$startcol + 4] : null;
+			$this->visit_type = ($row[$startcol + 5] !== null) ? (string) $row[$startcol + 5] : null;
+			$this->medicine = ($row[$startcol + 6] !== null) ? (string) $row[$startcol + 6] : null;
+			$this->bp = ($row[$startcol + 7] !== null) ? (string) $row[$startcol + 7] : null;
+			$this->temp = ($row[$startcol + 8] !== null) ? (string) $row[$startcol + 8] : null;
+			$this->pulse = ($row[$startcol + 9] !== null) ? (string) $row[$startcol + 9] : null;
+			$this->injection = ($row[$startcol + 10] !== null) ? (string) $row[$startcol + 10] : null;
+			$this->diet = ($row[$startcol + 11] !== null) ? (string) $row[$startcol + 11] : null;
+			$this->description = ($row[$startcol + 12] !== null) ? (string) $row[$startcol + 12] : null;
+			$this->fee = ($row[$startcol + 13] !== null) ? (string) $row[$startcol + 13] : null;
+			$this->fee_paid = ($row[$startcol + 14] !== null) ? (string) $row[$startcol + 14] : null;
+			$this->status = ($row[$startcol + 15] !== null) ? (string) $row[$startcol + 15] : null;
+			$this->created_at = ($row[$startcol + 16] !== null) ? (string) $row[$startcol + 16] : null;
+			$this->updated_at = ($row[$startcol + 17] !== null) ? (string) $row[$startcol + 17] : null;
 			$this->resetModified();
 
 			$this->setNew(false);
@@ -978,10 +884,10 @@ abstract class BasePatient extends BaseObject  implements Persistent {
 			}
 
 			// FIXME - using NUM_COLUMNS may be clearer.
-			return $startcol + 19; // 19 = PatientPeer::NUM_COLUMNS - PatientPeer::NUM_LAZY_LOAD_COLUMNS).
+			return $startcol + 18; // 18 = VisitPeer::NUM_COLUMNS - VisitPeer::NUM_LAZY_LOAD_COLUMNS).
 
 		} catch (Exception $e) {
-			throw new PropelException("Error populating Patient object", $e);
+			throw new PropelException("Error populating Visit object", $e);
 		}
 	}
 
@@ -1024,13 +930,13 @@ abstract class BasePatient extends BaseObject  implements Persistent {
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(PatientPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(VisitPeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 
 		// We don't need to alter the object instance pool; we're just modifying this instance
 		// already in the pool.
 
-		$stmt = PatientPeer::doSelectStmt($this->buildPkeyCriteria(), $con);
+		$stmt = VisitPeer::doSelectStmt($this->buildPkeyCriteria(), $con);
 		$row = $stmt->fetch(PDO::FETCH_NUM);
 		$stmt->closeCursor();
 		if (!$row) {
@@ -1055,7 +961,7 @@ abstract class BasePatient extends BaseObject  implements Persistent {
 	public function delete(PropelPDO $con = null)
 	{
 
-    foreach (sfMixer::getCallables('BasePatient:delete:pre') as $callable)
+    foreach (sfMixer::getCallables('BaseVisit:delete:pre') as $callable)
     {
       $ret = call_user_func($callable, $this, $con);
       if ($ret)
@@ -1070,12 +976,12 @@ abstract class BasePatient extends BaseObject  implements Persistent {
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(PatientPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+			$con = Propel::getConnection(VisitPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
 		
 		$con->beginTransaction();
 		try {
-			PatientPeer::doDelete($this, $con);
+			VisitPeer::doDelete($this, $con);
 			$this->setDeleted(true);
 			$con->commit();
 		} catch (PropelException $e) {
@@ -1084,7 +990,7 @@ abstract class BasePatient extends BaseObject  implements Persistent {
 		}
 	
 
-    foreach (sfMixer::getCallables('BasePatient:delete:post') as $callable)
+    foreach (sfMixer::getCallables('BaseVisit:delete:post') as $callable)
     {
       call_user_func($callable, $this, $con);
     }
@@ -1106,7 +1012,7 @@ abstract class BasePatient extends BaseObject  implements Persistent {
 	public function save(PropelPDO $con = null)
 	{
 
-    foreach (sfMixer::getCallables('BasePatient:save:pre') as $callable)
+    foreach (sfMixer::getCallables('BaseVisit:save:pre') as $callable)
     {
       $affectedRows = call_user_func($callable, $this, $con);
       if (is_int($affectedRows))
@@ -1116,12 +1022,12 @@ abstract class BasePatient extends BaseObject  implements Persistent {
     }
 
 
-    if ($this->isNew() && !$this->isColumnModified(PatientPeer::CREATED_AT))
+    if ($this->isNew() && !$this->isColumnModified(VisitPeer::CREATED_AT))
     {
       $this->setCreatedAt(time());
     }
 
-    if ($this->isModified() && !$this->isColumnModified(PatientPeer::UPDATED_AT))
+    if ($this->isModified() && !$this->isColumnModified(VisitPeer::UPDATED_AT))
     {
       $this->setUpdatedAt(time());
     }
@@ -1131,19 +1037,19 @@ abstract class BasePatient extends BaseObject  implements Persistent {
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(PatientPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+			$con = Propel::getConnection(VisitPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
 		
 		$con->beginTransaction();
 		try {
 			$affectedRows = $this->doSave($con);
 			$con->commit();
-    foreach (sfMixer::getCallables('BasePatient:save:post') as $callable)
+    foreach (sfMixer::getCallables('BaseVisit:save:post') as $callable)
     {
       call_user_func($callable, $this, $con, $affectedRows);
     }
 
-			PatientPeer::addInstanceToPool($this);
+			VisitPeer::addInstanceToPool($this);
 			return $affectedRows;
 		} catch (PropelException $e) {
 			$con->rollBack();
@@ -1169,13 +1075,13 @@ abstract class BasePatient extends BaseObject  implements Persistent {
 			$this->alreadyInSave = true;
 
 			if ($this->isNew() ) {
-				$this->modifiedColumns[] = PatientPeer::ID;
+				$this->modifiedColumns[] = VisitPeer::ID;
 			}
 
 			// If this object has been modified, then save it to the database.
 			if ($this->isModified()) {
 				if ($this->isNew()) {
-					$pk = PatientPeer::doInsert($this, $con);
+					$pk = VisitPeer::doInsert($this, $con);
 					$affectedRows += 1; // we are assuming that there is only 1 row per doInsert() which
 										 // should always be true here (even though technically
 										 // BasePeer::doInsert() can insert multiple rows).
@@ -1184,7 +1090,7 @@ abstract class BasePatient extends BaseObject  implements Persistent {
 
 					$this->setNew(false);
 				} else {
-					$affectedRows += PatientPeer::doUpdate($this, $con);
+					$affectedRows += VisitPeer::doUpdate($this, $con);
 				}
 
 				$this->resetModified(); // [HL] After being saved an object is no longer 'modified'
@@ -1256,7 +1162,7 @@ abstract class BasePatient extends BaseObject  implements Persistent {
 			$failureMap = array();
 
 
-			if (($retval = PatientPeer::doValidate($this, $columns)) !== true) {
+			if (($retval = VisitPeer::doValidate($this, $columns)) !== true) {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
@@ -1279,7 +1185,7 @@ abstract class BasePatient extends BaseObject  implements Persistent {
 	 */
 	public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
 	{
-		$pos = PatientPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+		$pos = VisitPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		$field = $this->getByPosition($pos);
 		return $field;
 	}
@@ -1298,57 +1204,54 @@ abstract class BasePatient extends BaseObject  implements Persistent {
 				return $this->getId();
 				break;
 			case 1:
-				return $this->getIdNumber();
+				return $this->getPatientId();
 				break;
 			case 2:
-				return $this->getCnic();
+				return $this->getDoctorId();
 				break;
 			case 3:
-				return $this->getName();
+				return $this->getWardBedId();
 				break;
 			case 4:
-				return $this->getFatherName();
+				return $this->getWardDocId();
 				break;
 			case 5:
-				return $this->getDob();
+				return $this->getVisitType();
 				break;
 			case 6:
-				return $this->getGender();
+				return $this->getMedicine();
 				break;
 			case 7:
-				return $this->getAddress();
+				return $this->getBp();
 				break;
 			case 8:
-				return $this->getContactRes();
+				return $this->getTemp();
 				break;
 			case 9:
-				return $this->getContactCell();
+				return $this->getPulse();
 				break;
 			case 10:
-				return $this->getEmergencyContact();
+				return $this->getInjection();
 				break;
 			case 11:
-				return $this->getEmail();
+				return $this->getDiet();
 				break;
 			case 12:
-				return $this->getBloodGroup();
+				return $this->getDescription();
 				break;
 			case 13:
-				return $this->getDisease();
+				return $this->getFee();
 				break;
 			case 14:
-				return $this->getAllergy();
+				return $this->getFeePaid();
 				break;
 			case 15:
-				return $this->getDrugAllergy();
-				break;
-			case 16:
 				return $this->getStatus();
 				break;
-			case 17:
+			case 16:
 				return $this->getCreatedAt();
 				break;
-			case 18:
+			case 17:
 				return $this->getUpdatedAt();
 				break;
 			default:
@@ -1370,27 +1273,26 @@ abstract class BasePatient extends BaseObject  implements Persistent {
 	 */
 	public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true)
 	{
-		$keys = PatientPeer::getFieldNames($keyType);
+		$keys = VisitPeer::getFieldNames($keyType);
 		$result = array(
 			$keys[0] => $this->getId(),
-			$keys[1] => $this->getIdNumber(),
-			$keys[2] => $this->getCnic(),
-			$keys[3] => $this->getName(),
-			$keys[4] => $this->getFatherName(),
-			$keys[5] => $this->getDob(),
-			$keys[6] => $this->getGender(),
-			$keys[7] => $this->getAddress(),
-			$keys[8] => $this->getContactRes(),
-			$keys[9] => $this->getContactCell(),
-			$keys[10] => $this->getEmergencyContact(),
-			$keys[11] => $this->getEmail(),
-			$keys[12] => $this->getBloodGroup(),
-			$keys[13] => $this->getDisease(),
-			$keys[14] => $this->getAllergy(),
-			$keys[15] => $this->getDrugAllergy(),
-			$keys[16] => $this->getStatus(),
-			$keys[17] => $this->getCreatedAt(),
-			$keys[18] => $this->getUpdatedAt(),
+			$keys[1] => $this->getPatientId(),
+			$keys[2] => $this->getDoctorId(),
+			$keys[3] => $this->getWardBedId(),
+			$keys[4] => $this->getWardDocId(),
+			$keys[5] => $this->getVisitType(),
+			$keys[6] => $this->getMedicine(),
+			$keys[7] => $this->getBp(),
+			$keys[8] => $this->getTemp(),
+			$keys[9] => $this->getPulse(),
+			$keys[10] => $this->getInjection(),
+			$keys[11] => $this->getDiet(),
+			$keys[12] => $this->getDescription(),
+			$keys[13] => $this->getFee(),
+			$keys[14] => $this->getFeePaid(),
+			$keys[15] => $this->getStatus(),
+			$keys[16] => $this->getCreatedAt(),
+			$keys[17] => $this->getUpdatedAt(),
 		);
 		return $result;
 	}
@@ -1407,7 +1309,7 @@ abstract class BasePatient extends BaseObject  implements Persistent {
 	 */
 	public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
 	{
-		$pos = PatientPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+		$pos = VisitPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->setByPosition($pos, $value);
 	}
 
@@ -1426,57 +1328,54 @@ abstract class BasePatient extends BaseObject  implements Persistent {
 				$this->setId($value);
 				break;
 			case 1:
-				$this->setIdNumber($value);
+				$this->setPatientId($value);
 				break;
 			case 2:
-				$this->setCnic($value);
+				$this->setDoctorId($value);
 				break;
 			case 3:
-				$this->setName($value);
+				$this->setWardBedId($value);
 				break;
 			case 4:
-				$this->setFatherName($value);
+				$this->setWardDocId($value);
 				break;
 			case 5:
-				$this->setDob($value);
+				$this->setVisitType($value);
 				break;
 			case 6:
-				$this->setGender($value);
+				$this->setMedicine($value);
 				break;
 			case 7:
-				$this->setAddress($value);
+				$this->setBp($value);
 				break;
 			case 8:
-				$this->setContactRes($value);
+				$this->setTemp($value);
 				break;
 			case 9:
-				$this->setContactCell($value);
+				$this->setPulse($value);
 				break;
 			case 10:
-				$this->setEmergencyContact($value);
+				$this->setInjection($value);
 				break;
 			case 11:
-				$this->setEmail($value);
+				$this->setDiet($value);
 				break;
 			case 12:
-				$this->setBloodGroup($value);
+				$this->setDescription($value);
 				break;
 			case 13:
-				$this->setDisease($value);
+				$this->setFee($value);
 				break;
 			case 14:
-				$this->setAllergy($value);
+				$this->setFeePaid($value);
 				break;
 			case 15:
-				$this->setDrugAllergy($value);
-				break;
-			case 16:
 				$this->setStatus($value);
 				break;
-			case 17:
+			case 16:
 				$this->setCreatedAt($value);
 				break;
-			case 18:
+			case 17:
 				$this->setUpdatedAt($value);
 				break;
 		} // switch()
@@ -1501,27 +1400,26 @@ abstract class BasePatient extends BaseObject  implements Persistent {
 	 */
 	public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
 	{
-		$keys = PatientPeer::getFieldNames($keyType);
+		$keys = VisitPeer::getFieldNames($keyType);
 
 		if (array_key_exists($keys[0], $arr)) $this->setId($arr[$keys[0]]);
-		if (array_key_exists($keys[1], $arr)) $this->setIdNumber($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setCnic($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setName($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setFatherName($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setDob($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setGender($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setAddress($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setContactRes($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setContactCell($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setEmergencyContact($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setEmail($arr[$keys[11]]);
-		if (array_key_exists($keys[12], $arr)) $this->setBloodGroup($arr[$keys[12]]);
-		if (array_key_exists($keys[13], $arr)) $this->setDisease($arr[$keys[13]]);
-		if (array_key_exists($keys[14], $arr)) $this->setAllergy($arr[$keys[14]]);
-		if (array_key_exists($keys[15], $arr)) $this->setDrugAllergy($arr[$keys[15]]);
-		if (array_key_exists($keys[16], $arr)) $this->setStatus($arr[$keys[16]]);
-		if (array_key_exists($keys[17], $arr)) $this->setCreatedAt($arr[$keys[17]]);
-		if (array_key_exists($keys[18], $arr)) $this->setUpdatedAt($arr[$keys[18]]);
+		if (array_key_exists($keys[1], $arr)) $this->setPatientId($arr[$keys[1]]);
+		if (array_key_exists($keys[2], $arr)) $this->setDoctorId($arr[$keys[2]]);
+		if (array_key_exists($keys[3], $arr)) $this->setWardBedId($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setWardDocId($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setVisitType($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setMedicine($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setBp($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setTemp($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setPulse($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setInjection($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setDiet($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setDescription($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setFee($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setFeePaid($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setStatus($arr[$keys[15]]);
+		if (array_key_exists($keys[16], $arr)) $this->setCreatedAt($arr[$keys[16]]);
+		if (array_key_exists($keys[17], $arr)) $this->setUpdatedAt($arr[$keys[17]]);
 	}
 
 	/**
@@ -1531,27 +1429,26 @@ abstract class BasePatient extends BaseObject  implements Persistent {
 	 */
 	public function buildCriteria()
 	{
-		$criteria = new Criteria(PatientPeer::DATABASE_NAME);
+		$criteria = new Criteria(VisitPeer::DATABASE_NAME);
 
-		if ($this->isColumnModified(PatientPeer::ID)) $criteria->add(PatientPeer::ID, $this->id);
-		if ($this->isColumnModified(PatientPeer::ID_NUMBER)) $criteria->add(PatientPeer::ID_NUMBER, $this->id_number);
-		if ($this->isColumnModified(PatientPeer::CNIC)) $criteria->add(PatientPeer::CNIC, $this->cnic);
-		if ($this->isColumnModified(PatientPeer::NAME)) $criteria->add(PatientPeer::NAME, $this->name);
-		if ($this->isColumnModified(PatientPeer::FATHER_NAME)) $criteria->add(PatientPeer::FATHER_NAME, $this->father_name);
-		if ($this->isColumnModified(PatientPeer::DOB)) $criteria->add(PatientPeer::DOB, $this->dob);
-		if ($this->isColumnModified(PatientPeer::GENDER)) $criteria->add(PatientPeer::GENDER, $this->gender);
-		if ($this->isColumnModified(PatientPeer::ADDRESS)) $criteria->add(PatientPeer::ADDRESS, $this->address);
-		if ($this->isColumnModified(PatientPeer::CONTACT_RES)) $criteria->add(PatientPeer::CONTACT_RES, $this->contact_res);
-		if ($this->isColumnModified(PatientPeer::CONTACT_CELL)) $criteria->add(PatientPeer::CONTACT_CELL, $this->contact_cell);
-		if ($this->isColumnModified(PatientPeer::EMERGENCY_CONTACT)) $criteria->add(PatientPeer::EMERGENCY_CONTACT, $this->emergency_contact);
-		if ($this->isColumnModified(PatientPeer::EMAIL)) $criteria->add(PatientPeer::EMAIL, $this->email);
-		if ($this->isColumnModified(PatientPeer::BLOOD_GROUP)) $criteria->add(PatientPeer::BLOOD_GROUP, $this->blood_group);
-		if ($this->isColumnModified(PatientPeer::DISEASE)) $criteria->add(PatientPeer::DISEASE, $this->disease);
-		if ($this->isColumnModified(PatientPeer::ALLERGY)) $criteria->add(PatientPeer::ALLERGY, $this->allergy);
-		if ($this->isColumnModified(PatientPeer::DRUG_ALLERGY)) $criteria->add(PatientPeer::DRUG_ALLERGY, $this->drug_allergy);
-		if ($this->isColumnModified(PatientPeer::STATUS)) $criteria->add(PatientPeer::STATUS, $this->status);
-		if ($this->isColumnModified(PatientPeer::CREATED_AT)) $criteria->add(PatientPeer::CREATED_AT, $this->created_at);
-		if ($this->isColumnModified(PatientPeer::UPDATED_AT)) $criteria->add(PatientPeer::UPDATED_AT, $this->updated_at);
+		if ($this->isColumnModified(VisitPeer::ID)) $criteria->add(VisitPeer::ID, $this->id);
+		if ($this->isColumnModified(VisitPeer::PATIENT_ID)) $criteria->add(VisitPeer::PATIENT_ID, $this->patient_id);
+		if ($this->isColumnModified(VisitPeer::DOCTOR_ID)) $criteria->add(VisitPeer::DOCTOR_ID, $this->doctor_id);
+		if ($this->isColumnModified(VisitPeer::WARD_BED_ID)) $criteria->add(VisitPeer::WARD_BED_ID, $this->ward_bed_id);
+		if ($this->isColumnModified(VisitPeer::WARD_DOC_ID)) $criteria->add(VisitPeer::WARD_DOC_ID, $this->ward_doc_id);
+		if ($this->isColumnModified(VisitPeer::VISIT_TYPE)) $criteria->add(VisitPeer::VISIT_TYPE, $this->visit_type);
+		if ($this->isColumnModified(VisitPeer::MEDICINE)) $criteria->add(VisitPeer::MEDICINE, $this->medicine);
+		if ($this->isColumnModified(VisitPeer::BP)) $criteria->add(VisitPeer::BP, $this->bp);
+		if ($this->isColumnModified(VisitPeer::TEMP)) $criteria->add(VisitPeer::TEMP, $this->temp);
+		if ($this->isColumnModified(VisitPeer::PULSE)) $criteria->add(VisitPeer::PULSE, $this->pulse);
+		if ($this->isColumnModified(VisitPeer::INJECTION)) $criteria->add(VisitPeer::INJECTION, $this->injection);
+		if ($this->isColumnModified(VisitPeer::DIET)) $criteria->add(VisitPeer::DIET, $this->diet);
+		if ($this->isColumnModified(VisitPeer::DESCRIPTION)) $criteria->add(VisitPeer::DESCRIPTION, $this->description);
+		if ($this->isColumnModified(VisitPeer::FEE)) $criteria->add(VisitPeer::FEE, $this->fee);
+		if ($this->isColumnModified(VisitPeer::FEE_PAID)) $criteria->add(VisitPeer::FEE_PAID, $this->fee_paid);
+		if ($this->isColumnModified(VisitPeer::STATUS)) $criteria->add(VisitPeer::STATUS, $this->status);
+		if ($this->isColumnModified(VisitPeer::CREATED_AT)) $criteria->add(VisitPeer::CREATED_AT, $this->created_at);
+		if ($this->isColumnModified(VisitPeer::UPDATED_AT)) $criteria->add(VisitPeer::UPDATED_AT, $this->updated_at);
 
 		return $criteria;
 	}
@@ -1566,9 +1463,9 @@ abstract class BasePatient extends BaseObject  implements Persistent {
 	 */
 	public function buildPkeyCriteria()
 	{
-		$criteria = new Criteria(PatientPeer::DATABASE_NAME);
+		$criteria = new Criteria(VisitPeer::DATABASE_NAME);
 
-		$criteria->add(PatientPeer::ID, $this->id);
+		$criteria->add(VisitPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -1599,42 +1496,40 @@ abstract class BasePatient extends BaseObject  implements Persistent {
 	 * If desired, this method can also make copies of all associated (fkey referrers)
 	 * objects.
 	 *
-	 * @param      object $copyObj An object of Patient (or compatible) type.
+	 * @param      object $copyObj An object of Visit (or compatible) type.
 	 * @param      boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
 	 * @throws     PropelException
 	 */
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
-		$copyObj->setIdNumber($this->id_number);
+		$copyObj->setPatientId($this->patient_id);
 
-		$copyObj->setCnic($this->cnic);
+		$copyObj->setDoctorId($this->doctor_id);
 
-		$copyObj->setName($this->name);
+		$copyObj->setWardBedId($this->ward_bed_id);
 
-		$copyObj->setFatherName($this->father_name);
+		$copyObj->setWardDocId($this->ward_doc_id);
 
-		$copyObj->setDob($this->dob);
+		$copyObj->setVisitType($this->visit_type);
 
-		$copyObj->setGender($this->gender);
+		$copyObj->setMedicine($this->medicine);
 
-		$copyObj->setAddress($this->address);
+		$copyObj->setBp($this->bp);
 
-		$copyObj->setContactRes($this->contact_res);
+		$copyObj->setTemp($this->temp);
 
-		$copyObj->setContactCell($this->contact_cell);
+		$copyObj->setPulse($this->pulse);
 
-		$copyObj->setEmergencyContact($this->emergency_contact);
+		$copyObj->setInjection($this->injection);
 
-		$copyObj->setEmail($this->email);
+		$copyObj->setDiet($this->diet);
 
-		$copyObj->setBloodGroup($this->blood_group);
+		$copyObj->setDescription($this->description);
 
-		$copyObj->setDisease($this->disease);
+		$copyObj->setFee($this->fee);
 
-		$copyObj->setAllergy($this->allergy);
-
-		$copyObj->setDrugAllergy($this->drug_allergy);
+		$copyObj->setFeePaid($this->fee_paid);
 
 		$copyObj->setStatus($this->status);
 
@@ -1658,7 +1553,7 @@ abstract class BasePatient extends BaseObject  implements Persistent {
 	 * objects.
 	 *
 	 * @param      boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
-	 * @return     Patient Clone of current object.
+	 * @return     Visit Clone of current object.
 	 * @throws     PropelException
 	 */
 	public function copy($deepCopy = false)
@@ -1677,12 +1572,12 @@ abstract class BasePatient extends BaseObject  implements Persistent {
 	 * same instance for all member of this class. The method could therefore
 	 * be static, but this would prevent one from overriding the behavior.
 	 *
-	 * @return     PatientPeer
+	 * @return     VisitPeer
 	 */
 	public function getPeer()
 	{
 		if (self::$peer === null) {
-			self::$peer = new PatientPeer();
+			self::$peer = new VisitPeer();
 		}
 		return self::$peer;
 	}
@@ -1706,9 +1601,9 @@ abstract class BasePatient extends BaseObject  implements Persistent {
 
   public function __call($method, $arguments)
   {
-    if (!$callable = sfMixer::getCallable('BasePatient:'.$method))
+    if (!$callable = sfMixer::getCallable('BaseVisit:'.$method))
     {
-      throw new sfException(sprintf('Call to undefined method BasePatient::%s', $method));
+      throw new sfException(sprintf('Call to undefined method BaseVisit::%s', $method));
     }
 
     array_unshift($arguments, $this);
@@ -1717,4 +1612,4 @@ abstract class BasePatient extends BaseObject  implements Persistent {
   }
 
 
-} // BasePatient
+} // BaseVisit
