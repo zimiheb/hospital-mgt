@@ -1,6 +1,6 @@
 -- DBTools Manager Professional (Enterprise Edition)
 -- Database Dump for: hospital
--- Backup Generated in: 5/27/2011 2:18:06 PM
+-- Backup Generated in: 5/28/2011 6:52:54 PM
 -- Database Server Version: MySQL 5.1.33
 
 -- USEGO
@@ -73,6 +73,29 @@ ALTER TABLE `hospital`.`designation` ADD INDEX `FK_designation_department` (`dep
 -- GO
 
 --
+-- Table: duty_place
+--
+CREATE TABLE `duty_place` 
+(
+	`id` integer (11) NOT NULL AUTO_INCREMENT , 
+	`title` varchar (100), 
+	`description` varchar (255), 
+	`status` varchar (10), 
+	`created_at` date, 
+	`updated_at` date,
+	PRIMARY KEY (`id`)
+) TYPE=InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
+-- GO
+
+--
+-- Dumping Table Data: duty_place
+--
+BEGIN;
+-- GO
+COMMIT;
+-- GO
+
+--
 -- Table: employee
 --
 CREATE TABLE `employee` 
@@ -126,6 +149,54 @@ ALTER TABLE `hospital`.`employee` ADD INDEX `FK_employee_department` (`departmen
 -- Index: FK_employee_designation
 --
 ALTER TABLE `hospital`.`employee` ADD INDEX `FK_employee_designation` (`designation_id` );
+-- GO
+
+--
+-- Table: lab_report
+--
+CREATE TABLE `lab_report` 
+(
+	`id` integer (11) NOT NULL AUTO_INCREMENT , 
+	`patient_id` integer (11), 
+	`visit_id` integer (11), 
+	`lab_test_id` integer (11), 
+	`description` varchar (1024), 
+	`status` varchar (10), 
+	`created_at` date, 
+	`updated_at` date,
+	PRIMARY KEY (`id`)
+) TYPE=InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
+-- GO
+
+--
+-- Dumping Table Data: lab_report
+--
+BEGIN;
+-- GO
+COMMIT;
+-- GO
+
+--
+-- Table: lab_test
+--
+CREATE TABLE `lab_test` 
+(
+	`id` integer (11) NOT NULL AUTO_INCREMENT , 
+	`title` varchar (255), 
+	`description` varchar (500), 
+	`status` varchar (10), 
+	`created_at` date, 
+	`updated_at` date,
+	PRIMARY KEY (`id`)
+) TYPE=InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
+-- GO
+
+--
+-- Dumping Table Data: lab_test
+--
+BEGIN;
+-- GO
+COMMIT;
 -- GO
 
 --
@@ -225,6 +296,41 @@ COMMIT;
 -- Index: FK_user_employee
 --
 ALTER TABLE `hospital`.`user` ADD INDEX `FK_user_employee` (`employee_id` );
+-- GO
+
+--
+-- Table: visit
+--
+CREATE TABLE `visit` 
+(
+	`id` integer (11) NOT NULL AUTO_INCREMENT , 
+	`patient_id` integer (11), 
+	`doctor_id` integer (11), 
+	`ward_bed_id` integer (11), 
+	`ward_doc_id` integer (11), 
+	`visit_type` varchar (10), 
+	`medicine` varchar (500), 
+	`bp` varchar (10), 
+	`temp` varchar (10), 
+	`pulse` varchar (10), 
+	`injection` varchar (500), 
+	`diet` varchar (500), 
+	`description` varchar (1024), 
+	`fee` varchar (10), 
+	`fee_paid` varchar (10), 
+	`status` varchar (10), 
+	`created_at` date, 
+	`updated_at` date,
+	PRIMARY KEY (`id`)
+) TYPE=InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
+-- GO
+
+--
+-- Dumping Table Data: visit
+--
+BEGIN;
+-- GO
+COMMIT;
 -- GO
 
 --
