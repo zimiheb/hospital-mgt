@@ -24,4 +24,25 @@ class HomeActions extends sfActions
   {
      
   } // END executeSettings
-}
+  public function executeCardiac(sfWebRequest $request)
+  {
+     
+  } // END executeSettings
+public function executeGeneral(sfWebRequest $request)
+  {
+     
+  } 
+  public function executeNeuro(sfWebRequest $request)
+  {
+     
+  } 
+  public function executeEnt(sfWebRequest $request)
+  {
+     
+  } 
+   public function executeMed(sfWebRequest $request)
+  {
+     
+  } 
+  
+  }
