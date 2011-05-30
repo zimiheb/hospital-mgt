@@ -74,7 +74,23 @@
 				<?php else: ?>
 					<ul>
 					  <li><?php echo link_to ('Home', 'Home/index', array(/*'class'=>'current'*/)); ?></li>
+					  <li><?php echo link_to ('Medical', 'Home/index', 'rel=dropmenu_3' , array(/*'class'=>'current'*/)); ?></li>
+					  <li><?php echo link_to ('Surgical', 'Home/index', 'rel=dropmenu_2' , array(/*'class'=>'current'*/)); ?></li>
                     </ul>
+					<div id="dropmenu_2" class="dropmenudiv" style="width: 150px; height:30px; ">
+				<?php echo link_to ('Cardiac Surgery', 'Home/cardiac'); ?>
+				<?php echo link_to ('General Surgery', 'Home/general'); ?>
+				<?php echo link_to ('Neuro Surgery', 'Home/neuro'); ?>
+				<?php echo link_to ('Ent Surgery', 'Home/ent'); ?>
+				
+			</div>
+					<div id="dropmenu_3" class="dropmenudiv" style="width: 150px; height:30px; ">
+				<?php echo link_to ('General Madication', 'Home/med'); ?>
+				<?php echo link_to ('General Surgery', 'Home/general'); ?>
+				<?php echo link_to ('Neuro Surgery', 'Home/neuro'); ?>
+				<?php echo link_to ('Ent Surgery', 'Home/ent'); ?>
+				
+			</div>
 			</div>
 				<?php endif ?>
 	
