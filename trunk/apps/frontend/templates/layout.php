@@ -32,9 +32,9 @@
 	<div class="header">
     	<div id="logo">
 		<?php if ($sf_user->isAuthenticated()): ?>
-			<?php echo link_to (image_tag('logo.png',array('borber'=>'0','width'=>'162', 'height'=>'54')),'Home/index');?>
+			<?php echo link_to (image_tag('hopital1.gif',array('borber'=>'0','width'=>'182', 'height'=>'45')),'Home/index');?>
 			<?php else: ?>
-			<?php echo link_to (image_tag('logo.png',array('borber'=>'0','width'=>'162', 'height'=>'54')),'Login/index');?>
+			<?php echo link_to (image_tag('hopital1.gif',array('borber'=>'0','width'=>'182', 'height'=>'45')),'Login/index');?>
 		<?php endif; ?>
 		</div>
     
@@ -76,7 +76,9 @@
 					  <li><?php echo link_to ('Home', 'Home/index', array(/*'class'=>'current'*/)); ?></li>
 					  <li><?php echo link_to ('Medical', 'Home/index', 'rel=dropmenu_3' , array(/*'class'=>'current'*/)); ?></li>
 					  <li><?php echo link_to ('Surgical', 'Home/index', 'rel=dropmenu_2' , array(/*'class'=>'current'*/)); ?></li>
-                    </ul>
+                    <li><?php echo link_to ('About Us', 'Home/about', array(/*'class'=>'current'*/)); ?></li>
+					<li><?php echo link_to ('Contact Us', 'Home/contact', array(/*'class'=>'current'*/)); ?></li>
+					</ul>
 					<div id="dropmenu_2" class="dropmenudiv" style="width: 150px; height:30px; ">
 				<?php echo link_to ('Cardiac Surgery', 'Home/cardiac'); ?>
 				<?php echo link_to ('General Surgery', 'Home/general'); ?>
@@ -86,9 +88,9 @@
 			</div>
 					<div id="dropmenu_3" class="dropmenudiv" style="width: 150px; height:30px; ">
 				<?php echo link_to ('General Madication', 'Home/med'); ?>
-				<?php echo link_to ('General Surgery', 'Home/general'); ?>
-				<?php echo link_to ('Neuro Surgery', 'Home/neuro'); ?>
-				<?php echo link_to ('Ent Surgery', 'Home/ent'); ?>
+				<?php echo link_to ('Cardioloy', 'Home/cardiacs'); ?>
+				<?php echo link_to ('Neurology', 'Home/neuros'); ?>
+				
 				
 			</div>
 			</div>

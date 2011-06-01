@@ -44,5 +44,20 @@ public function executeGeneral(sfWebRequest $request)
   {
      
   } 
-  
+  public function executeCardiacs(sfWebRequest $request)
+  {
+     
+  } 
+  public function executeNeuros(sfWebRequest $request)
+  {
+     
+  }
+  public function executeContact(sfWebRequest $request)
+  {
+     
+  }
+  public function executeAbout(sfWebRequest $request)
+  {
+     
+  }
   }
