@@ -14,13 +14,14 @@ class Constant
 	*/
 	
 	//Production or Test enviorment
-	const APPLICATION_PATH_PROD = "/frontend.php/Login/";
-	const APPLICATION_FRONTEND_PATH_PROD = "/frontend.php";
-	const APPLICATION_BACKEND_PATH_PROD = "/frontend.php/";
+	const APPLICATION_PATH_PROD = "hospital/web/frontend.php/Login/";
+	const APPLICATION_FRONTEND_PATH_PROD = "hospital/web/frontend.php";
+	const APPLICATION_BACKEND_PATH_PROD = "hospital/web/frontend.php/";
+	
 	//Development Enviorment
-	const APPLICATION_PATH_DEV = "/frontend_dev.php/";
-	const APPLICATION_FRONTEND_PATH_DEV = "/frontend_dev.php/";
-	const APPLICATION_BACKEND_PATH_DEV = "/backend_dev.php/";
+	const APPLICATION_PATH_DEV = "hospital/web/frontend_dev.php/";
+	const APPLICATION_FRONTEND_PATH_DEV = "hospital/web/frontend_dev.php/";
+	const APPLICATION_BACKEND_PATH_DEV = "hospital/web/backend_dev.php/";
 	
 	//Roles Constants
 	const ROLE_SUPER_ADMINISTRATOR = 1;

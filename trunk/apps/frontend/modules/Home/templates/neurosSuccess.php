@@ -8,15 +8,14 @@
     
  			<div class="box_content">
 					<div class="box_title">
-                    	<div class="title_icon"><img src="<?php image_tag('mini_icon1.gif','border="0"')?>" alt="" title="" /></div>
+                    	<div class="title_icon"></div>
                      <!--   <h2><span class="dark_blue", allign="center">Surgery</span></h2> -->
                    <br><br><br>
 				   <?php echo image_tag('neuro2.gif', 'alt=foo align=center') ?> 
-		   <!-- <?php echo image_tag('mask.gif', 'alt=foo align=center valign=middle') ?> -->
+		   
 					</div>
                     <div class="box_text_content">
-                    	<img src="<?php image_tag('calendar.gif','border="0"')?>" alt="" title="" class="box_icon" />
-                        <div class="box_text">
+					<div class="box_text">
                                 <p align="justify"><strong><br>
               </strong> Our Hospital is a sophisticated center for head injuries, spinal injuries, strokes and other neurological disorders, including epilepsy, Alzheimer's disease and aneurysms etc. RMI is the only hospital in N.W.F.P. to provide deep brain stimulization treatment for certain movement disorders, including Parkinson's disease.</p>
 

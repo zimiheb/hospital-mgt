@@ -39,10 +39,12 @@ public function executeIndex(sfWebRequest $request)
 			sfContext::getInstance ()->getUser ()->setAttribute ( 'USER_ID', $user->getId() );
 			sfContext::getInstance ()->getUser ()->setAttribute ( 'USERNAME', $user->getUser() );
 			sfContext::getInstance ()->getUser ()->setAttribute ( 'NAME', $user->getEmployee()->getName() );
-			sfContext::getInstance ()->getUser ()->setAttribute ( 'ROLE', 'OTHER' );
+			//sfContext::getInstance ()->getUser ()->setAttribute ( 'ROLE', 'OTHER' );
 			sfContext::getInstance ()->getUser ()->setAttribute ( 'LOGGED_IN', true );
 			sfContext::getInstance ()->getUser ()->setAuthenticated ( true );
+			
 			// - TODO - Set Permissions
+			
 			$this->redirect ( 'Home/index' );
 			}
 		
@@ -88,6 +90,6 @@ public function executeChangePassword(sfWebRequest $request)
 			}
 		}
 	
-} // - END - executeChangePassword
+	} // - END - executeChangePassword
   
 } // - END - class LoginActions

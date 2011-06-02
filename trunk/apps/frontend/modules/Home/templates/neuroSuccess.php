@@ -8,15 +8,13 @@
     
  			<div class="box_content">
 					<div class="box_title">
-                    	<div class="title_icon"><img src="<?php image_tag('mini_icon1.gif','border="0"')?>" alt="" title="" /></div>
-                     <!--   <h2><span class="dark_blue", allign="center">Surgery</span></h2> -->
+                    	<div class="title_icon"></div>
                    <br><br><br>
-				   <?php echo image_tag('neuro.gif', 'alt=foo align=center') ?> 
-		   <!-- <?php echo image_tag('mask.gif', 'alt=foo align=center valign=middle') ?> -->
+				   <?php echo image_tag('neuro.gif', 'align=center') ?> 
+		   
 					</div>
                     <div class="box_text_content">
-                    	<img src="<?php image_tag('calendar.gif','border="0"')?>" alt="" title="" class="box_icon" />
-                        <div class="box_text">
+                    	<div class="box_text">
                                 <p align="justify"><br> 
               We brought together top neurological experts with advanced technology. Neurosurgery is the branch of medicine that provides operative and medical management of disorders that affect the central and peripheral nervous systems, including their supportive structures and vascular supply to provide a good treatment.<br><br><?php echo image_tag('neuro1.gif', 'alt=foo size=228x122 align=right') ?> 
             <p align="justify">We are being the most advances and sophisticated health care provider in NWFP offers treatment for head injuries, spinal injuries, strokes and other neurological disorders, including Spinal &amp; brain tumors and nerve entrapments.
@@ -34,12 +32,12 @@
               <li>Neuro traumas </li> 
           </ul>            
 
-                        </div>
-                        
-                    </div>
-	
-            </div>
-            
-        <div class="clear"></div>    
-       </div>
+</div>
+
+</div>
+
+</div>
+
+<div class="clear"></div>    
+</div>
 

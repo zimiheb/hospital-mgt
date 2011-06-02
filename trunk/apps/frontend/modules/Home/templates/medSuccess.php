@@ -8,15 +8,14 @@
     
  			<div class="box_content">
 					<div class="box_title">
-                    	<div class="title_icon"><img src="<?php image_tag('mini_icon1.gif','border="0"')?>" alt="" title="" /></div>
+                    	<div class="title_icon"></div>
                      <!--   <h2><span class="dark_blue", allign="center">Surgery</span></h2> -->
                    <br><br><br>
-				   <?php echo image_tag('genmed.gif', 'alt=foo align=center') ?> 
-		   <!-- <?php echo image_tag('mask.gif', 'alt=foo align=center valign=middle') ?> -->
+				   <?php echo image_tag('genmed.gif', 'align=center') ?> 
+	
 					</div>
                     <div class="box_text_content">
-                    	<img src="<?php image_tag('calendar.gif','border="0"')?>" alt="" title="" class="box_icon" />
-                        <div class="box_text">
+					<div class="box_text">
                                 <p align="justify"><br>
 
               Our Hospital cares for patients with all types of problems. 
