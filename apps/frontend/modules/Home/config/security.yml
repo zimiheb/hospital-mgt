@@ -4,8 +4,8 @@ default:
 
 all:
   .actions:
-    login_module:  Home
+    login_module:  Login
     login_action:  index
 
-    secure_module: Home
+    secure_module: Login
     secure_action: index

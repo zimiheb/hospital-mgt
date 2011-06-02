@@ -74,8 +74,8 @@
 				<?php else: ?>
 					<ul>
 					  <li><?php echo link_to ('Home', 'Home/index', array(/*'class'=>'current'*/)); ?></li>
-					  <li><?php echo link_to ('Medical', 'Home/index', 'rel=dropmenu_3' , array(/*'class'=>'current'*/)); ?></li>
-					  <li><?php echo link_to ('Surgical', 'Home/index', 'rel=dropmenu_2' , array(/*'class'=>'current'*/)); ?></li>
+					  <li><?php echo link_to ('Medical', 'Home/med', 'rel=dropmenu_3' , array(/*'class'=>'current'*/)); ?></li>
+					  <li><?php echo link_to ('Surgical', 'Home/cardiac', 'rel=dropmenu_2' , array(/*'class'=>'current'*/)); ?></li>
                     <li><?php echo link_to ('About Us', 'Home/about', array(/*'class'=>'current'*/)); ?></li>
 					<li><?php echo link_to ('Contact Us', 'Home/contact', array(/*'class'=>'current'*/)); ?></li>
 					</ul>
@@ -113,33 +113,7 @@
     
     </div>
     
-  <!--  <div id="middle_box">
-    	<div class="middle_box_content"><img src="images/banner_content.jpg" alt="" title="" /></div>
-    </div>
-    
-    <div class="pattern_bg">
-    
-    	<div class="pattern_box">
-            <div class="pattern_box_icon"><img src="images/icon1.png" alt="" title="" width="70" height="112" /></div>
-            <div class="pattern_content">
-            <h1>My <span class="blue">Medicine</span></h1>
-            <p class="pat">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            </p>
-            </div>
-        </div>
-        
-    	<div class="pattern_box">
-            <div class="pattern_box_icon"><img src="images/icon2.png" alt="" title="" width="70" height="112" /></div>
-            <div class="pattern_content">
-            <h1>Search <span class="blue"> Treatments</span></h1>
-            <p class="pat">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            </p>
-            </div>
-        </div>        
-        
-    </div>-->
+  
     
 	<?php if ($sf_user->hasFlash('SUCCESS_MESSAGE')): ?>
 				<tr>
