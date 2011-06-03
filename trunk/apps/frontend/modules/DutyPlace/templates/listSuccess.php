@@ -9,9 +9,9 @@
 <div id="main_content">
 	<div class="box_content">
 	<div class="box_title">
-		<h2><span class="dark_blue">Staff Duty Information</span></h2>
+		<h2><span class="dark_blue">Duty Places Information</span></h2>
 		<span style="float:right"><?php echo image_tag('icon_addRight.jpg', 'width="2"', 'height="22"')?></span>
-			<a class="addNew" id="popup_link_add" href="#">Add Duty</a>
+			<a class="addNew" id="popup_link_add" href="#">Add new Place</a>
 		</h2>
 	</div>
 	<div class="box_text_content">
@@ -20,7 +20,7 @@
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="datagrid">
              
 			  <tr>
-				<th style="text-align:left";>Duty</th>
+				<th style="text-align:left";>Place of Duty</th>
 				<th style="text-align:left";>Status</th>
 				<th style="text-align:left";>Last Updated</th>
                 <th style="text-align:left;">Operation</th>
@@ -72,7 +72,7 @@
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="form">
   <tr>
-    <td style="padding-left:10px" height="30"><span class="heading">Add Duty</span></td>
+    <td style="padding-left:10px" height="30"><span class="heading">Add a Duty Place</span></td>
     <td align="right" style="padding-right:10px"><a class="popup_closebox" href="#"><?php echo image_tag('btn_x.gif', 'border=0'); ?></a></td>
   </tr>
 </table>
@@ -82,7 +82,7 @@
   
  
   <tr>
-    <td width="155" align="left" height="30" style="padding-left:10px; padding-top:10px">Duty Type:<span class="error"> *</span></td>
+    <td width="155" align="left" height="30" style="padding-left:10px; padding-top:10px">Place Name:<span class="error"> *</span></td>
 	<td width="445" align="left" height="30" style="padding-left:10px; padding-top:10px"> <?php echo input_tag('title','','size=38') ?></td>
 	<script type="text/javascript">
 	var title = new LiveValidation('title', { validMessage: "<?php echo Constant::VALIDATION_SUCCESS; ?>"});
@@ -90,6 +90,10 @@
 	</script>
   </tr>
   
+    <tr>
+    <td width="155" align="left" height="50" style="padding-left:10px; vertical-align:top;">Description:</td>
+	<td width="445" align="left" height="50" style="padding-left:10px; vertical-align:top;"> <?php echo textarea_tag('description',$duty_place->getDescription(),'size=35x2'); ?></td>
+  </tr>
  
   <tr>
     <td colspan="2">&nbsp;</td>

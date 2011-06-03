@@ -62,12 +62,8 @@ public function executeAdd(sfWebRequest $request)
   } // - END - executeAdd
   
  
-  
-
 public function executeEdit (sfWebRequest $request)
 	{
-
-		//$this->response->setTitle(Constant::TITLE_EDIT_QUESTION   );
 		if ($this->getRequest()->getMethod() == sfRequest::POST)
 		{
 			//Create User and set object attributes
@@ -75,9 +71,6 @@ public function executeEdit (sfWebRequest $request)
 
 			$designation->setDepartmentId($this->getRequestParameter('department_id'));
 			$designation->setTitle($this->getRequestParameter('title'));
-			//$designation->setDescription($this->getRequestParameter('description'));
-			//$designation->setStatus($this->getRequestParameter('status'));
-			
 			//Save object to database
 			if($designation->save())
 			{
@@ -93,10 +86,7 @@ public function executeEdit (sfWebRequest $request)
 
 		else
 		{
-			
-			//$this->AllDataAvailable();
 			$this->designation = DesignationPeer::retrieveByPk(Utility::DecryptQueryString($request->getParameter('id')));
-			
 		}
 	} //- END - executeEdit
   

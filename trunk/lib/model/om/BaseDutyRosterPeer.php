@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Base static class for performing query and update operations on the 'lab_report' table.
+ * Base static class for performing query and update operations on the 'duty_roster' table.
  *
  * 
  *
@@ -11,52 +11,61 @@
  *
  * @package    lib.model.om
  */
-abstract class BaseLabReportPeer {
+abstract class BaseDutyRosterPeer {
 
 	/** the default database name for this class */
 	const DATABASE_NAME = 'propel';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'lab_report';
+	const TABLE_NAME = 'duty_roster';
 
 	/** A class that can be returned by this peer. */
-	const CLASS_DEFAULT = 'lib.model.LabReport';
+	const CLASS_DEFAULT = 'lib.model.DutyRoster';
 
 	/** The total number of columns. */
-	const NUM_COLUMNS = 8;
+	const NUM_COLUMNS = 11;
 
 	/** The number of lazy-loaded columns. */
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 	/** the column name for the ID field */
-	const ID = 'lab_report.ID';
+	const ID = 'duty_roster.ID';
 
-	/** the column name for the PATIENT_ID field */
-	const PATIENT_ID = 'lab_report.PATIENT_ID';
+	/** the column name for the EMPLOYEE_ID field */
+	const EMPLOYEE_ID = 'duty_roster.EMPLOYEE_ID';
 
-	/** the column name for the VISIT_ID field */
-	const VISIT_ID = 'lab_report.VISIT_ID';
+	/** the column name for the DUTY_PLACE_ID field */
+	const DUTY_PLACE_ID = 'duty_roster.DUTY_PLACE_ID';
 
-	/** the column name for the LAB_TEST_ID field */
-	const LAB_TEST_ID = 'lab_report.LAB_TEST_ID';
+	/** the column name for the DUTY_DATE field */
+	const DUTY_DATE = 'duty_roster.DUTY_DATE';
 
-	/** the column name for the DESCRIPTION field */
-	const DESCRIPTION = 'lab_report.DESCRIPTION';
+	/** the column name for the FROM field */
+	const FROM = 'duty_roster.FROM';
+
+	/** the column name for the TO field */
+	const TO = 'duty_roster.TO';
+
+	/** the column name for the PRESENT field */
+	const PRESENT = 'duty_roster.PRESENT';
+
+	/** the column name for the SUBSTITUTE_ID field */
+	const SUBSTITUTE_ID = 'duty_roster.SUBSTITUTE_ID';
 
 	/** the column name for the STATUS field */
-	const STATUS = 'lab_report.STATUS';
+	const STATUS = 'duty_roster.STATUS';
 
 	/** the column name for the CREATED_AT field */
-	const CREATED_AT = 'lab_report.CREATED_AT';
+	const CREATED_AT = 'duty_roster.CREATED_AT';
 
 	/** the column name for the UPDATED_AT field */
-	const UPDATED_AT = 'lab_report.UPDATED_AT';
+	const UPDATED_AT = 'duty_roster.UPDATED_AT';
 
 	/**
-	 * An identiy map to hold any loaded instances of LabReport objects.
+	 * An identiy map to hold any loaded instances of DutyRoster objects.
 	 * This must be public so that other peer classes can access this when hydrating from JOIN
 	 * queries.
-	 * @var        array LabReport[]
+	 * @var        array DutyRoster[]
 	 */
 	public static $instances = array();
 
@@ -73,11 +82,11 @@ abstract class BaseLabReportPeer {
 	 * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
 	 */
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Id', 'PatientId', 'VisitId', 'LabTestId', 'Description', 'Status', 'CreatedAt', 'UpdatedAt', ),
-		BasePeer::TYPE_STUDLYPHPNAME => array ('id', 'patientId', 'visitId', 'labTestId', 'description', 'status', 'createdAt', 'updatedAt', ),
-		BasePeer::TYPE_COLNAME => array (self::ID, self::PATIENT_ID, self::VISIT_ID, self::LAB_TEST_ID, self::DESCRIPTION, self::STATUS, self::CREATED_AT, self::UPDATED_AT, ),
-		BasePeer::TYPE_FIELDNAME => array ('id', 'patient_id', 'visit_id', 'lab_test_id', 'description', 'status', 'created_at', 'updated_at', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Id', 'EmployeeId', 'DutyPlaceId', 'DutyDate', 'From', 'To', 'Present', 'SubstituteId', 'Status', 'CreatedAt', 'UpdatedAt', ),
+		BasePeer::TYPE_STUDLYPHPNAME => array ('id', 'employeeId', 'dutyPlaceId', 'dutyDate', 'from', 'to', 'present', 'substituteId', 'status', 'createdAt', 'updatedAt', ),
+		BasePeer::TYPE_COLNAME => array (self::ID, self::EMPLOYEE_ID, self::DUTY_PLACE_ID, self::DUTY_DATE, self::FROM, self::TO, self::PRESENT, self::SUBSTITUTE_ID, self::STATUS, self::CREATED_AT, self::UPDATED_AT, ),
+		BasePeer::TYPE_FIELDNAME => array ('id', 'employee_id', 'duty_place_id', 'duty_date', 'from', 'to', 'present', 'substitute_id', 'status', 'created_at', 'updated_at', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
 	);
 
 	/**
@@ -87,11 +96,11 @@ abstract class BaseLabReportPeer {
 	 * e.g. self::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
 	 */
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'PatientId' => 1, 'VisitId' => 2, 'LabTestId' => 3, 'Description' => 4, 'Status' => 5, 'CreatedAt' => 6, 'UpdatedAt' => 7, ),
-		BasePeer::TYPE_STUDLYPHPNAME => array ('id' => 0, 'patientId' => 1, 'visitId' => 2, 'labTestId' => 3, 'description' => 4, 'status' => 5, 'createdAt' => 6, 'updatedAt' => 7, ),
-		BasePeer::TYPE_COLNAME => array (self::ID => 0, self::PATIENT_ID => 1, self::VISIT_ID => 2, self::LAB_TEST_ID => 3, self::DESCRIPTION => 4, self::STATUS => 5, self::CREATED_AT => 6, self::UPDATED_AT => 7, ),
-		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'patient_id' => 1, 'visit_id' => 2, 'lab_test_id' => 3, 'description' => 4, 'status' => 5, 'created_at' => 6, 'updated_at' => 7, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'EmployeeId' => 1, 'DutyPlaceId' => 2, 'DutyDate' => 3, 'From' => 4, 'To' => 5, 'Present' => 6, 'SubstituteId' => 7, 'Status' => 8, 'CreatedAt' => 9, 'UpdatedAt' => 10, ),
+		BasePeer::TYPE_STUDLYPHPNAME => array ('id' => 0, 'employeeId' => 1, 'dutyPlaceId' => 2, 'dutyDate' => 3, 'from' => 4, 'to' => 5, 'present' => 6, 'substituteId' => 7, 'status' => 8, 'createdAt' => 9, 'updatedAt' => 10, ),
+		BasePeer::TYPE_COLNAME => array (self::ID => 0, self::EMPLOYEE_ID => 1, self::DUTY_PLACE_ID => 2, self::DUTY_DATE => 3, self::FROM => 4, self::TO => 5, self::PRESENT => 6, self::SUBSTITUTE_ID => 7, self::STATUS => 8, self::CREATED_AT => 9, self::UPDATED_AT => 10, ),
+		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'employee_id' => 1, 'duty_place_id' => 2, 'duty_date' => 3, 'from' => 4, 'to' => 5, 'present' => 6, 'substitute_id' => 7, 'status' => 8, 'created_at' => 9, 'updated_at' => 10, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
 	);
 
 	/**
@@ -101,7 +110,7 @@ abstract class BaseLabReportPeer {
 	public static function getMapBuilder()
 	{
 		if (self::$mapBuilder === null) {
-			self::$mapBuilder = new LabReportMapBuilder();
+			self::$mapBuilder = new DutyRosterMapBuilder();
 		}
 		return self::$mapBuilder;
 	}
@@ -151,12 +160,12 @@ abstract class BaseLabReportPeer {
 	 *		$c->addJoin(TablePeer::alias("alias1", TablePeer::PRIMARY_KEY_COLUMN), TablePeer::PRIMARY_KEY_COLUMN);
 	 * </code>
 	 * @param      string $alias The alias for the current table.
-	 * @param      string $column The column name for current table. (i.e. LabReportPeer::COLUMN_NAME).
+	 * @param      string $column The column name for current table. (i.e. DutyRosterPeer::COLUMN_NAME).
 	 * @return     string
 	 */
 	public static function alias($alias, $column)
 	{
-		return str_replace(LabReportPeer::TABLE_NAME.'.', $alias.'.', $column);
+		return str_replace(DutyRosterPeer::TABLE_NAME.'.', $alias.'.', $column);
 	}
 
 	/**
@@ -173,21 +182,27 @@ abstract class BaseLabReportPeer {
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
-		$criteria->addSelectColumn(LabReportPeer::ID);
+		$criteria->addSelectColumn(DutyRosterPeer::ID);
 
-		$criteria->addSelectColumn(LabReportPeer::PATIENT_ID);
+		$criteria->addSelectColumn(DutyRosterPeer::EMPLOYEE_ID);
 
-		$criteria->addSelectColumn(LabReportPeer::VISIT_ID);
+		$criteria->addSelectColumn(DutyRosterPeer::DUTY_PLACE_ID);
 
-		$criteria->addSelectColumn(LabReportPeer::LAB_TEST_ID);
+		$criteria->addSelectColumn(DutyRosterPeer::DUTY_DATE);
 
-		$criteria->addSelectColumn(LabReportPeer::DESCRIPTION);
+		$criteria->addSelectColumn(DutyRosterPeer::FROM);
 
-		$criteria->addSelectColumn(LabReportPeer::STATUS);
+		$criteria->addSelectColumn(DutyRosterPeer::TO);
 
-		$criteria->addSelectColumn(LabReportPeer::CREATED_AT);
+		$criteria->addSelectColumn(DutyRosterPeer::PRESENT);
 
-		$criteria->addSelectColumn(LabReportPeer::UPDATED_AT);
+		$criteria->addSelectColumn(DutyRosterPeer::SUBSTITUTE_ID);
+
+		$criteria->addSelectColumn(DutyRosterPeer::STATUS);
+
+		$criteria->addSelectColumn(DutyRosterPeer::CREATED_AT);
+
+		$criteria->addSelectColumn(DutyRosterPeer::UPDATED_AT);
 
 	}
 
@@ -207,27 +222,27 @@ abstract class BaseLabReportPeer {
 		// We need to set the primary table name, since in the case that there are no WHERE columns
 		// it will be impossible for the BasePeer::createSelectSql() method to determine which
 		// tables go into the FROM clause.
-		$criteria->setPrimaryTableName(LabReportPeer::TABLE_NAME);
+		$criteria->setPrimaryTableName(DutyRosterPeer::TABLE_NAME);
 
 		if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
 			$criteria->setDistinct();
 		}
 
 		if (!$criteria->hasSelectClause()) {
-			LabReportPeer::addSelectColumns($criteria);
+			DutyRosterPeer::addSelectColumns($criteria);
 		}
 
 		$criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
 		$criteria->setDbName(self::DATABASE_NAME); // Set the correct dbName
 
 		if ($con === null) {
-			$con = Propel::getConnection(LabReportPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(DutyRosterPeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 
 
-    foreach (sfMixer::getCallables('BaseLabReportPeer:doCount:doCount') as $callable)
+    foreach (sfMixer::getCallables('BaseDutyRosterPeer:doCount:doCount') as $callable)
     {
-      call_user_func($callable, 'BaseLabReportPeer', $criteria, $con);
+      call_user_func($callable, 'BaseDutyRosterPeer', $criteria, $con);
     }
 
 
@@ -247,7 +262,7 @@ abstract class BaseLabReportPeer {
 	 *
 	 * @param      Criteria $criteria object used to create the SELECT statement.
 	 * @param      PropelPDO $con
-	 * @return     LabReport
+	 * @return     DutyRoster
 	 * @throws     PropelException Any exceptions caught during processing will be
 	 *		 rethrown wrapped into a PropelException.
 	 */
@@ -255,7 +270,7 @@ abstract class BaseLabReportPeer {
 	{
 		$critcopy = clone $criteria;
 		$critcopy->setLimit(1);
-		$objects = LabReportPeer::doSelect($critcopy, $con);
+		$objects = DutyRosterPeer::doSelect($critcopy, $con);
 		if ($objects) {
 			return $objects[0];
 		}
@@ -272,7 +287,7 @@ abstract class BaseLabReportPeer {
 	 */
 	public static function doSelect(Criteria $criteria, PropelPDO $con = null)
 	{
-		return LabReportPeer::populateObjects(LabReportPeer::doSelectStmt($criteria, $con));
+		return DutyRosterPeer::populateObjects(DutyRosterPeer::doSelectStmt($criteria, $con));
 	}
 	/**
 	 * Prepares the Criteria object and uses the parent doSelect() method to execute a PDOStatement.
@@ -290,19 +305,19 @@ abstract class BaseLabReportPeer {
 	public static function doSelectStmt(Criteria $criteria, PropelPDO $con = null)
 	{
 
-    foreach (sfMixer::getCallables('BaseLabReportPeer:doSelectStmt:doSelectStmt') as $callable)
+    foreach (sfMixer::getCallables('BaseDutyRosterPeer:doSelectStmt:doSelectStmt') as $callable)
     {
-      call_user_func($callable, 'BaseLabReportPeer', $criteria, $con);
+      call_user_func($callable, 'BaseDutyRosterPeer', $criteria, $con);
     }
 
 
 		if ($con === null) {
-			$con = Propel::getConnection(LabReportPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(DutyRosterPeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 
 		if (!$criteria->hasSelectClause()) {
 			$criteria = clone $criteria;
-			LabReportPeer::addSelectColumns($criteria);
+			DutyRosterPeer::addSelectColumns($criteria);
 		}
 
 		// Set the correct dbName
@@ -320,10 +335,10 @@ abstract class BaseLabReportPeer {
 	 * to the cache in order to ensure that the same objects are always returned by doSelect*()
 	 * and retrieveByPK*() calls.
 	 *
-	 * @param      LabReport $value A LabReport object.
+	 * @param      DutyRoster $value A DutyRoster object.
 	 * @param      string $key (optional) key to use for instance map (for performance boost if key was already calculated externally).
 	 */
-	public static function addInstanceToPool(LabReport $obj, $key = null)
+	public static function addInstanceToPool(DutyRoster $obj, $key = null)
 	{
 		if (Propel::isInstancePoolingEnabled()) {
 			if ($key === null) {
@@ -341,18 +356,18 @@ abstract class BaseLabReportPeer {
 	 * methods in your stub classes -- you may need to explicitly remove objects
 	 * from the cache in order to prevent returning objects that no longer exist.
 	 *
-	 * @param      mixed $value A LabReport object or a primary key value.
+	 * @param      mixed $value A DutyRoster object or a primary key value.
 	 */
 	public static function removeInstanceFromPool($value)
 	{
 		if (Propel::isInstancePoolingEnabled() && $value !== null) {
-			if (is_object($value) && $value instanceof LabReport) {
+			if (is_object($value) && $value instanceof DutyRoster) {
 				$key = (string) $value->getId();
 			} elseif (is_scalar($value)) {
 				// assume we've been passed a primary key
 				$key = (string) $value;
 			} else {
-				$e = new PropelException("Invalid value passed to removeInstanceFromPool().  Expected primary key or LabReport object; got " . (is_object($value) ? get_class($value) . ' object.' : var_export($value,true)));
+				$e = new PropelException("Invalid value passed to removeInstanceFromPool().  Expected primary key or DutyRoster object; got " . (is_object($value) ? get_class($value) . ' object.' : var_export($value,true)));
 				throw $e;
 			}
 
@@ -367,7 +382,7 @@ abstract class BaseLabReportPeer {
 	 * a multi-column primary key, a serialize()d version of the primary key will be returned.
 	 *
 	 * @param      string $key The key (@see getPrimaryKeyHash()) for this instance.
-	 * @return     LabReport Found object or NULL if 1) no instance exists for specified key or 2) instance pooling has been disabled.
+	 * @return     DutyRoster Found object or NULL if 1) no instance exists for specified key or 2) instance pooling has been disabled.
 	 * @see        getPrimaryKeyHash()
 	 */
 	public static function getInstanceFromPool($key)
@@ -421,12 +436,12 @@ abstract class BaseLabReportPeer {
 		$results = array();
 	
 		// set the class once to avoid overhead in the loop
-		$cls = LabReportPeer::getOMClass();
+		$cls = DutyRosterPeer::getOMClass();
 		$cls = substr('.'.$cls, strrpos('.'.$cls, '.') + 1);
 		// populate the object(s)
 		while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-			$key = LabReportPeer::getPrimaryKeyHashFromRow($row, 0);
-			if (null !== ($obj = LabReportPeer::getInstanceFromPool($key))) {
+			$key = DutyRosterPeer::getPrimaryKeyHashFromRow($row, 0);
+			if (null !== ($obj = DutyRosterPeer::getInstanceFromPool($key))) {
 				// We no longer rehydrate the object, since this can cause data loss.
 				// See http://propel.phpdb.org/trac/ticket/509
 				// $obj->hydrate($row, 0, true); // rehydrate
@@ -436,7 +451,7 @@ abstract class BaseLabReportPeer {
 				$obj = new $cls();
 				$obj->hydrate($row);
 				$results[] = $obj;
-				LabReportPeer::addInstanceToPool($obj, $key);
+				DutyRosterPeer::addInstanceToPool($obj, $key);
 			} // if key exists
 		}
 		$stmt->closeCursor();
@@ -444,7 +459,7 @@ abstract class BaseLabReportPeer {
 	}
 
 	/**
-	 * Returns the number of rows matching criteria, joining the related Patient table
+	 * Returns the number of rows matching criteria, joining the related EmployeeRelatedByEmployeeId table
 	 *
 	 * @param      Criteria $c
 	 * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
@@ -452,7 +467,7 @@ abstract class BaseLabReportPeer {
 	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
 	 * @return     int Number of matching rows.
 	 */
-	public static function doCountJoinPatient(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	public static function doCountJoinEmployeeRelatedByEmployeeId(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
 	{
 		// we're going to modify criteria, so copy it first
 		$criteria = clone $criteria;
@@ -460,14 +475,14 @@ abstract class BaseLabReportPeer {
 		// We need to set the primary table name, since in the case that there are no WHERE columns
 		// it will be impossible for the BasePeer::createSelectSql() method to determine which
 		// tables go into the FROM clause.
-		$criteria->setPrimaryTableName(LabReportPeer::TABLE_NAME);
+		$criteria->setPrimaryTableName(DutyRosterPeer::TABLE_NAME);
 
 		if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
 			$criteria->setDistinct();
 		}
 
 		if (!$criteria->hasSelectClause()) {
-			LabReportPeer::addSelectColumns($criteria);
+			DutyRosterPeer::addSelectColumns($criteria);
 		}
 
 		$criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
@@ -476,15 +491,15 @@ abstract class BaseLabReportPeer {
 		$criteria->setDbName(self::DATABASE_NAME);
 
 		if ($con === null) {
-			$con = Propel::getConnection(LabReportPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(DutyRosterPeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 
-		$criteria->addJoin(array(LabReportPeer::PATIENT_ID,), array(PatientPeer::ID,), $join_behavior);
+		$criteria->addJoin(array(DutyRosterPeer::EMPLOYEE_ID,), array(EmployeePeer::ID,), $join_behavior);
 
 
-    foreach (sfMixer::getCallables('BaseLabReportPeer:doCount:doCount') as $callable)
+    foreach (sfMixer::getCallables('BaseDutyRosterPeer:doCount:doCount') as $callable)
     {
-      call_user_func($callable, 'BaseLabReportPeer', $criteria, $con);
+      call_user_func($callable, 'BaseDutyRosterPeer', $criteria, $con);
     }
 
 
@@ -501,7 +516,7 @@ abstract class BaseLabReportPeer {
 
 
 	/**
-	 * Returns the number of rows matching criteria, joining the related Visit table
+	 * Returns the number of rows matching criteria, joining the related DutyPlace table
 	 *
 	 * @param      Criteria $c
 	 * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
@@ -509,7 +524,7 @@ abstract class BaseLabReportPeer {
 	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
 	 * @return     int Number of matching rows.
 	 */
-	public static function doCountJoinVisit(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	public static function doCountJoinDutyPlace(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
 	{
 		// we're going to modify criteria, so copy it first
 		$criteria = clone $criteria;
@@ -517,14 +532,14 @@ abstract class BaseLabReportPeer {
 		// We need to set the primary table name, since in the case that there are no WHERE columns
 		// it will be impossible for the BasePeer::createSelectSql() method to determine which
 		// tables go into the FROM clause.
-		$criteria->setPrimaryTableName(LabReportPeer::TABLE_NAME);
+		$criteria->setPrimaryTableName(DutyRosterPeer::TABLE_NAME);
 
 		if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
 			$criteria->setDistinct();
 		}
 
 		if (!$criteria->hasSelectClause()) {
-			LabReportPeer::addSelectColumns($criteria);
+			DutyRosterPeer::addSelectColumns($criteria);
 		}
 
 		$criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
@@ -533,15 +548,15 @@ abstract class BaseLabReportPeer {
 		$criteria->setDbName(self::DATABASE_NAME);
 
 		if ($con === null) {
-			$con = Propel::getConnection(LabReportPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(DutyRosterPeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 
-		$criteria->addJoin(array(LabReportPeer::VISIT_ID,), array(VisitPeer::ID,), $join_behavior);
+		$criteria->addJoin(array(DutyRosterPeer::DUTY_PLACE_ID,), array(DutyPlacePeer::ID,), $join_behavior);
 
 
-    foreach (sfMixer::getCallables('BaseLabReportPeer:doCount:doCount') as $callable)
+    foreach (sfMixer::getCallables('BaseDutyRosterPeer:doCount:doCount') as $callable)
     {
-      call_user_func($callable, 'BaseLabReportPeer', $criteria, $con);
+      call_user_func($callable, 'BaseDutyRosterPeer', $criteria, $con);
     }
 
 
@@ -558,7 +573,7 @@ abstract class BaseLabReportPeer {
 
 
 	/**
-	 * Returns the number of rows matching criteria, joining the related LabTest table
+	 * Returns the number of rows matching criteria, joining the related EmployeeRelatedBySubstituteId table
 	 *
 	 * @param      Criteria $c
 	 * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
@@ -566,7 +581,7 @@ abstract class BaseLabReportPeer {
 	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
 	 * @return     int Number of matching rows.
 	 */
-	public static function doCountJoinLabTest(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	public static function doCountJoinEmployeeRelatedBySubstituteId(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
 	{
 		// we're going to modify criteria, so copy it first
 		$criteria = clone $criteria;
@@ -574,14 +589,14 @@ abstract class BaseLabReportPeer {
 		// We need to set the primary table name, since in the case that there are no WHERE columns
 		// it will be impossible for the BasePeer::createSelectSql() method to determine which
 		// tables go into the FROM clause.
-		$criteria->setPrimaryTableName(LabReportPeer::TABLE_NAME);
+		$criteria->setPrimaryTableName(DutyRosterPeer::TABLE_NAME);
 
 		if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
 			$criteria->setDistinct();
 		}
 
 		if (!$criteria->hasSelectClause()) {
-			LabReportPeer::addSelectColumns($criteria);
+			DutyRosterPeer::addSelectColumns($criteria);
 		}
 
 		$criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
@@ -590,15 +605,15 @@ abstract class BaseLabReportPeer {
 		$criteria->setDbName(self::DATABASE_NAME);
 
 		if ($con === null) {
-			$con = Propel::getConnection(LabReportPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(DutyRosterPeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 
-		$criteria->addJoin(array(LabReportPeer::LAB_TEST_ID,), array(LabTestPeer::ID,), $join_behavior);
+		$criteria->addJoin(array(DutyRosterPeer::SUBSTITUTE_ID,), array(EmployeePeer::ID,), $join_behavior);
 
 
-    foreach (sfMixer::getCallables('BaseLabReportPeer:doCount:doCount') as $callable)
+    foreach (sfMixer::getCallables('BaseDutyRosterPeer:doCount:doCount') as $callable)
     {
-      call_user_func($callable, 'BaseLabReportPeer', $criteria, $con);
+      call_user_func($callable, 'BaseDutyRosterPeer', $criteria, $con);
     }
 
 
@@ -615,20 +630,20 @@ abstract class BaseLabReportPeer {
 
 
 	/**
-	 * Selects a collection of LabReport objects pre-filled with their Patient objects.
+	 * Selects a collection of DutyRoster objects pre-filled with their Employee objects.
 	 * @param      Criteria  $c
 	 * @param      PropelPDO $con
 	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
-	 * @return     array Array of LabReport objects.
+	 * @return     array Array of DutyRoster objects.
 	 * @throws     PropelException Any exceptions caught during processing will be
 	 *		 rethrown wrapped into a PropelException.
 	 */
-	public static function doSelectJoinPatient(Criteria $c, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	public static function doSelectJoinEmployeeRelatedByEmployeeId(Criteria $c, $con = null, $join_behavior = Criteria::LEFT_JOIN)
 	{
 
-    foreach (sfMixer::getCallables('BaseLabReportPeer:doSelectJoin:doSelectJoin') as $callable)
+    foreach (sfMixer::getCallables('BaseDutyRosterPeer:doSelectJoin:doSelectJoin') as $callable)
     {
-      call_user_func($callable, 'BaseLabReportPeer', $c, $con);
+      call_user_func($callable, 'BaseDutyRosterPeer', $c, $con);
     }
 
 
@@ -639,45 +654,45 @@ abstract class BaseLabReportPeer {
 			$c->setDbName(self::DATABASE_NAME);
 		}
 
-		LabReportPeer::addSelectColumns($c);
-		$startcol = (LabReportPeer::NUM_COLUMNS - LabReportPeer::NUM_LAZY_LOAD_COLUMNS);
-		PatientPeer::addSelectColumns($c);
+		DutyRosterPeer::addSelectColumns($c);
+		$startcol = (DutyRosterPeer::NUM_COLUMNS - DutyRosterPeer::NUM_LAZY_LOAD_COLUMNS);
+		EmployeePeer::addSelectColumns($c);
 
-		$c->addJoin(array(LabReportPeer::PATIENT_ID,), array(PatientPeer::ID,), $join_behavior);
+		$c->addJoin(array(DutyRosterPeer::EMPLOYEE_ID,), array(EmployeePeer::ID,), $join_behavior);
 		$stmt = BasePeer::doSelect($c, $con);
 		$results = array();
 
 		while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-			$key1 = LabReportPeer::getPrimaryKeyHashFromRow($row, 0);
-			if (null !== ($obj1 = LabReportPeer::getInstanceFromPool($key1))) {
+			$key1 = DutyRosterPeer::getPrimaryKeyHashFromRow($row, 0);
+			if (null !== ($obj1 = DutyRosterPeer::getInstanceFromPool($key1))) {
 				// We no longer rehydrate the object, since this can cause data loss.
 				// See http://propel.phpdb.org/trac/ticket/509
 				// $obj1->hydrate($row, 0, true); // rehydrate
 			} else {
 
-				$omClass = LabReportPeer::getOMClass();
+				$omClass = DutyRosterPeer::getOMClass();
 
 				$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
 				$obj1 = new $cls();
 				$obj1->hydrate($row);
-				LabReportPeer::addInstanceToPool($obj1, $key1);
+				DutyRosterPeer::addInstanceToPool($obj1, $key1);
 			} // if $obj1 already loaded
 
-			$key2 = PatientPeer::getPrimaryKeyHashFromRow($row, $startcol);
+			$key2 = EmployeePeer::getPrimaryKeyHashFromRow($row, $startcol);
 			if ($key2 !== null) {
-				$obj2 = PatientPeer::getInstanceFromPool($key2);
+				$obj2 = EmployeePeer::getInstanceFromPool($key2);
 				if (!$obj2) {
 
-					$omClass = PatientPeer::getOMClass();
+					$omClass = EmployeePeer::getOMClass();
 
 					$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
 					$obj2 = new $cls();
 					$obj2->hydrate($row, $startcol);
-					PatientPeer::addInstanceToPool($obj2, $key2);
+					EmployeePeer::addInstanceToPool($obj2, $key2);
 				} // if obj2 already loaded
 
-				// Add the $obj1 (LabReport) to $obj2 (Patient)
-				$obj2->addLabReport($obj1);
+				// Add the $obj1 (DutyRoster) to $obj2 (Employee)
+				$obj2->addDutyRosterRelatedByEmployeeId($obj1);
 
 			} // if joined row was not null
 
@@ -689,15 +704,15 @@ abstract class BaseLabReportPeer {
 
 
 	/**
-	 * Selects a collection of LabReport objects pre-filled with their Visit objects.
+	 * Selects a collection of DutyRoster objects pre-filled with their DutyPlace objects.
 	 * @param      Criteria  $c
 	 * @param      PropelPDO $con
 	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
-	 * @return     array Array of LabReport objects.
+	 * @return     array Array of DutyRoster objects.
 	 * @throws     PropelException Any exceptions caught during processing will be
 	 *		 rethrown wrapped into a PropelException.
 	 */
-	public static function doSelectJoinVisit(Criteria $c, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	public static function doSelectJoinDutyPlace(Criteria $c, $con = null, $join_behavior = Criteria::LEFT_JOIN)
 	{
 		$c = clone $c;
 
@@ -706,45 +721,45 @@ abstract class BaseLabReportPeer {
 			$c->setDbName(self::DATABASE_NAME);
 		}
 
-		LabReportPeer::addSelectColumns($c);
-		$startcol = (LabReportPeer::NUM_COLUMNS - LabReportPeer::NUM_LAZY_LOAD_COLUMNS);
-		VisitPeer::addSelectColumns($c);
+		DutyRosterPeer::addSelectColumns($c);
+		$startcol = (DutyRosterPeer::NUM_COLUMNS - DutyRosterPeer::NUM_LAZY_LOAD_COLUMNS);
+		DutyPlacePeer::addSelectColumns($c);
 
-		$c->addJoin(array(LabReportPeer::VISIT_ID,), array(VisitPeer::ID,), $join_behavior);
+		$c->addJoin(array(DutyRosterPeer::DUTY_PLACE_ID,), array(DutyPlacePeer::ID,), $join_behavior);
 		$stmt = BasePeer::doSelect($c, $con);
 		$results = array();
 
 		while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-			$key1 = LabReportPeer::getPrimaryKeyHashFromRow($row, 0);
-			if (null !== ($obj1 = LabReportPeer::getInstanceFromPool($key1))) {
+			$key1 = DutyRosterPeer::getPrimaryKeyHashFromRow($row, 0);
+			if (null !== ($obj1 = DutyRosterPeer::getInstanceFromPool($key1))) {
 				// We no longer rehydrate the object, since this can cause data loss.
 				// See http://propel.phpdb.org/trac/ticket/509
 				// $obj1->hydrate($row, 0, true); // rehydrate
 			} else {
 
-				$omClass = LabReportPeer::getOMClass();
+				$omClass = DutyRosterPeer::getOMClass();
 
 				$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
 				$obj1 = new $cls();
 				$obj1->hydrate($row);
-				LabReportPeer::addInstanceToPool($obj1, $key1);
+				DutyRosterPeer::addInstanceToPool($obj1, $key1);
 			} // if $obj1 already loaded
 
-			$key2 = VisitPeer::getPrimaryKeyHashFromRow($row, $startcol);
+			$key2 = DutyPlacePeer::getPrimaryKeyHashFromRow($row, $startcol);
 			if ($key2 !== null) {
-				$obj2 = VisitPeer::getInstanceFromPool($key2);
+				$obj2 = DutyPlacePeer::getInstanceFromPool($key2);
 				if (!$obj2) {
 
-					$omClass = VisitPeer::getOMClass();
+					$omClass = DutyPlacePeer::getOMClass();
 
 					$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
 					$obj2 = new $cls();
 					$obj2->hydrate($row, $startcol);
-					VisitPeer::addInstanceToPool($obj2, $key2);
+					DutyPlacePeer::addInstanceToPool($obj2, $key2);
 				} // if obj2 already loaded
 
-				// Add the $obj1 (LabReport) to $obj2 (Visit)
-				$obj2->addLabReport($obj1);
+				// Add the $obj1 (DutyRoster) to $obj2 (DutyPlace)
+				$obj2->addDutyRoster($obj1);
 
 			} // if joined row was not null
 
@@ -756,15 +771,15 @@ abstract class BaseLabReportPeer {
 
 
 	/**
-	 * Selects a collection of LabReport objects pre-filled with their LabTest objects.
+	 * Selects a collection of DutyRoster objects pre-filled with their Employee objects.
 	 * @param      Criteria  $c
 	 * @param      PropelPDO $con
 	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
-	 * @return     array Array of LabReport objects.
+	 * @return     array Array of DutyRoster objects.
 	 * @throws     PropelException Any exceptions caught during processing will be
 	 *		 rethrown wrapped into a PropelException.
 	 */
-	public static function doSelectJoinLabTest(Criteria $c, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	public static function doSelectJoinEmployeeRelatedBySubstituteId(Criteria $c, $con = null, $join_behavior = Criteria::LEFT_JOIN)
 	{
 		$c = clone $c;
 
@@ -773,45 +788,45 @@ abstract class BaseLabReportPeer {
 			$c->setDbName(self::DATABASE_NAME);
 		}
 
-		LabReportPeer::addSelectColumns($c);
-		$startcol = (LabReportPeer::NUM_COLUMNS - LabReportPeer::NUM_LAZY_LOAD_COLUMNS);
-		LabTestPeer::addSelectColumns($c);
+		DutyRosterPeer::addSelectColumns($c);
+		$startcol = (DutyRosterPeer::NUM_COLUMNS - DutyRosterPeer::NUM_LAZY_LOAD_COLUMNS);
+		EmployeePeer::addSelectColumns($c);
 
-		$c->addJoin(array(LabReportPeer::LAB_TEST_ID,), array(LabTestPeer::ID,), $join_behavior);
+		$c->addJoin(array(DutyRosterPeer::SUBSTITUTE_ID,), array(EmployeePeer::ID,), $join_behavior);
 		$stmt = BasePeer::doSelect($c, $con);
 		$results = array();
 
 		while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-			$key1 = LabReportPeer::getPrimaryKeyHashFromRow($row, 0);
-			if (null !== ($obj1 = LabReportPeer::getInstanceFromPool($key1))) {
+			$key1 = DutyRosterPeer::getPrimaryKeyHashFromRow($row, 0);
+			if (null !== ($obj1 = DutyRosterPeer::getInstanceFromPool($key1))) {
 				// We no longer rehydrate the object, since this can cause data loss.
 				// See http://propel.phpdb.org/trac/ticket/509
 				// $obj1->hydrate($row, 0, true); // rehydrate
 			} else {
 
-				$omClass = LabReportPeer::getOMClass();
+				$omClass = DutyRosterPeer::getOMClass();
 
 				$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
 				$obj1 = new $cls();
 				$obj1->hydrate($row);
-				LabReportPeer::addInstanceToPool($obj1, $key1);
+				DutyRosterPeer::addInstanceToPool($obj1, $key1);
 			} // if $obj1 already loaded
 
-			$key2 = LabTestPeer::getPrimaryKeyHashFromRow($row, $startcol);
+			$key2 = EmployeePeer::getPrimaryKeyHashFromRow($row, $startcol);
 			if ($key2 !== null) {
-				$obj2 = LabTestPeer::getInstanceFromPool($key2);
+				$obj2 = EmployeePeer::getInstanceFromPool($key2);
 				if (!$obj2) {
 
-					$omClass = LabTestPeer::getOMClass();
+					$omClass = EmployeePeer::getOMClass();
 
 					$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
 					$obj2 = new $cls();
 					$obj2->hydrate($row, $startcol);
-					LabTestPeer::addInstanceToPool($obj2, $key2);
+					EmployeePeer::addInstanceToPool($obj2, $key2);
 				} // if obj2 already loaded
 
-				// Add the $obj1 (LabReport) to $obj2 (LabTest)
-				$obj2->addLabReport($obj1);
+				// Add the $obj1 (DutyRoster) to $obj2 (Employee)
+				$obj2->addDutyRosterRelatedBySubstituteId($obj1);
 
 			} // if joined row was not null
 
@@ -839,14 +854,14 @@ abstract class BaseLabReportPeer {
 		// We need to set the primary table name, since in the case that there are no WHERE columns
 		// it will be impossible for the BasePeer::createSelectSql() method to determine which
 		// tables go into the FROM clause.
-		$criteria->setPrimaryTableName(LabReportPeer::TABLE_NAME);
+		$criteria->setPrimaryTableName(DutyRosterPeer::TABLE_NAME);
 
 		if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
 			$criteria->setDistinct();
 		}
 
 		if (!$criteria->hasSelectClause()) {
-			LabReportPeer::addSelectColumns($criteria);
+			DutyRosterPeer::addSelectColumns($criteria);
 		}
 
 		$criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
@@ -855,16 +870,16 @@ abstract class BaseLabReportPeer {
 		$criteria->setDbName(self::DATABASE_NAME);
 
 		if ($con === null) {
-			$con = Propel::getConnection(LabReportPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(DutyRosterPeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 
-		$criteria->addJoin(array(LabReportPeer::PATIENT_ID,), array(PatientPeer::ID,), $join_behavior);
-		$criteria->addJoin(array(LabReportPeer::VISIT_ID,), array(VisitPeer::ID,), $join_behavior);
-		$criteria->addJoin(array(LabReportPeer::LAB_TEST_ID,), array(LabTestPeer::ID,), $join_behavior);
+		$criteria->addJoin(array(DutyRosterPeer::EMPLOYEE_ID,), array(EmployeePeer::ID,), $join_behavior);
+		$criteria->addJoin(array(DutyRosterPeer::DUTY_PLACE_ID,), array(DutyPlacePeer::ID,), $join_behavior);
+		$criteria->addJoin(array(DutyRosterPeer::SUBSTITUTE_ID,), array(EmployeePeer::ID,), $join_behavior);
 
-    foreach (sfMixer::getCallables('BaseLabReportPeer:doCount:doCount') as $callable)
+    foreach (sfMixer::getCallables('BaseDutyRosterPeer:doCount:doCount') as $callable)
     {
-      call_user_func($callable, 'BaseLabReportPeer', $criteria, $con);
+      call_user_func($callable, 'BaseDutyRosterPeer', $criteria, $con);
     }
 
 
@@ -880,21 +895,21 @@ abstract class BaseLabReportPeer {
 	}
 
 	/**
-	 * Selects a collection of LabReport objects pre-filled with all related objects.
+	 * Selects a collection of DutyRoster objects pre-filled with all related objects.
 	 *
 	 * @param      Criteria  $c
 	 * @param      PropelPDO $con
 	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
-	 * @return     array Array of LabReport objects.
+	 * @return     array Array of DutyRoster objects.
 	 * @throws     PropelException Any exceptions caught during processing will be
 	 *		 rethrown wrapped into a PropelException.
 	 */
 	public static function doSelectJoinAll(Criteria $c, $con = null, $join_behavior = Criteria::LEFT_JOIN)
 	{
 
-    foreach (sfMixer::getCallables('BaseLabReportPeer:doSelectJoinAll:doSelectJoinAll') as $callable)
+    foreach (sfMixer::getCallables('BaseDutyRosterPeer:doSelectJoinAll:doSelectJoinAll') as $callable)
     {
-      call_user_func($callable, 'BaseLabReportPeer', $c, $con);
+      call_user_func($callable, 'BaseDutyRosterPeer', $c, $con);
     }
 
 
@@ -905,97 +920,97 @@ abstract class BaseLabReportPeer {
 			$c->setDbName(self::DATABASE_NAME);
 		}
 
-		LabReportPeer::addSelectColumns($c);
-		$startcol2 = (LabReportPeer::NUM_COLUMNS - LabReportPeer::NUM_LAZY_LOAD_COLUMNS);
+		DutyRosterPeer::addSelectColumns($c);
+		$startcol2 = (DutyRosterPeer::NUM_COLUMNS - DutyRosterPeer::NUM_LAZY_LOAD_COLUMNS);
 
-		PatientPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + (PatientPeer::NUM_COLUMNS - PatientPeer::NUM_LAZY_LOAD_COLUMNS);
+		EmployeePeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + (EmployeePeer::NUM_COLUMNS - EmployeePeer::NUM_LAZY_LOAD_COLUMNS);
 
-		VisitPeer::addSelectColumns($c);
-		$startcol4 = $startcol3 + (VisitPeer::NUM_COLUMNS - VisitPeer::NUM_LAZY_LOAD_COLUMNS);
+		DutyPlacePeer::addSelectColumns($c);
+		$startcol4 = $startcol3 + (DutyPlacePeer::NUM_COLUMNS - DutyPlacePeer::NUM_LAZY_LOAD_COLUMNS);
 
-		LabTestPeer::addSelectColumns($c);
-		$startcol5 = $startcol4 + (LabTestPeer::NUM_COLUMNS - LabTestPeer::NUM_LAZY_LOAD_COLUMNS);
+		EmployeePeer::addSelectColumns($c);
+		$startcol5 = $startcol4 + (EmployeePeer::NUM_COLUMNS - EmployeePeer::NUM_LAZY_LOAD_COLUMNS);
 
-		$c->addJoin(array(LabReportPeer::PATIENT_ID,), array(PatientPeer::ID,), $join_behavior);
-		$c->addJoin(array(LabReportPeer::VISIT_ID,), array(VisitPeer::ID,), $join_behavior);
-		$c->addJoin(array(LabReportPeer::LAB_TEST_ID,), array(LabTestPeer::ID,), $join_behavior);
+		$c->addJoin(array(DutyRosterPeer::EMPLOYEE_ID,), array(EmployeePeer::ID,), $join_behavior);
+		$c->addJoin(array(DutyRosterPeer::DUTY_PLACE_ID,), array(DutyPlacePeer::ID,), $join_behavior);
+		$c->addJoin(array(DutyRosterPeer::SUBSTITUTE_ID,), array(EmployeePeer::ID,), $join_behavior);
 		$stmt = BasePeer::doSelect($c, $con);
 		$results = array();
 
 		while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-			$key1 = LabReportPeer::getPrimaryKeyHashFromRow($row, 0);
-			if (null !== ($obj1 = LabReportPeer::getInstanceFromPool($key1))) {
+			$key1 = DutyRosterPeer::getPrimaryKeyHashFromRow($row, 0);
+			if (null !== ($obj1 = DutyRosterPeer::getInstanceFromPool($key1))) {
 				// We no longer rehydrate the object, since this can cause data loss.
 				// See http://propel.phpdb.org/trac/ticket/509
 				// $obj1->hydrate($row, 0, true); // rehydrate
 			} else {
-				$omClass = LabReportPeer::getOMClass();
+				$omClass = DutyRosterPeer::getOMClass();
 
 				$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
 				$obj1 = new $cls();
 				$obj1->hydrate($row);
-				LabReportPeer::addInstanceToPool($obj1, $key1);
+				DutyRosterPeer::addInstanceToPool($obj1, $key1);
 			} // if obj1 already loaded
 
-			// Add objects for joined Patient rows
+			// Add objects for joined Employee rows
 
-			$key2 = PatientPeer::getPrimaryKeyHashFromRow($row, $startcol2);
+			$key2 = EmployeePeer::getPrimaryKeyHashFromRow($row, $startcol2);
 			if ($key2 !== null) {
-				$obj2 = PatientPeer::getInstanceFromPool($key2);
+				$obj2 = EmployeePeer::getInstanceFromPool($key2);
 				if (!$obj2) {
 
-					$omClass = PatientPeer::getOMClass();
+					$omClass = EmployeePeer::getOMClass();
 
 
 					$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
 					$obj2 = new $cls();
 					$obj2->hydrate($row, $startcol2);
-					PatientPeer::addInstanceToPool($obj2, $key2);
+					EmployeePeer::addInstanceToPool($obj2, $key2);
 				} // if obj2 loaded
 
-				// Add the $obj1 (LabReport) to the collection in $obj2 (Patient)
-				$obj2->addLabReport($obj1);
+				// Add the $obj1 (DutyRoster) to the collection in $obj2 (Employee)
+				$obj2->addDutyRosterRelatedByEmployeeId($obj1);
 			} // if joined row not null
 
-			// Add objects for joined Visit rows
+			// Add objects for joined DutyPlace rows
 
-			$key3 = VisitPeer::getPrimaryKeyHashFromRow($row, $startcol3);
+			$key3 = DutyPlacePeer::getPrimaryKeyHashFromRow($row, $startcol3);
 			if ($key3 !== null) {
-				$obj3 = VisitPeer::getInstanceFromPool($key3);
+				$obj3 = DutyPlacePeer::getInstanceFromPool($key3);
 				if (!$obj3) {
 
-					$omClass = VisitPeer::getOMClass();
+					$omClass = DutyPlacePeer::getOMClass();
 
 
 					$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
 					$obj3 = new $cls();
 					$obj3->hydrate($row, $startcol3);
-					VisitPeer::addInstanceToPool($obj3, $key3);
+					DutyPlacePeer::addInstanceToPool($obj3, $key3);
 				} // if obj3 loaded
 
-				// Add the $obj1 (LabReport) to the collection in $obj3 (Visit)
-				$obj3->addLabReport($obj1);
+				// Add the $obj1 (DutyRoster) to the collection in $obj3 (DutyPlace)
+				$obj3->addDutyRoster($obj1);
 			} // if joined row not null
 
-			// Add objects for joined LabTest rows
+			// Add objects for joined Employee rows
 
-			$key4 = LabTestPeer::getPrimaryKeyHashFromRow($row, $startcol4);
+			$key4 = EmployeePeer::getPrimaryKeyHashFromRow($row, $startcol4);
 			if ($key4 !== null) {
-				$obj4 = LabTestPeer::getInstanceFromPool($key4);
+				$obj4 = EmployeePeer::getInstanceFromPool($key4);
 				if (!$obj4) {
 
-					$omClass = LabTestPeer::getOMClass();
+					$omClass = EmployeePeer::getOMClass();
 
 
 					$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
 					$obj4 = new $cls();
 					$obj4->hydrate($row, $startcol4);
-					LabTestPeer::addInstanceToPool($obj4, $key4);
+					EmployeePeer::addInstanceToPool($obj4, $key4);
 				} // if obj4 loaded
 
-				// Add the $obj1 (LabReport) to the collection in $obj4 (LabTest)
-				$obj4->addLabReport($obj1);
+				// Add the $obj1 (DutyRoster) to the collection in $obj4 (Employee)
+				$obj4->addDutyRosterRelatedBySubstituteId($obj1);
 			} // if joined row not null
 
 			$results[] = $obj1;
@@ -1006,7 +1021,7 @@ abstract class BaseLabReportPeer {
 
 
 	/**
-	 * Returns the number of rows matching criteria, joining the related Patient table
+	 * Returns the number of rows matching criteria, joining the related EmployeeRelatedByEmployeeId table
 	 *
 	 * @param      Criteria $c
 	 * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
@@ -1014,7 +1029,7 @@ abstract class BaseLabReportPeer {
 	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
 	 * @return     int Number of matching rows.
 	 */
-	public static function doCountJoinAllExceptPatient(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	public static function doCountJoinAllExceptEmployeeRelatedByEmployeeId(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
 	{
 		// we're going to modify criteria, so copy it first
 		$criteria = clone $criteria;
@@ -1024,7 +1039,7 @@ abstract class BaseLabReportPeer {
 		}
 
 		if (!$criteria->hasSelectClause()) {
-			LabReportPeer::addSelectColumns($criteria);
+			DutyRosterPeer::addSelectColumns($criteria);
 		}
 
 		$criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
@@ -1033,15 +1048,14 @@ abstract class BaseLabReportPeer {
 		$criteria->setDbName(self::DATABASE_NAME);
 
 		if ($con === null) {
-			$con = Propel::getConnection(LabReportPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(DutyRosterPeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 	
-				$criteria->addJoin(array(LabReportPeer::VISIT_ID,), array(VisitPeer::ID,), $join_behavior);
-				$criteria->addJoin(array(LabReportPeer::LAB_TEST_ID,), array(LabTestPeer::ID,), $join_behavior);
+				$criteria->addJoin(array(DutyRosterPeer::DUTY_PLACE_ID,), array(DutyPlacePeer::ID,), $join_behavior);
 
-    foreach (sfMixer::getCallables('BaseLabReportPeer:doCount:doCount') as $callable)
+    foreach (sfMixer::getCallables('BaseDutyRosterPeer:doCount:doCount') as $callable)
     {
-      call_user_func($callable, 'BaseLabReportPeer', $criteria, $con);
+      call_user_func($callable, 'BaseDutyRosterPeer', $criteria, $con);
     }
 
 
@@ -1058,7 +1072,7 @@ abstract class BaseLabReportPeer {
 
 
 	/**
-	 * Returns the number of rows matching criteria, joining the related Visit table
+	 * Returns the number of rows matching criteria, joining the related DutyPlace table
 	 *
 	 * @param      Criteria $c
 	 * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
@@ -1066,7 +1080,7 @@ abstract class BaseLabReportPeer {
 	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
 	 * @return     int Number of matching rows.
 	 */
-	public static function doCountJoinAllExceptVisit(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	public static function doCountJoinAllExceptDutyPlace(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
 	{
 		// we're going to modify criteria, so copy it first
 		$criteria = clone $criteria;
@@ -1076,7 +1090,7 @@ abstract class BaseLabReportPeer {
 		}
 
 		if (!$criteria->hasSelectClause()) {
-			LabReportPeer::addSelectColumns($criteria);
+			DutyRosterPeer::addSelectColumns($criteria);
 		}
 
 		$criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
@@ -1085,15 +1099,15 @@ abstract class BaseLabReportPeer {
 		$criteria->setDbName(self::DATABASE_NAME);
 
 		if ($con === null) {
-			$con = Propel::getConnection(LabReportPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(DutyRosterPeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 	
-				$criteria->addJoin(array(LabReportPeer::PATIENT_ID,), array(PatientPeer::ID,), $join_behavior);
-				$criteria->addJoin(array(LabReportPeer::LAB_TEST_ID,), array(LabTestPeer::ID,), $join_behavior);
+				$criteria->addJoin(array(DutyRosterPeer::EMPLOYEE_ID,), array(EmployeePeer::ID,), $join_behavior);
+				$criteria->addJoin(array(DutyRosterPeer::SUBSTITUTE_ID,), array(EmployeePeer::ID,), $join_behavior);
 
-    foreach (sfMixer::getCallables('BaseLabReportPeer:doCount:doCount') as $callable)
+    foreach (sfMixer::getCallables('BaseDutyRosterPeer:doCount:doCount') as $callable)
     {
-      call_user_func($callable, 'BaseLabReportPeer', $criteria, $con);
+      call_user_func($callable, 'BaseDutyRosterPeer', $criteria, $con);
     }
 
 
@@ -1110,7 +1124,7 @@ abstract class BaseLabReportPeer {
 
 
 	/**
-	 * Returns the number of rows matching criteria, joining the related LabTest table
+	 * Returns the number of rows matching criteria, joining the related EmployeeRelatedBySubstituteId table
 	 *
 	 * @param      Criteria $c
 	 * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
@@ -1118,7 +1132,7 @@ abstract class BaseLabReportPeer {
 	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
 	 * @return     int Number of matching rows.
 	 */
-	public static function doCountJoinAllExceptLabTest(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	public static function doCountJoinAllExceptEmployeeRelatedBySubstituteId(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
 	{
 		// we're going to modify criteria, so copy it first
 		$criteria = clone $criteria;
@@ -1128,7 +1142,7 @@ abstract class BaseLabReportPeer {
 		}
 
 		if (!$criteria->hasSelectClause()) {
-			LabReportPeer::addSelectColumns($criteria);
+			DutyRosterPeer::addSelectColumns($criteria);
 		}
 
 		$criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
@@ -1137,15 +1151,14 @@ abstract class BaseLabReportPeer {
 		$criteria->setDbName(self::DATABASE_NAME);
 
 		if ($con === null) {
-			$con = Propel::getConnection(LabReportPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(DutyRosterPeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 	
-				$criteria->addJoin(array(LabReportPeer::PATIENT_ID,), array(PatientPeer::ID,), $join_behavior);
-				$criteria->addJoin(array(LabReportPeer::VISIT_ID,), array(VisitPeer::ID,), $join_behavior);
+				$criteria->addJoin(array(DutyRosterPeer::DUTY_PLACE_ID,), array(DutyPlacePeer::ID,), $join_behavior);
 
-    foreach (sfMixer::getCallables('BaseLabReportPeer:doCount:doCount') as $callable)
+    foreach (sfMixer::getCallables('BaseDutyRosterPeer:doCount:doCount') as $callable)
     {
-      call_user_func($callable, 'BaseLabReportPeer', $criteria, $con);
+      call_user_func($callable, 'BaseDutyRosterPeer', $criteria, $con);
     }
 
 
@@ -1162,21 +1175,21 @@ abstract class BaseLabReportPeer {
 
 
 	/**
-	 * Selects a collection of LabReport objects pre-filled with all related objects except Patient.
+	 * Selects a collection of DutyRoster objects pre-filled with all related objects except EmployeeRelatedByEmployeeId.
 	 *
 	 * @param      Criteria  $c
 	 * @param      PropelPDO $con
 	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
-	 * @return     array Array of LabReport objects.
+	 * @return     array Array of DutyRoster objects.
 	 * @throws     PropelException Any exceptions caught during processing will be
 	 *		 rethrown wrapped into a PropelException.
 	 */
-	public static function doSelectJoinAllExceptPatient(Criteria $c, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	public static function doSelectJoinAllExceptEmployeeRelatedByEmployeeId(Criteria $c, $con = null, $join_behavior = Criteria::LEFT_JOIN)
 	{
 
-    foreach (sfMixer::getCallables('BaseLabReportPeer:doSelectJoinAllExcept:doSelectJoinAllExcept') as $callable)
+    foreach (sfMixer::getCallables('BaseDutyRosterPeer:doSelectJoinAllExcept:doSelectJoinAllExcept') as $callable)
     {
-      call_user_func($callable, 'BaseLabReportPeer', $c, $con);
+      call_user_func($callable, 'BaseDutyRosterPeer', $c, $con);
     }
 
 
@@ -1189,75 +1202,50 @@ abstract class BaseLabReportPeer {
 			$c->setDbName(self::DATABASE_NAME);
 		}
 
-		LabReportPeer::addSelectColumns($c);
-		$startcol2 = (LabReportPeer::NUM_COLUMNS - LabReportPeer::NUM_LAZY_LOAD_COLUMNS);
+		DutyRosterPeer::addSelectColumns($c);
+		$startcol2 = (DutyRosterPeer::NUM_COLUMNS - DutyRosterPeer::NUM_LAZY_LOAD_COLUMNS);
 
-		VisitPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + (VisitPeer::NUM_COLUMNS - VisitPeer::NUM_LAZY_LOAD_COLUMNS);
+		DutyPlacePeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + (DutyPlacePeer::NUM_COLUMNS - DutyPlacePeer::NUM_LAZY_LOAD_COLUMNS);
 
-		LabTestPeer::addSelectColumns($c);
-		$startcol4 = $startcol3 + (LabTestPeer::NUM_COLUMNS - LabTestPeer::NUM_LAZY_LOAD_COLUMNS);
-
-				$c->addJoin(array(LabReportPeer::VISIT_ID,), array(VisitPeer::ID,), $join_behavior);
-				$c->addJoin(array(LabReportPeer::LAB_TEST_ID,), array(LabTestPeer::ID,), $join_behavior);
+				$c->addJoin(array(DutyRosterPeer::DUTY_PLACE_ID,), array(DutyPlacePeer::ID,), $join_behavior);
 
 		$stmt = BasePeer::doSelect($c, $con);
 		$results = array();
 
 		while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-			$key1 = LabReportPeer::getPrimaryKeyHashFromRow($row, 0);
-			if (null !== ($obj1 = LabReportPeer::getInstanceFromPool($key1))) {
+			$key1 = DutyRosterPeer::getPrimaryKeyHashFromRow($row, 0);
+			if (null !== ($obj1 = DutyRosterPeer::getInstanceFromPool($key1))) {
 				// We no longer rehydrate the object, since this can cause data loss.
 				// See http://propel.phpdb.org/trac/ticket/509
 				// $obj1->hydrate($row, 0, true); // rehydrate
 			} else {
-				$omClass = LabReportPeer::getOMClass();
+				$omClass = DutyRosterPeer::getOMClass();
 
 				$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
 				$obj1 = new $cls();
 				$obj1->hydrate($row);
-				LabReportPeer::addInstanceToPool($obj1, $key1);
+				DutyRosterPeer::addInstanceToPool($obj1, $key1);
 			} // if obj1 already loaded
 
-				// Add objects for joined Visit rows
+				// Add objects for joined DutyPlace rows
 
-				$key2 = VisitPeer::getPrimaryKeyHashFromRow($row, $startcol2);
+				$key2 = DutyPlacePeer::getPrimaryKeyHashFromRow($row, $startcol2);
 				if ($key2 !== null) {
-					$obj2 = VisitPeer::getInstanceFromPool($key2);
+					$obj2 = DutyPlacePeer::getInstanceFromPool($key2);
 					if (!$obj2) {
 	
-						$omClass = VisitPeer::getOMClass();
+						$omClass = DutyPlacePeer::getOMClass();
 
 
 					$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
 					$obj2 = new $cls();
 					$obj2->hydrate($row, $startcol2);
-					VisitPeer::addInstanceToPool($obj2, $key2);
+					DutyPlacePeer::addInstanceToPool($obj2, $key2);
 				} // if $obj2 already loaded
 
-				// Add the $obj1 (LabReport) to the collection in $obj2 (Visit)
-				$obj2->addLabReport($obj1);
-
-			} // if joined row is not null
-
-				// Add objects for joined LabTest rows
-
-				$key3 = LabTestPeer::getPrimaryKeyHashFromRow($row, $startcol3);
-				if ($key3 !== null) {
-					$obj3 = LabTestPeer::getInstanceFromPool($key3);
-					if (!$obj3) {
-	
-						$omClass = LabTestPeer::getOMClass();
-
-
-					$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
-					$obj3 = new $cls();
-					$obj3->hydrate($row, $startcol3);
-					LabTestPeer::addInstanceToPool($obj3, $key3);
-				} // if $obj3 already loaded
-
-				// Add the $obj1 (LabReport) to the collection in $obj3 (LabTest)
-				$obj3->addLabReport($obj1);
+				// Add the $obj1 (DutyRoster) to the collection in $obj2 (DutyPlace)
+				$obj2->addDutyRoster($obj1);
 
 			} // if joined row is not null
 
@@ -1269,16 +1257,16 @@ abstract class BaseLabReportPeer {
 
 
 	/**
-	 * Selects a collection of LabReport objects pre-filled with all related objects except Visit.
+	 * Selects a collection of DutyRoster objects pre-filled with all related objects except DutyPlace.
 	 *
 	 * @param      Criteria  $c
 	 * @param      PropelPDO $con
 	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
-	 * @return     array Array of LabReport objects.
+	 * @return     array Array of DutyRoster objects.
 	 * @throws     PropelException Any exceptions caught during processing will be
 	 *		 rethrown wrapped into a PropelException.
 	 */
-	public static function doSelectJoinAllExceptVisit(Criteria $c, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	public static function doSelectJoinAllExceptDutyPlace(Criteria $c, $con = null, $join_behavior = Criteria::LEFT_JOIN)
 	{
 		$c = clone $c;
 
@@ -1289,75 +1277,75 @@ abstract class BaseLabReportPeer {
 			$c->setDbName(self::DATABASE_NAME);
 		}
 
-		LabReportPeer::addSelectColumns($c);
-		$startcol2 = (LabReportPeer::NUM_COLUMNS - LabReportPeer::NUM_LAZY_LOAD_COLUMNS);
+		DutyRosterPeer::addSelectColumns($c);
+		$startcol2 = (DutyRosterPeer::NUM_COLUMNS - DutyRosterPeer::NUM_LAZY_LOAD_COLUMNS);
 
-		PatientPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + (PatientPeer::NUM_COLUMNS - PatientPeer::NUM_LAZY_LOAD_COLUMNS);
+		EmployeePeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + (EmployeePeer::NUM_COLUMNS - EmployeePeer::NUM_LAZY_LOAD_COLUMNS);
 
-		LabTestPeer::addSelectColumns($c);
-		$startcol4 = $startcol3 + (LabTestPeer::NUM_COLUMNS - LabTestPeer::NUM_LAZY_LOAD_COLUMNS);
+		EmployeePeer::addSelectColumns($c);
+		$startcol4 = $startcol3 + (EmployeePeer::NUM_COLUMNS - EmployeePeer::NUM_LAZY_LOAD_COLUMNS);
 
-				$c->addJoin(array(LabReportPeer::PATIENT_ID,), array(PatientPeer::ID,), $join_behavior);
-				$c->addJoin(array(LabReportPeer::LAB_TEST_ID,), array(LabTestPeer::ID,), $join_behavior);
+				$c->addJoin(array(DutyRosterPeer::EMPLOYEE_ID,), array(EmployeePeer::ID,), $join_behavior);
+				$c->addJoin(array(DutyRosterPeer::SUBSTITUTE_ID,), array(EmployeePeer::ID,), $join_behavior);
 
 		$stmt = BasePeer::doSelect($c, $con);
 		$results = array();
 
 		while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-			$key1 = LabReportPeer::getPrimaryKeyHashFromRow($row, 0);
-			if (null !== ($obj1 = LabReportPeer::getInstanceFromPool($key1))) {
+			$key1 = DutyRosterPeer::getPrimaryKeyHashFromRow($row, 0);
+			if (null !== ($obj1 = DutyRosterPeer::getInstanceFromPool($key1))) {
 				// We no longer rehydrate the object, since this can cause data loss.
 				// See http://propel.phpdb.org/trac/ticket/509
 				// $obj1->hydrate($row, 0, true); // rehydrate
 			} else {
-				$omClass = LabReportPeer::getOMClass();
+				$omClass = DutyRosterPeer::getOMClass();
 
 				$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
 				$obj1 = new $cls();
 				$obj1->hydrate($row);
-				LabReportPeer::addInstanceToPool($obj1, $key1);
+				DutyRosterPeer::addInstanceToPool($obj1, $key1);
 			} // if obj1 already loaded
 
-				// Add objects for joined Patient rows
+				// Add objects for joined Employee rows
 
-				$key2 = PatientPeer::getPrimaryKeyHashFromRow($row, $startcol2);
+				$key2 = EmployeePeer::getPrimaryKeyHashFromRow($row, $startcol2);
 				if ($key2 !== null) {
-					$obj2 = PatientPeer::getInstanceFromPool($key2);
+					$obj2 = EmployeePeer::getInstanceFromPool($key2);
 					if (!$obj2) {
 	
-						$omClass = PatientPeer::getOMClass();
+						$omClass = EmployeePeer::getOMClass();
 
 
 					$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
 					$obj2 = new $cls();
 					$obj2->hydrate($row, $startcol2);
-					PatientPeer::addInstanceToPool($obj2, $key2);
+					EmployeePeer::addInstanceToPool($obj2, $key2);
 				} // if $obj2 already loaded
 
-				// Add the $obj1 (LabReport) to the collection in $obj2 (Patient)
-				$obj2->addLabReport($obj1);
+				// Add the $obj1 (DutyRoster) to the collection in $obj2 (Employee)
+				$obj2->addDutyRosterRelatedByEmployeeId($obj1);
 
 			} // if joined row is not null
 
-				// Add objects for joined LabTest rows
+				// Add objects for joined Employee rows
 
-				$key3 = LabTestPeer::getPrimaryKeyHashFromRow($row, $startcol3);
+				$key3 = EmployeePeer::getPrimaryKeyHashFromRow($row, $startcol3);
 				if ($key3 !== null) {
-					$obj3 = LabTestPeer::getInstanceFromPool($key3);
+					$obj3 = EmployeePeer::getInstanceFromPool($key3);
 					if (!$obj3) {
 	
-						$omClass = LabTestPeer::getOMClass();
+						$omClass = EmployeePeer::getOMClass();
 
 
 					$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
 					$obj3 = new $cls();
 					$obj3->hydrate($row, $startcol3);
-					LabTestPeer::addInstanceToPool($obj3, $key3);
+					EmployeePeer::addInstanceToPool($obj3, $key3);
 				} // if $obj3 already loaded
 
-				// Add the $obj1 (LabReport) to the collection in $obj3 (LabTest)
-				$obj3->addLabReport($obj1);
+				// Add the $obj1 (DutyRoster) to the collection in $obj3 (Employee)
+				$obj3->addDutyRosterRelatedBySubstituteId($obj1);
 
 			} // if joined row is not null
 
@@ -1369,16 +1357,16 @@ abstract class BaseLabReportPeer {
 
 
 	/**
-	 * Selects a collection of LabReport objects pre-filled with all related objects except LabTest.
+	 * Selects a collection of DutyRoster objects pre-filled with all related objects except EmployeeRelatedBySubstituteId.
 	 *
 	 * @param      Criteria  $c
 	 * @param      PropelPDO $con
 	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
-	 * @return     array Array of LabReport objects.
+	 * @return     array Array of DutyRoster objects.
 	 * @throws     PropelException Any exceptions caught during processing will be
 	 *		 rethrown wrapped into a PropelException.
 	 */
-	public static function doSelectJoinAllExceptLabTest(Criteria $c, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	public static function doSelectJoinAllExceptEmployeeRelatedBySubstituteId(Criteria $c, $con = null, $join_behavior = Criteria::LEFT_JOIN)
 	{
 		$c = clone $c;
 
@@ -1389,75 +1377,50 @@ abstract class BaseLabReportPeer {
 			$c->setDbName(self::DATABASE_NAME);
 		}
 
-		LabReportPeer::addSelectColumns($c);
-		$startcol2 = (LabReportPeer::NUM_COLUMNS - LabReportPeer::NUM_LAZY_LOAD_COLUMNS);
+		DutyRosterPeer::addSelectColumns($c);
+		$startcol2 = (DutyRosterPeer::NUM_COLUMNS - DutyRosterPeer::NUM_LAZY_LOAD_COLUMNS);
 
-		PatientPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + (PatientPeer::NUM_COLUMNS - PatientPeer::NUM_LAZY_LOAD_COLUMNS);
+		DutyPlacePeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + (DutyPlacePeer::NUM_COLUMNS - DutyPlacePeer::NUM_LAZY_LOAD_COLUMNS);
 
-		VisitPeer::addSelectColumns($c);
-		$startcol4 = $startcol3 + (VisitPeer::NUM_COLUMNS - VisitPeer::NUM_LAZY_LOAD_COLUMNS);
-
-				$c->addJoin(array(LabReportPeer::PATIENT_ID,), array(PatientPeer::ID,), $join_behavior);
-				$c->addJoin(array(LabReportPeer::VISIT_ID,), array(VisitPeer::ID,), $join_behavior);
+				$c->addJoin(array(DutyRosterPeer::DUTY_PLACE_ID,), array(DutyPlacePeer::ID,), $join_behavior);
 
 		$stmt = BasePeer::doSelect($c, $con);
 		$results = array();
 
 		while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-			$key1 = LabReportPeer::getPrimaryKeyHashFromRow($row, 0);
-			if (null !== ($obj1 = LabReportPeer::getInstanceFromPool($key1))) {
+			$key1 = DutyRosterPeer::getPrimaryKeyHashFromRow($row, 0);
+			if (null !== ($obj1 = DutyRosterPeer::getInstanceFromPool($key1))) {
 				// We no longer rehydrate the object, since this can cause data loss.
 				// See http://propel.phpdb.org/trac/ticket/509
 				// $obj1->hydrate($row, 0, true); // rehydrate
 			} else {
-				$omClass = LabReportPeer::getOMClass();
+				$omClass = DutyRosterPeer::getOMClass();
 
 				$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
 				$obj1 = new $cls();
 				$obj1->hydrate($row);
-				LabReportPeer::addInstanceToPool($obj1, $key1);
+				DutyRosterPeer::addInstanceToPool($obj1, $key1);
 			} // if obj1 already loaded
 
-				// Add objects for joined Patient rows
+				// Add objects for joined DutyPlace rows
 
-				$key2 = PatientPeer::getPrimaryKeyHashFromRow($row, $startcol2);
+				$key2 = DutyPlacePeer::getPrimaryKeyHashFromRow($row, $startcol2);
 				if ($key2 !== null) {
-					$obj2 = PatientPeer::getInstanceFromPool($key2);
+					$obj2 = DutyPlacePeer::getInstanceFromPool($key2);
 					if (!$obj2) {
 	
-						$omClass = PatientPeer::getOMClass();
+						$omClass = DutyPlacePeer::getOMClass();
 
 
 					$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
 					$obj2 = new $cls();
 					$obj2->hydrate($row, $startcol2);
-					PatientPeer::addInstanceToPool($obj2, $key2);
+					DutyPlacePeer::addInstanceToPool($obj2, $key2);
 				} // if $obj2 already loaded
 
-				// Add the $obj1 (LabReport) to the collection in $obj2 (Patient)
-				$obj2->addLabReport($obj1);
-
-			} // if joined row is not null
-
-				// Add objects for joined Visit rows
-
-				$key3 = VisitPeer::getPrimaryKeyHashFromRow($row, $startcol3);
-				if ($key3 !== null) {
-					$obj3 = VisitPeer::getInstanceFromPool($key3);
-					if (!$obj3) {
-	
-						$omClass = VisitPeer::getOMClass();
-
-
-					$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
-					$obj3 = new $cls();
-					$obj3->hydrate($row, $startcol3);
-					VisitPeer::addInstanceToPool($obj3, $key3);
-				} // if $obj3 already loaded
-
-				// Add the $obj1 (LabReport) to the collection in $obj3 (Visit)
-				$obj3->addLabReport($obj1);
+				// Add the $obj1 (DutyRoster) to the collection in $obj2 (DutyPlace)
+				$obj2->addDutyRoster($obj1);
 
 			} // if joined row is not null
 
@@ -1495,13 +1458,13 @@ abstract class BaseLabReportPeer {
 	 */
 	public static function getOMClass()
 	{
-		return LabReportPeer::CLASS_DEFAULT;
+		return DutyRosterPeer::CLASS_DEFAULT;
 	}
 
 	/**
-	 * Method perform an INSERT on the database, given a LabReport or Criteria object.
+	 * Method perform an INSERT on the database, given a DutyRoster or Criteria object.
 	 *
-	 * @param      mixed $values Criteria or LabReport object containing data that is used to create the INSERT statement.
+	 * @param      mixed $values Criteria or DutyRoster object containing data that is used to create the INSERT statement.
 	 * @param      PropelPDO $con the PropelPDO connection to use
 	 * @return     mixed The new primary key.
 	 * @throws     PropelException Any exceptions caught during processing will be
@@ -1510,9 +1473,9 @@ abstract class BaseLabReportPeer {
 	public static function doInsert($values, PropelPDO $con = null)
 	{
 
-    foreach (sfMixer::getCallables('BaseLabReportPeer:doInsert:pre') as $callable)
+    foreach (sfMixer::getCallables('BaseDutyRosterPeer:doInsert:pre') as $callable)
     {
-      $ret = call_user_func($callable, 'BaseLabReportPeer', $values, $con);
+      $ret = call_user_func($callable, 'BaseDutyRosterPeer', $values, $con);
       if (false !== $ret)
       {
         return $ret;
@@ -1521,17 +1484,17 @@ abstract class BaseLabReportPeer {
 
 
 		if ($con === null) {
-			$con = Propel::getConnection(LabReportPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+			$con = Propel::getConnection(DutyRosterPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; // rename for clarity
 		} else {
-			$criteria = $values->buildCriteria(); // build Criteria from LabReport object
+			$criteria = $values->buildCriteria(); // build Criteria from DutyRoster object
 		}
 
-		if ($criteria->containsKey(LabReportPeer::ID) && $criteria->keyContainsValue(LabReportPeer::ID) ) {
-			throw new PropelException('Cannot insert a value for auto-increment primary key ('.LabReportPeer::ID.')');
+		if ($criteria->containsKey(DutyRosterPeer::ID) && $criteria->keyContainsValue(DutyRosterPeer::ID) ) {
+			throw new PropelException('Cannot insert a value for auto-increment primary key ('.DutyRosterPeer::ID.')');
 		}
 
 
@@ -1550,18 +1513,18 @@ abstract class BaseLabReportPeer {
 		}
 
 		
-    foreach (sfMixer::getCallables('BaseLabReportPeer:doInsert:post') as $callable)
+    foreach (sfMixer::getCallables('BaseDutyRosterPeer:doInsert:post') as $callable)
     {
-      call_user_func($callable, 'BaseLabReportPeer', $values, $con, $pk);
+      call_user_func($callable, 'BaseDutyRosterPeer', $values, $con, $pk);
     }
 
     return $pk;
 	}
 
 	/**
-	 * Method perform an UPDATE on the database, given a LabReport or Criteria object.
+	 * Method perform an UPDATE on the database, given a DutyRoster or Criteria object.
 	 *
-	 * @param      mixed $values Criteria or LabReport object containing data that is used to create the UPDATE statement.
+	 * @param      mixed $values Criteria or DutyRoster object containing data that is used to create the UPDATE statement.
 	 * @param      PropelPDO $con The connection to use (specify PropelPDO connection object to exert more control over transactions).
 	 * @return     int The number of affected rows (if supported by underlying database driver).
 	 * @throws     PropelException Any exceptions caught during processing will be
@@ -1570,9 +1533,9 @@ abstract class BaseLabReportPeer {
 	public static function doUpdate($values, PropelPDO $con = null)
 	{
 
-    foreach (sfMixer::getCallables('BaseLabReportPeer:doUpdate:pre') as $callable)
+    foreach (sfMixer::getCallables('BaseDutyRosterPeer:doUpdate:pre') as $callable)
     {
-      $ret = call_user_func($callable, 'BaseLabReportPeer', $values, $con);
+      $ret = call_user_func($callable, 'BaseDutyRosterPeer', $values, $con);
       if (false !== $ret)
       {
         return $ret;
@@ -1581,7 +1544,7 @@ abstract class BaseLabReportPeer {
 
 
 		if ($con === null) {
-			$con = Propel::getConnection(LabReportPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+			$con = Propel::getConnection(DutyRosterPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
 
 		$selectCriteria = new Criteria(self::DATABASE_NAME);
@@ -1589,10 +1552,10 @@ abstract class BaseLabReportPeer {
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; // rename for clarity
 
-			$comparison = $criteria->getComparison(LabReportPeer::ID);
-			$selectCriteria->add(LabReportPeer::ID, $criteria->remove(LabReportPeer::ID), $comparison);
+			$comparison = $criteria->getComparison(DutyRosterPeer::ID);
+			$selectCriteria->add(DutyRosterPeer::ID, $criteria->remove(DutyRosterPeer::ID), $comparison);
 
-		} else { // $values is LabReport object
+		} else { // $values is DutyRoster object
 			$criteria = $values->buildCriteria(); // gets full criteria
 			$selectCriteria = $values->buildPkeyCriteria(); // gets criteria w/ primary key(s)
 		}
@@ -1603,30 +1566,30 @@ abstract class BaseLabReportPeer {
 		$ret = BasePeer::doUpdate($selectCriteria, $criteria, $con);
 	
 
-    foreach (sfMixer::getCallables('BaseLabReportPeer:doUpdate:post') as $callable)
+    foreach (sfMixer::getCallables('BaseDutyRosterPeer:doUpdate:post') as $callable)
     {
-      call_user_func($callable, 'BaseLabReportPeer', $values, $con, $ret);
+      call_user_func($callable, 'BaseDutyRosterPeer', $values, $con, $ret);
     }
 
     return $ret;
   }
 
 	/**
-	 * Method to DELETE all rows from the lab_report table.
+	 * Method to DELETE all rows from the duty_roster table.
 	 *
 	 * @return     int The number of affected rows (if supported by underlying database driver).
 	 */
 	public static function doDeleteAll($con = null)
 	{
 		if ($con === null) {
-			$con = Propel::getConnection(LabReportPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+			$con = Propel::getConnection(DutyRosterPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
 		$affectedRows = 0; // initialize var to track total num of affected rows
 		try {
 			// use transaction because $criteria could contain info
 			// for more than one table or we could emulating ON DELETE CASCADE, etc.
 			$con->beginTransaction();
-			$affectedRows += BasePeer::doDeleteAll(LabReportPeer::TABLE_NAME, $con);
+			$affectedRows += BasePeer::doDeleteAll(DutyRosterPeer::TABLE_NAME, $con);
 			$con->commit();
 			return $affectedRows;
 		} catch (PropelException $e) {
@@ -1636,9 +1599,9 @@ abstract class BaseLabReportPeer {
 	}
 
 	/**
-	 * Method perform a DELETE on the database, given a LabReport or Criteria object OR a primary key value.
+	 * Method perform a DELETE on the database, given a DutyRoster or Criteria object OR a primary key value.
 	 *
-	 * @param      mixed $values Criteria or LabReport object or primary key or array of primary keys
+	 * @param      mixed $values Criteria or DutyRoster object or primary key or array of primary keys
 	 *              which is used to create the DELETE statement
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int 	The number of affected rows (if supported by underlying database driver).  This includes CASCADE-related rows
@@ -1649,20 +1612,20 @@ abstract class BaseLabReportPeer {
 	 public static function doDelete($values, PropelPDO $con = null)
 	 {
 		if ($con === null) {
-			$con = Propel::getConnection(LabReportPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+			$con = Propel::getConnection(DutyRosterPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
 
 		if ($values instanceof Criteria) {
 			// invalidate the cache for all objects of this type, since we have no
 			// way of knowing (without running a query) what objects should be invalidated
 			// from the cache based on this Criteria.
-			LabReportPeer::clearInstancePool();
+			DutyRosterPeer::clearInstancePool();
 
 			// rename for clarity
 			$criteria = clone $values;
-		} elseif ($values instanceof LabReport) {
+		} elseif ($values instanceof DutyRoster) {
 			// invalidate the cache for this single object
-			LabReportPeer::removeInstanceFromPool($values);
+			DutyRosterPeer::removeInstanceFromPool($values);
 			// create criteria based on pk values
 			$criteria = $values->buildPkeyCriteria();
 		} else {
@@ -1671,11 +1634,11 @@ abstract class BaseLabReportPeer {
 
 
 			$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(LabReportPeer::ID, (array) $values, Criteria::IN);
+			$criteria->add(DutyRosterPeer::ID, (array) $values, Criteria::IN);
 
 			foreach ((array) $values as $singleval) {
 				// we can invalidate the cache for this single object
-				LabReportPeer::removeInstanceFromPool($singleval);
+				DutyRosterPeer::removeInstanceFromPool($singleval);
 			}
 		}
 
@@ -1700,24 +1663,24 @@ abstract class BaseLabReportPeer {
 	}
 
 	/**
-	 * Validates all modified columns of given LabReport object.
+	 * Validates all modified columns of given DutyRoster object.
 	 * If parameter $columns is either a single column name or an array of column names
 	 * than only those columns are validated.
 	 *
 	 * NOTICE: This does not apply to primary or foreign keys for now.
 	 *
-	 * @param      LabReport $obj The object to validate.
+	 * @param      DutyRoster $obj The object to validate.
 	 * @param      mixed $cols Column name or array of column names.
 	 *
 	 * @return     mixed TRUE if all columns are valid or the error message of the first invalid column.
 	 */
-	public static function doValidate(LabReport $obj, $cols = null)
+	public static function doValidate(DutyRoster $obj, $cols = null)
 	{
 		$columns = array();
 
 		if ($cols) {
-			$dbMap = Propel::getDatabaseMap(LabReportPeer::DATABASE_NAME);
-			$tableMap = $dbMap->getTable(LabReportPeer::TABLE_NAME);
+			$dbMap = Propel::getDatabaseMap(DutyRosterPeer::DATABASE_NAME);
+			$tableMap = $dbMap->getTable(DutyRosterPeer::TABLE_NAME);
 
 			if (! is_array($cols)) {
 				$cols = array($cols);
@@ -1733,11 +1696,11 @@ abstract class BaseLabReportPeer {
 
 		}
 
-		$res =  BasePeer::doValidate(LabReportPeer::DATABASE_NAME, LabReportPeer::TABLE_NAME, $columns);
+		$res =  BasePeer::doValidate(DutyRosterPeer::DATABASE_NAME, DutyRosterPeer::TABLE_NAME, $columns);
     if ($res !== true) {
         $request = sfContext::getInstance()->getRequest();
         foreach ($res as $failed) {
-            $col = LabReportPeer::translateFieldname($failed->getColumn(), BasePeer::TYPE_COLNAME, BasePeer::TYPE_PHPNAME);
+            $col = DutyRosterPeer::translateFieldname($failed->getColumn(), BasePeer::TYPE_COLNAME, BasePeer::TYPE_PHPNAME);
         }
     }
 
@@ -1749,23 +1712,23 @@ abstract class BaseLabReportPeer {
 	 *
 	 * @param      int $pk the primary key.
 	 * @param      PropelPDO $con the connection to use
-	 * @return     LabReport
+	 * @return     DutyRoster
 	 */
 	public static function retrieveByPK($pk, PropelPDO $con = null)
 	{
 
-		if (null !== ($obj = LabReportPeer::getInstanceFromPool((string) $pk))) {
+		if (null !== ($obj = DutyRosterPeer::getInstanceFromPool((string) $pk))) {
 			return $obj;
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(LabReportPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(DutyRosterPeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 
-		$criteria = new Criteria(LabReportPeer::DATABASE_NAME);
-		$criteria->add(LabReportPeer::ID, $pk);
+		$criteria = new Criteria(DutyRosterPeer::DATABASE_NAME);
+		$criteria->add(DutyRosterPeer::ID, $pk);
 
-		$v = LabReportPeer::doSelect($criteria, $con);
+		$v = DutyRosterPeer::doSelect($criteria, $con);
 
 		return !empty($v) > 0 ? $v[0] : null;
 	}
@@ -1781,30 +1744,30 @@ abstract class BaseLabReportPeer {
 	public static function retrieveByPKs($pks, PropelPDO $con = null)
 	{
 		if ($con === null) {
-			$con = Propel::getConnection(LabReportPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(DutyRosterPeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 
 		$objs = null;
 		if (empty($pks)) {
 			$objs = array();
 		} else {
-			$criteria = new Criteria(LabReportPeer::DATABASE_NAME);
-			$criteria->add(LabReportPeer::ID, $pks, Criteria::IN);
-			$objs = LabReportPeer::doSelect($criteria, $con);
+			$criteria = new Criteria(DutyRosterPeer::DATABASE_NAME);
+			$criteria->add(DutyRosterPeer::ID, $pks, Criteria::IN);
+			$objs = DutyRosterPeer::doSelect($criteria, $con);
 		}
 		return $objs;
 	}
 
-} // BaseLabReportPeer
+} // BaseDutyRosterPeer
 
 // This is the static code needed to register the MapBuilder for this table with the main Propel class.
 //
-// NOTE: This static code cannot call methods on the LabReportPeer class, because it is not defined yet.
-// If you need to use overridden methods, you can add this code to the bottom of the LabReportPeer class:
+// NOTE: This static code cannot call methods on the DutyRosterPeer class, because it is not defined yet.
+// If you need to use overridden methods, you can add this code to the bottom of the DutyRosterPeer class:
 //
-// Propel::getDatabaseMap(LabReportPeer::DATABASE_NAME)->addTableBuilder(LabReportPeer::TABLE_NAME, LabReportPeer::getMapBuilder());
+// Propel::getDatabaseMap(DutyRosterPeer::DATABASE_NAME)->addTableBuilder(DutyRosterPeer::TABLE_NAME, DutyRosterPeer::getMapBuilder());
 //
 // Doing so will effectively overwrite the registration below.
 
-Propel::getDatabaseMap(BaseLabReportPeer::DATABASE_NAME)->addTableBuilder(BaseLabReportPeer::TABLE_NAME, BaseLabReportPeer::getMapBuilder());
+Propel::getDatabaseMap(BaseDutyRosterPeer::DATABASE_NAME)->addTableBuilder(BaseDutyRosterPeer::TABLE_NAME, BaseDutyRosterPeer::getMapBuilder());
 

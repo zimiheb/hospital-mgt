@@ -16,6 +16,8 @@ class BasePatientFormFilter extends BaseFormFilterPropel
     $this->setWidgets(array(
       'id_number'         => new sfWidgetFormFilterInput(),
       'cnic'              => new sfWidgetFormFilterInput(),
+      'username'          => new sfWidgetFormFilterInput(),
+      'password'          => new sfWidgetFormFilterInput(),
       'name'              => new sfWidgetFormFilterInput(),
       'father_name'       => new sfWidgetFormFilterInput(),
       'dob'               => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => true)),
@@ -37,6 +39,8 @@ class BasePatientFormFilter extends BaseFormFilterPropel
     $this->setValidators(array(
       'id_number'         => new sfValidatorPass(array('required' => false)),
       'cnic'              => new sfValidatorPass(array('required' => false)),
+      'username'          => new sfValidatorPass(array('required' => false)),
+      'password'          => new sfValidatorPass(array('required' => false)),
       'name'              => new sfValidatorPass(array('required' => false)),
       'father_name'       => new sfValidatorPass(array('required' => false)),
       'dob'               => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
@@ -73,6 +77,8 @@ class BasePatientFormFilter extends BaseFormFilterPropel
       'id'                => 'Number',
       'id_number'         => 'Text',
       'cnic'              => 'Text',
+      'username'          => 'Text',
+      'password'          => 'Text',
       'name'              => 'Text',
       'father_name'       => 'Text',
       'dob'               => 'Date',

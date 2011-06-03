@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Base class that represents a row from the 'department' table.
+ * Base class that represents a row from the 'duty_roster' table.
  *
  * 
  *
@@ -11,16 +11,16 @@
  *
  * @package    lib.model.om
  */
-abstract class BaseDepartment extends BaseObject  implements Persistent {
+abstract class BaseDutyRoster extends BaseObject  implements Persistent {
 
 
-  const PEER = 'DepartmentPeer';
+  const PEER = 'DutyRosterPeer';
 
 	/**
 	 * The Peer class.
 	 * Instance provides a convenient way of calling static methods on a class
 	 * that calling code may not be able to identify.
-	 * @var        DepartmentPeer
+	 * @var        DutyRosterPeer
 	 */
 	protected static $peer;
 
@@ -31,10 +31,46 @@ abstract class BaseDepartment extends BaseObject  implements Persistent {
 	protected $id;
 
 	/**
-	 * The value for the title field.
+	 * The value for the employee_id field.
+	 * @var        int
+	 */
+	protected $employee_id;
+
+	/**
+	 * The value for the duty_place_id field.
+	 * @var        int
+	 */
+	protected $duty_place_id;
+
+	/**
+	 * The value for the duty_date field.
 	 * @var        string
 	 */
-	protected $title;
+	protected $duty_date;
+
+	/**
+	 * The value for the from field.
+	 * @var        string
+	 */
+	protected $from;
+
+	/**
+	 * The value for the to field.
+	 * @var        string
+	 */
+	protected $to;
+
+	/**
+	 * The value for the present field.
+	 * @var        string
+	 */
+	protected $present;
+
+	/**
+	 * The value for the substitute_id field.
+	 * @var        int
+	 */
+	protected $substitute_id;
 
 	/**
 	 * The value for the status field.
@@ -55,24 +91,19 @@ abstract class BaseDepartment extends BaseObject  implements Persistent {
 	protected $updated_at;
 
 	/**
-	 * @var        array Designation[] Collection to store aggregation of Designation objects.
+	 * @var        Employee
 	 */
-	protected $collDesignations;
+	protected $aEmployeeRelatedByEmployeeId;
 
 	/**
-	 * @var        Criteria The criteria used to select the current contents of collDesignations.
+	 * @var        DutyPlace
 	 */
-	private $lastDesignationCriteria = null;
+	protected $aDutyPlace;
 
 	/**
-	 * @var        array Employee[] Collection to store aggregation of Employee objects.
+	 * @var        Employee
 	 */
-	protected $collEmployees;
-
-	/**
-	 * @var        Criteria The criteria used to select the current contents of collEmployees.
-	 */
-	private $lastEmployeeCriteria = null;
+	protected $aEmployeeRelatedBySubstituteId;
 
 	/**
 	 * Flag to prevent endless save loop, if this object is referenced
@@ -89,7 +120,7 @@ abstract class BaseDepartment extends BaseObject  implements Persistent {
 	protected $alreadyInValidation = false;
 
 	/**
-	 * Initializes internal state of BaseDepartment object.
+	 * Initializes internal state of BaseDutyRoster object.
 	 * @see        applyDefaults()
 	 */
 	public function __construct()
@@ -119,13 +150,101 @@ abstract class BaseDepartment extends BaseObject  implements Persistent {
 	}
 
 	/**
-	 * Get the [title] column value.
+	 * Get the [employee_id] column value.
+	 * 
+	 * @return     int
+	 */
+	public function getEmployeeId()
+	{
+		return $this->employee_id;
+	}
+
+	/**
+	 * Get the [duty_place_id] column value.
+	 * 
+	 * @return     int
+	 */
+	public function getDutyPlaceId()
+	{
+		return $this->duty_place_id;
+	}
+
+	/**
+	 * Get the [optionally formatted] temporal [duty_date] column value.
+	 * 
+	 *
+	 * @param      string $format The date/time format string (either date()-style or strftime()-style).
+	 *							If format is NULL, then the raw DateTime object will be returned.
+	 * @return     mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL, and 0 if column value is 0000-00-00
+	 * @throws     PropelException - if unable to parse/validate the date/time value.
+	 */
+	public function getDutyDate($format = 'Y-m-d')
+	{
+		if ($this->duty_date === null) {
+			return null;
+		}
+
+
+		if ($this->duty_date === '0000-00-00') {
+			// while technically this is not a default value of NULL,
+			// this seems to be closest in meaning.
+			return null;
+		} else {
+			try {
+				$dt = new DateTime($this->duty_date);
+			} catch (Exception $x) {
+				throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->duty_date, true), $x);
+			}
+		}
+
+		if ($format === null) {
+			// Because propel.useDateTimeClass is TRUE, we return a DateTime object.
+			return $dt;
+		} elseif (strpos($format, '%') !== false) {
+			return strftime($format, $dt->format('U'));
+		} else {
+			return $dt->format($format);
+		}
+	}
+
+	/**
+	 * Get the [from] column value.
 	 * 
 	 * @return     string
 	 */
-	public function getTitle()
+	public function getFrom()
 	{
-		return $this->title;
+		return $this->from;
+	}
+
+	/**
+	 * Get the [to] column value.
+	 * 
+	 * @return     string
+	 */
+	public function getTo()
+	{
+		return $this->to;
+	}
+
+	/**
+	 * Get the [present] column value.
+	 * 
+	 * @return     string
+	 */
+	public function getPresent()
+	{
+		return $this->present;
+	}
+
+	/**
+	 * Get the [substitute_id] column value.
+	 * 
+	 * @return     int
+	 */
+	public function getSubstituteId()
+	{
+		return $this->substitute_id;
 	}
 
 	/**
@@ -218,7 +337,7 @@ abstract class BaseDepartment extends BaseObject  implements Persistent {
 	 * Set the value of [id] column.
 	 * 
 	 * @param      int $v new value
-	 * @return     Department The current object (for fluent API support)
+	 * @return     DutyRoster The current object (for fluent API support)
 	 */
 	public function setId($v)
 	{
@@ -228,37 +347,198 @@ abstract class BaseDepartment extends BaseObject  implements Persistent {
 
 		if ($this->id !== $v) {
 			$this->id = $v;
-			$this->modifiedColumns[] = DepartmentPeer::ID;
+			$this->modifiedColumns[] = DutyRosterPeer::ID;
 		}
 
 		return $this;
 	} // setId()
 
 	/**
-	 * Set the value of [title] column.
+	 * Set the value of [employee_id] column.
+	 * 
+	 * @param      int $v new value
+	 * @return     DutyRoster The current object (for fluent API support)
+	 */
+	public function setEmployeeId($v)
+	{
+		if ($v !== null) {
+			$v = (int) $v;
+		}
+
+		if ($this->employee_id !== $v) {
+			$this->employee_id = $v;
+			$this->modifiedColumns[] = DutyRosterPeer::EMPLOYEE_ID;
+		}
+
+		if ($this->aEmployeeRelatedByEmployeeId !== null && $this->aEmployeeRelatedByEmployeeId->getId() !== $v) {
+			$this->aEmployeeRelatedByEmployeeId = null;
+		}
+
+		return $this;
+	} // setEmployeeId()
+
+	/**
+	 * Set the value of [duty_place_id] column.
+	 * 
+	 * @param      int $v new value
+	 * @return     DutyRoster The current object (for fluent API support)
+	 */
+	public function setDutyPlaceId($v)
+	{
+		if ($v !== null) {
+			$v = (int) $v;
+		}
+
+		if ($this->duty_place_id !== $v) {
+			$this->duty_place_id = $v;
+			$this->modifiedColumns[] = DutyRosterPeer::DUTY_PLACE_ID;
+		}
+
+		if ($this->aDutyPlace !== null && $this->aDutyPlace->getId() !== $v) {
+			$this->aDutyPlace = null;
+		}
+
+		return $this;
+	} // setDutyPlaceId()
+
+	/**
+	 * Sets the value of [duty_date] column to a normalized version of the date/time value specified.
+	 * 
+	 * @param      mixed $v string, integer (timestamp), or DateTime value.  Empty string will
+	 *						be treated as NULL for temporal objects.
+	 * @return     DutyRoster The current object (for fluent API support)
+	 */
+	public function setDutyDate($v)
+	{
+		// we treat '' as NULL for temporal objects because DateTime('') == DateTime('now')
+		// -- which is unexpected, to say the least.
+		if ($v === null || $v === '') {
+			$dt = null;
+		} elseif ($v instanceof DateTime) {
+			$dt = $v;
+		} else {
+			// some string/numeric value passed; we normalize that so that we can
+			// validate it.
+			try {
+				if (is_numeric($v)) { // if it's a unix timestamp
+					$dt = new DateTime('@'.$v, new DateTimeZone('UTC'));
+					// We have to explicitly specify and then change the time zone because of a
+					// DateTime bug: http://bugs.php.net/bug.php?id=43003
+					$dt->setTimeZone(new DateTimeZone(date_default_timezone_get()));
+				} else {
+					$dt = new DateTime($v);
+				}
+			} catch (Exception $x) {
+				throw new PropelException('Error parsing date/time value: ' . var_export($v, true), $x);
+			}
+		}
+
+		if ( $this->duty_date !== null || $dt !== null ) {
+			// (nested ifs are a little easier to read in this case)
+
+			$currNorm = ($this->duty_date !== null && $tmpDt = new DateTime($this->duty_date)) ? $tmpDt->format('Y-m-d') : null;
+			$newNorm = ($dt !== null) ? $dt->format('Y-m-d') : null;
+
+			if ( ($currNorm !== $newNorm) // normalized values don't match 
+					)
+			{
+				$this->duty_date = ($dt ? $dt->format('Y-m-d') : null);
+				$this->modifiedColumns[] = DutyRosterPeer::DUTY_DATE;
+			}
+		} // if either are not null
+
+		return $this;
+	} // setDutyDate()
+
+	/**
+	 * Set the value of [from] column.
 	 * 
 	 * @param      string $v new value
-	 * @return     Department The current object (for fluent API support)
+	 * @return     DutyRoster The current object (for fluent API support)
 	 */
-	public function setTitle($v)
+	public function setFrom($v)
 	{
 		if ($v !== null) {
 			$v = (string) $v;
 		}
 
-		if ($this->title !== $v) {
-			$this->title = $v;
-			$this->modifiedColumns[] = DepartmentPeer::TITLE;
+		if ($this->from !== $v) {
+			$this->from = $v;
+			$this->modifiedColumns[] = DutyRosterPeer::FROM;
 		}
 
 		return $this;
-	} // setTitle()
+	} // setFrom()
+
+	/**
+	 * Set the value of [to] column.
+	 * 
+	 * @param      string $v new value
+	 * @return     DutyRoster The current object (for fluent API support)
+	 */
+	public function setTo($v)
+	{
+		if ($v !== null) {
+			$v = (string) $v;
+		}
+
+		if ($this->to !== $v) {
+			$this->to = $v;
+			$this->modifiedColumns[] = DutyRosterPeer::TO;
+		}
+
+		return $this;
+	} // setTo()
+
+	/**
+	 * Set the value of [present] column.
+	 * 
+	 * @param      string $v new value
+	 * @return     DutyRoster The current object (for fluent API support)
+	 */
+	public function setPresent($v)
+	{
+		if ($v !== null) {
+			$v = (string) $v;
+		}
+
+		if ($this->present !== $v) {
+			$this->present = $v;
+			$this->modifiedColumns[] = DutyRosterPeer::PRESENT;
+		}
+
+		return $this;
+	} // setPresent()
+
+	/**
+	 * Set the value of [substitute_id] column.
+	 * 
+	 * @param      int $v new value
+	 * @return     DutyRoster The current object (for fluent API support)
+	 */
+	public function setSubstituteId($v)
+	{
+		if ($v !== null) {
+			$v = (int) $v;
+		}
+
+		if ($this->substitute_id !== $v) {
+			$this->substitute_id = $v;
+			$this->modifiedColumns[] = DutyRosterPeer::SUBSTITUTE_ID;
+		}
+
+		if ($this->aEmployeeRelatedBySubstituteId !== null && $this->aEmployeeRelatedBySubstituteId->getId() !== $v) {
+			$this->aEmployeeRelatedBySubstituteId = null;
+		}
+
+		return $this;
+	} // setSubstituteId()
 
 	/**
 	 * Set the value of [status] column.
 	 * 
 	 * @param      string $v new value
-	 * @return     Department The current object (for fluent API support)
+	 * @return     DutyRoster The current object (for fluent API support)
 	 */
 	public function setStatus($v)
 	{
@@ -268,7 +548,7 @@ abstract class BaseDepartment extends BaseObject  implements Persistent {
 
 		if ($this->status !== $v) {
 			$this->status = $v;
-			$this->modifiedColumns[] = DepartmentPeer::STATUS;
+			$this->modifiedColumns[] = DutyRosterPeer::STATUS;
 		}
 
 		return $this;
@@ -279,7 +559,7 @@ abstract class BaseDepartment extends BaseObject  implements Persistent {
 	 * 
 	 * @param      mixed $v string, integer (timestamp), or DateTime value.  Empty string will
 	 *						be treated as NULL for temporal objects.
-	 * @return     Department The current object (for fluent API support)
+	 * @return     DutyRoster The current object (for fluent API support)
 	 */
 	public function setCreatedAt($v)
 	{
@@ -316,7 +596,7 @@ abstract class BaseDepartment extends BaseObject  implements Persistent {
 					)
 			{
 				$this->created_at = ($dt ? $dt->format('Y-m-d') : null);
-				$this->modifiedColumns[] = DepartmentPeer::CREATED_AT;
+				$this->modifiedColumns[] = DutyRosterPeer::CREATED_AT;
 			}
 		} // if either are not null
 
@@ -328,7 +608,7 @@ abstract class BaseDepartment extends BaseObject  implements Persistent {
 	 * 
 	 * @param      mixed $v string, integer (timestamp), or DateTime value.  Empty string will
 	 *						be treated as NULL for temporal objects.
-	 * @return     Department The current object (for fluent API support)
+	 * @return     DutyRoster The current object (for fluent API support)
 	 */
 	public function setUpdatedAt($v)
 	{
@@ -365,7 +645,7 @@ abstract class BaseDepartment extends BaseObject  implements Persistent {
 					)
 			{
 				$this->updated_at = ($dt ? $dt->format('Y-m-d') : null);
-				$this->modifiedColumns[] = DepartmentPeer::UPDATED_AT;
+				$this->modifiedColumns[] = DutyRosterPeer::UPDATED_AT;
 			}
 		} // if either are not null
 
@@ -410,10 +690,16 @@ abstract class BaseDepartment extends BaseObject  implements Persistent {
 		try {
 
 			$this->id = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
-			$this->title = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
-			$this->status = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
-			$this->created_at = ($row[$startcol + 3] !== null) ? (string) $row[$startcol + 3] : null;
-			$this->updated_at = ($row[$startcol + 4] !== null) ? (string) $row[$startcol + 4] : null;
+			$this->employee_id = ($row[$startcol + 1] !== null) ? (int) $row[$startcol + 1] : null;
+			$this->duty_place_id = ($row[$startcol + 2] !== null) ? (int) $row[$startcol + 2] : null;
+			$this->duty_date = ($row[$startcol + 3] !== null) ? (string) $row[$startcol + 3] : null;
+			$this->from = ($row[$startcol + 4] !== null) ? (string) $row[$startcol + 4] : null;
+			$this->to = ($row[$startcol + 5] !== null) ? (string) $row[$startcol + 5] : null;
+			$this->present = ($row[$startcol + 6] !== null) ? (string) $row[$startcol + 6] : null;
+			$this->substitute_id = ($row[$startcol + 7] !== null) ? (int) $row[$startcol + 7] : null;
+			$this->status = ($row[$startcol + 8] !== null) ? (string) $row[$startcol + 8] : null;
+			$this->created_at = ($row[$startcol + 9] !== null) ? (string) $row[$startcol + 9] : null;
+			$this->updated_at = ($row[$startcol + 10] !== null) ? (string) $row[$startcol + 10] : null;
 			$this->resetModified();
 
 			$this->setNew(false);
@@ -423,10 +709,10 @@ abstract class BaseDepartment extends BaseObject  implements Persistent {
 			}
 
 			// FIXME - using NUM_COLUMNS may be clearer.
-			return $startcol + 5; // 5 = DepartmentPeer::NUM_COLUMNS - DepartmentPeer::NUM_LAZY_LOAD_COLUMNS).
+			return $startcol + 11; // 11 = DutyRosterPeer::NUM_COLUMNS - DutyRosterPeer::NUM_LAZY_LOAD_COLUMNS).
 
 		} catch (Exception $e) {
-			throw new PropelException("Error populating Department object", $e);
+			throw new PropelException("Error populating DutyRoster object", $e);
 		}
 	}
 
@@ -446,6 +732,15 @@ abstract class BaseDepartment extends BaseObject  implements Persistent {
 	public function ensureConsistency()
 	{
 
+		if ($this->aEmployeeRelatedByEmployeeId !== null && $this->employee_id !== $this->aEmployeeRelatedByEmployeeId->getId()) {
+			$this->aEmployeeRelatedByEmployeeId = null;
+		}
+		if ($this->aDutyPlace !== null && $this->duty_place_id !== $this->aDutyPlace->getId()) {
+			$this->aDutyPlace = null;
+		}
+		if ($this->aEmployeeRelatedBySubstituteId !== null && $this->substitute_id !== $this->aEmployeeRelatedBySubstituteId->getId()) {
+			$this->aEmployeeRelatedBySubstituteId = null;
+		}
 	} // ensureConsistency
 
 	/**
@@ -469,13 +764,13 @@ abstract class BaseDepartment extends BaseObject  implements Persistent {
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(DepartmentPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(DutyRosterPeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 
 		// We don't need to alter the object instance pool; we're just modifying this instance
 		// already in the pool.
 
-		$stmt = DepartmentPeer::doSelectStmt($this->buildPkeyCriteria(), $con);
+		$stmt = DutyRosterPeer::doSelectStmt($this->buildPkeyCriteria(), $con);
 		$row = $stmt->fetch(PDO::FETCH_NUM);
 		$stmt->closeCursor();
 		if (!$row) {
@@ -485,12 +780,9 @@ abstract class BaseDepartment extends BaseObject  implements Persistent {
 
 		if ($deep) {  // also de-associate any related objects?
 
-			$this->collDesignations = null;
-			$this->lastDesignationCriteria = null;
-
-			$this->collEmployees = null;
-			$this->lastEmployeeCriteria = null;
-
+			$this->aEmployeeRelatedByEmployeeId = null;
+			$this->aDutyPlace = null;
+			$this->aEmployeeRelatedBySubstituteId = null;
 		} // if (deep)
 	}
 
@@ -506,7 +798,7 @@ abstract class BaseDepartment extends BaseObject  implements Persistent {
 	public function delete(PropelPDO $con = null)
 	{
 
-    foreach (sfMixer::getCallables('BaseDepartment:delete:pre') as $callable)
+    foreach (sfMixer::getCallables('BaseDutyRoster:delete:pre') as $callable)
     {
       $ret = call_user_func($callable, $this, $con);
       if ($ret)
@@ -521,12 +813,12 @@ abstract class BaseDepartment extends BaseObject  implements Persistent {
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(DepartmentPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+			$con = Propel::getConnection(DutyRosterPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
 		
 		$con->beginTransaction();
 		try {
-			DepartmentPeer::doDelete($this, $con);
+			DutyRosterPeer::doDelete($this, $con);
 			$this->setDeleted(true);
 			$con->commit();
 		} catch (PropelException $e) {
@@ -535,7 +827,7 @@ abstract class BaseDepartment extends BaseObject  implements Persistent {
 		}
 	
 
-    foreach (sfMixer::getCallables('BaseDepartment:delete:post') as $callable)
+    foreach (sfMixer::getCallables('BaseDutyRoster:delete:post') as $callable)
     {
       call_user_func($callable, $this, $con);
     }
@@ -557,7 +849,7 @@ abstract class BaseDepartment extends BaseObject  implements Persistent {
 	public function save(PropelPDO $con = null)
 	{
 
-    foreach (sfMixer::getCallables('BaseDepartment:save:pre') as $callable)
+    foreach (sfMixer::getCallables('BaseDutyRoster:save:pre') as $callable)
     {
       $affectedRows = call_user_func($callable, $this, $con);
       if (is_int($affectedRows))
@@ -567,12 +859,12 @@ abstract class BaseDepartment extends BaseObject  implements Persistent {
     }
 
 
-    if ($this->isNew() && !$this->isColumnModified(DepartmentPeer::CREATED_AT))
+    if ($this->isNew() && !$this->isColumnModified(DutyRosterPeer::CREATED_AT))
     {
       $this->setCreatedAt(time());
     }
 
-    if ($this->isModified() && !$this->isColumnModified(DepartmentPeer::UPDATED_AT))
+    if ($this->isModified() && !$this->isColumnModified(DutyRosterPeer::UPDATED_AT))
     {
       $this->setUpdatedAt(time());
     }
@@ -582,19 +874,19 @@ abstract class BaseDepartment extends BaseObject  implements Persistent {
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(DepartmentPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+			$con = Propel::getConnection(DutyRosterPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
 		
 		$con->beginTransaction();
 		try {
 			$affectedRows = $this->doSave($con);
 			$con->commit();
-    foreach (sfMixer::getCallables('BaseDepartment:save:post') as $callable)
+    foreach (sfMixer::getCallables('BaseDutyRoster:save:post') as $callable)
     {
       call_user_func($callable, $this, $con, $affectedRows);
     }
 
-			DepartmentPeer::addInstanceToPool($this);
+			DutyRosterPeer::addInstanceToPool($this);
 			return $affectedRows;
 		} catch (PropelException $e) {
 			$con->rollBack();
@@ -619,14 +911,40 @@ abstract class BaseDepartment extends BaseObject  implements Persistent {
 		if (!$this->alreadyInSave) {
 			$this->alreadyInSave = true;
 
+			// We call the save method on the following object(s) if they
+			// were passed to this object by their coresponding set
+			// method.  This object relates to these object(s) by a
+			// foreign key reference.
+
+			if ($this->aEmployeeRelatedByEmployeeId !== null) {
+				if ($this->aEmployeeRelatedByEmployeeId->isModified() || $this->aEmployeeRelatedByEmployeeId->isNew()) {
+					$affectedRows += $this->aEmployeeRelatedByEmployeeId->save($con);
+				}
+				$this->setEmployeeRelatedByEmployeeId($this->aEmployeeRelatedByEmployeeId);
+			}
+
+			if ($this->aDutyPlace !== null) {
+				if ($this->aDutyPlace->isModified() || $this->aDutyPlace->isNew()) {
+					$affectedRows += $this->aDutyPlace->save($con);
+				}
+				$this->setDutyPlace($this->aDutyPlace);
+			}
+
+			if ($this->aEmployeeRelatedBySubstituteId !== null) {
+				if ($this->aEmployeeRelatedBySubstituteId->isModified() || $this->aEmployeeRelatedBySubstituteId->isNew()) {
+					$affectedRows += $this->aEmployeeRelatedBySubstituteId->save($con);
+				}
+				$this->setEmployeeRelatedBySubstituteId($this->aEmployeeRelatedBySubstituteId);
+			}
+
 			if ($this->isNew() ) {
-				$this->modifiedColumns[] = DepartmentPeer::ID;
+				$this->modifiedColumns[] = DutyRosterPeer::ID;
 			}
 
 			// If this object has been modified, then save it to the database.
 			if ($this->isModified()) {
 				if ($this->isNew()) {
-					$pk = DepartmentPeer::doInsert($this, $con);
+					$pk = DutyRosterPeer::doInsert($this, $con);
 					$affectedRows += 1; // we are assuming that there is only 1 row per doInsert() which
 										 // should always be true here (even though technically
 										 // BasePeer::doInsert() can insert multiple rows).
@@ -635,26 +953,10 @@ abstract class BaseDepartment extends BaseObject  implements Persistent {
 
 					$this->setNew(false);
 				} else {
-					$affectedRows += DepartmentPeer::doUpdate($this, $con);
+					$affectedRows += DutyRosterPeer::doUpdate($this, $con);
 				}
 
 				$this->resetModified(); // [HL] After being saved an object is no longer 'modified'
-			}
-
-			if ($this->collDesignations !== null) {
-				foreach ($this->collDesignations as $referrerFK) {
-					if (!$referrerFK->isDeleted()) {
-						$affectedRows += $referrerFK->save($con);
-					}
-				}
-			}
-
-			if ($this->collEmployees !== null) {
-				foreach ($this->collEmployees as $referrerFK) {
-					if (!$referrerFK->isDeleted()) {
-						$affectedRows += $referrerFK->save($con);
-					}
-				}
 			}
 
 			$this->alreadyInSave = false;
@@ -723,26 +1025,34 @@ abstract class BaseDepartment extends BaseObject  implements Persistent {
 			$failureMap = array();
 
 
-			if (($retval = DepartmentPeer::doValidate($this, $columns)) !== true) {
-				$failureMap = array_merge($failureMap, $retval);
+			// We call the validate method on the following object(s) if they
+			// were passed to this object by their coresponding set
+			// method.  This object relates to these object(s) by a
+			// foreign key reference.
+
+			if ($this->aEmployeeRelatedByEmployeeId !== null) {
+				if (!$this->aEmployeeRelatedByEmployeeId->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aEmployeeRelatedByEmployeeId->getValidationFailures());
+				}
+			}
+
+			if ($this->aDutyPlace !== null) {
+				if (!$this->aDutyPlace->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aDutyPlace->getValidationFailures());
+				}
+			}
+
+			if ($this->aEmployeeRelatedBySubstituteId !== null) {
+				if (!$this->aEmployeeRelatedBySubstituteId->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aEmployeeRelatedBySubstituteId->getValidationFailures());
+				}
 			}
 
 
-				if ($this->collDesignations !== null) {
-					foreach ($this->collDesignations as $referrerFK) {
-						if (!$referrerFK->validate($columns)) {
-							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
-						}
-					}
-				}
+			if (($retval = DutyRosterPeer::doValidate($this, $columns)) !== true) {
+				$failureMap = array_merge($failureMap, $retval);
+			}
 
-				if ($this->collEmployees !== null) {
-					foreach ($this->collEmployees as $referrerFK) {
-						if (!$referrerFK->validate($columns)) {
-							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
-						}
-					}
-				}
 
 
 			$this->alreadyInValidation = false;
@@ -762,7 +1072,7 @@ abstract class BaseDepartment extends BaseObject  implements Persistent {
 	 */
 	public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
 	{
-		$pos = DepartmentPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+		$pos = DutyRosterPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		$field = $this->getByPosition($pos);
 		return $field;
 	}
@@ -781,15 +1091,33 @@ abstract class BaseDepartment extends BaseObject  implements Persistent {
 				return $this->getId();
 				break;
 			case 1:
-				return $this->getTitle();
+				return $this->getEmployeeId();
 				break;
 			case 2:
-				return $this->getStatus();
+				return $this->getDutyPlaceId();
 				break;
 			case 3:
-				return $this->getCreatedAt();
+				return $this->getDutyDate();
 				break;
 			case 4:
+				return $this->getFrom();
+				break;
+			case 5:
+				return $this->getTo();
+				break;
+			case 6:
+				return $this->getPresent();
+				break;
+			case 7:
+				return $this->getSubstituteId();
+				break;
+			case 8:
+				return $this->getStatus();
+				break;
+			case 9:
+				return $this->getCreatedAt();
+				break;
+			case 10:
 				return $this->getUpdatedAt();
 				break;
 			default:
@@ -811,13 +1139,19 @@ abstract class BaseDepartment extends BaseObject  implements Persistent {
 	 */
 	public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true)
 	{
-		$keys = DepartmentPeer::getFieldNames($keyType);
+		$keys = DutyRosterPeer::getFieldNames($keyType);
 		$result = array(
 			$keys[0] => $this->getId(),
-			$keys[1] => $this->getTitle(),
-			$keys[2] => $this->getStatus(),
-			$keys[3] => $this->getCreatedAt(),
-			$keys[4] => $this->getUpdatedAt(),
+			$keys[1] => $this->getEmployeeId(),
+			$keys[2] => $this->getDutyPlaceId(),
+			$keys[3] => $this->getDutyDate(),
+			$keys[4] => $this->getFrom(),
+			$keys[5] => $this->getTo(),
+			$keys[6] => $this->getPresent(),
+			$keys[7] => $this->getSubstituteId(),
+			$keys[8] => $this->getStatus(),
+			$keys[9] => $this->getCreatedAt(),
+			$keys[10] => $this->getUpdatedAt(),
 		);
 		return $result;
 	}
@@ -834,7 +1168,7 @@ abstract class BaseDepartment extends BaseObject  implements Persistent {
 	 */
 	public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
 	{
-		$pos = DepartmentPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+		$pos = DutyRosterPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->setByPosition($pos, $value);
 	}
 
@@ -853,15 +1187,33 @@ abstract class BaseDepartment extends BaseObject  implements Persistent {
 				$this->setId($value);
 				break;
 			case 1:
-				$this->setTitle($value);
+				$this->setEmployeeId($value);
 				break;
 			case 2:
-				$this->setStatus($value);
+				$this->setDutyPlaceId($value);
 				break;
 			case 3:
-				$this->setCreatedAt($value);
+				$this->setDutyDate($value);
 				break;
 			case 4:
+				$this->setFrom($value);
+				break;
+			case 5:
+				$this->setTo($value);
+				break;
+			case 6:
+				$this->setPresent($value);
+				break;
+			case 7:
+				$this->setSubstituteId($value);
+				break;
+			case 8:
+				$this->setStatus($value);
+				break;
+			case 9:
+				$this->setCreatedAt($value);
+				break;
+			case 10:
 				$this->setUpdatedAt($value);
 				break;
 		} // switch()
@@ -886,13 +1238,19 @@ abstract class BaseDepartment extends BaseObject  implements Persistent {
 	 */
 	public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
 	{
-		$keys = DepartmentPeer::getFieldNames($keyType);
+		$keys = DutyRosterPeer::getFieldNames($keyType);
 
 		if (array_key_exists($keys[0], $arr)) $this->setId($arr[$keys[0]]);
-		if (array_key_exists($keys[1], $arr)) $this->setTitle($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setStatus($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setCreatedAt($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setUpdatedAt($arr[$keys[4]]);
+		if (array_key_exists($keys[1], $arr)) $this->setEmployeeId($arr[$keys[1]]);
+		if (array_key_exists($keys[2], $arr)) $this->setDutyPlaceId($arr[$keys[2]]);
+		if (array_key_exists($keys[3], $arr)) $this->setDutyDate($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setFrom($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setTo($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setPresent($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setSubstituteId($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setStatus($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setCreatedAt($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setUpdatedAt($arr[$keys[10]]);
 	}
 
 	/**
@@ -902,13 +1260,19 @@ abstract class BaseDepartment extends BaseObject  implements Persistent {
 	 */
 	public function buildCriteria()
 	{
-		$criteria = new Criteria(DepartmentPeer::DATABASE_NAME);
+		$criteria = new Criteria(DutyRosterPeer::DATABASE_NAME);
 
-		if ($this->isColumnModified(DepartmentPeer::ID)) $criteria->add(DepartmentPeer::ID, $this->id);
-		if ($this->isColumnModified(DepartmentPeer::TITLE)) $criteria->add(DepartmentPeer::TITLE, $this->title);
-		if ($this->isColumnModified(DepartmentPeer::STATUS)) $criteria->add(DepartmentPeer::STATUS, $this->status);
-		if ($this->isColumnModified(DepartmentPeer::CREATED_AT)) $criteria->add(DepartmentPeer::CREATED_AT, $this->created_at);
-		if ($this->isColumnModified(DepartmentPeer::UPDATED_AT)) $criteria->add(DepartmentPeer::UPDATED_AT, $this->updated_at);
+		if ($this->isColumnModified(DutyRosterPeer::ID)) $criteria->add(DutyRosterPeer::ID, $this->id);
+		if ($this->isColumnModified(DutyRosterPeer::EMPLOYEE_ID)) $criteria->add(DutyRosterPeer::EMPLOYEE_ID, $this->employee_id);
+		if ($this->isColumnModified(DutyRosterPeer::DUTY_PLACE_ID)) $criteria->add(DutyRosterPeer::DUTY_PLACE_ID, $this->duty_place_id);
+		if ($this->isColumnModified(DutyRosterPeer::DUTY_DATE)) $criteria->add(DutyRosterPeer::DUTY_DATE, $this->duty_date);
+		if ($this->isColumnModified(DutyRosterPeer::FROM)) $criteria->add(DutyRosterPeer::FROM, $this->from);
+		if ($this->isColumnModified(DutyRosterPeer::TO)) $criteria->add(DutyRosterPeer::TO, $this->to);
+		if ($this->isColumnModified(DutyRosterPeer::PRESENT)) $criteria->add(DutyRosterPeer::PRESENT, $this->present);
+		if ($this->isColumnModified(DutyRosterPeer::SUBSTITUTE_ID)) $criteria->add(DutyRosterPeer::SUBSTITUTE_ID, $this->substitute_id);
+		if ($this->isColumnModified(DutyRosterPeer::STATUS)) $criteria->add(DutyRosterPeer::STATUS, $this->status);
+		if ($this->isColumnModified(DutyRosterPeer::CREATED_AT)) $criteria->add(DutyRosterPeer::CREATED_AT, $this->created_at);
+		if ($this->isColumnModified(DutyRosterPeer::UPDATED_AT)) $criteria->add(DutyRosterPeer::UPDATED_AT, $this->updated_at);
 
 		return $criteria;
 	}
@@ -923,9 +1287,9 @@ abstract class BaseDepartment extends BaseObject  implements Persistent {
 	 */
 	public function buildPkeyCriteria()
 	{
-		$criteria = new Criteria(DepartmentPeer::DATABASE_NAME);
+		$criteria = new Criteria(DutyRosterPeer::DATABASE_NAME);
 
-		$criteria->add(DepartmentPeer::ID, $this->id);
+		$criteria->add(DutyRosterPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -956,40 +1320,32 @@ abstract class BaseDepartment extends BaseObject  implements Persistent {
 	 * If desired, this method can also make copies of all associated (fkey referrers)
 	 * objects.
 	 *
-	 * @param      object $copyObj An object of Department (or compatible) type.
+	 * @param      object $copyObj An object of DutyRoster (or compatible) type.
 	 * @param      boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
 	 * @throws     PropelException
 	 */
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
-		$copyObj->setTitle($this->title);
+		$copyObj->setEmployeeId($this->employee_id);
+
+		$copyObj->setDutyPlaceId($this->duty_place_id);
+
+		$copyObj->setDutyDate($this->duty_date);
+
+		$copyObj->setFrom($this->from);
+
+		$copyObj->setTo($this->to);
+
+		$copyObj->setPresent($this->present);
+
+		$copyObj->setSubstituteId($this->substitute_id);
 
 		$copyObj->setStatus($this->status);
 
 		$copyObj->setCreatedAt($this->created_at);
 
 		$copyObj->setUpdatedAt($this->updated_at);
-
-
-		if ($deepCopy) {
-			// important: temporarily setNew(false) because this affects the behavior of
-			// the getter/setter methods for fkey referrer objects.
-			$copyObj->setNew(false);
-
-			foreach ($this->getDesignations() as $relObj) {
-				if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
-					$copyObj->addDesignation($relObj->copy($deepCopy));
-				}
-			}
-
-			foreach ($this->getEmployees() as $relObj) {
-				if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
-					$copyObj->addEmployee($relObj->copy($deepCopy));
-				}
-			}
-
-		} // if ($deepCopy)
 
 
 		$copyObj->setNew(true);
@@ -1007,7 +1363,7 @@ abstract class BaseDepartment extends BaseObject  implements Persistent {
 	 * objects.
 	 *
 	 * @param      boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
-	 * @return     Department Clone of current object.
+	 * @return     DutyRoster Clone of current object.
 	 * @throws     PropelException
 	 */
 	public function copy($deepCopy = false)
@@ -1026,369 +1382,167 @@ abstract class BaseDepartment extends BaseObject  implements Persistent {
 	 * same instance for all member of this class. The method could therefore
 	 * be static, but this would prevent one from overriding the behavior.
 	 *
-	 * @return     DepartmentPeer
+	 * @return     DutyRosterPeer
 	 */
 	public function getPeer()
 	{
 		if (self::$peer === null) {
-			self::$peer = new DepartmentPeer();
+			self::$peer = new DutyRosterPeer();
 		}
 		return self::$peer;
 	}
 
 	/**
-	 * Clears out the collDesignations collection (array).
+	 * Declares an association between this object and a Employee object.
 	 *
-	 * This does not modify the database; however, it will remove any associated objects, causing
-	 * them to be refetched by subsequent calls to accessor method.
-	 *
-	 * @return     void
-	 * @see        addDesignations()
-	 */
-	public function clearDesignations()
-	{
-		$this->collDesignations = null; // important to set this to NULL since that means it is uninitialized
-	}
-
-	/**
-	 * Initializes the collDesignations collection (array).
-	 *
-	 * By default this just sets the collDesignations collection to an empty array (like clearcollDesignations());
-	 * however, you may wish to override this method in your stub class to provide setting appropriate
-	 * to your application -- for example, setting the initial array to the values stored in database.
-	 *
-	 * @return     void
-	 */
-	public function initDesignations()
-	{
-		$this->collDesignations = array();
-	}
-
-	/**
-	 * Gets an array of Designation objects which contain a foreign key that references this object.
-	 *
-	 * If this collection has already been initialized with an identical Criteria, it returns the collection.
-	 * Otherwise if this Department has previously been saved, it will retrieve
-	 * related Designations from storage. If this Department is new, it will return
-	 * an empty collection or the current collection, the criteria is ignored on a new object.
-	 *
-	 * @param      PropelPDO $con
-	 * @param      Criteria $criteria
-	 * @return     array Designation[]
+	 * @param      Employee $v
+	 * @return     DutyRoster The current object (for fluent API support)
 	 * @throws     PropelException
 	 */
-	public function getDesignations($criteria = null, PropelPDO $con = null)
+	public function setEmployeeRelatedByEmployeeId(Employee $v = null)
 	{
-		if ($criteria === null) {
-			$criteria = new Criteria(DepartmentPeer::DATABASE_NAME);
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collDesignations === null) {
-			if ($this->isNew()) {
-			   $this->collDesignations = array();
-			} else {
-
-				$criteria->add(DesignationPeer::DEPARTMENT_ID, $this->id);
-
-				DesignationPeer::addSelectColumns($criteria);
-				$this->collDesignations = DesignationPeer::doSelect($criteria, $con);
-			}
+		if ($v === null) {
+			$this->setEmployeeId(NULL);
 		} else {
-			// criteria has no effect for a new object
-			if (!$this->isNew()) {
-				// the following code is to determine if a new query is
-				// called for.  If the criteria is the same as the last
-				// one, just return the collection.
-
-
-				$criteria->add(DesignationPeer::DEPARTMENT_ID, $this->id);
-
-				DesignationPeer::addSelectColumns($criteria);
-				if (!isset($this->lastDesignationCriteria) || !$this->lastDesignationCriteria->equals($criteria)) {
-					$this->collDesignations = DesignationPeer::doSelect($criteria, $con);
-				}
-			}
+			$this->setEmployeeId($v->getId());
 		}
-		$this->lastDesignationCriteria = $criteria;
-		return $this->collDesignations;
+
+		$this->aEmployeeRelatedByEmployeeId = $v;
+
+		// Add binding for other direction of this n:n relationship.
+		// If this object has already been added to the Employee object, it will not be re-added.
+		if ($v !== null) {
+			$v->addDutyRosterRelatedByEmployeeId($this);
+		}
+
+		return $this;
 	}
 
+
 	/**
-	 * Returns the number of related Designation objects.
+	 * Get the associated Employee object
 	 *
-	 * @param      Criteria $criteria
-	 * @param      boolean $distinct
-	 * @param      PropelPDO $con
-	 * @return     int Count of related Designation objects.
+	 * @param      PropelPDO Optional Connection object.
+	 * @return     Employee The associated Employee object.
 	 * @throws     PropelException
 	 */
-	public function countDesignations(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
+	public function getEmployeeRelatedByEmployeeId(PropelPDO $con = null)
 	{
-		if ($criteria === null) {
-			$criteria = new Criteria(DepartmentPeer::DATABASE_NAME);
-		} else {
-			$criteria = clone $criteria;
+		if ($this->aEmployeeRelatedByEmployeeId === null && ($this->employee_id !== null)) {
+			$c = new Criteria(EmployeePeer::DATABASE_NAME);
+			$c->add(EmployeePeer::ID, $this->employee_id);
+			$this->aEmployeeRelatedByEmployeeId = EmployeePeer::doSelectOne($c, $con);
+			/* The following can be used additionally to
+			   guarantee the related object contains a reference
+			   to this object.  This level of coupling may, however, be
+			   undesirable since it could result in an only partially populated collection
+			   in the referenced object.
+			   $this->aEmployeeRelatedByEmployeeId->addDutyRostersRelatedByEmployeeId($this);
+			 */
 		}
-
-		if ($distinct) {
-			$criteria->setDistinct();
-		}
-
-		$count = null;
-
-		if ($this->collDesignations === null) {
-			if ($this->isNew()) {
-				$count = 0;
-			} else {
-
-				$criteria->add(DesignationPeer::DEPARTMENT_ID, $this->id);
-
-				$count = DesignationPeer::doCount($criteria, $con);
-			}
-		} else {
-			// criteria has no effect for a new object
-			if (!$this->isNew()) {
-				// the following code is to determine if a new query is
-				// called for.  If the criteria is the same as the last
-				// one, just return count of the collection.
-
-
-				$criteria->add(DesignationPeer::DEPARTMENT_ID, $this->id);
-
-				if (!isset($this->lastDesignationCriteria) || !$this->lastDesignationCriteria->equals($criteria)) {
-					$count = DesignationPeer::doCount($criteria, $con);
-				} else {
-					$count = count($this->collDesignations);
-				}
-			} else {
-				$count = count($this->collDesignations);
-			}
-		}
-		return $count;
+		return $this->aEmployeeRelatedByEmployeeId;
 	}
 
 	/**
-	 * Method called to associate a Designation object to this object
-	 * through the Designation foreign key attribute.
+	 * Declares an association between this object and a DutyPlace object.
 	 *
-	 * @param      Designation $l Designation
-	 * @return     void
+	 * @param      DutyPlace $v
+	 * @return     DutyRoster The current object (for fluent API support)
 	 * @throws     PropelException
 	 */
-	public function addDesignation(Designation $l)
+	public function setDutyPlace(DutyPlace $v = null)
 	{
-		if ($this->collDesignations === null) {
-			$this->initDesignations();
+		if ($v === null) {
+			$this->setDutyPlaceId(NULL);
+		} else {
+			$this->setDutyPlaceId($v->getId());
 		}
-		if (!in_array($l, $this->collDesignations, true)) { // only add it if the **same** object is not already associated
-			array_push($this->collDesignations, $l);
-			$l->setDepartment($this);
+
+		$this->aDutyPlace = $v;
+
+		// Add binding for other direction of this n:n relationship.
+		// If this object has already been added to the DutyPlace object, it will not be re-added.
+		if ($v !== null) {
+			$v->addDutyRoster($this);
 		}
+
+		return $this;
 	}
 
-	/**
-	 * Clears out the collEmployees collection (array).
-	 *
-	 * This does not modify the database; however, it will remove any associated objects, causing
-	 * them to be refetched by subsequent calls to accessor method.
-	 *
-	 * @return     void
-	 * @see        addEmployees()
-	 */
-	public function clearEmployees()
-	{
-		$this->collEmployees = null; // important to set this to NULL since that means it is uninitialized
-	}
 
 	/**
-	 * Initializes the collEmployees collection (array).
+	 * Get the associated DutyPlace object
 	 *
-	 * By default this just sets the collEmployees collection to an empty array (like clearcollEmployees());
-	 * however, you may wish to override this method in your stub class to provide setting appropriate
-	 * to your application -- for example, setting the initial array to the values stored in database.
-	 *
-	 * @return     void
-	 */
-	public function initEmployees()
-	{
-		$this->collEmployees = array();
-	}
-
-	/**
-	 * Gets an array of Employee objects which contain a foreign key that references this object.
-	 *
-	 * If this collection has already been initialized with an identical Criteria, it returns the collection.
-	 * Otherwise if this Department has previously been saved, it will retrieve
-	 * related Employees from storage. If this Department is new, it will return
-	 * an empty collection or the current collection, the criteria is ignored on a new object.
-	 *
-	 * @param      PropelPDO $con
-	 * @param      Criteria $criteria
-	 * @return     array Employee[]
+	 * @param      PropelPDO Optional Connection object.
+	 * @return     DutyPlace The associated DutyPlace object.
 	 * @throws     PropelException
 	 */
-	public function getEmployees($criteria = null, PropelPDO $con = null)
+	public function getDutyPlace(PropelPDO $con = null)
 	{
-		if ($criteria === null) {
-			$criteria = new Criteria(DepartmentPeer::DATABASE_NAME);
+		if ($this->aDutyPlace === null && ($this->duty_place_id !== null)) {
+			$c = new Criteria(DutyPlacePeer::DATABASE_NAME);
+			$c->add(DutyPlacePeer::ID, $this->duty_place_id);
+			$this->aDutyPlace = DutyPlacePeer::doSelectOne($c, $con);
+			/* The following can be used additionally to
+			   guarantee the related object contains a reference
+			   to this object.  This level of coupling may, however, be
+			   undesirable since it could result in an only partially populated collection
+			   in the referenced object.
+			   $this->aDutyPlace->addDutyRosters($this);
+			 */
 		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collEmployees === null) {
-			if ($this->isNew()) {
-			   $this->collEmployees = array();
-			} else {
-
-				$criteria->add(EmployeePeer::DEPARTMENT_ID, $this->id);
-
-				EmployeePeer::addSelectColumns($criteria);
-				$this->collEmployees = EmployeePeer::doSelect($criteria, $con);
-			}
-		} else {
-			// criteria has no effect for a new object
-			if (!$this->isNew()) {
-				// the following code is to determine if a new query is
-				// called for.  If the criteria is the same as the last
-				// one, just return the collection.
-
-
-				$criteria->add(EmployeePeer::DEPARTMENT_ID, $this->id);
-
-				EmployeePeer::addSelectColumns($criteria);
-				if (!isset($this->lastEmployeeCriteria) || !$this->lastEmployeeCriteria->equals($criteria)) {
-					$this->collEmployees = EmployeePeer::doSelect($criteria, $con);
-				}
-			}
-		}
-		$this->lastEmployeeCriteria = $criteria;
-		return $this->collEmployees;
+		return $this->aDutyPlace;
 	}
 
 	/**
-	 * Returns the number of related Employee objects.
+	 * Declares an association between this object and a Employee object.
 	 *
-	 * @param      Criteria $criteria
-	 * @param      boolean $distinct
-	 * @param      PropelPDO $con
-	 * @return     int Count of related Employee objects.
+	 * @param      Employee $v
+	 * @return     DutyRoster The current object (for fluent API support)
 	 * @throws     PropelException
 	 */
-	public function countEmployees(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
+	public function setEmployeeRelatedBySubstituteId(Employee $v = null)
 	{
-		if ($criteria === null) {
-			$criteria = new Criteria(DepartmentPeer::DATABASE_NAME);
+		if ($v === null) {
+			$this->setSubstituteId(NULL);
 		} else {
-			$criteria = clone $criteria;
+			$this->setSubstituteId($v->getId());
 		}
 
-		if ($distinct) {
-			$criteria->setDistinct();
+		$this->aEmployeeRelatedBySubstituteId = $v;
+
+		// Add binding for other direction of this n:n relationship.
+		// If this object has already been added to the Employee object, it will not be re-added.
+		if ($v !== null) {
+			$v->addDutyRosterRelatedBySubstituteId($this);
 		}
 
-		$count = null;
-
-		if ($this->collEmployees === null) {
-			if ($this->isNew()) {
-				$count = 0;
-			} else {
-
-				$criteria->add(EmployeePeer::DEPARTMENT_ID, $this->id);
-
-				$count = EmployeePeer::doCount($criteria, $con);
-			}
-		} else {
-			// criteria has no effect for a new object
-			if (!$this->isNew()) {
-				// the following code is to determine if a new query is
-				// called for.  If the criteria is the same as the last
-				// one, just return count of the collection.
-
-
-				$criteria->add(EmployeePeer::DEPARTMENT_ID, $this->id);
-
-				if (!isset($this->lastEmployeeCriteria) || !$this->lastEmployeeCriteria->equals($criteria)) {
-					$count = EmployeePeer::doCount($criteria, $con);
-				} else {
-					$count = count($this->collEmployees);
-				}
-			} else {
-				$count = count($this->collEmployees);
-			}
-		}
-		return $count;
+		return $this;
 	}
 
+
 	/**
-	 * Method called to associate a Employee object to this object
-	 * through the Employee foreign key attribute.
+	 * Get the associated Employee object
 	 *
-	 * @param      Employee $l Employee
-	 * @return     void
+	 * @param      PropelPDO Optional Connection object.
+	 * @return     Employee The associated Employee object.
 	 * @throws     PropelException
 	 */
-	public function addEmployee(Employee $l)
+	public function getEmployeeRelatedBySubstituteId(PropelPDO $con = null)
 	{
-		if ($this->collEmployees === null) {
-			$this->initEmployees();
+		if ($this->aEmployeeRelatedBySubstituteId === null && ($this->substitute_id !== null)) {
+			$c = new Criteria(EmployeePeer::DATABASE_NAME);
+			$c->add(EmployeePeer::ID, $this->substitute_id);
+			$this->aEmployeeRelatedBySubstituteId = EmployeePeer::doSelectOne($c, $con);
+			/* The following can be used additionally to
+			   guarantee the related object contains a reference
+			   to this object.  This level of coupling may, however, be
+			   undesirable since it could result in an only partially populated collection
+			   in the referenced object.
+			   $this->aEmployeeRelatedBySubstituteId->addDutyRostersRelatedBySubstituteId($this);
+			 */
 		}
-		if (!in_array($l, $this->collEmployees, true)) { // only add it if the **same** object is not already associated
-			array_push($this->collEmployees, $l);
-			$l->setDepartment($this);
-		}
-	}
-
-
-	/**
-	 * If this collection has already been initialized with
-	 * an identical criteria, it returns the collection.
-	 * Otherwise if this Department is new, it will return
-	 * an empty collection; or if this Department has previously
-	 * been saved, it will retrieve related Employees from storage.
-	 *
-	 * This method is protected by default in order to keep the public
-	 * api reasonable.  You can provide public methods for those you
-	 * actually need in Department.
-	 */
-	public function getEmployeesJoinDesignation($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
-	{
-		if ($criteria === null) {
-			$criteria = new Criteria(DepartmentPeer::DATABASE_NAME);
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collEmployees === null) {
-			if ($this->isNew()) {
-				$this->collEmployees = array();
-			} else {
-
-				$criteria->add(EmployeePeer::DEPARTMENT_ID, $this->id);
-
-				$this->collEmployees = EmployeePeer::doSelectJoinDesignation($criteria, $con, $join_behavior);
-			}
-		} else {
-			// the following code is to determine if a new query is
-			// called for.  If the criteria is the same as the last
-			// one, just return the collection.
-
-			$criteria->add(EmployeePeer::DEPARTMENT_ID, $this->id);
-
-			if (!isset($this->lastEmployeeCriteria) || !$this->lastEmployeeCriteria->equals($criteria)) {
-				$this->collEmployees = EmployeePeer::doSelectJoinDesignation($criteria, $con, $join_behavior);
-			}
-		}
-		$this->lastEmployeeCriteria = $criteria;
-
-		return $this->collEmployees;
+		return $this->aEmployeeRelatedBySubstituteId;
 	}
 
 	/**
@@ -1403,28 +1557,19 @@ abstract class BaseDepartment extends BaseObject  implements Persistent {
 	public function clearAllReferences($deep = false)
 	{
 		if ($deep) {
-			if ($this->collDesignations) {
-				foreach ((array) $this->collDesignations as $o) {
-					$o->clearAllReferences($deep);
-				}
-			}
-			if ($this->collEmployees) {
-				foreach ((array) $this->collEmployees as $o) {
-					$o->clearAllReferences($deep);
-				}
-			}
 		} // if ($deep)
 
-		$this->collDesignations = null;
-		$this->collEmployees = null;
+			$this->aEmployeeRelatedByEmployeeId = null;
+			$this->aDutyPlace = null;
+			$this->aEmployeeRelatedBySubstituteId = null;
 	}
 
 
   public function __call($method, $arguments)
   {
-    if (!$callable = sfMixer::getCallable('BaseDepartment:'.$method))
+    if (!$callable = sfMixer::getCallable('BaseDutyRoster:'.$method))
     {
-      throw new sfException(sprintf('Call to undefined method BaseDepartment::%s', $method));
+      throw new sfException(sprintf('Call to undefined method BaseDutyRoster::%s', $method));
     }
 
     array_unshift($arguments, $this);
@@ -1433,4 +1578,4 @@ abstract class BaseDepartment extends BaseObject  implements Persistent {
   }
 
 
-} // BaseDepartment
+} // BaseDutyRoster
