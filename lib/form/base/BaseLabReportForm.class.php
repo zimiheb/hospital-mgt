@@ -13,9 +13,9 @@ class BaseLabReportForm extends BaseFormPropel
   {
     $this->setWidgets(array(
       'id'          => new sfWidgetFormInputHidden(),
-      'patient_id'  => new sfWidgetFormInput(),
-      'visit_id'    => new sfWidgetFormInput(),
-      'lab_test_id' => new sfWidgetFormInput(),
+      'patient_id'  => new sfWidgetFormPropelChoice(array('model' => 'Patient', 'add_empty' => true)),
+      'visit_id'    => new sfWidgetFormPropelChoice(array('model' => 'Visit', 'add_empty' => true)),
+      'lab_test_id' => new sfWidgetFormPropelChoice(array('model' => 'LabTest', 'add_empty' => true)),
       'description' => new sfWidgetFormInput(),
       'status'      => new sfWidgetFormInput(),
       'created_at'  => new sfWidgetFormDate(),
@@ -24,9 +24,9 @@ class BaseLabReportForm extends BaseFormPropel
 
     $this->setValidators(array(
       'id'          => new sfValidatorPropelChoice(array('model' => 'LabReport', 'column' => 'id', 'required' => false)),
-      'patient_id'  => new sfValidatorInteger(array('required' => false)),
-      'visit_id'    => new sfValidatorInteger(array('required' => false)),
-      'lab_test_id' => new sfValidatorInteger(array('required' => false)),
+      'patient_id'  => new sfValidatorPropelChoice(array('model' => 'Patient', 'column' => 'id', 'required' => false)),
+      'visit_id'    => new sfValidatorPropelChoice(array('model' => 'Visit', 'column' => 'id', 'required' => false)),
+      'lab_test_id' => new sfValidatorPropelChoice(array('model' => 'LabTest', 'column' => 'id', 'required' => false)),
       'description' => new sfValidatorString(array('max_length' => 1024, 'required' => false)),
       'status'      => new sfValidatorString(array('max_length' => 10, 'required' => false)),
       'created_at'  => new sfValidatorDate(array('required' => false)),

@@ -26,6 +26,20 @@ propel:
     status: { type: VARCHAR, size: '10', required: false }
     created_at: { type: DATE, required: false }
     updated_at: { type: DATE, required: false }
+  duty_roster:
+    _attributes: { phpName: DutyRoster }
+    id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }
+    employee_id: { type: INTEGER, size: '11', required: false, foreignTable: employee, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    duty_place_id: { type: INTEGER, size: '11', required: false, foreignTable: duty_place, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    duty_date: { type: DATE, required: false }
+    from: { type: VARCHAR, size: '10', required: false }
+    to: { type: VARCHAR, size: '10', required: false }
+    present: { type: VARCHAR, size: '5', required: false }
+    substitute_id: { type: INTEGER, size: '11', required: false, foreignTable: employee, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    status: { type: VARCHAR, size: '10', required: false }
+    created_at: { type: DATE, required: false }
+    updated_at: { type: DATE, required: false }
+    _indexes: { FK_duty_roster_employee: [employee_id], FK_duty_roster_place: [duty_place_id], FK_duty_roster_substitute: [substitute_id] }
   employee:
     _attributes: { phpName: Employee }
     id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }
@@ -51,13 +65,14 @@ propel:
   lab_report:
     _attributes: { phpName: LabReport }
     id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }
-    patient_id: { type: INTEGER, size: '11', required: false }
-    visit_id: { type: INTEGER, size: '11', required: false }
-    lab_test_id: { type: INTEGER, size: '11', required: false }
+    patient_id: { type: INTEGER, size: '11', required: false, foreignTable: patient, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    visit_id: { type: INTEGER, size: '11', required: false, foreignTable: visit, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    lab_test_id: { type: INTEGER, size: '11', required: false, foreignTable: lab_test, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
     description: { type: VARCHAR, size: '1024', required: false }
     status: { type: VARCHAR, size: '10', required: false }
     created_at: { type: DATE, required: false }
     updated_at: { type: DATE, required: false }
+    _indexes: { FK_lab_report_patient: [patient_id], FK_lab_report_visit: [visit_id], FK_lab_report_lab_test: [lab_test_id] }
   lab_test:
     _attributes: { phpName: LabTest }
     id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }
@@ -71,6 +86,8 @@ propel:
     id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }
     id_number: { type: VARCHAR, size: '20', required: false }
     cnic: { type: VARCHAR, size: '25', required: false }
+    username: { type: VARCHAR, size: '50', required: false }
+    password: { type: VARCHAR, size: '50', required: false }
     name: { type: VARCHAR, size: '100', required: false }
     father_name: { type: VARCHAR, size: '50', required: false }
     dob: { type: DATE, required: false }
@@ -110,10 +127,10 @@ propel:
   visit:
     _attributes: { phpName: Visit }
     id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }
-    patient_id: { type: INTEGER, size: '11', required: false }
-    doctor_id: { type: INTEGER, size: '11', required: false }
-    ward_bed_id: { type: INTEGER, size: '11', required: false }
-    ward_doc_id: { type: INTEGER, size: '11', required: false }
+    patient_id: { type: INTEGER, size: '11', required: false, foreignTable: patient, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    doctor_id: { type: INTEGER, size: '11', required: false, foreignTable: employee, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    ward_bed_id: { type: INTEGER, size: '11', required: false, foreignTable: ward_bed, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    ward_doc_id: { type: INTEGER, size: '11', required: false, foreignTable: employee, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
     visit_type: { type: VARCHAR, size: '10', required: false }
     medicine: { type: VARCHAR, size: '500', required: false }
     bp: { type: VARCHAR, size: '10', required: false }
@@ -127,6 +144,7 @@ propel:
     status: { type: VARCHAR, size: '10', required: false }
     created_at: { type: DATE, required: false }
     updated_at: { type: DATE, required: false }
+    _indexes: { FK_visit_patient: [patient_id], FK_visit_doctor: [doctor_id], FK_visit_ward_bed: [ward_bed_id], FK_visit_ward_doc: [ward_doc_id] }
   ward:
     _attributes: { phpName: Ward }
     id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }

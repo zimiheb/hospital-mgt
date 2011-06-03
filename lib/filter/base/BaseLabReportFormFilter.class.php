@@ -14,9 +14,9 @@ class BaseLabReportFormFilter extends BaseFormFilterPropel
   public function setup()
   {
     $this->setWidgets(array(
-      'patient_id'  => new sfWidgetFormFilterInput(),
-      'visit_id'    => new sfWidgetFormFilterInput(),
-      'lab_test_id' => new sfWidgetFormFilterInput(),
+      'patient_id'  => new sfWidgetFormPropelChoice(array('model' => 'Patient', 'add_empty' => true)),
+      'visit_id'    => new sfWidgetFormPropelChoice(array('model' => 'Visit', 'add_empty' => true)),
+      'lab_test_id' => new sfWidgetFormPropelChoice(array('model' => 'LabTest', 'add_empty' => true)),
       'description' => new sfWidgetFormFilterInput(),
       'status'      => new sfWidgetFormFilterInput(),
       'created_at'  => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => true)),
@@ -24,9 +24,9 @@ class BaseLabReportFormFilter extends BaseFormFilterPropel
     ));
 
     $this->setValidators(array(
-      'patient_id'  => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
-      'visit_id'    => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
-      'lab_test_id' => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'patient_id'  => new sfValidatorPropelChoice(array('required' => false, 'model' => 'Patient', 'column' => 'id')),
+      'visit_id'    => new sfValidatorPropelChoice(array('required' => false, 'model' => 'Visit', 'column' => 'id')),
+      'lab_test_id' => new sfValidatorPropelChoice(array('required' => false, 'model' => 'LabTest', 'column' => 'id')),
       'description' => new sfValidatorPass(array('required' => false)),
       'status'      => new sfValidatorPass(array('required' => false)),
       'created_at'  => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
@@ -49,9 +49,9 @@ class BaseLabReportFormFilter extends BaseFormFilterPropel
   {
     return array(
       'id'          => 'Number',
-      'patient_id'  => 'Number',
-      'visit_id'    => 'Number',
-      'lab_test_id' => 'Number',
+      'patient_id'  => 'ForeignKey',
+      'visit_id'    => 'ForeignKey',
+      'lab_test_id' => 'ForeignKey',
       'description' => 'Text',
       'status'      => 'Text',
       'created_at'  => 'Date',

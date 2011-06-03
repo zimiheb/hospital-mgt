@@ -13,10 +13,10 @@ class BaseVisitForm extends BaseFormPropel
   {
     $this->setWidgets(array(
       'id'          => new sfWidgetFormInputHidden(),
-      'patient_id'  => new sfWidgetFormInput(),
-      'doctor_id'   => new sfWidgetFormInput(),
-      'ward_bed_id' => new sfWidgetFormInput(),
-      'ward_doc_id' => new sfWidgetFormInput(),
+      'patient_id'  => new sfWidgetFormPropelChoice(array('model' => 'Patient', 'add_empty' => true)),
+      'doctor_id'   => new sfWidgetFormPropelChoice(array('model' => 'Employee', 'add_empty' => true)),
+      'ward_bed_id' => new sfWidgetFormPropelChoice(array('model' => 'WardBed', 'add_empty' => true)),
+      'ward_doc_id' => new sfWidgetFormPropelChoice(array('model' => 'Employee', 'add_empty' => true)),
       'visit_type'  => new sfWidgetFormInput(),
       'medicine'    => new sfWidgetFormInput(),
       'bp'          => new sfWidgetFormInput(),
@@ -34,10 +34,10 @@ class BaseVisitForm extends BaseFormPropel
 
     $this->setValidators(array(
       'id'          => new sfValidatorPropelChoice(array('model' => 'Visit', 'column' => 'id', 'required' => false)),
-      'patient_id'  => new sfValidatorInteger(array('required' => false)),
-      'doctor_id'   => new sfValidatorInteger(array('required' => false)),
-      'ward_bed_id' => new sfValidatorInteger(array('required' => false)),
-      'ward_doc_id' => new sfValidatorInteger(array('required' => false)),
+      'patient_id'  => new sfValidatorPropelChoice(array('model' => 'Patient', 'column' => 'id', 'required' => false)),
+      'doctor_id'   => new sfValidatorPropelChoice(array('model' => 'Employee', 'column' => 'id', 'required' => false)),
+      'ward_bed_id' => new sfValidatorPropelChoice(array('model' => 'WardBed', 'column' => 'id', 'required' => false)),
+      'ward_doc_id' => new sfValidatorPropelChoice(array('model' => 'Employee', 'column' => 'id', 'required' => false)),
       'visit_type'  => new sfValidatorString(array('max_length' => 10, 'required' => false)),
       'medicine'    => new sfValidatorString(array('max_length' => 500, 'required' => false)),
       'bp'          => new sfValidatorString(array('max_length' => 10, 'required' => false)),

@@ -14,10 +14,10 @@ class BaseVisitFormFilter extends BaseFormFilterPropel
   public function setup()
   {
     $this->setWidgets(array(
-      'patient_id'  => new sfWidgetFormFilterInput(),
-      'doctor_id'   => new sfWidgetFormFilterInput(),
-      'ward_bed_id' => new sfWidgetFormFilterInput(),
-      'ward_doc_id' => new sfWidgetFormFilterInput(),
+      'patient_id'  => new sfWidgetFormPropelChoice(array('model' => 'Patient', 'add_empty' => true)),
+      'doctor_id'   => new sfWidgetFormPropelChoice(array('model' => 'Employee', 'add_empty' => true)),
+      'ward_bed_id' => new sfWidgetFormPropelChoice(array('model' => 'WardBed', 'add_empty' => true)),
+      'ward_doc_id' => new sfWidgetFormPropelChoice(array('model' => 'Employee', 'add_empty' => true)),
       'visit_type'  => new sfWidgetFormFilterInput(),
       'medicine'    => new sfWidgetFormFilterInput(),
       'bp'          => new sfWidgetFormFilterInput(),
@@ -34,10 +34,10 @@ class BaseVisitFormFilter extends BaseFormFilterPropel
     ));
 
     $this->setValidators(array(
-      'patient_id'  => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
-      'doctor_id'   => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
-      'ward_bed_id' => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
-      'ward_doc_id' => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'patient_id'  => new sfValidatorPropelChoice(array('required' => false, 'model' => 'Patient', 'column' => 'id')),
+      'doctor_id'   => new sfValidatorPropelChoice(array('required' => false, 'model' => 'Employee', 'column' => 'id')),
+      'ward_bed_id' => new sfValidatorPropelChoice(array('required' => false, 'model' => 'WardBed', 'column' => 'id')),
+      'ward_doc_id' => new sfValidatorPropelChoice(array('required' => false, 'model' => 'Employee', 'column' => 'id')),
       'visit_type'  => new sfValidatorPass(array('required' => false)),
       'medicine'    => new sfValidatorPass(array('required' => false)),
       'bp'          => new sfValidatorPass(array('required' => false)),
@@ -69,10 +69,10 @@ class BaseVisitFormFilter extends BaseFormFilterPropel
   {
     return array(
       'id'          => 'Number',
-      'patient_id'  => 'Number',
-      'doctor_id'   => 'Number',
-      'ward_bed_id' => 'Number',
-      'ward_doc_id' => 'Number',
+      'patient_id'  => 'ForeignKey',
+      'doctor_id'   => 'ForeignKey',
+      'ward_bed_id' => 'ForeignKey',
+      'ward_doc_id' => 'ForeignKey',
       'visit_type'  => 'Text',
       'medicine'    => 'Text',
       'bp'          => 'Text',

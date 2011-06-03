@@ -6,7 +6,7 @@
 <div id="main_content">
 	<div class="box_content">
 	<div class="box_title">
-	<h2><span class="dark_blue">Edit Staff Duty Information</span></h2>
+	<h2><span class="dark_blue">Edit a Duty Place</span></h2>
 	</div>
 	<div class="box_text_content">
 	<div class="box_text">
@@ -14,7 +14,7 @@
 <table width="100%" cellpadding="0" cellspacing="0"  align="left" border="0">
 
   <tr>
-    <td width="16%" height="30">Duty Type:<span class="error"> *</span> </td>
+    <td width="16%" height="30">Place Name:<span class="error"> *</span> </td>
     <td width="84%" height="30"><?php echo input_tag ('title', $duty_place->getTitle(),'size=38'); ?>
 	<script type="text/javascript">
 	var title = new LiveValidation('title', { validMessage: "<?php echo Constant::VALIDATION_SUCCESS; ?>"});

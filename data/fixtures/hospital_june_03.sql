@@ -1,6 +1,6 @@
 -- DBTools Manager Professional (Enterprise Edition)
 -- Database Dump for: hospital
--- Backup Generated in: 5/28/2011 6:52:54 PM
+-- Backup Generated in: 6/3/2011 6:45:02 AM
 -- Database Server Version: MySQL 5.1.33
 
 -- USEGO
@@ -61,7 +61,7 @@ BEGIN;
 -- GO
 INSERT INTO `designation` (`id`, `department_id`, `title`, `status`, `created_at`, `updated_at`) VALUES(1, 1, 'Surgen...', '1', '2011-05-11', '2011-05-11');
 -- GO
-INSERT INTO `designation` (`id`, `department_id`, `title`, `status`, `created_at`, `updated_at`) VALUES(2, 2, 'Receptionist', '1', '2011-05-17', '2011-05-17');
+INSERT INTO `designation` (`id`, `department_id`, `title`, `status`, `created_at`, `updated_at`) VALUES(2, 2, 'Receptionist', '1', '2011-05-17', '2011-06-03');
 -- GO
 COMMIT;
 -- GO
@@ -92,7 +92,63 @@ CREATE TABLE `duty_place`
 --
 BEGIN;
 -- GO
+INSERT INTO `duty_place` (`id`, `title`, `description`, `status`, `created_at`, `updated_at`) VALUES(1, 'Reception', NULL, '1', '2011-06-03', '2011-06-03');
+-- GO
+INSERT INTO `duty_place` (`id`, `title`, `description`, `status`, `created_at`, `updated_at`) VALUES(2, 'Emergency Room', NULL, '1', '2011-06-03', '2011-06-03');
+-- GO
+INSERT INTO `duty_place` (`id`, `title`, `description`, `status`, `created_at`, `updated_at`) VALUES(3, 'Trauma Center', NULL, '1', '2011-06-03', '2011-06-03');
+-- GO
 COMMIT;
+-- GO
+
+--
+-- Table: duty_roster
+--
+CREATE TABLE `duty_roster` 
+(
+	`id` integer (11) NOT NULL AUTO_INCREMENT , 
+	`employee_id` integer (11), 
+	`duty_place_id` integer (11), 
+	`duty_date` date, 
+	`from` varchar (10), 
+	`to` varchar (10), 
+	`present` varchar (5), 
+	`substitute_id` integer (11), 
+	`status` varchar (10), 
+	`created_at` date, 
+	`updated_at` date,
+	PRIMARY KEY (`id`)
+) TYPE=InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
+-- GO
+
+--
+-- Dumping Table Data: duty_roster
+--
+BEGIN;
+-- GO
+INSERT INTO `duty_roster` (`id`, `employee_id`, `duty_place_id`, `duty_date`, `from`, `to`, `present`, `substitute_id`, `status`, `created_at`, `updated_at`) VALUES(1, 1, 1, '2011-06-03', '0730', '1400', NULL, 2, '1', '2011-06-03', '2011-06-03');
+-- GO
+INSERT INTO `duty_roster` (`id`, `employee_id`, `duty_place_id`, `duty_date`, `from`, `to`, `present`, `substitute_id`, `status`, `created_at`, `updated_at`) VALUES(2, 3, 2, '2011-06-03', '0730', '1400', NULL, 2, '1', '2011-06-03', '2011-06-03');
+-- GO
+COMMIT;
+-- GO
+
+--
+-- Index: FK_duty_roster_employee
+--
+ALTER TABLE `hospital`.`duty_roster` ADD INDEX `FK_duty_roster_employee` (`employee_id` );
+-- GO
+
+--
+-- Index: FK_duty_roster_place
+--
+ALTER TABLE `hospital`.`duty_roster` ADD INDEX `FK_duty_roster_place` (`duty_place_id` );
+-- GO
+
+--
+-- Index: FK_duty_roster_substitute
+--
+ALTER TABLE `hospital`.`duty_roster` ADD INDEX `FK_duty_roster_substitute` (`substitute_id` );
 -- GO
 
 --
@@ -177,6 +233,24 @@ COMMIT;
 -- GO
 
 --
+-- Index: FK_lab_report_patient
+--
+ALTER TABLE `hospital`.`lab_report` ADD INDEX `FK_lab_report_patient` (`patient_id` );
+-- GO
+
+--
+-- Index: FK_lab_report_visit
+--
+ALTER TABLE `hospital`.`lab_report` ADD INDEX `FK_lab_report_visit` (`visit_id` );
+-- GO
+
+--
+-- Index: FK_lab_report_lab_test
+--
+ALTER TABLE `hospital`.`lab_report` ADD INDEX `FK_lab_report_lab_test` (`lab_test_id` );
+-- GO
+
+--
 -- Table: lab_test
 --
 CREATE TABLE `lab_test` 
@@ -196,6 +270,8 @@ CREATE TABLE `lab_test`
 --
 BEGIN;
 -- GO
+INSERT INTO `lab_test` (`id`, `title`, `description`, `status`, `created_at`, `updated_at`) VALUES(1, 'Blood CP', NULL, '1', '2011-05-29', '2011-05-29');
+-- GO
 COMMIT;
 -- GO
 
@@ -207,6 +283,8 @@ CREATE TABLE `patient`
 	`id` integer (11) NOT NULL AUTO_INCREMENT , 
 	`id_number` varchar (20), 
 	`cnic` varchar (25), 
+	`username` varchar (50), 
+	`password` varchar (50), 
 	`name` varchar (100), 
 	`father_name` varchar (50), 
 	`dob` date, 
@@ -232,9 +310,9 @@ CREATE TABLE `patient`
 --
 BEGIN;
 -- GO
-INSERT INTO `patient` (`id`, `id_number`, `cnic`, `name`, `father_name`, `dob`, `gender`, `address`, `contact_res`, `contact_cell`, `emergency_contact`, `email`, `blood_group`, `disease`, `allergy`, `drug_allergy`, `status`, `created_at`, `updated_at`) VALUES(1, '01', '61145-5847592-5', 'Nazeer Hussain', NULL, '1985-03-08', 'Male', ' kug uy rfuy tf j h', '0515548365', '03122354618', '021835246', NULL, NULL, 'dfgdsfg dfg sdfdsf gsd fgs dfg', 'lk kjuh lk j lkj yg poitg kjh bk', ' lk hiy t hgvkj htr i ygkl ujh ploi yp', '1', '2011-05-17', '2011-05-17');
+INSERT INTO `patient` (`id`, `id_number`, `cnic`, `username`, `password`, `name`, `father_name`, `dob`, `gender`, `address`, `contact_res`, `contact_cell`, `emergency_contact`, `email`, `blood_group`, `disease`, `allergy`, `drug_allergy`, `status`, `created_at`, `updated_at`) VALUES(1, '01', '61145-5847592-5', NULL, NULL, 'Nazeer Hussain', NULL, '1985-03-08', 'Male', ' kug uy rfuy tf j h', '0515548365', '03122354618', '021835246', NULL, NULL, 'dfgdsfg dfg sdfdsf gsd fgs dfg', 'lk kjuh lk j lkj yg poitg kjh bk', ' lk hiy t hgvkj htr i ygkl ujh ploi yp', '1', '2011-05-17', '2011-05-17');
 -- GO
-INSERT INTO `patient` (`id`, `id_number`, `cnic`, `name`, `father_name`, `dob`, `gender`, `address`, `contact_res`, `contact_cell`, `emergency_contact`, `email`, `blood_group`, `disease`, `allergy`, `drug_allergy`, `status`, `created_at`, `updated_at`) VALUES(2, NULL, '514244-8528483-8', 'Shakeela Khanum', NULL, '1969-09-15', 'Female', NULL, NULL, '0333-5642147', NULL, NULL, NULL, NULL, NULL, NULL, '1', '2011-05-17', '2011-05-17');
+INSERT INTO `patient` (`id`, `id_number`, `cnic`, `username`, `password`, `name`, `father_name`, `dob`, `gender`, `address`, `contact_res`, `contact_cell`, `emergency_contact`, `email`, `blood_group`, `disease`, `allergy`, `drug_allergy`, `status`, `created_at`, `updated_at`) VALUES(2, NULL, '514244-8528483-8', NULL, NULL, 'Shakeela Khanum', NULL, '1969-09-15', 'Female', NULL, NULL, '0333-5642147', NULL, NULL, NULL, NULL, NULL, NULL, '1', '2011-05-17', '2011-05-17');
 -- GO
 COMMIT;
 -- GO
@@ -334,6 +412,30 @@ COMMIT;
 -- GO
 
 --
+-- Index: FK_visit_patient
+--
+ALTER TABLE `hospital`.`visit` ADD INDEX `FK_visit_patient` (`patient_id` );
+-- GO
+
+--
+-- Index: FK_visit_doctor
+--
+ALTER TABLE `hospital`.`visit` ADD INDEX `FK_visit_doctor` (`doctor_id` );
+-- GO
+
+--
+-- Index: FK_visit_ward_bed
+--
+ALTER TABLE `hospital`.`visit` ADD INDEX `FK_visit_ward_bed` (`ward_bed_id` );
+-- GO
+
+--
+-- Index: FK_visit_ward_doc
+--
+ALTER TABLE `hospital`.`visit` ADD INDEX `FK_visit_ward_doc` (`ward_doc_id` );
+-- GO
+
+--
 -- Table: ward
 --
 CREATE TABLE `ward` 
@@ -405,6 +507,24 @@ ALTER TABLE `designation` ADD CONSTRAINT `FK_designation_department` FOREIGN KEY
 -- GO
 
 --
+-- Foreign Key Constraint: FK_duty_roster_substitute
+--
+ALTER TABLE `duty_roster` ADD CONSTRAINT `FK_duty_roster_substitute` FOREIGN KEY (`substitute_id`) REFERENCES `employee`(`id`);
+-- GO
+
+--
+-- Foreign Key Constraint: FK_duty_roster_employee
+--
+ALTER TABLE `duty_roster` ADD CONSTRAINT `FK_duty_roster_employee` FOREIGN KEY (`employee_id`) REFERENCES `employee`(`id`);
+-- GO
+
+--
+-- Foreign Key Constraint: FK_duty_roster_place
+--
+ALTER TABLE `duty_roster` ADD CONSTRAINT `FK_duty_roster_place` FOREIGN KEY (`duty_place_id`) REFERENCES `duty_place`(`id`);
+-- GO
+
+--
 -- Foreign Key Constraint: FK_employee_department
 --
 ALTER TABLE `employee` ADD CONSTRAINT `FK_employee_department` FOREIGN KEY (`department_id`) REFERENCES `department`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
@@ -417,9 +537,51 @@ ALTER TABLE `employee` ADD CONSTRAINT `FK_employee_designation` FOREIGN KEY (`de
 -- GO
 
 --
+-- Foreign Key Constraint: FK_lab_report_lab_test
+--
+ALTER TABLE `lab_report` ADD CONSTRAINT `FK_lab_report_lab_test` FOREIGN KEY (`lab_test_id`) REFERENCES `lab_test`(`id`);
+-- GO
+
+--
+-- Foreign Key Constraint: FK_lab_report_patient
+--
+ALTER TABLE `lab_report` ADD CONSTRAINT `FK_lab_report_patient` FOREIGN KEY (`patient_id`) REFERENCES `patient`(`id`);
+-- GO
+
+--
+-- Foreign Key Constraint: FK_lab_report_visit
+--
+ALTER TABLE `lab_report` ADD CONSTRAINT `FK_lab_report_visit` FOREIGN KEY (`visit_id`) REFERENCES `visit`(`id`);
+-- GO
+
+--
 -- Foreign Key Constraint: FK_user_employee
 --
 ALTER TABLE `user` ADD CONSTRAINT `FK_user_employee` FOREIGN KEY (`employee_id`) REFERENCES `employee`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+-- GO
+
+--
+-- Foreign Key Constraint: FK_visit_ward_doc
+--
+ALTER TABLE `visit` ADD CONSTRAINT `FK_visit_ward_doc` FOREIGN KEY (`ward_doc_id`) REFERENCES `employee`(`id`);
+-- GO
+
+--
+-- Foreign Key Constraint: FK_visit_doctor
+--
+ALTER TABLE `visit` ADD CONSTRAINT `FK_visit_doctor` FOREIGN KEY (`doctor_id`) REFERENCES `employee`(`id`);
+-- GO
+
+--
+-- Foreign Key Constraint: FK_visit_patient
+--
+ALTER TABLE `visit` ADD CONSTRAINT `FK_visit_patient` FOREIGN KEY (`patient_id`) REFERENCES `patient`(`id`);
+-- GO
+
+--
+-- Foreign Key Constraint: FK_visit_ward_bed
+--
+ALTER TABLE `visit` ADD CONSTRAINT `FK_visit_ward_bed` FOREIGN KEY (`ward_bed_id`) REFERENCES `ward_bed`(`id`);
 -- GO
 
 --
