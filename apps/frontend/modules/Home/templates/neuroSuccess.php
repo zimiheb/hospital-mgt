@@ -15,12 +15,22 @@
 					</div>
                     <div class="box_text_content">
                     	<div class="box_text">
-                                <p align="justify"><br> 
-              We brought together top neurological experts with advanced technology. Neurosurgery is the branch of medicine that provides operative and medical management of disorders that affect the central and peripheral nervous systems, including their supportive structures and vascular supply to provide a good treatment.<br><br><?php echo image_tag('neuro1.gif', 'alt=foo size=228x122 align=right') ?> 
-            <p align="justify">We are being the most advances and sophisticated health care provider in NWFP offers treatment for head injuries, spinal injuries, strokes and other neurological disorders, including Spinal &amp; brain tumors and nerve entrapments.
+                                <table>
+                <tr>			   
+         <td colspan="3">
+		<p align="justify"><br> 
+              We brought together top neurological experts with advanced technology. Neurosurgery is the branch of medicine that provides operative and medical management of disorders that affect the central and peripheral nervous systems, including their supportive structures and vascular supply to provide a good treatment.
+			  </td></tr>
+			  <tr><td>
+            <p align="justify">We are being the most advances and sophisticated health care provider in area offers treatment for head injuries, spinal injuries, strokes and other neurological disorders, including Spinal &amp; brain tumors and nerve entrapments.
          Broadly, the field of Neurosurgery encompasses the surgical treatment of the nervous system and its coverings i.e. neurosurgeons operate on the brain, spinal cord, skull, scalp and the spine .
-         As a provider of neurological care, we are pleased to be the first to bring Neuro Interventional Surgery and Diagnostic Services to NWFP .A team at RMI offers minimally invasive treatment options for the fore mentioned neurosurgical disorders .These interventional techniques also allow chemotherapy to be delivered directly to some tumors as part of cancer treatment.</p> 
-            <br><p>Types of neurosurgery performed: </p> 
+         As a provider of neurological care, we are pleased to be the first to bring Neuro Interventional Surgery and Diagnostic Services .Our offers minimally invasive treatment options for the fore mentioned neurosurgical disorders .These interventional techniques also allow chemotherapy to be delivered directly to some tumors as part of cancer treatment.</p> 
+         </td>
+		    <td>&nbsp &nbsp </td>
+			<td>
+		 <?php echo image_tag('neuro1.gif', 'alt=foo size=228x122 align=right') ?> </td>
+			<tr><td>
+			<p>Types of neurosurgery performed: </p> 
             <ul> 
               <li>Neurosurgical Oncology </li> 
               <li>Pediatric Neurosurgery </li> 
@@ -30,7 +40,8 @@
               <li>Trauma Surgery </li> 
               <li>Emergency </li> 
               <li>Neuro traumas </li> 
-          </ul>            
+          </ul>            </td></tr>
+		  </table>
 
 </div>
 

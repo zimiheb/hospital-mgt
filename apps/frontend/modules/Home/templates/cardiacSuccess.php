@@ -18,19 +18,22 @@
                     	<div class="box_text">
                <table>
                 <tr>			   
-         <td>
+         <td colspan="3">
 		
-		
-		
-		 </td>
-		 </tr>
-	<tr>
-	<td>
          <p align="justify">
  
-              The heart program's growth highlights dedicated people working together to provide the best possible care. Division of Cardiac Surgery continues to be on the leading edge of programs for both acquired and congenital heart disease, often setting the standards for institutions worldwide. In state-of-the-art operating facilities, world-renowned surgeons work with cardiac anesthesiologists and a specialized nursing staff to provide patients with the best cardiac care possible.<br><br><?php echo image_tag('card.gif', 'alt=foo size=228x122 align=right') ?>  Many aspects of the division's activities work in association with other subspecialties and involve multidisciplinary approaches to evaluation, management, and treatment. As a result, the patients receive supportive care that is tailored to their particular needs and, in some instances, through clinical trials, have access to pioneering treatment not available anywhere else in the region.
+              The heart program's growth highlights dedicated people working together to provide the best possible care. Division of Cardiac Surgery continues to be on the leading edge of programs for both acquired and congenital heart disease, often setting the standards for institutions worldwide. In state-of-the-art operating facilities, world-renowned surgeons work with cardiac anesthesiologists and a specialized nursing staff to provide patients with the best cardiac care possible.
+			  </td></tr>
+			  <tr> <td> Many aspects of the division's activities work in association with other subspecialties and involve multidisciplinary approaches to evaluation, management, and treatment. As a result, the patients receive supportive care that is tailored to their particular needs and, in some instances, through clinical trials, have access to pioneering treatment not available anywhere else in the region.
              The cardiac care includes prevention and early detection programs, emergency care, advanced diagnostic and treatment capabilities, cardiac, pulmonary, and peripheral vascular rehabilitation, and a nationally recognized surgery program that performs more open-heart surgeries than any other hospital in the region.
-         </p> <p>
+         </p>  </td> 
+		 <td>&nbsp &nbsp </td>
+		 <td>
+		 <?php echo image_tag('card.gif', 'alt=foo size=228x122 align=right') ?> 
+		 </td></tr>
+		 <tr>
+		 <td>
+		 <p>
               <br> 
             Cardiac surgery services include:</p> 
 		  <ul> 
