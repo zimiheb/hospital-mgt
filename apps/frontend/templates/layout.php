@@ -74,7 +74,8 @@
 					</div>
 					
 					<div id="dropmenu_2" class="dropmenudiv" style="width: 150px; height:30px;">
-					<li><?php echo link_to ('Patient', 'Patient/list'); ?></li>
+					<li><?php echo link_to ('Outdoor Patient Visits', 'FrontDesk/visitList'); ?></li>
+					<li><?php echo link_to ('Patient List', 'Patient/list'); ?></li>
 					<li><?php echo link_to ('Duty Roster', 'FrontDesk/dutyRoster'); ?></li>
 					</div>
 					

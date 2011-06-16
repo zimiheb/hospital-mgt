@@ -101,6 +101,60 @@ class FrontDeskActions extends sfActions
 		$this->redirect ('FrontDesk/dutyRoster');
 
 	} //- END - executeDelete
+	
+public function executeVisitList(sfWebRequest $request)
+  {
+    $c = new Criteria();
+	$c->add(VisitPeer::STATUS, Constant::RECORD_STATUS_DELETED, Criteria::NOT_EQUAL);
+	$c->add(VisitPeer::VISIT_DATE, date('Y-m-d'));
+	$c->addAscendingOrderByColumn(VisitPeer::ID);
+	$this->visits = VisitPeer::doSelect($c);
+	
+	
+  } // -- END executeVisitList
+  
+  public function executeSearchPatient(sfWebRequest $request)
+  {
+    //$patient_id = $this->getRequestParameter('id');
+	$patient_name = $this->getRequestParameter('name');
+	
+    $c = new Criteria();
+		//$c->add(PatientPeer::STATUS, Constant::RECORD_STATUS_ACTIVE);
+		/*$c1 = $c->getNewCriterion(PatientPeer::NAME, '%'.$patient_name.'%' , Criteria::LIKE);
+		$c2 = $c->getNewCriterion(PatientPeer::ID, $patient_id, Criteria::EQUAL);
+		$c1->addOr($c2);
+		$c->add($c1);*/
+		$c->add(PatientPeer::NAME, '%'.$patient_name.'%' , Criteria::LIKE);
+		$this->patients = PatientPeer::doSelect($c);
+	
+  } // -- END executeVisitList
+  
+  public function executeVisitAdd(sfWebRequest $request)
+  {
+    if ($request->isMethod('POST'))
+	{
+		$visit = new Visit();
+		
+		$visit->setPatientId($this->getRequestParameter('patient_id'));
+		$visit->setDoctorId($this->getRequestParameter('doctor_id'));
+		$visit->setWardDocId($this->getRequestParameter('ward_doc_id'));
+		$visit->setVisitDate($this->getRequestParameter('visit_date'));
+		$visit->setTime($this->getRequestParameter('time'));
+		$visit->setVisitType($this->getRequestParameter('visit_type'));
+		//$duty->setSubstituteId($this->getRequestParameter('substitute_id'));
+		$visit->setStatus(Constant::RECORD_STATUS_ACTIVE);
+		
+		$visit->save();
+		
+		$this->getUser ()->setFlash ( 'SUCCESS_MESSAGE', 'Visit to Doctor added Successfully.' );
+		$this->redirect('FrontDesk/visitList');
+	}
+	
+	else
+	{
+	$this->patient = PatientPeer::retrieveByPk(Utility::DecryptQueryString($request->getParameter('patient')));
+	}
+  } // -- END executeAddDuty
 
 
 } // END Class
