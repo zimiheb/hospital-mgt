@@ -138,7 +138,9 @@ propel:
     pulse: { type: VARCHAR, size: '10', required: false }
     injection: { type: VARCHAR, size: '500', required: false }
     diet: { type: VARCHAR, size: '500', required: false }
-    description: { type: VARCHAR, size: '1024', required: false }
+    description: { type: VARCHAR, size: '5000', required: false }
+    time: { type: VARCHAR, size: '10', required: false }
+    visit_date: { type: DATE, required: false }
     fee: { type: VARCHAR, size: '10', required: false }
     fee_paid: { type: VARCHAR, size: '10', required: false }
     status: { type: VARCHAR, size: '10', required: false }

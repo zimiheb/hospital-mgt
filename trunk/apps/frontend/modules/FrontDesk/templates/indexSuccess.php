@@ -27,6 +27,10 @@
 </tr>
 
 <tr>
+	<td height="40" class="boysSec">&nbsp;&nbsp;<?php echo link_to ('Outdoor Patient Visits', 'FrontDesk/visitList'); ?></td>
+</tr>
+
+<tr>
 	<td height="40" class="boysSec">&nbsp;&nbsp;<?php echo link_to ('View Patient Listing', 'Patient/list'); ?></td>
 </tr>
 
