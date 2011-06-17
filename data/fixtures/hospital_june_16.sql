@@ -1,6 +1,6 @@
 -- DBTools Manager Professional (Enterprise Edition)
 -- Database Dump for: hospital
--- Backup Generated in: 6/3/2011 6:45:02 AM
+-- Backup Generated in: 6/17/2011 8:01:36 AM
 -- Database Server Version: MySQL 5.1.33
 
 -- USEGO
@@ -129,6 +129,8 @@ BEGIN;
 INSERT INTO `duty_roster` (`id`, `employee_id`, `duty_place_id`, `duty_date`, `from`, `to`, `present`, `substitute_id`, `status`, `created_at`, `updated_at`) VALUES(1, 1, 1, '2011-06-03', '0730', '1400', NULL, 2, '1', '2011-06-03', '2011-06-03');
 -- GO
 INSERT INTO `duty_roster` (`id`, `employee_id`, `duty_place_id`, `duty_date`, `from`, `to`, `present`, `substitute_id`, `status`, `created_at`, `updated_at`) VALUES(2, 3, 2, '2011-06-03', '0730', '1400', NULL, 2, '1', '2011-06-03', '2011-06-03');
+-- GO
+INSERT INTO `duty_roster` (`id`, `employee_id`, `duty_place_id`, `duty_date`, `from`, `to`, `present`, `substitute_id`, `status`, `created_at`, `updated_at`) VALUES(3, 1, 1, '2011-06-17', '0700', '1300', NULL, 2, '1', '2011-06-17', '2011-06-17');
 -- GO
 COMMIT;
 -- GO
@@ -310,9 +312,9 @@ CREATE TABLE `patient`
 --
 BEGIN;
 -- GO
-INSERT INTO `patient` (`id`, `id_number`, `cnic`, `username`, `password`, `name`, `father_name`, `dob`, `gender`, `address`, `contact_res`, `contact_cell`, `emergency_contact`, `email`, `blood_group`, `disease`, `allergy`, `drug_allergy`, `status`, `created_at`, `updated_at`) VALUES(1, '01', '61145-5847592-5', NULL, NULL, 'Nazeer Hussain', NULL, '1985-03-08', 'Male', ' kug uy rfuy tf j h', '0515548365', '03122354618', '021835246', NULL, NULL, 'dfgdsfg dfg sdfdsf gsd fgs dfg', 'lk kjuh lk j lkj yg poitg kjh bk', ' lk hiy t hgvkj htr i ygkl ujh ploi yp', '1', '2011-05-17', '2011-05-17');
+INSERT INTO `patient` (`id`, `id_number`, `cnic`, `username`, `password`, `name`, `father_name`, `dob`, `gender`, `address`, `contact_res`, `contact_cell`, `emergency_contact`, `email`, `blood_group`, `disease`, `allergy`, `drug_allergy`, `status`, `created_at`, `updated_at`) VALUES(1, '01', '61145-5847592-5', NULL, NULL, 'Nazeer Hussain xz', NULL, '1985-03-08', 'Male', ' kug uy rfuy tf j h', '0515548365', '03122354618', '021835246', NULL, NULL, 'dfgdsfg dfg sdfdsf gsd fgs dfg', 'lk kjuh lk j lkj yg poitg kjh bk', ' lk hiy t hgvkj htr i ygkl ujh ploi yp', '1', '2011-05-17', '2011-05-17');
 -- GO
-INSERT INTO `patient` (`id`, `id_number`, `cnic`, `username`, `password`, `name`, `father_name`, `dob`, `gender`, `address`, `contact_res`, `contact_cell`, `emergency_contact`, `email`, `blood_group`, `disease`, `allergy`, `drug_allergy`, `status`, `created_at`, `updated_at`) VALUES(2, NULL, '514244-8528483-8', NULL, NULL, 'Shakeela Khanum', NULL, '1969-09-15', 'Female', NULL, NULL, '0333-5642147', NULL, NULL, NULL, NULL, NULL, NULL, '1', '2011-05-17', '2011-05-17');
+INSERT INTO `patient` (`id`, `id_number`, `cnic`, `username`, `password`, `name`, `father_name`, `dob`, `gender`, `address`, `contact_res`, `contact_cell`, `emergency_contact`, `email`, `blood_group`, `disease`, `allergy`, `drug_allergy`, `status`, `created_at`, `updated_at`) VALUES(2, NULL, '514244-8528483-8', NULL, NULL, 'Shakeela Khanum xz', NULL, '1969-09-15', 'Female', NULL, NULL, '0333-5642147', NULL, NULL, NULL, NULL, NULL, NULL, '1', '2011-05-17', '2011-05-17');
 -- GO
 COMMIT;
 -- GO
@@ -393,7 +395,9 @@ CREATE TABLE `visit`
 	`pulse` varchar (10), 
 	`injection` varchar (500), 
 	`diet` varchar (500), 
-	`description` varchar (1024), 
+	`description` varchar (5000), 
+	`time` varchar (10), 
+	`visit_date` date, 
 	`fee` varchar (10), 
 	`fee_paid` varchar (10), 
 	`status` varchar (10), 
@@ -407,6 +411,8 @@ CREATE TABLE `visit`
 -- Dumping Table Data: visit
 --
 BEGIN;
+-- GO
+INSERT INTO `visit` (`id`, `patient_id`, `doctor_id`, `ward_bed_id`, `ward_doc_id`, `visit_type`, `medicine`, `bp`, `temp`, `pulse`, `injection`, `diet`, `description`, `time`, `visit_date`, `fee`, `fee_paid`, `status`, `created_at`, `updated_at`) VALUES(1, 1, 1, NULL, 3, 'Indoor', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1350', '2011-06-17', NULL, NULL, '1', '2011-06-17', '2011-06-17');
 -- GO
 COMMIT;
 -- GO
@@ -507,12 +513,6 @@ ALTER TABLE `designation` ADD CONSTRAINT `FK_designation_department` FOREIGN KEY
 -- GO
 
 --
--- Foreign Key Constraint: FK_duty_roster_substitute
---
-ALTER TABLE `duty_roster` ADD CONSTRAINT `FK_duty_roster_substitute` FOREIGN KEY (`substitute_id`) REFERENCES `employee`(`id`);
--- GO
-
---
 -- Foreign Key Constraint: FK_duty_roster_employee
 --
 ALTER TABLE `duty_roster` ADD CONSTRAINT `FK_duty_roster_employee` FOREIGN KEY (`employee_id`) REFERENCES `employee`(`id`);
@@ -522,6 +522,12 @@ ALTER TABLE `duty_roster` ADD CONSTRAINT `FK_duty_roster_employee` FOREIGN KEY (
 -- Foreign Key Constraint: FK_duty_roster_place
 --
 ALTER TABLE `duty_roster` ADD CONSTRAINT `FK_duty_roster_place` FOREIGN KEY (`duty_place_id`) REFERENCES `duty_place`(`id`);
+-- GO
+
+--
+-- Foreign Key Constraint: FK_duty_roster_substitute
+--
+ALTER TABLE `duty_roster` ADD CONSTRAINT `FK_duty_roster_substitute` FOREIGN KEY (`substitute_id`) REFERENCES `employee`(`id`);
 -- GO
 
 --
@@ -561,12 +567,6 @@ ALTER TABLE `user` ADD CONSTRAINT `FK_user_employee` FOREIGN KEY (`employee_id`)
 -- GO
 
 --
--- Foreign Key Constraint: FK_visit_ward_doc
---
-ALTER TABLE `visit` ADD CONSTRAINT `FK_visit_ward_doc` FOREIGN KEY (`ward_doc_id`) REFERENCES `employee`(`id`);
--- GO
-
---
 -- Foreign Key Constraint: FK_visit_doctor
 --
 ALTER TABLE `visit` ADD CONSTRAINT `FK_visit_doctor` FOREIGN KEY (`doctor_id`) REFERENCES `employee`(`id`);
@@ -582,6 +582,12 @@ ALTER TABLE `visit` ADD CONSTRAINT `FK_visit_patient` FOREIGN KEY (`patient_id`)
 -- Foreign Key Constraint: FK_visit_ward_bed
 --
 ALTER TABLE `visit` ADD CONSTRAINT `FK_visit_ward_bed` FOREIGN KEY (`ward_bed_id`) REFERENCES `ward_bed`(`id`);
+-- GO
+
+--
+-- Foreign Key Constraint: FK_visit_ward_doc
+--
+ALTER TABLE `visit` ADD CONSTRAINT `FK_visit_ward_doc` FOREIGN KEY (`ward_doc_id`) REFERENCES `employee`(`id`);
 -- GO
 
 --

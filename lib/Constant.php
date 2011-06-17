@@ -115,16 +115,19 @@ class Constant
 	const RECORD_STATUS_DEACTIVE_TITLE = 'Disabled';
 	const UNKNOWN_STATUS_TITLE = 'Unknown Status';
 		
-	const TICKET_PENDING = 1;
+	const VISIT_PENDING = 1;
 	const TICKET_PENDING_TITLE = 'Pending';
-	const TICKET_PAID = 2;
-	const TICKET_PAID_TITLE = 'Paid';
+	
+	const TICKET_DONE = 2;
+	const TICKET_PAID_TITLE = 'Done';
+	
 	const TICKET_SENT_TO_COURT = 3;
 	const TICKET_SENT_TO_COURT_TITLE = 'Sent To Court';
+	
 	const TICKET_OUT_STANDING = 4;
 	const TICKET_OUT_STANDING_TITLE = 'Out Standing';
 	
-	static public function GetTicketStatusArray ()
+	static public function GetVisitStatusArray ()
 	{
 		$statuses = array (	self::TICKET_PENDING => self::TICKET_PENDING_TITLE,
 							self::TICKET_PAID => self::TICKET_PAID_TITLE,
@@ -133,10 +136,10 @@ class Constant
 		return $statuses;	
 	}
 	
-	static public function GetTicketStatus($ticket)
+	static public function GetVisitStatus($visit)
 	{
 	//Compare Status and return appropriate title.
-		switch ($ticket)
+		switch ($visit)
 		{
 			case self::TICKET_PENDING:
 				$title = self::TICKET_PENDING_TITLE;
