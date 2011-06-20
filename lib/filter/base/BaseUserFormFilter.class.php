@@ -14,7 +14,7 @@ class BaseUserFormFilter extends BaseFormFilterPropel
   public function setup()
   {
     $this->setWidgets(array(
-      'role_id'     => new sfWidgetFormFilterInput(),
+      'role_id'     => new sfWidgetFormPropelChoice(array('model' => 'Role', 'add_empty' => true)),
       'employee_id' => new sfWidgetFormPropelChoice(array('model' => 'Employee', 'add_empty' => true)),
       'user'        => new sfWidgetFormFilterInput(),
       'password'    => new sfWidgetFormFilterInput(),
@@ -24,7 +24,7 @@ class BaseUserFormFilter extends BaseFormFilterPropel
     ));
 
     $this->setValidators(array(
-      'role_id'     => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'role_id'     => new sfValidatorPropelChoice(array('required' => false, 'model' => 'Role', 'column' => 'id')),
       'employee_id' => new sfValidatorPropelChoice(array('required' => false, 'model' => 'Employee', 'column' => 'id')),
       'user'        => new sfValidatorPass(array('required' => false)),
       'password'    => new sfValidatorPass(array('required' => false)),
@@ -49,7 +49,7 @@ class BaseUserFormFilter extends BaseFormFilterPropel
   {
     return array(
       'id'          => 'Number',
-      'role_id'     => 'Number',
+      'role_id'     => 'ForeignKey',
       'employee_id' => 'ForeignKey',
       'user'        => 'Text',
       'password'    => 'Text',

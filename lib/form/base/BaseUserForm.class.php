@@ -13,7 +13,7 @@ class BaseUserForm extends BaseFormPropel
   {
     $this->setWidgets(array(
       'id'          => new sfWidgetFormInputHidden(),
-      'role_id'     => new sfWidgetFormInput(),
+      'role_id'     => new sfWidgetFormPropelChoice(array('model' => 'Role', 'add_empty' => true)),
       'employee_id' => new sfWidgetFormPropelChoice(array('model' => 'Employee', 'add_empty' => true)),
       'user'        => new sfWidgetFormInput(),
       'password'    => new sfWidgetFormInput(),
@@ -24,7 +24,7 @@ class BaseUserForm extends BaseFormPropel
 
     $this->setValidators(array(
       'id'          => new sfValidatorPropelChoice(array('model' => 'User', 'column' => 'id', 'required' => false)),
-      'role_id'     => new sfValidatorInteger(array('required' => false)),
+      'role_id'     => new sfValidatorPropelChoice(array('model' => 'Role', 'column' => 'id', 'required' => false)),
       'employee_id' => new sfValidatorPropelChoice(array('model' => 'Employee', 'column' => 'id', 'required' => false)),
       'user'        => new sfValidatorString(array('max_length' => 50, 'required' => false)),
       'password'    => new sfValidatorString(array('max_length' => 50, 'required' => false)),

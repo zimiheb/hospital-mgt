@@ -45,6 +45,7 @@ propel:
     id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }
     department_id: { type: INTEGER, size: '11', required: false, foreignTable: department, foreignReference: id, onDelete: CASCADE, onUpdate: CASCADE }
     designation_id: { type: INTEGER, size: '11', required: false, foreignTable: designation, foreignReference: id, onDelete: CASCADE, onUpdate: CASCADE }
+    role_id: { type: INTEGER, size: '11', required: false, foreignTable: role, foreignReference: id, onDelete: CASCADE, onUpdate: CASCADE }
     emp_category: { type: VARCHAR, size: '10', required: false }
     name: { type: VARCHAR, size: '100', required: false }
     cnic: { type: VARCHAR, size: '50', required: false }
@@ -61,7 +62,7 @@ propel:
     status: { type: VARCHAR, size: '10', required: false }
     created_at: { type: DATE, required: false }
     updated_at: { type: DATE, required: false }
-    _indexes: { FK_employee_department: [department_id], FK_employee_designation: [designation_id] }
+    _indexes: { FK_employee_department: [department_id], FK_employee_designation: [designation_id], FK_employee_role: [role_id] }
   lab_report:
     _attributes: { phpName: LabReport }
     id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }
@@ -108,8 +109,10 @@ propel:
     _attributes: { phpName: Pharma }
     id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }
     name: { type: VARCHAR, size: '100', required: false }
+    type: { type: VARCHAR, size: '50', required: false }
     strength: { type: VARCHAR, size: '10', required: false }
     company: { type: VARCHAR, size: '100', required: false }
+    price: { type: INTEGER, size: '6', required: false }
     status: { type: VARCHAR, size: '10', required: false }
     created_at: { type: DATE, required: false }
     updated_at: { type: DATE, required: false }
@@ -129,14 +132,14 @@ propel:
   user:
     _attributes: { phpName: User }
     id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }
-    role_id: { type: INTEGER, size: '11', required: false }
+    role_id: { type: INTEGER, size: '11', required: false, foreignTable: role, foreignReference: id, onDelete: CASCADE, onUpdate: CASCADE }
     employee_id: { type: INTEGER, size: '11', required: false, foreignTable: employee, foreignReference: id, onDelete: CASCADE, onUpdate: CASCADE }
     user: { type: VARCHAR, size: '50', required: false }
     password: { type: VARCHAR, size: '50', required: false }
     status: { type: VARCHAR, size: '10', required: false }
     created_at: { type: DATE, required: false }
     updated_at: { type: DATE, required: false }
-    _indexes: { FK_user_employee: [employee_id] }
+    _indexes: { FK_user_employee: [employee_id], FK_user_role: [role_id] }
   visit:
     _attributes: { phpName: Visit }
     id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }

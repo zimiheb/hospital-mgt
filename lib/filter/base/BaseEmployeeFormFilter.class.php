@@ -16,6 +16,7 @@ class BaseEmployeeFormFilter extends BaseFormFilterPropel
     $this->setWidgets(array(
       'department_id'     => new sfWidgetFormPropelChoice(array('model' => 'Department', 'add_empty' => true)),
       'designation_id'    => new sfWidgetFormPropelChoice(array('model' => 'Designation', 'add_empty' => true)),
+      'role_id'           => new sfWidgetFormPropelChoice(array('model' => 'Role', 'add_empty' => true)),
       'emp_category'      => new sfWidgetFormFilterInput(),
       'name'              => new sfWidgetFormFilterInput(),
       'cnic'              => new sfWidgetFormFilterInput(),
@@ -37,6 +38,7 @@ class BaseEmployeeFormFilter extends BaseFormFilterPropel
     $this->setValidators(array(
       'department_id'     => new sfValidatorPropelChoice(array('required' => false, 'model' => 'Department', 'column' => 'id')),
       'designation_id'    => new sfValidatorPropelChoice(array('required' => false, 'model' => 'Designation', 'column' => 'id')),
+      'role_id'           => new sfValidatorPropelChoice(array('required' => false, 'model' => 'Role', 'column' => 'id')),
       'emp_category'      => new sfValidatorPass(array('required' => false)),
       'name'              => new sfValidatorPass(array('required' => false)),
       'cnic'              => new sfValidatorPass(array('required' => false)),
@@ -73,6 +75,7 @@ class BaseEmployeeFormFilter extends BaseFormFilterPropel
       'id'                => 'Number',
       'department_id'     => 'ForeignKey',
       'designation_id'    => 'ForeignKey',
+      'role_id'           => 'ForeignKey',
       'emp_category'      => 'Text',
       'name'              => 'Text',
       'cnic'              => 'Text',
