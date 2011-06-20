@@ -1,7 +1,7 @@
 <?php use_helper ('Form','DateForm','Object'); ?>
 <?php echo form_tag('Employee/edit'); ?>
-
 <?php echo input_hidden_tag('employee_id', $employee->getId()); ?>
+
 <div id="main_content">
 	<div class="box_content">
 	<div class="box_title">

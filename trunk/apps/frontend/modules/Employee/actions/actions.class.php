@@ -17,7 +17,7 @@ class EmployeeActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    $this->forward('default', 'module');
+    $this->forward('Employee', 'list');
   }
   
    public function executeList(sfWebRequest $request)

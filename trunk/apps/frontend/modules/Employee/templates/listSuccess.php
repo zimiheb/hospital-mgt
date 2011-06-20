@@ -20,11 +20,11 @@
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="datagrid">
              
 			  <tr>
-				<th style="text-align:left";>Department</th>
-				<th style="text-align:left";>Employee Name</th>
-				<th style="text-align:left";>Designation</th>
-				<th style="text-align:left";>Office No.</th>
-				<th style="text-align:left";>Mobile No.</th>
+				<th style="text-align:left;">Department</th>
+				<th style="text-align:left;">Employee Name</th>
+				<th style="text-align:left;">Designation</th>
+				<th style="text-align:left;";>Office No.</th>
+				<th style="text-align:left;">Mobile No.</th>
 				<th style="text-align:left;">Operation</th>
               </tr>
 			  
@@ -67,10 +67,9 @@
 			  	<td class="last">&nbsp;</td>
 			  </tr>
 			   <?php else:?>
-			  
-					<tr>
-						<td colspan="6" style="background:none; text-align:center;"><?php echo Constant::RECORD_NOT_FOUND; ?></td>
-					</tr>
+			  	<tr>
+					<td colspan="6" style="background:none; text-align:center;"><?php echo Constant::RECORD_NOT_FOUND; ?></td>
+				</tr>
 					
 			  <?php endif; ?>
             </table>
