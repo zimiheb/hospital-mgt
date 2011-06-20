@@ -1,6 +1,6 @@
 -- DBTools Manager Professional (Enterprise Edition)
 -- Database Dump for: hospital
--- Backup Generated in: 6/17/2011 8:01:36 AM
+-- Backup Generated in: 6/21/2011 1:35:17 AM
 -- Database Server Version: MySQL 5.1.33
 
 -- USEGO
@@ -161,6 +161,7 @@ CREATE TABLE `employee`
 	`id` integer (11) NOT NULL AUTO_INCREMENT , 
 	`department_id` integer (11), 
 	`designation_id` integer (11), 
+	`role_id` integer (11), 
 	`emp_category` varchar (10), 
 	`name` varchar (100), 
 	`cnic` varchar (50), 
@@ -186,13 +187,13 @@ CREATE TABLE `employee`
 --
 BEGIN;
 -- GO
-INSERT INTO `employee` (`id`, `department_id`, `designation_id`, `emp_category`, `name`, `cnic`, `dob`, `gender`, `mail_address`, `contact_res`, `contact_cell`, `contact_off`, `emergency_contact`, `employment_date`, `local_resident`, `qualification`, `status`, `created_at`, `updated_at`) VALUES(1, 1, 1, 'doc', 'Zeeshan Cheema', '61101-5487541-5', '1980-05-01', 'Male', 'sadfsadf', '654321', '123456', '1111111', '2222222', '2011-05-12', '1', 'hgjghjryfu', '1', '2011-05-12', '2011-05-12');
+INSERT INTO `employee` (`id`, `department_id`, `designation_id`, `role_id`, `emp_category`, `name`, `cnic`, `dob`, `gender`, `mail_address`, `contact_res`, `contact_cell`, `contact_off`, `emergency_contact`, `employment_date`, `local_resident`, `qualification`, `status`, `created_at`, `updated_at`) VALUES(1, 1, 1, 3, 'doc', 'Zeeshan Cheema', '61101-5487541-5', '1980-05-01', 'Male', 'sadfsadf', '654321', '123456', '1111111', '2222222', '2011-05-12', '1', 'hgjghjryfu', '1', '2011-05-12', '2011-05-12');
 -- GO
-INSERT INTO `employee` (`id`, `department_id`, `designation_id`, `emp_category`, `name`, `cnic`, `dob`, `gender`, `mail_address`, `contact_res`, `contact_cell`, `contact_off`, `emergency_contact`, `employment_date`, `local_resident`, `qualification`, `status`, `created_at`, `updated_at`) VALUES(2, 1, 1, 'doc', 'Kashif Hussain', '61246-58457875-5', '1987-05-17', 'Male', '', '', '', '', '', '2011-05-17', '0', '', '1', '2011-05-17', '2011-05-17');
+INSERT INTO `employee` (`id`, `department_id`, `designation_id`, `role_id`, `emp_category`, `name`, `cnic`, `dob`, `gender`, `mail_address`, `contact_res`, `contact_cell`, `contact_off`, `emergency_contact`, `employment_date`, `local_resident`, `qualification`, `status`, `created_at`, `updated_at`) VALUES(2, 1, 1, 3, 'doc', 'Kashif Hussain', '61246-58457875-5', '1987-05-17', 'Male', '', '', '', '', '', '2011-05-17', '0', '', '1', '2011-05-17', '2011-05-17');
 -- GO
-INSERT INTO `employee` (`id`, `department_id`, `designation_id`, `emp_category`, `name`, `cnic`, `dob`, `gender`, `mail_address`, `contact_res`, `contact_cell`, `contact_off`, `emergency_contact`, `employment_date`, `local_resident`, `qualification`, `status`, `created_at`, `updated_at`) VALUES(3, 2, 2, 'staff', 'Fareeha Khan', '', NULL, 'Male', '', '', '', '', '', NULL, '1', '', '1', '2011-05-17', '2011-05-17');
+INSERT INTO `employee` (`id`, `department_id`, `designation_id`, `role_id`, `emp_category`, `name`, `cnic`, `dob`, `gender`, `mail_address`, `contact_res`, `contact_cell`, `contact_off`, `emergency_contact`, `employment_date`, `local_resident`, `qualification`, `status`, `created_at`, `updated_at`) VALUES(3, 2, 2, 4, 'staff', 'Fareeha Khan', '', '1988-06-20', 'Female', '', '', '', '', '', NULL, '1', '', '1', '2011-05-17', '2011-05-17');
 -- GO
-INSERT INTO `employee` (`id`, `department_id`, `designation_id`, `emp_category`, `name`, `cnic`, `dob`, `gender`, `mail_address`, `contact_res`, `contact_cell`, `contact_off`, `emergency_contact`, `employment_date`, `local_resident`, `qualification`, `status`, `created_at`, `updated_at`) VALUES(4, NULL, NULL, '1', 'Administrator', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '2011-05-27', '2011-05-27');
+INSERT INTO `employee` (`id`, `department_id`, `designation_id`, `role_id`, `emp_category`, `name`, `cnic`, `dob`, `gender`, `mail_address`, `contact_res`, `contact_cell`, `contact_off`, `emergency_contact`, `employment_date`, `local_resident`, `qualification`, `status`, `created_at`, `updated_at`) VALUES(4, NULL, NULL, 1, '1', 'Super Administrator', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '2011-05-27', '2011-05-27');
 -- GO
 COMMIT;
 -- GO
@@ -207,6 +208,12 @@ ALTER TABLE `hospital`.`employee` ADD INDEX `FK_employee_department` (`departmen
 -- Index: FK_employee_designation
 --
 ALTER TABLE `hospital`.`employee` ADD INDEX `FK_employee_designation` (`designation_id` );
+-- GO
+
+--
+-- Index: FK_employee_role
+--
+ALTER TABLE `hospital`.`employee` ADD INDEX `FK_employee_role` (`role_id` );
 -- GO
 
 --
@@ -316,6 +323,14 @@ INSERT INTO `patient` (`id`, `id_number`, `cnic`, `username`, `password`, `name`
 -- GO
 INSERT INTO `patient` (`id`, `id_number`, `cnic`, `username`, `password`, `name`, `father_name`, `dob`, `gender`, `address`, `contact_res`, `contact_cell`, `emergency_contact`, `email`, `blood_group`, `disease`, `allergy`, `drug_allergy`, `status`, `created_at`, `updated_at`) VALUES(2, NULL, '514244-8528483-8', NULL, NULL, 'Shakeela Khanum xz', NULL, '1969-09-15', 'Female', NULL, NULL, '0333-5642147', NULL, NULL, NULL, NULL, NULL, NULL, '1', '2011-05-17', '2011-05-17');
 -- GO
+INSERT INTO `patient` (`id`, `id_number`, `cnic`, `username`, `password`, `name`, `father_name`, `dob`, `gender`, `address`, `contact_res`, `contact_cell`, `emergency_contact`, `email`, `blood_group`, `disease`, `allergy`, `drug_allergy`, `status`, `created_at`, `updated_at`) VALUES(3, NULL, '25448-5245478-5', NULL, NULL, 'Masood Aslam', NULL, '1967-01-01', 'Male', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, '1', '2011-06-20', '2011-06-20');
+-- GO
+INSERT INTO `patient` (`id`, `id_number`, `cnic`, `username`, `password`, `name`, `father_name`, `dob`, `gender`, `address`, `contact_res`, `contact_cell`, `emergency_contact`, `email`, `blood_group`, `disease`, `allergy`, `drug_allergy`, `status`, `created_at`, `updated_at`) VALUES(4, NULL, '21542-5665384-5', NULL, NULL, 'Yahiya Khan', NULL, '1985-08-06', 'Male', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, '1', '2011-06-20', '2011-06-20');
+-- GO
+INSERT INTO `patient` (`id`, `id_number`, `cnic`, `username`, `password`, `name`, `father_name`, `dob`, `gender`, `address`, `contact_res`, `contact_cell`, `emergency_contact`, `email`, `blood_group`, `disease`, `allergy`, `drug_allergy`, `status`, `created_at`, `updated_at`) VALUES(5, NULL, '61101-9356487-7', NULL, NULL, 'Tehmina Dawood', NULL, '1992-03-10', 'Female', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, '1', '2011-06-20', '2011-06-20');
+-- GO
+INSERT INTO `patient` (`id`, `id_number`, `cnic`, `username`, `password`, `name`, `father_name`, `dob`, `gender`, `address`, `contact_res`, `contact_cell`, `emergency_contact`, `email`, `blood_group`, `disease`, `allergy`, `drug_allergy`, `status`, `created_at`, `updated_at`) VALUES(6, NULL, '20476-5847543-2', NULL, NULL, 'Fatima Baber', NULL, '1982-10-20', 'Female', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, '1', '2011-06-20', '2011-06-20');
+-- GO
 COMMIT;
 -- GO
 
@@ -326,8 +341,10 @@ CREATE TABLE `pharma`
 (
 	`id` integer (11) NOT NULL AUTO_INCREMENT , 
 	`name` varchar (100), 
+	`type` varchar (50), 
 	`strength` varchar (10), 
 	`company` varchar (100), 
+	`price` integer (6), 
 	`status` varchar (10), 
 	`created_at` date, 
 	`updated_at` date,
@@ -340,7 +357,62 @@ CREATE TABLE `pharma`
 --
 BEGIN;
 -- GO
-INSERT INTO `pharma` (`id`, `name`, `strength`, `company`, `status`, `created_at`, `updated_at`) VALUES(1, 'Paracetamol', '100 mg', 'Werrik', '1', '2011-05-23', '2011-05-23');
+INSERT INTO `pharma` (`id`, `name`, `type`, `strength`, `company`, `price`, `status`, `created_at`, `updated_at`) VALUES(1, 'Paracetamol', 'Tab', '100 mg', 'Werrik', NULL, '1', '2011-05-23', '2011-05-23');
+-- GO
+COMMIT;
+-- GO
+
+--
+-- Table: role
+--
+CREATE TABLE `role` 
+(
+	`id` integer (11) NOT NULL AUTO_INCREMENT , 
+	`title` varchar (50), 
+	`status` varchar (10),
+	PRIMARY KEY (`id`)
+) TYPE=InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
+-- GO
+
+--
+-- Dumping Table Data: role
+--
+BEGIN;
+-- GO
+INSERT INTO `role` (`id`, `title`, `status`) VALUES(1, 'Super Administrator', '0');
+-- GO
+INSERT INTO `role` (`id`, `title`, `status`) VALUES(2, 'Administrator', '1');
+-- GO
+INSERT INTO `role` (`id`, `title`, `status`) VALUES(3, 'Doctor', '1');
+-- GO
+INSERT INTO `role` (`id`, `title`, `status`) VALUES(4, 'Front Desk', '1');
+-- GO
+INSERT INTO `role` (`id`, `title`, `status`) VALUES(5, 'Pharma Assistant', '1');
+-- GO
+INSERT INTO `role` (`id`, `title`, `status`) VALUES(6, 'Employee', '1');
+-- GO
+COMMIT;
+-- GO
+
+--
+-- Table: room
+--
+CREATE TABLE `room` 
+(
+	`id` integer (11) NOT NULL AUTO_INCREMENT , 
+	`title` varchar (50), 
+	`description` varchar (255), 
+	`status` varchar (10), 
+	`created_at` date, 
+	`updated_at` date,
+	PRIMARY KEY (`id`)
+) TYPE=InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
+-- GO
+
+--
+-- Dumping Table Data: room
+--
+BEGIN;
 -- GO
 COMMIT;
 -- GO
@@ -369,6 +441,8 @@ BEGIN;
 -- GO
 INSERT INTO `user` (`id`, `role_id`, `employee_id`, `user`, `password`, `status`, `created_at`, `updated_at`) VALUES(1, 1, 4, 'admin', '4e075844d2e00e4c800c8c62716bed8c', '1', '2011-05-27', '2011-05-27');
 -- GO
+INSERT INTO `user` (`id`, `role_id`, `employee_id`, `user`, `password`, `status`, `created_at`, `updated_at`) VALUES(2, 3, 1, 'zeeshancheema', '4e075844d2e00e4c800c8c62716bed8c', '1', '2011-06-20', '2011-06-20');
+-- GO
 COMMIT;
 -- GO
 
@@ -376,6 +450,12 @@ COMMIT;
 -- Index: FK_user_employee
 --
 ALTER TABLE `hospital`.`user` ADD INDEX `FK_user_employee` (`employee_id` );
+-- GO
+
+--
+-- Index: FK_user_role
+--
+ALTER TABLE `hospital`.`user` ADD INDEX `FK_user_role` (`role_id` );
 -- GO
 
 --
@@ -413,6 +493,12 @@ CREATE TABLE `visit`
 BEGIN;
 -- GO
 INSERT INTO `visit` (`id`, `patient_id`, `doctor_id`, `ward_bed_id`, `ward_doc_id`, `visit_type`, `medicine`, `bp`, `temp`, `pulse`, `injection`, `diet`, `description`, `time`, `visit_date`, `fee`, `fee_paid`, `status`, `created_at`, `updated_at`) VALUES(1, 1, 1, NULL, 3, 'Indoor', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1350', '2011-06-17', NULL, NULL, '1', '2011-06-17', '2011-06-17');
+-- GO
+INSERT INTO `visit` (`id`, `patient_id`, `doctor_id`, `ward_bed_id`, `ward_doc_id`, `visit_type`, `medicine`, `bp`, `temp`, `pulse`, `injection`, `diet`, `description`, `time`, `visit_date`, `fee`, `fee_paid`, `status`, `created_at`, `updated_at`) VALUES(2, 1, 1, NULL, 2, 'Indoor', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1350', '2011-06-20', NULL, NULL, '1', '2011-06-20', '2011-06-20');
+-- GO
+INSERT INTO `visit` (`id`, `patient_id`, `doctor_id`, `ward_bed_id`, `ward_doc_id`, `visit_type`, `medicine`, `bp`, `temp`, `pulse`, `injection`, `diet`, `description`, `time`, `visit_date`, `fee`, `fee_paid`, `status`, `created_at`, `updated_at`) VALUES(3, 2, 1, NULL, 2, 'Indoor', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1430', '2011-06-20', NULL, NULL, '1', '2011-06-20', '2011-06-20');
+-- GO
+INSERT INTO `visit` (`id`, `patient_id`, `doctor_id`, `ward_bed_id`, `ward_doc_id`, `visit_type`, `medicine`, `bp`, `temp`, `pulse`, `injection`, `diet`, `description`, `time`, `visit_date`, `fee`, `fee_paid`, `status`, `created_at`, `updated_at`) VALUES(4, 5, 2, NULL, 3, 'Indoor', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1500', '2011-06-20', NULL, NULL, '1', '2011-06-20', '2011-06-20');
 -- GO
 COMMIT;
 -- GO
@@ -543,6 +629,12 @@ ALTER TABLE `employee` ADD CONSTRAINT `FK_employee_designation` FOREIGN KEY (`de
 -- GO
 
 --
+-- Foreign Key Constraint: FK_employee_role
+--
+ALTER TABLE `employee` ADD CONSTRAINT `FK_employee_role` FOREIGN KEY (`role_id`) REFERENCES `role`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+-- GO
+
+--
 -- Foreign Key Constraint: FK_lab_report_lab_test
 --
 ALTER TABLE `lab_report` ADD CONSTRAINT `FK_lab_report_lab_test` FOREIGN KEY (`lab_test_id`) REFERENCES `lab_test`(`id`);
@@ -564,6 +656,12 @@ ALTER TABLE `lab_report` ADD CONSTRAINT `FK_lab_report_visit` FOREIGN KEY (`visi
 -- Foreign Key Constraint: FK_user_employee
 --
 ALTER TABLE `user` ADD CONSTRAINT `FK_user_employee` FOREIGN KEY (`employee_id`) REFERENCES `employee`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+-- GO
+
+--
+-- Foreign Key Constraint: FK_user_role
+--
+ALTER TABLE `user` ADD CONSTRAINT `FK_user_role` FOREIGN KEY (`role_id`) REFERENCES `role`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 -- GO
 
 --
