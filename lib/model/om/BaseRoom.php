@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Base class that represents a row from the 'designation' table.
+ * Base class that represents a row from the 'room' table.
  *
  * 
  *
@@ -11,16 +11,16 @@
  *
  * @package    lib.model.om
  */
-abstract class BaseDesignation extends BaseObject  implements Persistent {
+abstract class BaseRoom extends BaseObject  implements Persistent {
 
 
-  const PEER = 'DesignationPeer';
+  const PEER = 'RoomPeer';
 
 	/**
 	 * The Peer class.
 	 * Instance provides a convenient way of calling static methods on a class
 	 * that calling code may not be able to identify.
-	 * @var        DesignationPeer
+	 * @var        RoomPeer
 	 */
 	protected static $peer;
 
@@ -31,16 +31,16 @@ abstract class BaseDesignation extends BaseObject  implements Persistent {
 	protected $id;
 
 	/**
-	 * The value for the department_id field.
-	 * @var        int
-	 */
-	protected $department_id;
-
-	/**
 	 * The value for the title field.
 	 * @var        string
 	 */
 	protected $title;
+
+	/**
+	 * The value for the description field.
+	 * @var        string
+	 */
+	protected $description;
 
 	/**
 	 * The value for the status field.
@@ -61,21 +61,6 @@ abstract class BaseDesignation extends BaseObject  implements Persistent {
 	protected $updated_at;
 
 	/**
-	 * @var        Department
-	 */
-	protected $aDepartment;
-
-	/**
-	 * @var        array Employee[] Collection to store aggregation of Employee objects.
-	 */
-	protected $collEmployees;
-
-	/**
-	 * @var        Criteria The criteria used to select the current contents of collEmployees.
-	 */
-	private $lastEmployeeCriteria = null;
-
-	/**
 	 * Flag to prevent endless save loop, if this object is referenced
 	 * by another object which falls in this transaction.
 	 * @var        boolean
@@ -90,7 +75,7 @@ abstract class BaseDesignation extends BaseObject  implements Persistent {
 	protected $alreadyInValidation = false;
 
 	/**
-	 * Initializes internal state of BaseDesignation object.
+	 * Initializes internal state of BaseRoom object.
 	 * @see        applyDefaults()
 	 */
 	public function __construct()
@@ -120,16 +105,6 @@ abstract class BaseDesignation extends BaseObject  implements Persistent {
 	}
 
 	/**
-	 * Get the [department_id] column value.
-	 * 
-	 * @return     int
-	 */
-	public function getDepartmentId()
-	{
-		return $this->department_id;
-	}
-
-	/**
 	 * Get the [title] column value.
 	 * 
 	 * @return     string
@@ -137,6 +112,16 @@ abstract class BaseDesignation extends BaseObject  implements Persistent {
 	public function getTitle()
 	{
 		return $this->title;
+	}
+
+	/**
+	 * Get the [description] column value.
+	 * 
+	 * @return     string
+	 */
+	public function getDescription()
+	{
+		return $this->description;
 	}
 
 	/**
@@ -229,7 +214,7 @@ abstract class BaseDesignation extends BaseObject  implements Persistent {
 	 * Set the value of [id] column.
 	 * 
 	 * @param      int $v new value
-	 * @return     Designation The current object (for fluent API support)
+	 * @return     Room The current object (for fluent API support)
 	 */
 	public function setId($v)
 	{
@@ -239,41 +224,17 @@ abstract class BaseDesignation extends BaseObject  implements Persistent {
 
 		if ($this->id !== $v) {
 			$this->id = $v;
-			$this->modifiedColumns[] = DesignationPeer::ID;
+			$this->modifiedColumns[] = RoomPeer::ID;
 		}
 
 		return $this;
 	} // setId()
 
 	/**
-	 * Set the value of [department_id] column.
-	 * 
-	 * @param      int $v new value
-	 * @return     Designation The current object (for fluent API support)
-	 */
-	public function setDepartmentId($v)
-	{
-		if ($v !== null) {
-			$v = (int) $v;
-		}
-
-		if ($this->department_id !== $v) {
-			$this->department_id = $v;
-			$this->modifiedColumns[] = DesignationPeer::DEPARTMENT_ID;
-		}
-
-		if ($this->aDepartment !== null && $this->aDepartment->getId() !== $v) {
-			$this->aDepartment = null;
-		}
-
-		return $this;
-	} // setDepartmentId()
-
-	/**
 	 * Set the value of [title] column.
 	 * 
 	 * @param      string $v new value
-	 * @return     Designation The current object (for fluent API support)
+	 * @return     Room The current object (for fluent API support)
 	 */
 	public function setTitle($v)
 	{
@@ -283,17 +244,37 @@ abstract class BaseDesignation extends BaseObject  implements Persistent {
 
 		if ($this->title !== $v) {
 			$this->title = $v;
-			$this->modifiedColumns[] = DesignationPeer::TITLE;
+			$this->modifiedColumns[] = RoomPeer::TITLE;
 		}
 
 		return $this;
 	} // setTitle()
 
 	/**
+	 * Set the value of [description] column.
+	 * 
+	 * @param      string $v new value
+	 * @return     Room The current object (for fluent API support)
+	 */
+	public function setDescription($v)
+	{
+		if ($v !== null) {
+			$v = (string) $v;
+		}
+
+		if ($this->description !== $v) {
+			$this->description = $v;
+			$this->modifiedColumns[] = RoomPeer::DESCRIPTION;
+		}
+
+		return $this;
+	} // setDescription()
+
+	/**
 	 * Set the value of [status] column.
 	 * 
 	 * @param      string $v new value
-	 * @return     Designation The current object (for fluent API support)
+	 * @return     Room The current object (for fluent API support)
 	 */
 	public function setStatus($v)
 	{
@@ -303,7 +284,7 @@ abstract class BaseDesignation extends BaseObject  implements Persistent {
 
 		if ($this->status !== $v) {
 			$this->status = $v;
-			$this->modifiedColumns[] = DesignationPeer::STATUS;
+			$this->modifiedColumns[] = RoomPeer::STATUS;
 		}
 
 		return $this;
@@ -314,7 +295,7 @@ abstract class BaseDesignation extends BaseObject  implements Persistent {
 	 * 
 	 * @param      mixed $v string, integer (timestamp), or DateTime value.  Empty string will
 	 *						be treated as NULL for temporal objects.
-	 * @return     Designation The current object (for fluent API support)
+	 * @return     Room The current object (for fluent API support)
 	 */
 	public function setCreatedAt($v)
 	{
@@ -351,7 +332,7 @@ abstract class BaseDesignation extends BaseObject  implements Persistent {
 					)
 			{
 				$this->created_at = ($dt ? $dt->format('Y-m-d') : null);
-				$this->modifiedColumns[] = DesignationPeer::CREATED_AT;
+				$this->modifiedColumns[] = RoomPeer::CREATED_AT;
 			}
 		} // if either are not null
 
@@ -363,7 +344,7 @@ abstract class BaseDesignation extends BaseObject  implements Persistent {
 	 * 
 	 * @param      mixed $v string, integer (timestamp), or DateTime value.  Empty string will
 	 *						be treated as NULL for temporal objects.
-	 * @return     Designation The current object (for fluent API support)
+	 * @return     Room The current object (for fluent API support)
 	 */
 	public function setUpdatedAt($v)
 	{
@@ -400,7 +381,7 @@ abstract class BaseDesignation extends BaseObject  implements Persistent {
 					)
 			{
 				$this->updated_at = ($dt ? $dt->format('Y-m-d') : null);
-				$this->modifiedColumns[] = DesignationPeer::UPDATED_AT;
+				$this->modifiedColumns[] = RoomPeer::UPDATED_AT;
 			}
 		} // if either are not null
 
@@ -445,8 +426,8 @@ abstract class BaseDesignation extends BaseObject  implements Persistent {
 		try {
 
 			$this->id = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
-			$this->department_id = ($row[$startcol + 1] !== null) ? (int) $row[$startcol + 1] : null;
-			$this->title = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
+			$this->title = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
+			$this->description = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
 			$this->status = ($row[$startcol + 3] !== null) ? (string) $row[$startcol + 3] : null;
 			$this->created_at = ($row[$startcol + 4] !== null) ? (string) $row[$startcol + 4] : null;
 			$this->updated_at = ($row[$startcol + 5] !== null) ? (string) $row[$startcol + 5] : null;
@@ -459,10 +440,10 @@ abstract class BaseDesignation extends BaseObject  implements Persistent {
 			}
 
 			// FIXME - using NUM_COLUMNS may be clearer.
-			return $startcol + 6; // 6 = DesignationPeer::NUM_COLUMNS - DesignationPeer::NUM_LAZY_LOAD_COLUMNS).
+			return $startcol + 6; // 6 = RoomPeer::NUM_COLUMNS - RoomPeer::NUM_LAZY_LOAD_COLUMNS).
 
 		} catch (Exception $e) {
-			throw new PropelException("Error populating Designation object", $e);
+			throw new PropelException("Error populating Room object", $e);
 		}
 	}
 
@@ -482,9 +463,6 @@ abstract class BaseDesignation extends BaseObject  implements Persistent {
 	public function ensureConsistency()
 	{
 
-		if ($this->aDepartment !== null && $this->department_id !== $this->aDepartment->getId()) {
-			$this->aDepartment = null;
-		}
 	} // ensureConsistency
 
 	/**
@@ -508,13 +486,13 @@ abstract class BaseDesignation extends BaseObject  implements Persistent {
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(DesignationPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(RoomPeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 
 		// We don't need to alter the object instance pool; we're just modifying this instance
 		// already in the pool.
 
-		$stmt = DesignationPeer::doSelectStmt($this->buildPkeyCriteria(), $con);
+		$stmt = RoomPeer::doSelectStmt($this->buildPkeyCriteria(), $con);
 		$row = $stmt->fetch(PDO::FETCH_NUM);
 		$stmt->closeCursor();
 		if (!$row) {
@@ -523,10 +501,6 @@ abstract class BaseDesignation extends BaseObject  implements Persistent {
 		$this->hydrate($row, 0, true); // rehydrate
 
 		if ($deep) {  // also de-associate any related objects?
-
-			$this->aDepartment = null;
-			$this->collEmployees = null;
-			$this->lastEmployeeCriteria = null;
 
 		} // if (deep)
 	}
@@ -543,7 +517,7 @@ abstract class BaseDesignation extends BaseObject  implements Persistent {
 	public function delete(PropelPDO $con = null)
 	{
 
-    foreach (sfMixer::getCallables('BaseDesignation:delete:pre') as $callable)
+    foreach (sfMixer::getCallables('BaseRoom:delete:pre') as $callable)
     {
       $ret = call_user_func($callable, $this, $con);
       if ($ret)
@@ -558,12 +532,12 @@ abstract class BaseDesignation extends BaseObject  implements Persistent {
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(DesignationPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+			$con = Propel::getConnection(RoomPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
 		
 		$con->beginTransaction();
 		try {
-			DesignationPeer::doDelete($this, $con);
+			RoomPeer::doDelete($this, $con);
 			$this->setDeleted(true);
 			$con->commit();
 		} catch (PropelException $e) {
@@ -572,7 +546,7 @@ abstract class BaseDesignation extends BaseObject  implements Persistent {
 		}
 	
 
-    foreach (sfMixer::getCallables('BaseDesignation:delete:post') as $callable)
+    foreach (sfMixer::getCallables('BaseRoom:delete:post') as $callable)
     {
       call_user_func($callable, $this, $con);
     }
@@ -594,7 +568,7 @@ abstract class BaseDesignation extends BaseObject  implements Persistent {
 	public function save(PropelPDO $con = null)
 	{
 
-    foreach (sfMixer::getCallables('BaseDesignation:save:pre') as $callable)
+    foreach (sfMixer::getCallables('BaseRoom:save:pre') as $callable)
     {
       $affectedRows = call_user_func($callable, $this, $con);
       if (is_int($affectedRows))
@@ -604,12 +578,12 @@ abstract class BaseDesignation extends BaseObject  implements Persistent {
     }
 
 
-    if ($this->isNew() && !$this->isColumnModified(DesignationPeer::CREATED_AT))
+    if ($this->isNew() && !$this->isColumnModified(RoomPeer::CREATED_AT))
     {
       $this->setCreatedAt(time());
     }
 
-    if ($this->isModified() && !$this->isColumnModified(DesignationPeer::UPDATED_AT))
+    if ($this->isModified() && !$this->isColumnModified(RoomPeer::UPDATED_AT))
     {
       $this->setUpdatedAt(time());
     }
@@ -619,19 +593,19 @@ abstract class BaseDesignation extends BaseObject  implements Persistent {
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(DesignationPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+			$con = Propel::getConnection(RoomPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
 		
 		$con->beginTransaction();
 		try {
 			$affectedRows = $this->doSave($con);
 			$con->commit();
-    foreach (sfMixer::getCallables('BaseDesignation:save:post') as $callable)
+    foreach (sfMixer::getCallables('BaseRoom:save:post') as $callable)
     {
       call_user_func($callable, $this, $con, $affectedRows);
     }
 
-			DesignationPeer::addInstanceToPool($this);
+			RoomPeer::addInstanceToPool($this);
 			return $affectedRows;
 		} catch (PropelException $e) {
 			$con->rollBack();
@@ -656,26 +630,14 @@ abstract class BaseDesignation extends BaseObject  implements Persistent {
 		if (!$this->alreadyInSave) {
 			$this->alreadyInSave = true;
 
-			// We call the save method on the following object(s) if they
-			// were passed to this object by their coresponding set
-			// method.  This object relates to these object(s) by a
-			// foreign key reference.
-
-			if ($this->aDepartment !== null) {
-				if ($this->aDepartment->isModified() || $this->aDepartment->isNew()) {
-					$affectedRows += $this->aDepartment->save($con);
-				}
-				$this->setDepartment($this->aDepartment);
-			}
-
 			if ($this->isNew() ) {
-				$this->modifiedColumns[] = DesignationPeer::ID;
+				$this->modifiedColumns[] = RoomPeer::ID;
 			}
 
 			// If this object has been modified, then save it to the database.
 			if ($this->isModified()) {
 				if ($this->isNew()) {
-					$pk = DesignationPeer::doInsert($this, $con);
+					$pk = RoomPeer::doInsert($this, $con);
 					$affectedRows += 1; // we are assuming that there is only 1 row per doInsert() which
 										 // should always be true here (even though technically
 										 // BasePeer::doInsert() can insert multiple rows).
@@ -684,18 +646,10 @@ abstract class BaseDesignation extends BaseObject  implements Persistent {
 
 					$this->setNew(false);
 				} else {
-					$affectedRows += DesignationPeer::doUpdate($this, $con);
+					$affectedRows += RoomPeer::doUpdate($this, $con);
 				}
 
 				$this->resetModified(); // [HL] After being saved an object is no longer 'modified'
-			}
-
-			if ($this->collEmployees !== null) {
-				foreach ($this->collEmployees as $referrerFK) {
-					if (!$referrerFK->isDeleted()) {
-						$affectedRows += $referrerFK->save($con);
-					}
-				}
 			}
 
 			$this->alreadyInSave = false;
@@ -764,30 +718,10 @@ abstract class BaseDesignation extends BaseObject  implements Persistent {
 			$failureMap = array();
 
 
-			// We call the validate method on the following object(s) if they
-			// were passed to this object by their coresponding set
-			// method.  This object relates to these object(s) by a
-			// foreign key reference.
-
-			if ($this->aDepartment !== null) {
-				if (!$this->aDepartment->validate($columns)) {
-					$failureMap = array_merge($failureMap, $this->aDepartment->getValidationFailures());
-				}
-			}
-
-
-			if (($retval = DesignationPeer::doValidate($this, $columns)) !== true) {
+			if (($retval = RoomPeer::doValidate($this, $columns)) !== true) {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
-
-				if ($this->collEmployees !== null) {
-					foreach ($this->collEmployees as $referrerFK) {
-						if (!$referrerFK->validate($columns)) {
-							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
-						}
-					}
-				}
 
 
 			$this->alreadyInValidation = false;
@@ -807,7 +741,7 @@ abstract class BaseDesignation extends BaseObject  implements Persistent {
 	 */
 	public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
 	{
-		$pos = DesignationPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+		$pos = RoomPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		$field = $this->getByPosition($pos);
 		return $field;
 	}
@@ -826,10 +760,10 @@ abstract class BaseDesignation extends BaseObject  implements Persistent {
 				return $this->getId();
 				break;
 			case 1:
-				return $this->getDepartmentId();
+				return $this->getTitle();
 				break;
 			case 2:
-				return $this->getTitle();
+				return $this->getDescription();
 				break;
 			case 3:
 				return $this->getStatus();
@@ -859,11 +793,11 @@ abstract class BaseDesignation extends BaseObject  implements Persistent {
 	 */
 	public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true)
 	{
-		$keys = DesignationPeer::getFieldNames($keyType);
+		$keys = RoomPeer::getFieldNames($keyType);
 		$result = array(
 			$keys[0] => $this->getId(),
-			$keys[1] => $this->getDepartmentId(),
-			$keys[2] => $this->getTitle(),
+			$keys[1] => $this->getTitle(),
+			$keys[2] => $this->getDescription(),
 			$keys[3] => $this->getStatus(),
 			$keys[4] => $this->getCreatedAt(),
 			$keys[5] => $this->getUpdatedAt(),
@@ -883,7 +817,7 @@ abstract class BaseDesignation extends BaseObject  implements Persistent {
 	 */
 	public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
 	{
-		$pos = DesignationPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+		$pos = RoomPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->setByPosition($pos, $value);
 	}
 
@@ -902,10 +836,10 @@ abstract class BaseDesignation extends BaseObject  implements Persistent {
 				$this->setId($value);
 				break;
 			case 1:
-				$this->setDepartmentId($value);
+				$this->setTitle($value);
 				break;
 			case 2:
-				$this->setTitle($value);
+				$this->setDescription($value);
 				break;
 			case 3:
 				$this->setStatus($value);
@@ -938,11 +872,11 @@ abstract class BaseDesignation extends BaseObject  implements Persistent {
 	 */
 	public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
 	{
-		$keys = DesignationPeer::getFieldNames($keyType);
+		$keys = RoomPeer::getFieldNames($keyType);
 
 		if (array_key_exists($keys[0], $arr)) $this->setId($arr[$keys[0]]);
-		if (array_key_exists($keys[1], $arr)) $this->setDepartmentId($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setTitle($arr[$keys[2]]);
+		if (array_key_exists($keys[1], $arr)) $this->setTitle($arr[$keys[1]]);
+		if (array_key_exists($keys[2], $arr)) $this->setDescription($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setStatus($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setCreatedAt($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setUpdatedAt($arr[$keys[5]]);
@@ -955,14 +889,14 @@ abstract class BaseDesignation extends BaseObject  implements Persistent {
 	 */
 	public function buildCriteria()
 	{
-		$criteria = new Criteria(DesignationPeer::DATABASE_NAME);
+		$criteria = new Criteria(RoomPeer::DATABASE_NAME);
 
-		if ($this->isColumnModified(DesignationPeer::ID)) $criteria->add(DesignationPeer::ID, $this->id);
-		if ($this->isColumnModified(DesignationPeer::DEPARTMENT_ID)) $criteria->add(DesignationPeer::DEPARTMENT_ID, $this->department_id);
-		if ($this->isColumnModified(DesignationPeer::TITLE)) $criteria->add(DesignationPeer::TITLE, $this->title);
-		if ($this->isColumnModified(DesignationPeer::STATUS)) $criteria->add(DesignationPeer::STATUS, $this->status);
-		if ($this->isColumnModified(DesignationPeer::CREATED_AT)) $criteria->add(DesignationPeer::CREATED_AT, $this->created_at);
-		if ($this->isColumnModified(DesignationPeer::UPDATED_AT)) $criteria->add(DesignationPeer::UPDATED_AT, $this->updated_at);
+		if ($this->isColumnModified(RoomPeer::ID)) $criteria->add(RoomPeer::ID, $this->id);
+		if ($this->isColumnModified(RoomPeer::TITLE)) $criteria->add(RoomPeer::TITLE, $this->title);
+		if ($this->isColumnModified(RoomPeer::DESCRIPTION)) $criteria->add(RoomPeer::DESCRIPTION, $this->description);
+		if ($this->isColumnModified(RoomPeer::STATUS)) $criteria->add(RoomPeer::STATUS, $this->status);
+		if ($this->isColumnModified(RoomPeer::CREATED_AT)) $criteria->add(RoomPeer::CREATED_AT, $this->created_at);
+		if ($this->isColumnModified(RoomPeer::UPDATED_AT)) $criteria->add(RoomPeer::UPDATED_AT, $this->updated_at);
 
 		return $criteria;
 	}
@@ -977,9 +911,9 @@ abstract class BaseDesignation extends BaseObject  implements Persistent {
 	 */
 	public function buildPkeyCriteria()
 	{
-		$criteria = new Criteria(DesignationPeer::DATABASE_NAME);
+		$criteria = new Criteria(RoomPeer::DATABASE_NAME);
 
-		$criteria->add(DesignationPeer::ID, $this->id);
+		$criteria->add(RoomPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -1010,36 +944,22 @@ abstract class BaseDesignation extends BaseObject  implements Persistent {
 	 * If desired, this method can also make copies of all associated (fkey referrers)
 	 * objects.
 	 *
-	 * @param      object $copyObj An object of Designation (or compatible) type.
+	 * @param      object $copyObj An object of Room (or compatible) type.
 	 * @param      boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
 	 * @throws     PropelException
 	 */
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
-		$copyObj->setDepartmentId($this->department_id);
-
 		$copyObj->setTitle($this->title);
+
+		$copyObj->setDescription($this->description);
 
 		$copyObj->setStatus($this->status);
 
 		$copyObj->setCreatedAt($this->created_at);
 
 		$copyObj->setUpdatedAt($this->updated_at);
-
-
-		if ($deepCopy) {
-			// important: temporarily setNew(false) because this affects the behavior of
-			// the getter/setter methods for fkey referrer objects.
-			$copyObj->setNew(false);
-
-			foreach ($this->getEmployees() as $relObj) {
-				if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
-					$copyObj->addEmployee($relObj->copy($deepCopy));
-				}
-			}
-
-		} // if ($deepCopy)
 
 
 		$copyObj->setNew(true);
@@ -1057,7 +977,7 @@ abstract class BaseDesignation extends BaseObject  implements Persistent {
 	 * objects.
 	 *
 	 * @param      boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
-	 * @return     Designation Clone of current object.
+	 * @return     Room Clone of current object.
 	 * @throws     PropelException
 	 */
 	public function copy($deepCopy = false)
@@ -1076,266 +996,14 @@ abstract class BaseDesignation extends BaseObject  implements Persistent {
 	 * same instance for all member of this class. The method could therefore
 	 * be static, but this would prevent one from overriding the behavior.
 	 *
-	 * @return     DesignationPeer
+	 * @return     RoomPeer
 	 */
 	public function getPeer()
 	{
 		if (self::$peer === null) {
-			self::$peer = new DesignationPeer();
+			self::$peer = new RoomPeer();
 		}
 		return self::$peer;
-	}
-
-	/**
-	 * Declares an association between this object and a Department object.
-	 *
-	 * @param      Department $v
-	 * @return     Designation The current object (for fluent API support)
-	 * @throws     PropelException
-	 */
-	public function setDepartment(Department $v = null)
-	{
-		if ($v === null) {
-			$this->setDepartmentId(NULL);
-		} else {
-			$this->setDepartmentId($v->getId());
-		}
-
-		$this->aDepartment = $v;
-
-		// Add binding for other direction of this n:n relationship.
-		// If this object has already been added to the Department object, it will not be re-added.
-		if ($v !== null) {
-			$v->addDesignation($this);
-		}
-
-		return $this;
-	}
-
-
-	/**
-	 * Get the associated Department object
-	 *
-	 * @param      PropelPDO Optional Connection object.
-	 * @return     Department The associated Department object.
-	 * @throws     PropelException
-	 */
-	public function getDepartment(PropelPDO $con = null)
-	{
-		if ($this->aDepartment === null && ($this->department_id !== null)) {
-			$c = new Criteria(DepartmentPeer::DATABASE_NAME);
-			$c->add(DepartmentPeer::ID, $this->department_id);
-			$this->aDepartment = DepartmentPeer::doSelectOne($c, $con);
-			/* The following can be used additionally to
-			   guarantee the related object contains a reference
-			   to this object.  This level of coupling may, however, be
-			   undesirable since it could result in an only partially populated collection
-			   in the referenced object.
-			   $this->aDepartment->addDesignations($this);
-			 */
-		}
-		return $this->aDepartment;
-	}
-
-	/**
-	 * Clears out the collEmployees collection (array).
-	 *
-	 * This does not modify the database; however, it will remove any associated objects, causing
-	 * them to be refetched by subsequent calls to accessor method.
-	 *
-	 * @return     void
-	 * @see        addEmployees()
-	 */
-	public function clearEmployees()
-	{
-		$this->collEmployees = null; // important to set this to NULL since that means it is uninitialized
-	}
-
-	/**
-	 * Initializes the collEmployees collection (array).
-	 *
-	 * By default this just sets the collEmployees collection to an empty array (like clearcollEmployees());
-	 * however, you may wish to override this method in your stub class to provide setting appropriate
-	 * to your application -- for example, setting the initial array to the values stored in database.
-	 *
-	 * @return     void
-	 */
-	public function initEmployees()
-	{
-		$this->collEmployees = array();
-	}
-
-	/**
-	 * Gets an array of Employee objects which contain a foreign key that references this object.
-	 *
-	 * If this collection has already been initialized with an identical Criteria, it returns the collection.
-	 * Otherwise if this Designation has previously been saved, it will retrieve
-	 * related Employees from storage. If this Designation is new, it will return
-	 * an empty collection or the current collection, the criteria is ignored on a new object.
-	 *
-	 * @param      PropelPDO $con
-	 * @param      Criteria $criteria
-	 * @return     array Employee[]
-	 * @throws     PropelException
-	 */
-	public function getEmployees($criteria = null, PropelPDO $con = null)
-	{
-		if ($criteria === null) {
-			$criteria = new Criteria(DesignationPeer::DATABASE_NAME);
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collEmployees === null) {
-			if ($this->isNew()) {
-			   $this->collEmployees = array();
-			} else {
-
-				$criteria->add(EmployeePeer::DESIGNATION_ID, $this->id);
-
-				EmployeePeer::addSelectColumns($criteria);
-				$this->collEmployees = EmployeePeer::doSelect($criteria, $con);
-			}
-		} else {
-			// criteria has no effect for a new object
-			if (!$this->isNew()) {
-				// the following code is to determine if a new query is
-				// called for.  If the criteria is the same as the last
-				// one, just return the collection.
-
-
-				$criteria->add(EmployeePeer::DESIGNATION_ID, $this->id);
-
-				EmployeePeer::addSelectColumns($criteria);
-				if (!isset($this->lastEmployeeCriteria) || !$this->lastEmployeeCriteria->equals($criteria)) {
-					$this->collEmployees = EmployeePeer::doSelect($criteria, $con);
-				}
-			}
-		}
-		$this->lastEmployeeCriteria = $criteria;
-		return $this->collEmployees;
-	}
-
-	/**
-	 * Returns the number of related Employee objects.
-	 *
-	 * @param      Criteria $criteria
-	 * @param      boolean $distinct
-	 * @param      PropelPDO $con
-	 * @return     int Count of related Employee objects.
-	 * @throws     PropelException
-	 */
-	public function countEmployees(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
-	{
-		if ($criteria === null) {
-			$criteria = new Criteria(DesignationPeer::DATABASE_NAME);
-		} else {
-			$criteria = clone $criteria;
-		}
-
-		if ($distinct) {
-			$criteria->setDistinct();
-		}
-
-		$count = null;
-
-		if ($this->collEmployees === null) {
-			if ($this->isNew()) {
-				$count = 0;
-			} else {
-
-				$criteria->add(EmployeePeer::DESIGNATION_ID, $this->id);
-
-				$count = EmployeePeer::doCount($criteria, $con);
-			}
-		} else {
-			// criteria has no effect for a new object
-			if (!$this->isNew()) {
-				// the following code is to determine if a new query is
-				// called for.  If the criteria is the same as the last
-				// one, just return count of the collection.
-
-
-				$criteria->add(EmployeePeer::DESIGNATION_ID, $this->id);
-
-				if (!isset($this->lastEmployeeCriteria) || !$this->lastEmployeeCriteria->equals($criteria)) {
-					$count = EmployeePeer::doCount($criteria, $con);
-				} else {
-					$count = count($this->collEmployees);
-				}
-			} else {
-				$count = count($this->collEmployees);
-			}
-		}
-		return $count;
-	}
-
-	/**
-	 * Method called to associate a Employee object to this object
-	 * through the Employee foreign key attribute.
-	 *
-	 * @param      Employee $l Employee
-	 * @return     void
-	 * @throws     PropelException
-	 */
-	public function addEmployee(Employee $l)
-	{
-		if ($this->collEmployees === null) {
-			$this->initEmployees();
-		}
-		if (!in_array($l, $this->collEmployees, true)) { // only add it if the **same** object is not already associated
-			array_push($this->collEmployees, $l);
-			$l->setDesignation($this);
-		}
-	}
-
-
-	/**
-	 * If this collection has already been initialized with
-	 * an identical criteria, it returns the collection.
-	 * Otherwise if this Designation is new, it will return
-	 * an empty collection; or if this Designation has previously
-	 * been saved, it will retrieve related Employees from storage.
-	 *
-	 * This method is protected by default in order to keep the public
-	 * api reasonable.  You can provide public methods for those you
-	 * actually need in Designation.
-	 */
-	public function getEmployeesJoinDepartment($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
-	{
-		if ($criteria === null) {
-			$criteria = new Criteria(DesignationPeer::DATABASE_NAME);
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collEmployees === null) {
-			if ($this->isNew()) {
-				$this->collEmployees = array();
-			} else {
-
-				$criteria->add(EmployeePeer::DESIGNATION_ID, $this->id);
-
-				$this->collEmployees = EmployeePeer::doSelectJoinDepartment($criteria, $con, $join_behavior);
-			}
-		} else {
-			// the following code is to determine if a new query is
-			// called for.  If the criteria is the same as the last
-			// one, just return the collection.
-
-			$criteria->add(EmployeePeer::DESIGNATION_ID, $this->id);
-
-			if (!isset($this->lastEmployeeCriteria) || !$this->lastEmployeeCriteria->equals($criteria)) {
-				$this->collEmployees = EmployeePeer::doSelectJoinDepartment($criteria, $con, $join_behavior);
-			}
-		}
-		$this->lastEmployeeCriteria = $criteria;
-
-		return $this->collEmployees;
 	}
 
 	/**
@@ -1350,23 +1018,16 @@ abstract class BaseDesignation extends BaseObject  implements Persistent {
 	public function clearAllReferences($deep = false)
 	{
 		if ($deep) {
-			if ($this->collEmployees) {
-				foreach ((array) $this->collEmployees as $o) {
-					$o->clearAllReferences($deep);
-				}
-			}
 		} // if ($deep)
 
-		$this->collEmployees = null;
-			$this->aDepartment = null;
 	}
 
 
   public function __call($method, $arguments)
   {
-    if (!$callable = sfMixer::getCallable('BaseDesignation:'.$method))
+    if (!$callable = sfMixer::getCallable('BaseRoom:'.$method))
     {
-      throw new sfException(sprintf('Call to undefined method BaseDesignation::%s', $method));
+      throw new sfException(sprintf('Call to undefined method BaseRoom::%s', $method));
     }
 
     array_unshift($arguments, $this);
@@ -1375,4 +1036,4 @@ abstract class BaseDesignation extends BaseObject  implements Persistent {
   }
 
 
-} // BaseDesignation
+} // BaseRoom

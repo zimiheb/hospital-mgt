@@ -113,6 +113,19 @@ propel:
     status: { type: VARCHAR, size: '10', required: false }
     created_at: { type: DATE, required: false }
     updated_at: { type: DATE, required: false }
+  role:
+    _attributes: { phpName: Role }
+    id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }
+    title: { type: VARCHAR, size: '50', required: false }
+    status: { type: VARCHAR, size: '10', required: false }
+  room:
+    _attributes: { phpName: Room }
+    id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }
+    title: { type: VARCHAR, size: '50', required: false }
+    description: { type: VARCHAR, size: '255', required: false }
+    status: { type: VARCHAR, size: '10', required: false }
+    created_at: { type: DATE, required: false }
+    updated_at: { type: DATE, required: false }
   user:
     _attributes: { phpName: User }
     id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }
