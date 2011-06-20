@@ -22,6 +22,9 @@ public function executeLogin (sfWebRequest $request) {
 public function executeModule (sfWebRequest $request) {
 	$this->redirect ('Home/index');
 	}
-	
+
+/*public function executeError404 (sfWebRequest $request) {
+	$this->forward404();
+	}	*/
 
 }

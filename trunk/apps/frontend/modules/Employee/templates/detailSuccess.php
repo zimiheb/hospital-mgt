@@ -112,7 +112,7 @@
 </tr>
 
 
-<!--<tr class="datagrid">
+<tr class="datagrid">
 	<th colspan="4">System Authentication Information</th>
 </tr>
 
@@ -122,13 +122,12 @@
 	<td>&nbsp;
 	<?php 
 	if($user != NULL):
-	//echo $user->getUser();
+	echo $user->getUser();
 	else:
-	//echo link_to('Assign Credintials', 'Register/giveCredential?employee='.Utility::EncryptQueryString($employee->getId()) );
+	echo link_to('Assign Credintials', 'Employee/giveCredential?employee='.Utility::EncryptQueryString($employee->getId()) );
 	endif;
 	?> </td>
-<td>Department:</td>
-	<td>&nbsp;<?php //echo $employee->getDepartment();?> </td>-->
+<td colspan="2">&nbsp;</td>
 </tr>
 </table>
 			</div>

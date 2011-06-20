@@ -1,20 +1,7 @@
 <?php
 
-/**
- * Employee actions.
- *
- * @package    hospital
- * @subpackage Employee
- * @author     Your name here
- * @version    SVN: $Id: actions.class.php 12479 2008-10-31 10:54:40Z fabien $
- */
 class EmployeeActions extends sfActions
 {
- /**
-  * Executes index action
-  *
-  * @param sfRequest $request A request object
-  */
   public function executeIndex(sfWebRequest $request)
   {
     $this->forward('Employee', 'list');
@@ -24,7 +11,7 @@ class EmployeeActions extends sfActions
 	{
 	$c = new Criteria();
 	$c->add(EmployeePeer::STATUS, Constant::RECORD_STATUS_DELETED, Criteria::NOT_EQUAL);
-	//$c->add(EmployeePeer::ROLE_ID, 1 , Criteria::NOT_EQUAL);
+	$c->add(EmployeePeer::ROLE_ID, 1 , Criteria::NOT_EQUAL);
 	$c->addAscendingOrderByColumn(EmployeePeer::DEPARTMENT_ID);
 	$this->employees = EmployeePeer::doSelect($c);
 	} // - END - executeList
@@ -156,25 +143,19 @@ class EmployeeActions extends sfActions
 			$employee = new Employee();
 			
 			$employee->setName($this->getRequestParameter('name'));
-			//$employee->setFatherName($this->getRequestParameter('father_name'));
 			$employee->setCnic($this->getRequestParameter('cnic'));
 			$employee->setDob($this->getRequestParameter('dob'));
-			//$employee->setBloodGroup($this->getRequestParameter('blood_group'));
-			//$employee->setDisease($this->getRequestParameter('disease'));
 			$employee->setGender($this->getRequestParameter('gender[0]'));
 			$employee->setContactCell($this->getRequestParameter('contact_cell'));
 			$employee->setContactRes($this->getRequestParameter('contact_res'));
 			$employee->setContactOff($this->getRequestParameter('contact_off'));
 			$employee->setEmergencyContact($this->getRequestParameter('emergency_contact'));
 			$employee->setMailAddress($this->getRequestParameter('mail_address'));
-			//$employee->setPermanentAddress($this->getRequestParameter('permanent_address'));
 			$employee->setDesignationId($this->getRequestParameter('designation_id'));
 			$employee->setDepartmentId($department_id);
 			//$employee->setRoleId(2);
-			//$employee->setBeltNo($this->getRequestParameter('belt_no'));
 			$employee->setEmploymentDate($this->getRequestParameter('employment_date'));
 			$employee->setLocalResident($this->getRequestParameter('local[0]'));
-			//$employee->setExperienceYear($this->getRequestParameter('experience_year'));
 			$employee->setQualification($this->getRequestParameter('qualification'));
 			$employee->setEmpCategory('staff');
 			$employee->setStatus(Constant::RECORD_STATUS_ACTIVE);
@@ -258,19 +239,12 @@ class EmployeeActions extends sfActions
 	
 	$this->employee = EmployeePeer::retrieveByPk(Utility::DecryptQueryString($request->getParameter('employee')));
 	
-/*	$this->region_id = Utility::DecryptQueryString($request->getParameter('region'));
-	$this->office_id = Utility::DecryptQueryString($request->getParameter('office'));
-	$this->partner_id = Utility::DecryptQueryString($request->getParameter('partner'));
-*/			
 	} // end else
-	 } // - END - executeEdit	
+ } // - END - executeEdit	
 
 public function executeDelete (sfWebRequest $request)
 	{
-
 		$user = EmployeePeer::retrieveByPk(Utility::DecryptQueryString($request->getParameter('id')));
-		
-		
 		if($user)
 		{
 			$user->setStatus(Constant::RECORD_STATUS_DELETED);
@@ -297,9 +271,34 @@ public function executeDetail(sfWebRequest $request)
 		$employee_id = $emp->getId();
 		
 		$c = new Criteria;
-		//$c->add(UserPeer::EMPLOYEE_ID, $employee_id);
+		$c->add(UserPeer::EMPLOYEE_ID, $employee_id);
 		$this->user = UserPeer::doSelectOne($c);
 	} // - END - executeDetail
+	
+public function executeGiveCredential(sfWebRequest $request)
+	{
+	if ($request->isMethod('Post'))
+		{
+			$password = md5($this->getRequestParameter('password'));
+			
+			$user = new User();
+			$user->setEmployeeId($this->getRequestParameter('employee_id'));
+			$user->setUser($this->getRequestParameter('user_name'));
+			$user->setPassword($password);
+			$user->setRoleId($this->getRequestParameter('role_id'));
+			$user->setStatus(Constant::RECORD_STATUS_ACTIVE);
+			
+			$user->save();
+			$this->getUser()->setFlash( 'SUCCESS_MESSAGE', 'Credentials Assigned Successfully.');
+			$this->redirect('Employee/detail?employee='.Utility::EncryptQueryString($this->getRequestParameter('employee_id')));
+			
+		}
+	else
+		{
+		$this->employee = EmployeePeer::retrieveByPk(Utility::DecryptQueryString($request->getParameter('employee')));
+		}
+	
+	}// - END - exectueGiveCredentials
 
 
 }// END class EmployeeActions

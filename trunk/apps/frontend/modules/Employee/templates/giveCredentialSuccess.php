@@ -1,30 +1,12 @@
 <?php use_helper ('Form','DateForm','Object') ?>
-<?php echo form_tag('Register/giveCredential') ?>
-
+<?php use_javascript('jquery-1.3.2.min.js') ?>
+<?php echo form_tag('Employee/giveCredential') ?>
 <?php echo input_hidden_tag('employee_id', $employee->getId()); ?>
-
-<table width="100%" border="0" cellpadding="0" cellspacing="0">
-	<tbody>
-		<tr>
-			<td colspan="2" nowrap="nowrap">
-				<table width="100%" border="0" cellspacing="0" cellpadding="0" class="school_hdng">
-					<tr>
-					<td><h2>Assign Credentials to: <span><?php echo $employee->getName() ;?></span></h2></td>
-					<td align="right"><h3>&nbsp;</h3></td>
-					</tr>
-					
-				</table>
-			</td>
-		</tr>
-		<tr>
-			<td width="461" nowrap="nowrap" class="heading"></td>
-			<td width="464"  align="right"></td>
-		</tr>
-		<tr>
-			<td height="20" colspan="2">&nbsp;</td>
-		</tr>
-	</tbody>
-</table>
+<div id="main_content">
+	<div class="box_content">
+	<div class="box_title">	<h2><span class="dark_blue">Give Credentials to Employee: </span><?php echo $employee->getName() ;?></h2></div>
+	<div class="box_text_content">
+	<div class="box_text">
 
 
 <table width="100%" cellpadding="0" cellspacing="0"  align="left" border="0" class="form">
@@ -37,8 +19,8 @@
 </tr>
 
 <tr height="30">
-	<td width="10%">Username:<span class="error"> *</span></td>
-	<td width="90%" colspan="2"> <?php echo input_tag('user_name','','size=35'); ?>
+	<td width="13%">Username:<span class="error"> *</span></td>
+	<td width="87%" colspan="2"> <?php echo input_tag('user_name','','size=35'); ?>
 	<script type="text/javascript">
 	var user_name = new LiveValidation('user_name', { validMessage: "<?php echo Constant::VALIDATION_SUCCESS;?>", wait:500});
 	user_name.add( Validate.Presence,{ failureMessage: "<?php echo Constant::VALIDATION_REQUIRED_FIELD;?>"});
@@ -57,6 +39,11 @@
 	</script>	</td>
 </tr>
 
+<tr height="30">
+	<td>System Role:<span class="error"> *</span></td>
+	<td colspan="3"> <?php echo object_select_tag('', '', array ( 'name'=>'role_id', 'id'=>'role_id', 'related_class' => 'Role' , 'peer_method' => 'GetRole')); ?></td>
+</tr>
+
 <tr>
 	<td height="50" colspan="2"><span class="error">* Username once entered, cannot be changed afterwards.</span><br />
 								<span class="error">* Only use Chatacher, Digits, Underscore and Dots for valid Username.</span></td>
@@ -73,3 +60,8 @@
     </table></td>
   </tr>
 </table>
+	</div>
+	</div>
+	</div>
+	<div class="clear"></div>    
+</div>
