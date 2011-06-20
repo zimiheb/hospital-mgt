@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Base static class for performing query and update operations on the 'patient' table.
+ * Base static class for performing query and update operations on the 'role' table.
  *
  * 
  *
@@ -11,91 +11,37 @@
  *
  * @package    lib.model.om
  */
-abstract class BasePatientPeer {
+abstract class BaseRolePeer {
 
 	/** the default database name for this class */
 	const DATABASE_NAME = 'propel';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'patient';
+	const TABLE_NAME = 'role';
 
 	/** A class that can be returned by this peer. */
-	const CLASS_DEFAULT = 'lib.model.Patient';
+	const CLASS_DEFAULT = 'lib.model.Role';
 
 	/** The total number of columns. */
-	const NUM_COLUMNS = 21;
+	const NUM_COLUMNS = 3;
 
 	/** The number of lazy-loaded columns. */
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 	/** the column name for the ID field */
-	const ID = 'patient.ID';
+	const ID = 'role.ID';
 
-	/** the column name for the ID_NUMBER field */
-	const ID_NUMBER = 'patient.ID_NUMBER';
-
-	/** the column name for the CNIC field */
-	const CNIC = 'patient.CNIC';
-
-	/** the column name for the USERNAME field */
-	const USERNAME = 'patient.USERNAME';
-
-	/** the column name for the PASSWORD field */
-	const PASSWORD = 'patient.PASSWORD';
-
-	/** the column name for the NAME field */
-	const NAME = 'patient.NAME';
-
-	/** the column name for the FATHER_NAME field */
-	const FATHER_NAME = 'patient.FATHER_NAME';
-
-	/** the column name for the DOB field */
-	const DOB = 'patient.DOB';
-
-	/** the column name for the GENDER field */
-	const GENDER = 'patient.GENDER';
-
-	/** the column name for the ADDRESS field */
-	const ADDRESS = 'patient.ADDRESS';
-
-	/** the column name for the CONTACT_RES field */
-	const CONTACT_RES = 'patient.CONTACT_RES';
-
-	/** the column name for the CONTACT_CELL field */
-	const CONTACT_CELL = 'patient.CONTACT_CELL';
-
-	/** the column name for the EMERGENCY_CONTACT field */
-	const EMERGENCY_CONTACT = 'patient.EMERGENCY_CONTACT';
-
-	/** the column name for the EMAIL field */
-	const EMAIL = 'patient.EMAIL';
-
-	/** the column name for the BLOOD_GROUP field */
-	const BLOOD_GROUP = 'patient.BLOOD_GROUP';
-
-	/** the column name for the DISEASE field */
-	const DISEASE = 'patient.DISEASE';
-
-	/** the column name for the ALLERGY field */
-	const ALLERGY = 'patient.ALLERGY';
-
-	/** the column name for the DRUG_ALLERGY field */
-	const DRUG_ALLERGY = 'patient.DRUG_ALLERGY';
+	/** the column name for the TITLE field */
+	const TITLE = 'role.TITLE';
 
 	/** the column name for the STATUS field */
-	const STATUS = 'patient.STATUS';
-
-	/** the column name for the CREATED_AT field */
-	const CREATED_AT = 'patient.CREATED_AT';
-
-	/** the column name for the UPDATED_AT field */
-	const UPDATED_AT = 'patient.UPDATED_AT';
+	const STATUS = 'role.STATUS';
 
 	/**
-	 * An identiy map to hold any loaded instances of Patient objects.
+	 * An identiy map to hold any loaded instances of Role objects.
 	 * This must be public so that other peer classes can access this when hydrating from JOIN
 	 * queries.
-	 * @var        array Patient[]
+	 * @var        array Role[]
 	 */
 	public static $instances = array();
 
@@ -112,11 +58,11 @@ abstract class BasePatientPeer {
 	 * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
 	 */
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Id', 'IdNumber', 'Cnic', 'Username', 'Password', 'Name', 'FatherName', 'Dob', 'Gender', 'Address', 'ContactRes', 'ContactCell', 'EmergencyContact', 'Email', 'BloodGroup', 'Disease', 'Allergy', 'DrugAllergy', 'Status', 'CreatedAt', 'UpdatedAt', ),
-		BasePeer::TYPE_STUDLYPHPNAME => array ('id', 'idNumber', 'cnic', 'username', 'password', 'name', 'fatherName', 'dob', 'gender', 'address', 'contactRes', 'contactCell', 'emergencyContact', 'email', 'bloodGroup', 'disease', 'allergy', 'drugAllergy', 'status', 'createdAt', 'updatedAt', ),
-		BasePeer::TYPE_COLNAME => array (self::ID, self::ID_NUMBER, self::CNIC, self::USERNAME, self::PASSWORD, self::NAME, self::FATHER_NAME, self::DOB, self::GENDER, self::ADDRESS, self::CONTACT_RES, self::CONTACT_CELL, self::EMERGENCY_CONTACT, self::EMAIL, self::BLOOD_GROUP, self::DISEASE, self::ALLERGY, self::DRUG_ALLERGY, self::STATUS, self::CREATED_AT, self::UPDATED_AT, ),
-		BasePeer::TYPE_FIELDNAME => array ('id', 'id_number', 'cnic', 'username', 'password', 'name', 'father_name', 'dob', 'gender', 'address', 'contact_res', 'contact_cell', 'emergency_contact', 'email', 'blood_group', 'disease', 'allergy', 'drug_allergy', 'status', 'created_at', 'updated_at', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, )
+		BasePeer::TYPE_PHPNAME => array ('Id', 'Title', 'Status', ),
+		BasePeer::TYPE_STUDLYPHPNAME => array ('id', 'title', 'status', ),
+		BasePeer::TYPE_COLNAME => array (self::ID, self::TITLE, self::STATUS, ),
+		BasePeer::TYPE_FIELDNAME => array ('id', 'title', 'status', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, )
 	);
 
 	/**
@@ -126,11 +72,11 @@ abstract class BasePatientPeer {
 	 * e.g. self::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
 	 */
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'IdNumber' => 1, 'Cnic' => 2, 'Username' => 3, 'Password' => 4, 'Name' => 5, 'FatherName' => 6, 'Dob' => 7, 'Gender' => 8, 'Address' => 9, 'ContactRes' => 10, 'ContactCell' => 11, 'EmergencyContact' => 12, 'Email' => 13, 'BloodGroup' => 14, 'Disease' => 15, 'Allergy' => 16, 'DrugAllergy' => 17, 'Status' => 18, 'CreatedAt' => 19, 'UpdatedAt' => 20, ),
-		BasePeer::TYPE_STUDLYPHPNAME => array ('id' => 0, 'idNumber' => 1, 'cnic' => 2, 'username' => 3, 'password' => 4, 'name' => 5, 'fatherName' => 6, 'dob' => 7, 'gender' => 8, 'address' => 9, 'contactRes' => 10, 'contactCell' => 11, 'emergencyContact' => 12, 'email' => 13, 'bloodGroup' => 14, 'disease' => 15, 'allergy' => 16, 'drugAllergy' => 17, 'status' => 18, 'createdAt' => 19, 'updatedAt' => 20, ),
-		BasePeer::TYPE_COLNAME => array (self::ID => 0, self::ID_NUMBER => 1, self::CNIC => 2, self::USERNAME => 3, self::PASSWORD => 4, self::NAME => 5, self::FATHER_NAME => 6, self::DOB => 7, self::GENDER => 8, self::ADDRESS => 9, self::CONTACT_RES => 10, self::CONTACT_CELL => 11, self::EMERGENCY_CONTACT => 12, self::EMAIL => 13, self::BLOOD_GROUP => 14, self::DISEASE => 15, self::ALLERGY => 16, self::DRUG_ALLERGY => 17, self::STATUS => 18, self::CREATED_AT => 19, self::UPDATED_AT => 20, ),
-		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'id_number' => 1, 'cnic' => 2, 'username' => 3, 'password' => 4, 'name' => 5, 'father_name' => 6, 'dob' => 7, 'gender' => 8, 'address' => 9, 'contact_res' => 10, 'contact_cell' => 11, 'emergency_contact' => 12, 'email' => 13, 'blood_group' => 14, 'disease' => 15, 'allergy' => 16, 'drug_allergy' => 17, 'status' => 18, 'created_at' => 19, 'updated_at' => 20, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, )
+		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'Title' => 1, 'Status' => 2, ),
+		BasePeer::TYPE_STUDLYPHPNAME => array ('id' => 0, 'title' => 1, 'status' => 2, ),
+		BasePeer::TYPE_COLNAME => array (self::ID => 0, self::TITLE => 1, self::STATUS => 2, ),
+		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'title' => 1, 'status' => 2, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, )
 	);
 
 	/**
@@ -140,7 +86,7 @@ abstract class BasePatientPeer {
 	public static function getMapBuilder()
 	{
 		if (self::$mapBuilder === null) {
-			self::$mapBuilder = new PatientMapBuilder();
+			self::$mapBuilder = new RoleMapBuilder();
 		}
 		return self::$mapBuilder;
 	}
@@ -190,12 +136,12 @@ abstract class BasePatientPeer {
 	 *		$c->addJoin(TablePeer::alias("alias1", TablePeer::PRIMARY_KEY_COLUMN), TablePeer::PRIMARY_KEY_COLUMN);
 	 * </code>
 	 * @param      string $alias The alias for the current table.
-	 * @param      string $column The column name for current table. (i.e. PatientPeer::COLUMN_NAME).
+	 * @param      string $column The column name for current table. (i.e. RolePeer::COLUMN_NAME).
 	 * @return     string
 	 */
 	public static function alias($alias, $column)
 	{
-		return str_replace(PatientPeer::TABLE_NAME.'.', $alias.'.', $column);
+		return str_replace(RolePeer::TABLE_NAME.'.', $alias.'.', $column);
 	}
 
 	/**
@@ -212,47 +158,11 @@ abstract class BasePatientPeer {
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
-		$criteria->addSelectColumn(PatientPeer::ID);
+		$criteria->addSelectColumn(RolePeer::ID);
 
-		$criteria->addSelectColumn(PatientPeer::ID_NUMBER);
+		$criteria->addSelectColumn(RolePeer::TITLE);
 
-		$criteria->addSelectColumn(PatientPeer::CNIC);
-
-		$criteria->addSelectColumn(PatientPeer::USERNAME);
-
-		$criteria->addSelectColumn(PatientPeer::PASSWORD);
-
-		$criteria->addSelectColumn(PatientPeer::NAME);
-
-		$criteria->addSelectColumn(PatientPeer::FATHER_NAME);
-
-		$criteria->addSelectColumn(PatientPeer::DOB);
-
-		$criteria->addSelectColumn(PatientPeer::GENDER);
-
-		$criteria->addSelectColumn(PatientPeer::ADDRESS);
-
-		$criteria->addSelectColumn(PatientPeer::CONTACT_RES);
-
-		$criteria->addSelectColumn(PatientPeer::CONTACT_CELL);
-
-		$criteria->addSelectColumn(PatientPeer::EMERGENCY_CONTACT);
-
-		$criteria->addSelectColumn(PatientPeer::EMAIL);
-
-		$criteria->addSelectColumn(PatientPeer::BLOOD_GROUP);
-
-		$criteria->addSelectColumn(PatientPeer::DISEASE);
-
-		$criteria->addSelectColumn(PatientPeer::ALLERGY);
-
-		$criteria->addSelectColumn(PatientPeer::DRUG_ALLERGY);
-
-		$criteria->addSelectColumn(PatientPeer::STATUS);
-
-		$criteria->addSelectColumn(PatientPeer::CREATED_AT);
-
-		$criteria->addSelectColumn(PatientPeer::UPDATED_AT);
+		$criteria->addSelectColumn(RolePeer::STATUS);
 
 	}
 
@@ -272,27 +182,27 @@ abstract class BasePatientPeer {
 		// We need to set the primary table name, since in the case that there are no WHERE columns
 		// it will be impossible for the BasePeer::createSelectSql() method to determine which
 		// tables go into the FROM clause.
-		$criteria->setPrimaryTableName(PatientPeer::TABLE_NAME);
+		$criteria->setPrimaryTableName(RolePeer::TABLE_NAME);
 
 		if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
 			$criteria->setDistinct();
 		}
 
 		if (!$criteria->hasSelectClause()) {
-			PatientPeer::addSelectColumns($criteria);
+			RolePeer::addSelectColumns($criteria);
 		}
 
 		$criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
 		$criteria->setDbName(self::DATABASE_NAME); // Set the correct dbName
 
 		if ($con === null) {
-			$con = Propel::getConnection(PatientPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(RolePeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 
 
-    foreach (sfMixer::getCallables('BasePatientPeer:doCount:doCount') as $callable)
+    foreach (sfMixer::getCallables('BaseRolePeer:doCount:doCount') as $callable)
     {
-      call_user_func($callable, 'BasePatientPeer', $criteria, $con);
+      call_user_func($callable, 'BaseRolePeer', $criteria, $con);
     }
 
 
@@ -312,7 +222,7 @@ abstract class BasePatientPeer {
 	 *
 	 * @param      Criteria $criteria object used to create the SELECT statement.
 	 * @param      PropelPDO $con
-	 * @return     Patient
+	 * @return     Role
 	 * @throws     PropelException Any exceptions caught during processing will be
 	 *		 rethrown wrapped into a PropelException.
 	 */
@@ -320,7 +230,7 @@ abstract class BasePatientPeer {
 	{
 		$critcopy = clone $criteria;
 		$critcopy->setLimit(1);
-		$objects = PatientPeer::doSelect($critcopy, $con);
+		$objects = RolePeer::doSelect($critcopy, $con);
 		if ($objects) {
 			return $objects[0];
 		}
@@ -337,7 +247,7 @@ abstract class BasePatientPeer {
 	 */
 	public static function doSelect(Criteria $criteria, PropelPDO $con = null)
 	{
-		return PatientPeer::populateObjects(PatientPeer::doSelectStmt($criteria, $con));
+		return RolePeer::populateObjects(RolePeer::doSelectStmt($criteria, $con));
 	}
 	/**
 	 * Prepares the Criteria object and uses the parent doSelect() method to execute a PDOStatement.
@@ -355,19 +265,19 @@ abstract class BasePatientPeer {
 	public static function doSelectStmt(Criteria $criteria, PropelPDO $con = null)
 	{
 
-    foreach (sfMixer::getCallables('BasePatientPeer:doSelectStmt:doSelectStmt') as $callable)
+    foreach (sfMixer::getCallables('BaseRolePeer:doSelectStmt:doSelectStmt') as $callable)
     {
-      call_user_func($callable, 'BasePatientPeer', $criteria, $con);
+      call_user_func($callable, 'BaseRolePeer', $criteria, $con);
     }
 
 
 		if ($con === null) {
-			$con = Propel::getConnection(PatientPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(RolePeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 
 		if (!$criteria->hasSelectClause()) {
 			$criteria = clone $criteria;
-			PatientPeer::addSelectColumns($criteria);
+			RolePeer::addSelectColumns($criteria);
 		}
 
 		// Set the correct dbName
@@ -385,10 +295,10 @@ abstract class BasePatientPeer {
 	 * to the cache in order to ensure that the same objects are always returned by doSelect*()
 	 * and retrieveByPK*() calls.
 	 *
-	 * @param      Patient $value A Patient object.
+	 * @param      Role $value A Role object.
 	 * @param      string $key (optional) key to use for instance map (for performance boost if key was already calculated externally).
 	 */
-	public static function addInstanceToPool(Patient $obj, $key = null)
+	public static function addInstanceToPool(Role $obj, $key = null)
 	{
 		if (Propel::isInstancePoolingEnabled()) {
 			if ($key === null) {
@@ -406,18 +316,18 @@ abstract class BasePatientPeer {
 	 * methods in your stub classes -- you may need to explicitly remove objects
 	 * from the cache in order to prevent returning objects that no longer exist.
 	 *
-	 * @param      mixed $value A Patient object or a primary key value.
+	 * @param      mixed $value A Role object or a primary key value.
 	 */
 	public static function removeInstanceFromPool($value)
 	{
 		if (Propel::isInstancePoolingEnabled() && $value !== null) {
-			if (is_object($value) && $value instanceof Patient) {
+			if (is_object($value) && $value instanceof Role) {
 				$key = (string) $value->getId();
 			} elseif (is_scalar($value)) {
 				// assume we've been passed a primary key
 				$key = (string) $value;
 			} else {
-				$e = new PropelException("Invalid value passed to removeInstanceFromPool().  Expected primary key or Patient object; got " . (is_object($value) ? get_class($value) . ' object.' : var_export($value,true)));
+				$e = new PropelException("Invalid value passed to removeInstanceFromPool().  Expected primary key or Role object; got " . (is_object($value) ? get_class($value) . ' object.' : var_export($value,true)));
 				throw $e;
 			}
 
@@ -432,7 +342,7 @@ abstract class BasePatientPeer {
 	 * a multi-column primary key, a serialize()d version of the primary key will be returned.
 	 *
 	 * @param      string $key The key (@see getPrimaryKeyHash()) for this instance.
-	 * @return     Patient Found object or NULL if 1) no instance exists for specified key or 2) instance pooling has been disabled.
+	 * @return     Role Found object or NULL if 1) no instance exists for specified key or 2) instance pooling has been disabled.
 	 * @see        getPrimaryKeyHash()
 	 */
 	public static function getInstanceFromPool($key)
@@ -486,12 +396,12 @@ abstract class BasePatientPeer {
 		$results = array();
 	
 		// set the class once to avoid overhead in the loop
-		$cls = PatientPeer::getOMClass();
+		$cls = RolePeer::getOMClass();
 		$cls = substr('.'.$cls, strrpos('.'.$cls, '.') + 1);
 		// populate the object(s)
 		while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-			$key = PatientPeer::getPrimaryKeyHashFromRow($row, 0);
-			if (null !== ($obj = PatientPeer::getInstanceFromPool($key))) {
+			$key = RolePeer::getPrimaryKeyHashFromRow($row, 0);
+			if (null !== ($obj = RolePeer::getInstanceFromPool($key))) {
 				// We no longer rehydrate the object, since this can cause data loss.
 				// See http://propel.phpdb.org/trac/ticket/509
 				// $obj->hydrate($row, 0, true); // rehydrate
@@ -501,7 +411,7 @@ abstract class BasePatientPeer {
 				$obj = new $cls();
 				$obj->hydrate($row);
 				$results[] = $obj;
-				PatientPeer::addInstanceToPool($obj, $key);
+				RolePeer::addInstanceToPool($obj, $key);
 			} // if key exists
 		}
 		$stmt->closeCursor();
@@ -535,13 +445,13 @@ abstract class BasePatientPeer {
 	 */
 	public static function getOMClass()
 	{
-		return PatientPeer::CLASS_DEFAULT;
+		return RolePeer::CLASS_DEFAULT;
 	}
 
 	/**
-	 * Method perform an INSERT on the database, given a Patient or Criteria object.
+	 * Method perform an INSERT on the database, given a Role or Criteria object.
 	 *
-	 * @param      mixed $values Criteria or Patient object containing data that is used to create the INSERT statement.
+	 * @param      mixed $values Criteria or Role object containing data that is used to create the INSERT statement.
 	 * @param      PropelPDO $con the PropelPDO connection to use
 	 * @return     mixed The new primary key.
 	 * @throws     PropelException Any exceptions caught during processing will be
@@ -550,9 +460,9 @@ abstract class BasePatientPeer {
 	public static function doInsert($values, PropelPDO $con = null)
 	{
 
-    foreach (sfMixer::getCallables('BasePatientPeer:doInsert:pre') as $callable)
+    foreach (sfMixer::getCallables('BaseRolePeer:doInsert:pre') as $callable)
     {
-      $ret = call_user_func($callable, 'BasePatientPeer', $values, $con);
+      $ret = call_user_func($callable, 'BaseRolePeer', $values, $con);
       if (false !== $ret)
       {
         return $ret;
@@ -561,17 +471,17 @@ abstract class BasePatientPeer {
 
 
 		if ($con === null) {
-			$con = Propel::getConnection(PatientPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+			$con = Propel::getConnection(RolePeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; // rename for clarity
 		} else {
-			$criteria = $values->buildCriteria(); // build Criteria from Patient object
+			$criteria = $values->buildCriteria(); // build Criteria from Role object
 		}
 
-		if ($criteria->containsKey(PatientPeer::ID) && $criteria->keyContainsValue(PatientPeer::ID) ) {
-			throw new PropelException('Cannot insert a value for auto-increment primary key ('.PatientPeer::ID.')');
+		if ($criteria->containsKey(RolePeer::ID) && $criteria->keyContainsValue(RolePeer::ID) ) {
+			throw new PropelException('Cannot insert a value for auto-increment primary key ('.RolePeer::ID.')');
 		}
 
 
@@ -590,18 +500,18 @@ abstract class BasePatientPeer {
 		}
 
 		
-    foreach (sfMixer::getCallables('BasePatientPeer:doInsert:post') as $callable)
+    foreach (sfMixer::getCallables('BaseRolePeer:doInsert:post') as $callable)
     {
-      call_user_func($callable, 'BasePatientPeer', $values, $con, $pk);
+      call_user_func($callable, 'BaseRolePeer', $values, $con, $pk);
     }
 
     return $pk;
 	}
 
 	/**
-	 * Method perform an UPDATE on the database, given a Patient or Criteria object.
+	 * Method perform an UPDATE on the database, given a Role or Criteria object.
 	 *
-	 * @param      mixed $values Criteria or Patient object containing data that is used to create the UPDATE statement.
+	 * @param      mixed $values Criteria or Role object containing data that is used to create the UPDATE statement.
 	 * @param      PropelPDO $con The connection to use (specify PropelPDO connection object to exert more control over transactions).
 	 * @return     int The number of affected rows (if supported by underlying database driver).
 	 * @throws     PropelException Any exceptions caught during processing will be
@@ -610,9 +520,9 @@ abstract class BasePatientPeer {
 	public static function doUpdate($values, PropelPDO $con = null)
 	{
 
-    foreach (sfMixer::getCallables('BasePatientPeer:doUpdate:pre') as $callable)
+    foreach (sfMixer::getCallables('BaseRolePeer:doUpdate:pre') as $callable)
     {
-      $ret = call_user_func($callable, 'BasePatientPeer', $values, $con);
+      $ret = call_user_func($callable, 'BaseRolePeer', $values, $con);
       if (false !== $ret)
       {
         return $ret;
@@ -621,7 +531,7 @@ abstract class BasePatientPeer {
 
 
 		if ($con === null) {
-			$con = Propel::getConnection(PatientPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+			$con = Propel::getConnection(RolePeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
 
 		$selectCriteria = new Criteria(self::DATABASE_NAME);
@@ -629,10 +539,10 @@ abstract class BasePatientPeer {
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; // rename for clarity
 
-			$comparison = $criteria->getComparison(PatientPeer::ID);
-			$selectCriteria->add(PatientPeer::ID, $criteria->remove(PatientPeer::ID), $comparison);
+			$comparison = $criteria->getComparison(RolePeer::ID);
+			$selectCriteria->add(RolePeer::ID, $criteria->remove(RolePeer::ID), $comparison);
 
-		} else { // $values is Patient object
+		} else { // $values is Role object
 			$criteria = $values->buildCriteria(); // gets full criteria
 			$selectCriteria = $values->buildPkeyCriteria(); // gets criteria w/ primary key(s)
 		}
@@ -643,30 +553,30 @@ abstract class BasePatientPeer {
 		$ret = BasePeer::doUpdate($selectCriteria, $criteria, $con);
 	
 
-    foreach (sfMixer::getCallables('BasePatientPeer:doUpdate:post') as $callable)
+    foreach (sfMixer::getCallables('BaseRolePeer:doUpdate:post') as $callable)
     {
-      call_user_func($callable, 'BasePatientPeer', $values, $con, $ret);
+      call_user_func($callable, 'BaseRolePeer', $values, $con, $ret);
     }
 
     return $ret;
   }
 
 	/**
-	 * Method to DELETE all rows from the patient table.
+	 * Method to DELETE all rows from the role table.
 	 *
 	 * @return     int The number of affected rows (if supported by underlying database driver).
 	 */
 	public static function doDeleteAll($con = null)
 	{
 		if ($con === null) {
-			$con = Propel::getConnection(PatientPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+			$con = Propel::getConnection(RolePeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
 		$affectedRows = 0; // initialize var to track total num of affected rows
 		try {
 			// use transaction because $criteria could contain info
 			// for more than one table or we could emulating ON DELETE CASCADE, etc.
 			$con->beginTransaction();
-			$affectedRows += BasePeer::doDeleteAll(PatientPeer::TABLE_NAME, $con);
+			$affectedRows += BasePeer::doDeleteAll(RolePeer::TABLE_NAME, $con);
 			$con->commit();
 			return $affectedRows;
 		} catch (PropelException $e) {
@@ -676,9 +586,9 @@ abstract class BasePatientPeer {
 	}
 
 	/**
-	 * Method perform a DELETE on the database, given a Patient or Criteria object OR a primary key value.
+	 * Method perform a DELETE on the database, given a Role or Criteria object OR a primary key value.
 	 *
-	 * @param      mixed $values Criteria or Patient object or primary key or array of primary keys
+	 * @param      mixed $values Criteria or Role object or primary key or array of primary keys
 	 *              which is used to create the DELETE statement
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int 	The number of affected rows (if supported by underlying database driver).  This includes CASCADE-related rows
@@ -689,20 +599,20 @@ abstract class BasePatientPeer {
 	 public static function doDelete($values, PropelPDO $con = null)
 	 {
 		if ($con === null) {
-			$con = Propel::getConnection(PatientPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+			$con = Propel::getConnection(RolePeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
 
 		if ($values instanceof Criteria) {
 			// invalidate the cache for all objects of this type, since we have no
 			// way of knowing (without running a query) what objects should be invalidated
 			// from the cache based on this Criteria.
-			PatientPeer::clearInstancePool();
+			RolePeer::clearInstancePool();
 
 			// rename for clarity
 			$criteria = clone $values;
-		} elseif ($values instanceof Patient) {
+		} elseif ($values instanceof Role) {
 			// invalidate the cache for this single object
-			PatientPeer::removeInstanceFromPool($values);
+			RolePeer::removeInstanceFromPool($values);
 			// create criteria based on pk values
 			$criteria = $values->buildPkeyCriteria();
 		} else {
@@ -711,11 +621,11 @@ abstract class BasePatientPeer {
 
 
 			$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(PatientPeer::ID, (array) $values, Criteria::IN);
+			$criteria->add(RolePeer::ID, (array) $values, Criteria::IN);
 
 			foreach ((array) $values as $singleval) {
 				// we can invalidate the cache for this single object
-				PatientPeer::removeInstanceFromPool($singleval);
+				RolePeer::removeInstanceFromPool($singleval);
 			}
 		}
 
@@ -740,24 +650,24 @@ abstract class BasePatientPeer {
 	}
 
 	/**
-	 * Validates all modified columns of given Patient object.
+	 * Validates all modified columns of given Role object.
 	 * If parameter $columns is either a single column name or an array of column names
 	 * than only those columns are validated.
 	 *
 	 * NOTICE: This does not apply to primary or foreign keys for now.
 	 *
-	 * @param      Patient $obj The object to validate.
+	 * @param      Role $obj The object to validate.
 	 * @param      mixed $cols Column name or array of column names.
 	 *
 	 * @return     mixed TRUE if all columns are valid or the error message of the first invalid column.
 	 */
-	public static function doValidate(Patient $obj, $cols = null)
+	public static function doValidate(Role $obj, $cols = null)
 	{
 		$columns = array();
 
 		if ($cols) {
-			$dbMap = Propel::getDatabaseMap(PatientPeer::DATABASE_NAME);
-			$tableMap = $dbMap->getTable(PatientPeer::TABLE_NAME);
+			$dbMap = Propel::getDatabaseMap(RolePeer::DATABASE_NAME);
+			$tableMap = $dbMap->getTable(RolePeer::TABLE_NAME);
 
 			if (! is_array($cols)) {
 				$cols = array($cols);
@@ -773,11 +683,11 @@ abstract class BasePatientPeer {
 
 		}
 
-		$res =  BasePeer::doValidate(PatientPeer::DATABASE_NAME, PatientPeer::TABLE_NAME, $columns);
+		$res =  BasePeer::doValidate(RolePeer::DATABASE_NAME, RolePeer::TABLE_NAME, $columns);
     if ($res !== true) {
         $request = sfContext::getInstance()->getRequest();
         foreach ($res as $failed) {
-            $col = PatientPeer::translateFieldname($failed->getColumn(), BasePeer::TYPE_COLNAME, BasePeer::TYPE_PHPNAME);
+            $col = RolePeer::translateFieldname($failed->getColumn(), BasePeer::TYPE_COLNAME, BasePeer::TYPE_PHPNAME);
         }
     }
 
@@ -789,23 +699,23 @@ abstract class BasePatientPeer {
 	 *
 	 * @param      int $pk the primary key.
 	 * @param      PropelPDO $con the connection to use
-	 * @return     Patient
+	 * @return     Role
 	 */
 	public static function retrieveByPK($pk, PropelPDO $con = null)
 	{
 
-		if (null !== ($obj = PatientPeer::getInstanceFromPool((string) $pk))) {
+		if (null !== ($obj = RolePeer::getInstanceFromPool((string) $pk))) {
 			return $obj;
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(PatientPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(RolePeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 
-		$criteria = new Criteria(PatientPeer::DATABASE_NAME);
-		$criteria->add(PatientPeer::ID, $pk);
+		$criteria = new Criteria(RolePeer::DATABASE_NAME);
+		$criteria->add(RolePeer::ID, $pk);
 
-		$v = PatientPeer::doSelect($criteria, $con);
+		$v = RolePeer::doSelect($criteria, $con);
 
 		return !empty($v) > 0 ? $v[0] : null;
 	}
@@ -821,30 +731,30 @@ abstract class BasePatientPeer {
 	public static function retrieveByPKs($pks, PropelPDO $con = null)
 	{
 		if ($con === null) {
-			$con = Propel::getConnection(PatientPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(RolePeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 
 		$objs = null;
 		if (empty($pks)) {
 			$objs = array();
 		} else {
-			$criteria = new Criteria(PatientPeer::DATABASE_NAME);
-			$criteria->add(PatientPeer::ID, $pks, Criteria::IN);
-			$objs = PatientPeer::doSelect($criteria, $con);
+			$criteria = new Criteria(RolePeer::DATABASE_NAME);
+			$criteria->add(RolePeer::ID, $pks, Criteria::IN);
+			$objs = RolePeer::doSelect($criteria, $con);
 		}
 		return $objs;
 	}
 
-} // BasePatientPeer
+} // BaseRolePeer
 
 // This is the static code needed to register the MapBuilder for this table with the main Propel class.
 //
-// NOTE: This static code cannot call methods on the PatientPeer class, because it is not defined yet.
-// If you need to use overridden methods, you can add this code to the bottom of the PatientPeer class:
+// NOTE: This static code cannot call methods on the RolePeer class, because it is not defined yet.
+// If you need to use overridden methods, you can add this code to the bottom of the RolePeer class:
 //
-// Propel::getDatabaseMap(PatientPeer::DATABASE_NAME)->addTableBuilder(PatientPeer::TABLE_NAME, PatientPeer::getMapBuilder());
+// Propel::getDatabaseMap(RolePeer::DATABASE_NAME)->addTableBuilder(RolePeer::TABLE_NAME, RolePeer::getMapBuilder());
 //
 // Doing so will effectively overwrite the registration below.
 
-Propel::getDatabaseMap(BasePatientPeer::DATABASE_NAME)->addTableBuilder(BasePatientPeer::TABLE_NAME, BasePatientPeer::getMapBuilder());
+Propel::getDatabaseMap(BaseRolePeer::DATABASE_NAME)->addTableBuilder(BaseRolePeer::TABLE_NAME, BaseRolePeer::getMapBuilder());
 

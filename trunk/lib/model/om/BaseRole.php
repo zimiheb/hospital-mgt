@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Base class that represents a row from the 'ward_bed' table.
+ * Base class that represents a row from the 'role' table.
  *
  * 
  *
@@ -11,16 +11,16 @@
  *
  * @package    lib.model.om
  */
-abstract class BaseWardBed extends BaseObject  implements Persistent {
+abstract class BaseRole extends BaseObject  implements Persistent {
 
 
-  const PEER = 'WardBedPeer';
+  const PEER = 'RolePeer';
 
 	/**
 	 * The Peer class.
 	 * Instance provides a convenient way of calling static methods on a class
 	 * that calling code may not be able to identify.
-	 * @var        WardBedPeer
+	 * @var        RolePeer
 	 */
 	protected static $peer;
 
@@ -31,37 +31,16 @@ abstract class BaseWardBed extends BaseObject  implements Persistent {
 	protected $id;
 
 	/**
-	 * The value for the ward_id field.
-	 * @var        int
-	 */
-	protected $ward_id;
-
-	/**
-	 * The value for the bed field.
+	 * The value for the title field.
 	 * @var        string
 	 */
-	protected $bed;
+	protected $title;
 
 	/**
 	 * The value for the status field.
 	 * @var        string
 	 */
 	protected $status;
-
-	/**
-	 * @var        Ward
-	 */
-	protected $aWard;
-
-	/**
-	 * @var        array Visit[] Collection to store aggregation of Visit objects.
-	 */
-	protected $collVisits;
-
-	/**
-	 * @var        Criteria The criteria used to select the current contents of collVisits.
-	 */
-	private $lastVisitCriteria = null;
 
 	/**
 	 * Flag to prevent endless save loop, if this object is referenced
@@ -78,7 +57,7 @@ abstract class BaseWardBed extends BaseObject  implements Persistent {
 	protected $alreadyInValidation = false;
 
 	/**
-	 * Initializes internal state of BaseWardBed object.
+	 * Initializes internal state of BaseRole object.
 	 * @see        applyDefaults()
 	 */
 	public function __construct()
@@ -108,23 +87,13 @@ abstract class BaseWardBed extends BaseObject  implements Persistent {
 	}
 
 	/**
-	 * Get the [ward_id] column value.
-	 * 
-	 * @return     int
-	 */
-	public function getWardId()
-	{
-		return $this->ward_id;
-	}
-
-	/**
-	 * Get the [bed] column value.
+	 * Get the [title] column value.
 	 * 
 	 * @return     string
 	 */
-	public function getBed()
+	public function getTitle()
 	{
-		return $this->bed;
+		return $this->title;
 	}
 
 	/**
@@ -141,7 +110,7 @@ abstract class BaseWardBed extends BaseObject  implements Persistent {
 	 * Set the value of [id] column.
 	 * 
 	 * @param      int $v new value
-	 * @return     WardBed The current object (for fluent API support)
+	 * @return     Role The current object (for fluent API support)
 	 */
 	public function setId($v)
 	{
@@ -151,61 +120,37 @@ abstract class BaseWardBed extends BaseObject  implements Persistent {
 
 		if ($this->id !== $v) {
 			$this->id = $v;
-			$this->modifiedColumns[] = WardBedPeer::ID;
+			$this->modifiedColumns[] = RolePeer::ID;
 		}
 
 		return $this;
 	} // setId()
 
 	/**
-	 * Set the value of [ward_id] column.
-	 * 
-	 * @param      int $v new value
-	 * @return     WardBed The current object (for fluent API support)
-	 */
-	public function setWardId($v)
-	{
-		if ($v !== null) {
-			$v = (int) $v;
-		}
-
-		if ($this->ward_id !== $v) {
-			$this->ward_id = $v;
-			$this->modifiedColumns[] = WardBedPeer::WARD_ID;
-		}
-
-		if ($this->aWard !== null && $this->aWard->getId() !== $v) {
-			$this->aWard = null;
-		}
-
-		return $this;
-	} // setWardId()
-
-	/**
-	 * Set the value of [bed] column.
+	 * Set the value of [title] column.
 	 * 
 	 * @param      string $v new value
-	 * @return     WardBed The current object (for fluent API support)
+	 * @return     Role The current object (for fluent API support)
 	 */
-	public function setBed($v)
+	public function setTitle($v)
 	{
 		if ($v !== null) {
 			$v = (string) $v;
 		}
 
-		if ($this->bed !== $v) {
-			$this->bed = $v;
-			$this->modifiedColumns[] = WardBedPeer::BED;
+		if ($this->title !== $v) {
+			$this->title = $v;
+			$this->modifiedColumns[] = RolePeer::TITLE;
 		}
 
 		return $this;
-	} // setBed()
+	} // setTitle()
 
 	/**
 	 * Set the value of [status] column.
 	 * 
 	 * @param      string $v new value
-	 * @return     WardBed The current object (for fluent API support)
+	 * @return     Role The current object (for fluent API support)
 	 */
 	public function setStatus($v)
 	{
@@ -215,7 +160,7 @@ abstract class BaseWardBed extends BaseObject  implements Persistent {
 
 		if ($this->status !== $v) {
 			$this->status = $v;
-			$this->modifiedColumns[] = WardBedPeer::STATUS;
+			$this->modifiedColumns[] = RolePeer::STATUS;
 		}
 
 		return $this;
@@ -259,9 +204,8 @@ abstract class BaseWardBed extends BaseObject  implements Persistent {
 		try {
 
 			$this->id = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
-			$this->ward_id = ($row[$startcol + 1] !== null) ? (int) $row[$startcol + 1] : null;
-			$this->bed = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
-			$this->status = ($row[$startcol + 3] !== null) ? (string) $row[$startcol + 3] : null;
+			$this->title = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
+			$this->status = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
 			$this->resetModified();
 
 			$this->setNew(false);
@@ -271,10 +215,10 @@ abstract class BaseWardBed extends BaseObject  implements Persistent {
 			}
 
 			// FIXME - using NUM_COLUMNS may be clearer.
-			return $startcol + 4; // 4 = WardBedPeer::NUM_COLUMNS - WardBedPeer::NUM_LAZY_LOAD_COLUMNS).
+			return $startcol + 3; // 3 = RolePeer::NUM_COLUMNS - RolePeer::NUM_LAZY_LOAD_COLUMNS).
 
 		} catch (Exception $e) {
-			throw new PropelException("Error populating WardBed object", $e);
+			throw new PropelException("Error populating Role object", $e);
 		}
 	}
 
@@ -294,9 +238,6 @@ abstract class BaseWardBed extends BaseObject  implements Persistent {
 	public function ensureConsistency()
 	{
 
-		if ($this->aWard !== null && $this->ward_id !== $this->aWard->getId()) {
-			$this->aWard = null;
-		}
 	} // ensureConsistency
 
 	/**
@@ -320,13 +261,13 @@ abstract class BaseWardBed extends BaseObject  implements Persistent {
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(WardBedPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(RolePeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 
 		// We don't need to alter the object instance pool; we're just modifying this instance
 		// already in the pool.
 
-		$stmt = WardBedPeer::doSelectStmt($this->buildPkeyCriteria(), $con);
+		$stmt = RolePeer::doSelectStmt($this->buildPkeyCriteria(), $con);
 		$row = $stmt->fetch(PDO::FETCH_NUM);
 		$stmt->closeCursor();
 		if (!$row) {
@@ -335,10 +276,6 @@ abstract class BaseWardBed extends BaseObject  implements Persistent {
 		$this->hydrate($row, 0, true); // rehydrate
 
 		if ($deep) {  // also de-associate any related objects?
-
-			$this->aWard = null;
-			$this->collVisits = null;
-			$this->lastVisitCriteria = null;
 
 		} // if (deep)
 	}
@@ -355,7 +292,7 @@ abstract class BaseWardBed extends BaseObject  implements Persistent {
 	public function delete(PropelPDO $con = null)
 	{
 
-    foreach (sfMixer::getCallables('BaseWardBed:delete:pre') as $callable)
+    foreach (sfMixer::getCallables('BaseRole:delete:pre') as $callable)
     {
       $ret = call_user_func($callable, $this, $con);
       if ($ret)
@@ -370,12 +307,12 @@ abstract class BaseWardBed extends BaseObject  implements Persistent {
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(WardBedPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+			$con = Propel::getConnection(RolePeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
 		
 		$con->beginTransaction();
 		try {
-			WardBedPeer::doDelete($this, $con);
+			RolePeer::doDelete($this, $con);
 			$this->setDeleted(true);
 			$con->commit();
 		} catch (PropelException $e) {
@@ -384,7 +321,7 @@ abstract class BaseWardBed extends BaseObject  implements Persistent {
 		}
 	
 
-    foreach (sfMixer::getCallables('BaseWardBed:delete:post') as $callable)
+    foreach (sfMixer::getCallables('BaseRole:delete:post') as $callable)
     {
       call_user_func($callable, $this, $con);
     }
@@ -406,7 +343,7 @@ abstract class BaseWardBed extends BaseObject  implements Persistent {
 	public function save(PropelPDO $con = null)
 	{
 
-    foreach (sfMixer::getCallables('BaseWardBed:save:pre') as $callable)
+    foreach (sfMixer::getCallables('BaseRole:save:pre') as $callable)
     {
       $affectedRows = call_user_func($callable, $this, $con);
       if (is_int($affectedRows))
@@ -421,19 +358,19 @@ abstract class BaseWardBed extends BaseObject  implements Persistent {
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(WardBedPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+			$con = Propel::getConnection(RolePeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
 		
 		$con->beginTransaction();
 		try {
 			$affectedRows = $this->doSave($con);
 			$con->commit();
-    foreach (sfMixer::getCallables('BaseWardBed:save:post') as $callable)
+    foreach (sfMixer::getCallables('BaseRole:save:post') as $callable)
     {
       call_user_func($callable, $this, $con, $affectedRows);
     }
 
-			WardBedPeer::addInstanceToPool($this);
+			RolePeer::addInstanceToPool($this);
 			return $affectedRows;
 		} catch (PropelException $e) {
 			$con->rollBack();
@@ -458,26 +395,14 @@ abstract class BaseWardBed extends BaseObject  implements Persistent {
 		if (!$this->alreadyInSave) {
 			$this->alreadyInSave = true;
 
-			// We call the save method on the following object(s) if they
-			// were passed to this object by their coresponding set
-			// method.  This object relates to these object(s) by a
-			// foreign key reference.
-
-			if ($this->aWard !== null) {
-				if ($this->aWard->isModified() || $this->aWard->isNew()) {
-					$affectedRows += $this->aWard->save($con);
-				}
-				$this->setWard($this->aWard);
-			}
-
 			if ($this->isNew() ) {
-				$this->modifiedColumns[] = WardBedPeer::ID;
+				$this->modifiedColumns[] = RolePeer::ID;
 			}
 
 			// If this object has been modified, then save it to the database.
 			if ($this->isModified()) {
 				if ($this->isNew()) {
-					$pk = WardBedPeer::doInsert($this, $con);
+					$pk = RolePeer::doInsert($this, $con);
 					$affectedRows += 1; // we are assuming that there is only 1 row per doInsert() which
 										 // should always be true here (even though technically
 										 // BasePeer::doInsert() can insert multiple rows).
@@ -486,18 +411,10 @@ abstract class BaseWardBed extends BaseObject  implements Persistent {
 
 					$this->setNew(false);
 				} else {
-					$affectedRows += WardBedPeer::doUpdate($this, $con);
+					$affectedRows += RolePeer::doUpdate($this, $con);
 				}
 
 				$this->resetModified(); // [HL] After being saved an object is no longer 'modified'
-			}
-
-			if ($this->collVisits !== null) {
-				foreach ($this->collVisits as $referrerFK) {
-					if (!$referrerFK->isDeleted()) {
-						$affectedRows += $referrerFK->save($con);
-					}
-				}
 			}
 
 			$this->alreadyInSave = false;
@@ -566,30 +483,10 @@ abstract class BaseWardBed extends BaseObject  implements Persistent {
 			$failureMap = array();
 
 
-			// We call the validate method on the following object(s) if they
-			// were passed to this object by their coresponding set
-			// method.  This object relates to these object(s) by a
-			// foreign key reference.
-
-			if ($this->aWard !== null) {
-				if (!$this->aWard->validate($columns)) {
-					$failureMap = array_merge($failureMap, $this->aWard->getValidationFailures());
-				}
-			}
-
-
-			if (($retval = WardBedPeer::doValidate($this, $columns)) !== true) {
+			if (($retval = RolePeer::doValidate($this, $columns)) !== true) {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
-
-				if ($this->collVisits !== null) {
-					foreach ($this->collVisits as $referrerFK) {
-						if (!$referrerFK->validate($columns)) {
-							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
-						}
-					}
-				}
 
 
 			$this->alreadyInValidation = false;
@@ -609,7 +506,7 @@ abstract class BaseWardBed extends BaseObject  implements Persistent {
 	 */
 	public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
 	{
-		$pos = WardBedPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+		$pos = RolePeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		$field = $this->getByPosition($pos);
 		return $field;
 	}
@@ -628,12 +525,9 @@ abstract class BaseWardBed extends BaseObject  implements Persistent {
 				return $this->getId();
 				break;
 			case 1:
-				return $this->getWardId();
+				return $this->getTitle();
 				break;
 			case 2:
-				return $this->getBed();
-				break;
-			case 3:
 				return $this->getStatus();
 				break;
 			default:
@@ -655,12 +549,11 @@ abstract class BaseWardBed extends BaseObject  implements Persistent {
 	 */
 	public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true)
 	{
-		$keys = WardBedPeer::getFieldNames($keyType);
+		$keys = RolePeer::getFieldNames($keyType);
 		$result = array(
 			$keys[0] => $this->getId(),
-			$keys[1] => $this->getWardId(),
-			$keys[2] => $this->getBed(),
-			$keys[3] => $this->getStatus(),
+			$keys[1] => $this->getTitle(),
+			$keys[2] => $this->getStatus(),
 		);
 		return $result;
 	}
@@ -677,7 +570,7 @@ abstract class BaseWardBed extends BaseObject  implements Persistent {
 	 */
 	public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
 	{
-		$pos = WardBedPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+		$pos = RolePeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->setByPosition($pos, $value);
 	}
 
@@ -696,12 +589,9 @@ abstract class BaseWardBed extends BaseObject  implements Persistent {
 				$this->setId($value);
 				break;
 			case 1:
-				$this->setWardId($value);
+				$this->setTitle($value);
 				break;
 			case 2:
-				$this->setBed($value);
-				break;
-			case 3:
 				$this->setStatus($value);
 				break;
 		} // switch()
@@ -726,12 +616,11 @@ abstract class BaseWardBed extends BaseObject  implements Persistent {
 	 */
 	public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
 	{
-		$keys = WardBedPeer::getFieldNames($keyType);
+		$keys = RolePeer::getFieldNames($keyType);
 
 		if (array_key_exists($keys[0], $arr)) $this->setId($arr[$keys[0]]);
-		if (array_key_exists($keys[1], $arr)) $this->setWardId($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setBed($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setStatus($arr[$keys[3]]);
+		if (array_key_exists($keys[1], $arr)) $this->setTitle($arr[$keys[1]]);
+		if (array_key_exists($keys[2], $arr)) $this->setStatus($arr[$keys[2]]);
 	}
 
 	/**
@@ -741,12 +630,11 @@ abstract class BaseWardBed extends BaseObject  implements Persistent {
 	 */
 	public function buildCriteria()
 	{
-		$criteria = new Criteria(WardBedPeer::DATABASE_NAME);
+		$criteria = new Criteria(RolePeer::DATABASE_NAME);
 
-		if ($this->isColumnModified(WardBedPeer::ID)) $criteria->add(WardBedPeer::ID, $this->id);
-		if ($this->isColumnModified(WardBedPeer::WARD_ID)) $criteria->add(WardBedPeer::WARD_ID, $this->ward_id);
-		if ($this->isColumnModified(WardBedPeer::BED)) $criteria->add(WardBedPeer::BED, $this->bed);
-		if ($this->isColumnModified(WardBedPeer::STATUS)) $criteria->add(WardBedPeer::STATUS, $this->status);
+		if ($this->isColumnModified(RolePeer::ID)) $criteria->add(RolePeer::ID, $this->id);
+		if ($this->isColumnModified(RolePeer::TITLE)) $criteria->add(RolePeer::TITLE, $this->title);
+		if ($this->isColumnModified(RolePeer::STATUS)) $criteria->add(RolePeer::STATUS, $this->status);
 
 		return $criteria;
 	}
@@ -761,9 +649,9 @@ abstract class BaseWardBed extends BaseObject  implements Persistent {
 	 */
 	public function buildPkeyCriteria()
 	{
-		$criteria = new Criteria(WardBedPeer::DATABASE_NAME);
+		$criteria = new Criteria(RolePeer::DATABASE_NAME);
 
-		$criteria->add(WardBedPeer::ID, $this->id);
+		$criteria->add(RolePeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -794,32 +682,16 @@ abstract class BaseWardBed extends BaseObject  implements Persistent {
 	 * If desired, this method can also make copies of all associated (fkey referrers)
 	 * objects.
 	 *
-	 * @param      object $copyObj An object of WardBed (or compatible) type.
+	 * @param      object $copyObj An object of Role (or compatible) type.
 	 * @param      boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
 	 * @throws     PropelException
 	 */
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
-		$copyObj->setWardId($this->ward_id);
-
-		$copyObj->setBed($this->bed);
+		$copyObj->setTitle($this->title);
 
 		$copyObj->setStatus($this->status);
-
-
-		if ($deepCopy) {
-			// important: temporarily setNew(false) because this affects the behavior of
-			// the getter/setter methods for fkey referrer objects.
-			$copyObj->setNew(false);
-
-			foreach ($this->getVisits() as $relObj) {
-				if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
-					$copyObj->addVisit($relObj->copy($deepCopy));
-				}
-			}
-
-		} // if ($deepCopy)
 
 
 		$copyObj->setNew(true);
@@ -837,7 +709,7 @@ abstract class BaseWardBed extends BaseObject  implements Persistent {
 	 * objects.
 	 *
 	 * @param      boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
-	 * @return     WardBed Clone of current object.
+	 * @return     Role Clone of current object.
 	 * @throws     PropelException
 	 */
 	public function copy($deepCopy = false)
@@ -856,360 +728,14 @@ abstract class BaseWardBed extends BaseObject  implements Persistent {
 	 * same instance for all member of this class. The method could therefore
 	 * be static, but this would prevent one from overriding the behavior.
 	 *
-	 * @return     WardBedPeer
+	 * @return     RolePeer
 	 */
 	public function getPeer()
 	{
 		if (self::$peer === null) {
-			self::$peer = new WardBedPeer();
+			self::$peer = new RolePeer();
 		}
 		return self::$peer;
-	}
-
-	/**
-	 * Declares an association between this object and a Ward object.
-	 *
-	 * @param      Ward $v
-	 * @return     WardBed The current object (for fluent API support)
-	 * @throws     PropelException
-	 */
-	public function setWard(Ward $v = null)
-	{
-		if ($v === null) {
-			$this->setWardId(NULL);
-		} else {
-			$this->setWardId($v->getId());
-		}
-
-		$this->aWard = $v;
-
-		// Add binding for other direction of this n:n relationship.
-		// If this object has already been added to the Ward object, it will not be re-added.
-		if ($v !== null) {
-			$v->addWardBed($this);
-		}
-
-		return $this;
-	}
-
-
-	/**
-	 * Get the associated Ward object
-	 *
-	 * @param      PropelPDO Optional Connection object.
-	 * @return     Ward The associated Ward object.
-	 * @throws     PropelException
-	 */
-	public function getWard(PropelPDO $con = null)
-	{
-		if ($this->aWard === null && ($this->ward_id !== null)) {
-			$c = new Criteria(WardPeer::DATABASE_NAME);
-			$c->add(WardPeer::ID, $this->ward_id);
-			$this->aWard = WardPeer::doSelectOne($c, $con);
-			/* The following can be used additionally to
-			   guarantee the related object contains a reference
-			   to this object.  This level of coupling may, however, be
-			   undesirable since it could result in an only partially populated collection
-			   in the referenced object.
-			   $this->aWard->addWardBeds($this);
-			 */
-		}
-		return $this->aWard;
-	}
-
-	/**
-	 * Clears out the collVisits collection (array).
-	 *
-	 * This does not modify the database; however, it will remove any associated objects, causing
-	 * them to be refetched by subsequent calls to accessor method.
-	 *
-	 * @return     void
-	 * @see        addVisits()
-	 */
-	public function clearVisits()
-	{
-		$this->collVisits = null; // important to set this to NULL since that means it is uninitialized
-	}
-
-	/**
-	 * Initializes the collVisits collection (array).
-	 *
-	 * By default this just sets the collVisits collection to an empty array (like clearcollVisits());
-	 * however, you may wish to override this method in your stub class to provide setting appropriate
-	 * to your application -- for example, setting the initial array to the values stored in database.
-	 *
-	 * @return     void
-	 */
-	public function initVisits()
-	{
-		$this->collVisits = array();
-	}
-
-	/**
-	 * Gets an array of Visit objects which contain a foreign key that references this object.
-	 *
-	 * If this collection has already been initialized with an identical Criteria, it returns the collection.
-	 * Otherwise if this WardBed has previously been saved, it will retrieve
-	 * related Visits from storage. If this WardBed is new, it will return
-	 * an empty collection or the current collection, the criteria is ignored on a new object.
-	 *
-	 * @param      PropelPDO $con
-	 * @param      Criteria $criteria
-	 * @return     array Visit[]
-	 * @throws     PropelException
-	 */
-	public function getVisits($criteria = null, PropelPDO $con = null)
-	{
-		if ($criteria === null) {
-			$criteria = new Criteria(WardBedPeer::DATABASE_NAME);
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collVisits === null) {
-			if ($this->isNew()) {
-			   $this->collVisits = array();
-			} else {
-
-				$criteria->add(VisitPeer::WARD_BED_ID, $this->id);
-
-				VisitPeer::addSelectColumns($criteria);
-				$this->collVisits = VisitPeer::doSelect($criteria, $con);
-			}
-		} else {
-			// criteria has no effect for a new object
-			if (!$this->isNew()) {
-				// the following code is to determine if a new query is
-				// called for.  If the criteria is the same as the last
-				// one, just return the collection.
-
-
-				$criteria->add(VisitPeer::WARD_BED_ID, $this->id);
-
-				VisitPeer::addSelectColumns($criteria);
-				if (!isset($this->lastVisitCriteria) || !$this->lastVisitCriteria->equals($criteria)) {
-					$this->collVisits = VisitPeer::doSelect($criteria, $con);
-				}
-			}
-		}
-		$this->lastVisitCriteria = $criteria;
-		return $this->collVisits;
-	}
-
-	/**
-	 * Returns the number of related Visit objects.
-	 *
-	 * @param      Criteria $criteria
-	 * @param      boolean $distinct
-	 * @param      PropelPDO $con
-	 * @return     int Count of related Visit objects.
-	 * @throws     PropelException
-	 */
-	public function countVisits(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
-	{
-		if ($criteria === null) {
-			$criteria = new Criteria(WardBedPeer::DATABASE_NAME);
-		} else {
-			$criteria = clone $criteria;
-		}
-
-		if ($distinct) {
-			$criteria->setDistinct();
-		}
-
-		$count = null;
-
-		if ($this->collVisits === null) {
-			if ($this->isNew()) {
-				$count = 0;
-			} else {
-
-				$criteria->add(VisitPeer::WARD_BED_ID, $this->id);
-
-				$count = VisitPeer::doCount($criteria, $con);
-			}
-		} else {
-			// criteria has no effect for a new object
-			if (!$this->isNew()) {
-				// the following code is to determine if a new query is
-				// called for.  If the criteria is the same as the last
-				// one, just return count of the collection.
-
-
-				$criteria->add(VisitPeer::WARD_BED_ID, $this->id);
-
-				if (!isset($this->lastVisitCriteria) || !$this->lastVisitCriteria->equals($criteria)) {
-					$count = VisitPeer::doCount($criteria, $con);
-				} else {
-					$count = count($this->collVisits);
-				}
-			} else {
-				$count = count($this->collVisits);
-			}
-		}
-		return $count;
-	}
-
-	/**
-	 * Method called to associate a Visit object to this object
-	 * through the Visit foreign key attribute.
-	 *
-	 * @param      Visit $l Visit
-	 * @return     void
-	 * @throws     PropelException
-	 */
-	public function addVisit(Visit $l)
-	{
-		if ($this->collVisits === null) {
-			$this->initVisits();
-		}
-		if (!in_array($l, $this->collVisits, true)) { // only add it if the **same** object is not already associated
-			array_push($this->collVisits, $l);
-			$l->setWardBed($this);
-		}
-	}
-
-
-	/**
-	 * If this collection has already been initialized with
-	 * an identical criteria, it returns the collection.
-	 * Otherwise if this WardBed is new, it will return
-	 * an empty collection; or if this WardBed has previously
-	 * been saved, it will retrieve related Visits from storage.
-	 *
-	 * This method is protected by default in order to keep the public
-	 * api reasonable.  You can provide public methods for those you
-	 * actually need in WardBed.
-	 */
-	public function getVisitsJoinPatient($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
-	{
-		if ($criteria === null) {
-			$criteria = new Criteria(WardBedPeer::DATABASE_NAME);
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collVisits === null) {
-			if ($this->isNew()) {
-				$this->collVisits = array();
-			} else {
-
-				$criteria->add(VisitPeer::WARD_BED_ID, $this->id);
-
-				$this->collVisits = VisitPeer::doSelectJoinPatient($criteria, $con, $join_behavior);
-			}
-		} else {
-			// the following code is to determine if a new query is
-			// called for.  If the criteria is the same as the last
-			// one, just return the collection.
-
-			$criteria->add(VisitPeer::WARD_BED_ID, $this->id);
-
-			if (!isset($this->lastVisitCriteria) || !$this->lastVisitCriteria->equals($criteria)) {
-				$this->collVisits = VisitPeer::doSelectJoinPatient($criteria, $con, $join_behavior);
-			}
-		}
-		$this->lastVisitCriteria = $criteria;
-
-		return $this->collVisits;
-	}
-
-
-	/**
-	 * If this collection has already been initialized with
-	 * an identical criteria, it returns the collection.
-	 * Otherwise if this WardBed is new, it will return
-	 * an empty collection; or if this WardBed has previously
-	 * been saved, it will retrieve related Visits from storage.
-	 *
-	 * This method is protected by default in order to keep the public
-	 * api reasonable.  You can provide public methods for those you
-	 * actually need in WardBed.
-	 */
-	public function getVisitsJoinEmployeeRelatedByDoctorId($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
-	{
-		if ($criteria === null) {
-			$criteria = new Criteria(WardBedPeer::DATABASE_NAME);
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collVisits === null) {
-			if ($this->isNew()) {
-				$this->collVisits = array();
-			} else {
-
-				$criteria->add(VisitPeer::WARD_BED_ID, $this->id);
-
-				$this->collVisits = VisitPeer::doSelectJoinEmployeeRelatedByDoctorId($criteria, $con, $join_behavior);
-			}
-		} else {
-			// the following code is to determine if a new query is
-			// called for.  If the criteria is the same as the last
-			// one, just return the collection.
-
-			$criteria->add(VisitPeer::WARD_BED_ID, $this->id);
-
-			if (!isset($this->lastVisitCriteria) || !$this->lastVisitCriteria->equals($criteria)) {
-				$this->collVisits = VisitPeer::doSelectJoinEmployeeRelatedByDoctorId($criteria, $con, $join_behavior);
-			}
-		}
-		$this->lastVisitCriteria = $criteria;
-
-		return $this->collVisits;
-	}
-
-
-	/**
-	 * If this collection has already been initialized with
-	 * an identical criteria, it returns the collection.
-	 * Otherwise if this WardBed is new, it will return
-	 * an empty collection; or if this WardBed has previously
-	 * been saved, it will retrieve related Visits from storage.
-	 *
-	 * This method is protected by default in order to keep the public
-	 * api reasonable.  You can provide public methods for those you
-	 * actually need in WardBed.
-	 */
-	public function getVisitsJoinEmployeeRelatedByWardDocId($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
-	{
-		if ($criteria === null) {
-			$criteria = new Criteria(WardBedPeer::DATABASE_NAME);
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collVisits === null) {
-			if ($this->isNew()) {
-				$this->collVisits = array();
-			} else {
-
-				$criteria->add(VisitPeer::WARD_BED_ID, $this->id);
-
-				$this->collVisits = VisitPeer::doSelectJoinEmployeeRelatedByWardDocId($criteria, $con, $join_behavior);
-			}
-		} else {
-			// the following code is to determine if a new query is
-			// called for.  If the criteria is the same as the last
-			// one, just return the collection.
-
-			$criteria->add(VisitPeer::WARD_BED_ID, $this->id);
-
-			if (!isset($this->lastVisitCriteria) || !$this->lastVisitCriteria->equals($criteria)) {
-				$this->collVisits = VisitPeer::doSelectJoinEmployeeRelatedByWardDocId($criteria, $con, $join_behavior);
-			}
-		}
-		$this->lastVisitCriteria = $criteria;
-
-		return $this->collVisits;
 	}
 
 	/**
@@ -1224,23 +750,16 @@ abstract class BaseWardBed extends BaseObject  implements Persistent {
 	public function clearAllReferences($deep = false)
 	{
 		if ($deep) {
-			if ($this->collVisits) {
-				foreach ((array) $this->collVisits as $o) {
-					$o->clearAllReferences($deep);
-				}
-			}
 		} // if ($deep)
 
-		$this->collVisits = null;
-			$this->aWard = null;
 	}
 
 
   public function __call($method, $arguments)
   {
-    if (!$callable = sfMixer::getCallable('BaseWardBed:'.$method))
+    if (!$callable = sfMixer::getCallable('BaseRole:'.$method))
     {
-      throw new sfException(sprintf('Call to undefined method BaseWardBed::%s', $method));
+      throw new sfException(sprintf('Call to undefined method BaseRole::%s', $method));
     }
 
     array_unshift($arguments, $this);
@@ -1249,4 +768,4 @@ abstract class BaseWardBed extends BaseObject  implements Persistent {
   }
 
 
-} // BaseWardBed
+} // BaseRole
