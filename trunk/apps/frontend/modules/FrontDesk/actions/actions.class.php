@@ -141,7 +141,6 @@ public function executeVisitList(sfWebRequest $request)
 		$visit->setVisitDate($this->getRequestParameter('visit_date'));
 		$visit->setTime($this->getRequestParameter('time'));
 		$visit->setVisitType($this->getRequestParameter('visit_type'));
-		//$duty->setSubstituteId($this->getRequestParameter('substitute_id'));
 		$visit->setStatus(Constant::RECORD_STATUS_ACTIVE);
 		
 		$visit->save();

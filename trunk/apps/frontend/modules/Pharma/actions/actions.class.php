@@ -22,8 +22,10 @@ class PharmaActions extends sfActions
   	if ($request->isMethod('Post'))
   	{
 		$pharma = new Pharma();
+		$pharma->setType($request->getParameter('type'));
 		$pharma->setName($request->getParameter('name'));
 		$pharma->setStrength($request->getParameter('strength'));
+		$pharma->setPrice($request->getParameter('price'));
 		$pharma->setCompany($request->getParameter('company'));
 		$pharma->setStatus(Constant::RECORD_STATUS_ACTIVE);
 		
@@ -43,8 +45,10 @@ class PharmaActions extends sfActions
 		{
 			$pharma = PharmaPeer::retrieveByPk($this->getRequestParameter('id'));
 
+			$pharma->setType($request->getParameter('type'));
 			$pharma->setName($request->getParameter('name'));
 			$pharma->setStrength($request->getParameter('strength'));
+			$pharma->setPrice($request->getParameter('price'));
 			$pharma->setCompany($request->getParameter('company'));
 			
 			if($pharma->save())

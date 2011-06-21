@@ -14,6 +14,16 @@
 <table width="100%" cellpadding="0" cellspacing="0"  align="left" border="0">
 
   <tr>
+    <td width="16%" height="30">Medicine Type:<span class="error"> *</span> </td>
+    <td width="84%" height="30"><?php echo input_tag ('type', $pharma->getType(),'size=38'); ?>
+	<script type="text/javascript">
+	var type = new LiveValidation('type', { validMessage: "<?php echo Constant::VALIDATION_SUCCESS; ?>"});
+	type.add( Validate.Presence,{ failureMessage: "<?php echo Constant::VALIDATION_REQUIRED_FIELD; ?>"});
+	</script>
+	</td>
+  </tr>
+  
+  <tr>
     <td width="16%" height="30">Medicine Name:<span class="error"> *</span> </td>
     <td width="84%" height="30"><?php echo input_tag ('name', $pharma->getName(),'size=38'); ?>
 	<script type="text/javascript">
@@ -24,10 +34,22 @@
   </tr>
   
   <tr>
-    <td width="16%" height="30">Strength (mg):</td>
+    <td width="16%" height="30">Strength (mg/ml/cc):</td>
     <td width="84%" height="30"><?php echo input_tag ('strength', $pharma->getStrength(),'size=38'); ?>
 	</td>
   </tr>
+  
+  
+  
+  <tr>
+    <td width="16%" height="30">Price (per unit):</td>
+	<td width="84%" height="30"><?php echo input_tag ('price', $pharma->getPrice(),'size=38'); ?>
+	<script type="text/javascript">
+	var price = new LiveValidation('price', { validMessage: "<?php echo Constant::VALIDATION_SUCCESS; ?>"});
+	price.add( Validate.Presence,{ failureMessage: "<?php echo Constant::VALIDATION_REQUIRED_FIELD; ?>"});
+	price.add( Validate.Numericality, { failureMessage: "<?php echo Constant::VALIDATION_INTEGER_FIELD; ?>" } );
+	</script>
+  
   
   <tr>
     <td width="16%" height="30">Company:</td>
