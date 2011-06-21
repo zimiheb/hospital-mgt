@@ -3,7 +3,7 @@
 class Utility {
 	
 	
-	public function dateDiff($startDate, $endDate) 
+	public static function dateDiff($startDate, $endDate) 
 { 
     // Parse dates for conversion 
     $startArry = date_parse($startDate); 
@@ -15,7 +15,22 @@ class Utility {
 
     // Return difference 
     return round(($end_date - $start_date), 0); 
-} 
+}
+
+public static function getAge($startDate, $endDate) 
+{ 
+    // Parse dates for conversion 
+     $startArry = date_parse($startDate); 
+    $endArry = date_parse($endDate); 
+
+    // Convert dates to Julian Days 
+    $start_date = $startArry["year"]; 
+    $end_date = $endArry["year"]; 
+
+    // Return difference 
+    return round(($end_date - $start_date), 0); 
+}
+ 
 
 public static function GetMonth($date) {
 		
