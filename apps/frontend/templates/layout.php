@@ -59,6 +59,7 @@
 					<li><?php echo link_to ('Home', 'Home/index', array(/*'class'=>'current'*/)); ?></li>
 					<li><?php echo link_to ('Front Desk', 'FrontDesk/index', 'rel=dropmenu_2'); ?></li>
                     <li><?php echo link_to ('Administrator', 'Employee/list'); ?></li>
+					<li><?php echo link_to ('Doctor', 'Visit/docList'); ?></li>
 					<li><?php echo link_to ('Settings', 'Home/settings', 'rel=dropmenu_1'); ?></li>
 				</ul>
 			</div>
@@ -67,27 +68,30 @@
 						<?php echo link_to ('Department', 'Department/list'); ?>
 						<?php echo link_to ('Designation', 'Designation/list'); ?>
 						<?php echo link_to ('Pharma', 'Pharma/list'); ?>
+						<?php echo link_to ('Lab Tests', 'LabTest/list'); ?>
+						<?php echo link_to ('Duty Places', 'DutyPlace/list'); ?>
 						<?php echo link_to ('Ward', 'Ward/list'); ?>
 						<?php echo link_to ('Beds in Ward', 'WardBed/list'); ?>
-						<?php echo link_to ('Duty Places', 'DutyPlace/list'); ?>
-						<?php echo link_to ('Lab Tests', 'LabTest/list'); ?>
+						<?php echo link_to ('Rooms', 'Rooms/list'); ?>
+						<?php echo link_to ('Dosage', 'Dosage/list'); ?>
+						
 					</div>
 					
 					<div id="dropmenu_2" class="dropmenudiv" style="width: 150px; height:30px;">
-					<li><?php echo link_to ('Outdoor Patient Visits', 'FrontDesk/visitList'); ?></li>
-					<li><?php echo link_to ('Patient List', 'Patient/list'); ?></li>
-					<li><?php echo link_to ('Duty Roster', 'FrontDesk/dutyRoster'); ?></li>
+					<?php echo link_to ('Outdoor Patient Visits', 'FrontDesk/visitList'); ?>
+					<?php echo link_to ('Patient List', 'Patient/list'); ?>
+					<?php echo link_to ('Duty Roster', 'FrontDesk/dutyRoster'); ?>
 					</div>
 					
 			
-				<?php else: ?>
-				<ul>
-					<li><?php echo link_to ('Home', 'Home/index'); ?></li>
-					<li><?php echo link_to ('Medical', 'Home/med', 'rel=dropmenu_3'); ?></li>
-					<li><?php echo link_to ('Surgical', 'Home/cardiac', 'rel=dropmenu_4'); ?></li>
-					<li><?php echo link_to ('About Us', 'Home/about'); ?></li>
-					<li><?php echo link_to ('Contact Us', 'Home/contact'); ?></li>
-				</ul>
+			<?php else: ?>
+			<ul>
+				<li><?php echo link_to ('Home', 'Home/index'); ?></li>
+				<li><?php echo link_to ('Medical', 'Home/med', 'rel=dropmenu_3'); ?></li>
+				<li><?php echo link_to ('Surgical', 'Home/cardiac', 'rel=dropmenu_4'); ?></li>
+				<li><?php echo link_to ('About Us', 'Home/about'); ?></li>
+				<li><?php echo link_to ('Contact Us', 'Home/contact'); ?></li>
+			</ul>
 				
 				<div id="dropmenu_3" class="dropmenudiv" style="width: 150px; height:30px; ">
 					<?php echo link_to ('General Madication', 'Home/med'); ?>
@@ -105,24 +109,14 @@
 			</div>
 				<?php endif ?>
 	
-	
 			<script type="text/javascript">
 				cssdropdown.startchrome("chromemenu")
 			</script>
-                <!--<ul>                                              
-                    <li><?php //echo link_to ('Home', 'Home/index', array(/*'class'=>'current'*/)); ?></li>
-                    <li><?php //echo link_to ('Employee', 'Employee/list'); ?></li>
-					 <li><?php //echo link_to ('Patient', 'Patient/list'); ?></li>
-					<li><?php //echo link_to ('Settings', 'Home/settings'); ?></li>
-					
-                </ul>-->
             </div>
         
         </div>
     
     </div>
-    
-  
     
 	<?php if ($sf_user->hasFlash('SUCCESS_MESSAGE')): ?>
 				<tr>

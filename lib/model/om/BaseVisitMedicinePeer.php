@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Base static class for performing query and update operations on the 'lab_report' table.
+ * Base static class for performing query and update operations on the 'visit_medicine' table.
  *
  * 
  *
@@ -11,16 +11,16 @@
  *
  * @package    lib.model.om
  */
-abstract class BaseLabReportPeer {
+abstract class BaseVisitMedicinePeer {
 
 	/** the default database name for this class */
 	const DATABASE_NAME = 'propel';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'lab_report';
+	const TABLE_NAME = 'visit_medicine';
 
 	/** A class that can be returned by this peer. */
-	const CLASS_DEFAULT = 'lib.model.LabReport';
+	const CLASS_DEFAULT = 'lib.model.VisitMedicine';
 
 	/** The total number of columns. */
 	const NUM_COLUMNS = 9;
@@ -29,37 +29,37 @@ abstract class BaseLabReportPeer {
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 	/** the column name for the ID field */
-	const ID = 'lab_report.ID';
+	const ID = 'visit_medicine.ID';
 
 	/** the column name for the PATIENT_ID field */
-	const PATIENT_ID = 'lab_report.PATIENT_ID';
+	const PATIENT_ID = 'visit_medicine.PATIENT_ID';
 
 	/** the column name for the VISIT_ID field */
-	const VISIT_ID = 'lab_report.VISIT_ID';
+	const VISIT_ID = 'visit_medicine.VISIT_ID';
 
-	/** the column name for the LAB_TEST_ID field */
-	const LAB_TEST_ID = 'lab_report.LAB_TEST_ID';
+	/** the column name for the PHARMA_ID field */
+	const PHARMA_ID = 'visit_medicine.PHARMA_ID';
 
-	/** the column name for the DESCRIPTION field */
-	const DESCRIPTION = 'lab_report.DESCRIPTION';
+	/** the column name for the DOSAGE_ID field */
+	const DOSAGE_ID = 'visit_medicine.DOSAGE_ID';
+
+	/** the column name for the QUANTITY field */
+	const QUANTITY = 'visit_medicine.QUANTITY';
 
 	/** the column name for the PRICE field */
-	const PRICE = 'lab_report.PRICE';
-
-	/** the column name for the STATUS field */
-	const STATUS = 'lab_report.STATUS';
+	const PRICE = 'visit_medicine.PRICE';
 
 	/** the column name for the CREATED_AT field */
-	const CREATED_AT = 'lab_report.CREATED_AT';
+	const CREATED_AT = 'visit_medicine.CREATED_AT';
 
 	/** the column name for the UPDATED_AT field */
-	const UPDATED_AT = 'lab_report.UPDATED_AT';
+	const UPDATED_AT = 'visit_medicine.UPDATED_AT';
 
 	/**
-	 * An identiy map to hold any loaded instances of LabReport objects.
+	 * An identiy map to hold any loaded instances of VisitMedicine objects.
 	 * This must be public so that other peer classes can access this when hydrating from JOIN
 	 * queries.
-	 * @var        array LabReport[]
+	 * @var        array VisitMedicine[]
 	 */
 	public static $instances = array();
 
@@ -76,10 +76,10 @@ abstract class BaseLabReportPeer {
 	 * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
 	 */
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Id', 'PatientId', 'VisitId', 'LabTestId', 'Description', 'Price', 'Status', 'CreatedAt', 'UpdatedAt', ),
-		BasePeer::TYPE_STUDLYPHPNAME => array ('id', 'patientId', 'visitId', 'labTestId', 'description', 'price', 'status', 'createdAt', 'updatedAt', ),
-		BasePeer::TYPE_COLNAME => array (self::ID, self::PATIENT_ID, self::VISIT_ID, self::LAB_TEST_ID, self::DESCRIPTION, self::PRICE, self::STATUS, self::CREATED_AT, self::UPDATED_AT, ),
-		BasePeer::TYPE_FIELDNAME => array ('id', 'patient_id', 'visit_id', 'lab_test_id', 'description', 'price', 'status', 'created_at', 'updated_at', ),
+		BasePeer::TYPE_PHPNAME => array ('Id', 'PatientId', 'VisitId', 'PharmaId', 'DosageId', 'Quantity', 'Price', 'CreatedAt', 'UpdatedAt', ),
+		BasePeer::TYPE_STUDLYPHPNAME => array ('id', 'patientId', 'visitId', 'pharmaId', 'dosageId', 'quantity', 'price', 'createdAt', 'updatedAt', ),
+		BasePeer::TYPE_COLNAME => array (self::ID, self::PATIENT_ID, self::VISIT_ID, self::PHARMA_ID, self::DOSAGE_ID, self::QUANTITY, self::PRICE, self::CREATED_AT, self::UPDATED_AT, ),
+		BasePeer::TYPE_FIELDNAME => array ('id', 'patient_id', 'visit_id', 'pharma_id', 'dosage_id', 'quantity', 'price', 'created_at', 'updated_at', ),
 		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
 	);
 
@@ -90,10 +90,10 @@ abstract class BaseLabReportPeer {
 	 * e.g. self::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
 	 */
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'PatientId' => 1, 'VisitId' => 2, 'LabTestId' => 3, 'Description' => 4, 'Price' => 5, 'Status' => 6, 'CreatedAt' => 7, 'UpdatedAt' => 8, ),
-		BasePeer::TYPE_STUDLYPHPNAME => array ('id' => 0, 'patientId' => 1, 'visitId' => 2, 'labTestId' => 3, 'description' => 4, 'price' => 5, 'status' => 6, 'createdAt' => 7, 'updatedAt' => 8, ),
-		BasePeer::TYPE_COLNAME => array (self::ID => 0, self::PATIENT_ID => 1, self::VISIT_ID => 2, self::LAB_TEST_ID => 3, self::DESCRIPTION => 4, self::PRICE => 5, self::STATUS => 6, self::CREATED_AT => 7, self::UPDATED_AT => 8, ),
-		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'patient_id' => 1, 'visit_id' => 2, 'lab_test_id' => 3, 'description' => 4, 'price' => 5, 'status' => 6, 'created_at' => 7, 'updated_at' => 8, ),
+		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'PatientId' => 1, 'VisitId' => 2, 'PharmaId' => 3, 'DosageId' => 4, 'Quantity' => 5, 'Price' => 6, 'CreatedAt' => 7, 'UpdatedAt' => 8, ),
+		BasePeer::TYPE_STUDLYPHPNAME => array ('id' => 0, 'patientId' => 1, 'visitId' => 2, 'pharmaId' => 3, 'dosageId' => 4, 'quantity' => 5, 'price' => 6, 'createdAt' => 7, 'updatedAt' => 8, ),
+		BasePeer::TYPE_COLNAME => array (self::ID => 0, self::PATIENT_ID => 1, self::VISIT_ID => 2, self::PHARMA_ID => 3, self::DOSAGE_ID => 4, self::QUANTITY => 5, self::PRICE => 6, self::CREATED_AT => 7, self::UPDATED_AT => 8, ),
+		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'patient_id' => 1, 'visit_id' => 2, 'pharma_id' => 3, 'dosage_id' => 4, 'quantity' => 5, 'price' => 6, 'created_at' => 7, 'updated_at' => 8, ),
 		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
 	);
 
@@ -104,7 +104,7 @@ abstract class BaseLabReportPeer {
 	public static function getMapBuilder()
 	{
 		if (self::$mapBuilder === null) {
-			self::$mapBuilder = new LabReportMapBuilder();
+			self::$mapBuilder = new VisitMedicineMapBuilder();
 		}
 		return self::$mapBuilder;
 	}
@@ -154,12 +154,12 @@ abstract class BaseLabReportPeer {
 	 *		$c->addJoin(TablePeer::alias("alias1", TablePeer::PRIMARY_KEY_COLUMN), TablePeer::PRIMARY_KEY_COLUMN);
 	 * </code>
 	 * @param      string $alias The alias for the current table.
-	 * @param      string $column The column name for current table. (i.e. LabReportPeer::COLUMN_NAME).
+	 * @param      string $column The column name for current table. (i.e. VisitMedicinePeer::COLUMN_NAME).
 	 * @return     string
 	 */
 	public static function alias($alias, $column)
 	{
-		return str_replace(LabReportPeer::TABLE_NAME.'.', $alias.'.', $column);
+		return str_replace(VisitMedicinePeer::TABLE_NAME.'.', $alias.'.', $column);
 	}
 
 	/**
@@ -176,23 +176,23 @@ abstract class BaseLabReportPeer {
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
-		$criteria->addSelectColumn(LabReportPeer::ID);
+		$criteria->addSelectColumn(VisitMedicinePeer::ID);
 
-		$criteria->addSelectColumn(LabReportPeer::PATIENT_ID);
+		$criteria->addSelectColumn(VisitMedicinePeer::PATIENT_ID);
 
-		$criteria->addSelectColumn(LabReportPeer::VISIT_ID);
+		$criteria->addSelectColumn(VisitMedicinePeer::VISIT_ID);
 
-		$criteria->addSelectColumn(LabReportPeer::LAB_TEST_ID);
+		$criteria->addSelectColumn(VisitMedicinePeer::PHARMA_ID);
 
-		$criteria->addSelectColumn(LabReportPeer::DESCRIPTION);
+		$criteria->addSelectColumn(VisitMedicinePeer::DOSAGE_ID);
 
-		$criteria->addSelectColumn(LabReportPeer::PRICE);
+		$criteria->addSelectColumn(VisitMedicinePeer::QUANTITY);
 
-		$criteria->addSelectColumn(LabReportPeer::STATUS);
+		$criteria->addSelectColumn(VisitMedicinePeer::PRICE);
 
-		$criteria->addSelectColumn(LabReportPeer::CREATED_AT);
+		$criteria->addSelectColumn(VisitMedicinePeer::CREATED_AT);
 
-		$criteria->addSelectColumn(LabReportPeer::UPDATED_AT);
+		$criteria->addSelectColumn(VisitMedicinePeer::UPDATED_AT);
 
 	}
 
@@ -212,27 +212,27 @@ abstract class BaseLabReportPeer {
 		// We need to set the primary table name, since in the case that there are no WHERE columns
 		// it will be impossible for the BasePeer::createSelectSql() method to determine which
 		// tables go into the FROM clause.
-		$criteria->setPrimaryTableName(LabReportPeer::TABLE_NAME);
+		$criteria->setPrimaryTableName(VisitMedicinePeer::TABLE_NAME);
 
 		if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
 			$criteria->setDistinct();
 		}
 
 		if (!$criteria->hasSelectClause()) {
-			LabReportPeer::addSelectColumns($criteria);
+			VisitMedicinePeer::addSelectColumns($criteria);
 		}
 
 		$criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
 		$criteria->setDbName(self::DATABASE_NAME); // Set the correct dbName
 
 		if ($con === null) {
-			$con = Propel::getConnection(LabReportPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(VisitMedicinePeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 
 
-    foreach (sfMixer::getCallables('BaseLabReportPeer:doCount:doCount') as $callable)
+    foreach (sfMixer::getCallables('BaseVisitMedicinePeer:doCount:doCount') as $callable)
     {
-      call_user_func($callable, 'BaseLabReportPeer', $criteria, $con);
+      call_user_func($callable, 'BaseVisitMedicinePeer', $criteria, $con);
     }
 
 
@@ -252,7 +252,7 @@ abstract class BaseLabReportPeer {
 	 *
 	 * @param      Criteria $criteria object used to create the SELECT statement.
 	 * @param      PropelPDO $con
-	 * @return     LabReport
+	 * @return     VisitMedicine
 	 * @throws     PropelException Any exceptions caught during processing will be
 	 *		 rethrown wrapped into a PropelException.
 	 */
@@ -260,7 +260,7 @@ abstract class BaseLabReportPeer {
 	{
 		$critcopy = clone $criteria;
 		$critcopy->setLimit(1);
-		$objects = LabReportPeer::doSelect($critcopy, $con);
+		$objects = VisitMedicinePeer::doSelect($critcopy, $con);
 		if ($objects) {
 			return $objects[0];
 		}
@@ -277,7 +277,7 @@ abstract class BaseLabReportPeer {
 	 */
 	public static function doSelect(Criteria $criteria, PropelPDO $con = null)
 	{
-		return LabReportPeer::populateObjects(LabReportPeer::doSelectStmt($criteria, $con));
+		return VisitMedicinePeer::populateObjects(VisitMedicinePeer::doSelectStmt($criteria, $con));
 	}
 	/**
 	 * Prepares the Criteria object and uses the parent doSelect() method to execute a PDOStatement.
@@ -295,19 +295,19 @@ abstract class BaseLabReportPeer {
 	public static function doSelectStmt(Criteria $criteria, PropelPDO $con = null)
 	{
 
-    foreach (sfMixer::getCallables('BaseLabReportPeer:doSelectStmt:doSelectStmt') as $callable)
+    foreach (sfMixer::getCallables('BaseVisitMedicinePeer:doSelectStmt:doSelectStmt') as $callable)
     {
-      call_user_func($callable, 'BaseLabReportPeer', $criteria, $con);
+      call_user_func($callable, 'BaseVisitMedicinePeer', $criteria, $con);
     }
 
 
 		if ($con === null) {
-			$con = Propel::getConnection(LabReportPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(VisitMedicinePeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 
 		if (!$criteria->hasSelectClause()) {
 			$criteria = clone $criteria;
-			LabReportPeer::addSelectColumns($criteria);
+			VisitMedicinePeer::addSelectColumns($criteria);
 		}
 
 		// Set the correct dbName
@@ -325,10 +325,10 @@ abstract class BaseLabReportPeer {
 	 * to the cache in order to ensure that the same objects are always returned by doSelect*()
 	 * and retrieveByPK*() calls.
 	 *
-	 * @param      LabReport $value A LabReport object.
+	 * @param      VisitMedicine $value A VisitMedicine object.
 	 * @param      string $key (optional) key to use for instance map (for performance boost if key was already calculated externally).
 	 */
-	public static function addInstanceToPool(LabReport $obj, $key = null)
+	public static function addInstanceToPool(VisitMedicine $obj, $key = null)
 	{
 		if (Propel::isInstancePoolingEnabled()) {
 			if ($key === null) {
@@ -346,18 +346,18 @@ abstract class BaseLabReportPeer {
 	 * methods in your stub classes -- you may need to explicitly remove objects
 	 * from the cache in order to prevent returning objects that no longer exist.
 	 *
-	 * @param      mixed $value A LabReport object or a primary key value.
+	 * @param      mixed $value A VisitMedicine object or a primary key value.
 	 */
 	public static function removeInstanceFromPool($value)
 	{
 		if (Propel::isInstancePoolingEnabled() && $value !== null) {
-			if (is_object($value) && $value instanceof LabReport) {
+			if (is_object($value) && $value instanceof VisitMedicine) {
 				$key = (string) $value->getId();
 			} elseif (is_scalar($value)) {
 				// assume we've been passed a primary key
 				$key = (string) $value;
 			} else {
-				$e = new PropelException("Invalid value passed to removeInstanceFromPool().  Expected primary key or LabReport object; got " . (is_object($value) ? get_class($value) . ' object.' : var_export($value,true)));
+				$e = new PropelException("Invalid value passed to removeInstanceFromPool().  Expected primary key or VisitMedicine object; got " . (is_object($value) ? get_class($value) . ' object.' : var_export($value,true)));
 				throw $e;
 			}
 
@@ -372,7 +372,7 @@ abstract class BaseLabReportPeer {
 	 * a multi-column primary key, a serialize()d version of the primary key will be returned.
 	 *
 	 * @param      string $key The key (@see getPrimaryKeyHash()) for this instance.
-	 * @return     LabReport Found object or NULL if 1) no instance exists for specified key or 2) instance pooling has been disabled.
+	 * @return     VisitMedicine Found object or NULL if 1) no instance exists for specified key or 2) instance pooling has been disabled.
 	 * @see        getPrimaryKeyHash()
 	 */
 	public static function getInstanceFromPool($key)
@@ -426,12 +426,12 @@ abstract class BaseLabReportPeer {
 		$results = array();
 	
 		// set the class once to avoid overhead in the loop
-		$cls = LabReportPeer::getOMClass();
+		$cls = VisitMedicinePeer::getOMClass();
 		$cls = substr('.'.$cls, strrpos('.'.$cls, '.') + 1);
 		// populate the object(s)
 		while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-			$key = LabReportPeer::getPrimaryKeyHashFromRow($row, 0);
-			if (null !== ($obj = LabReportPeer::getInstanceFromPool($key))) {
+			$key = VisitMedicinePeer::getPrimaryKeyHashFromRow($row, 0);
+			if (null !== ($obj = VisitMedicinePeer::getInstanceFromPool($key))) {
 				// We no longer rehydrate the object, since this can cause data loss.
 				// See http://propel.phpdb.org/trac/ticket/509
 				// $obj->hydrate($row, 0, true); // rehydrate
@@ -441,7 +441,7 @@ abstract class BaseLabReportPeer {
 				$obj = new $cls();
 				$obj->hydrate($row);
 				$results[] = $obj;
-				LabReportPeer::addInstanceToPool($obj, $key);
+				VisitMedicinePeer::addInstanceToPool($obj, $key);
 			} // if key exists
 		}
 		$stmt->closeCursor();
@@ -465,14 +465,14 @@ abstract class BaseLabReportPeer {
 		// We need to set the primary table name, since in the case that there are no WHERE columns
 		// it will be impossible for the BasePeer::createSelectSql() method to determine which
 		// tables go into the FROM clause.
-		$criteria->setPrimaryTableName(LabReportPeer::TABLE_NAME);
+		$criteria->setPrimaryTableName(VisitMedicinePeer::TABLE_NAME);
 
 		if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
 			$criteria->setDistinct();
 		}
 
 		if (!$criteria->hasSelectClause()) {
-			LabReportPeer::addSelectColumns($criteria);
+			VisitMedicinePeer::addSelectColumns($criteria);
 		}
 
 		$criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
@@ -481,15 +481,15 @@ abstract class BaseLabReportPeer {
 		$criteria->setDbName(self::DATABASE_NAME);
 
 		if ($con === null) {
-			$con = Propel::getConnection(LabReportPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(VisitMedicinePeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 
-		$criteria->addJoin(array(LabReportPeer::PATIENT_ID,), array(PatientPeer::ID,), $join_behavior);
+		$criteria->addJoin(array(VisitMedicinePeer::PATIENT_ID,), array(PatientPeer::ID,), $join_behavior);
 
 
-    foreach (sfMixer::getCallables('BaseLabReportPeer:doCount:doCount') as $callable)
+    foreach (sfMixer::getCallables('BaseVisitMedicinePeer:doCount:doCount') as $callable)
     {
-      call_user_func($callable, 'BaseLabReportPeer', $criteria, $con);
+      call_user_func($callable, 'BaseVisitMedicinePeer', $criteria, $con);
     }
 
 
@@ -522,14 +522,14 @@ abstract class BaseLabReportPeer {
 		// We need to set the primary table name, since in the case that there are no WHERE columns
 		// it will be impossible for the BasePeer::createSelectSql() method to determine which
 		// tables go into the FROM clause.
-		$criteria->setPrimaryTableName(LabReportPeer::TABLE_NAME);
+		$criteria->setPrimaryTableName(VisitMedicinePeer::TABLE_NAME);
 
 		if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
 			$criteria->setDistinct();
 		}
 
 		if (!$criteria->hasSelectClause()) {
-			LabReportPeer::addSelectColumns($criteria);
+			VisitMedicinePeer::addSelectColumns($criteria);
 		}
 
 		$criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
@@ -538,15 +538,15 @@ abstract class BaseLabReportPeer {
 		$criteria->setDbName(self::DATABASE_NAME);
 
 		if ($con === null) {
-			$con = Propel::getConnection(LabReportPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(VisitMedicinePeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 
-		$criteria->addJoin(array(LabReportPeer::VISIT_ID,), array(VisitPeer::ID,), $join_behavior);
+		$criteria->addJoin(array(VisitMedicinePeer::VISIT_ID,), array(VisitPeer::ID,), $join_behavior);
 
 
-    foreach (sfMixer::getCallables('BaseLabReportPeer:doCount:doCount') as $callable)
+    foreach (sfMixer::getCallables('BaseVisitMedicinePeer:doCount:doCount') as $callable)
     {
-      call_user_func($callable, 'BaseLabReportPeer', $criteria, $con);
+      call_user_func($callable, 'BaseVisitMedicinePeer', $criteria, $con);
     }
 
 
@@ -563,7 +563,7 @@ abstract class BaseLabReportPeer {
 
 
 	/**
-	 * Returns the number of rows matching criteria, joining the related LabTest table
+	 * Returns the number of rows matching criteria, joining the related Pharma table
 	 *
 	 * @param      Criteria $c
 	 * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
@@ -571,7 +571,7 @@ abstract class BaseLabReportPeer {
 	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
 	 * @return     int Number of matching rows.
 	 */
-	public static function doCountJoinLabTest(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	public static function doCountJoinPharma(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
 	{
 		// we're going to modify criteria, so copy it first
 		$criteria = clone $criteria;
@@ -579,14 +579,14 @@ abstract class BaseLabReportPeer {
 		// We need to set the primary table name, since in the case that there are no WHERE columns
 		// it will be impossible for the BasePeer::createSelectSql() method to determine which
 		// tables go into the FROM clause.
-		$criteria->setPrimaryTableName(LabReportPeer::TABLE_NAME);
+		$criteria->setPrimaryTableName(VisitMedicinePeer::TABLE_NAME);
 
 		if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
 			$criteria->setDistinct();
 		}
 
 		if (!$criteria->hasSelectClause()) {
-			LabReportPeer::addSelectColumns($criteria);
+			VisitMedicinePeer::addSelectColumns($criteria);
 		}
 
 		$criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
@@ -595,15 +595,15 @@ abstract class BaseLabReportPeer {
 		$criteria->setDbName(self::DATABASE_NAME);
 
 		if ($con === null) {
-			$con = Propel::getConnection(LabReportPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(VisitMedicinePeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 
-		$criteria->addJoin(array(LabReportPeer::LAB_TEST_ID,), array(LabTestPeer::ID,), $join_behavior);
+		$criteria->addJoin(array(VisitMedicinePeer::PHARMA_ID,), array(PharmaPeer::ID,), $join_behavior);
 
 
-    foreach (sfMixer::getCallables('BaseLabReportPeer:doCount:doCount') as $callable)
+    foreach (sfMixer::getCallables('BaseVisitMedicinePeer:doCount:doCount') as $callable)
     {
-      call_user_func($callable, 'BaseLabReportPeer', $criteria, $con);
+      call_user_func($callable, 'BaseVisitMedicinePeer', $criteria, $con);
     }
 
 
@@ -620,20 +620,77 @@ abstract class BaseLabReportPeer {
 
 
 	/**
-	 * Selects a collection of LabReport objects pre-filled with their Patient objects.
+	 * Returns the number of rows matching criteria, joining the related Dosage table
+	 *
+	 * @param      Criteria $c
+	 * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
+	 * @param      PropelPDO $con
+	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+	 * @return     int Number of matching rows.
+	 */
+	public static function doCountJoinDosage(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	{
+		// we're going to modify criteria, so copy it first
+		$criteria = clone $criteria;
+
+		// We need to set the primary table name, since in the case that there are no WHERE columns
+		// it will be impossible for the BasePeer::createSelectSql() method to determine which
+		// tables go into the FROM clause.
+		$criteria->setPrimaryTableName(VisitMedicinePeer::TABLE_NAME);
+
+		if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->setDistinct();
+		}
+
+		if (!$criteria->hasSelectClause()) {
+			VisitMedicinePeer::addSelectColumns($criteria);
+		}
+
+		$criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
+
+		// Set the correct dbName
+		$criteria->setDbName(self::DATABASE_NAME);
+
+		if ($con === null) {
+			$con = Propel::getConnection(VisitMedicinePeer::DATABASE_NAME, Propel::CONNECTION_READ);
+		}
+
+		$criteria->addJoin(array(VisitMedicinePeer::DOSAGE_ID,), array(DosagePeer::ID,), $join_behavior);
+
+
+    foreach (sfMixer::getCallables('BaseVisitMedicinePeer:doCount:doCount') as $callable)
+    {
+      call_user_func($callable, 'BaseVisitMedicinePeer', $criteria, $con);
+    }
+
+
+		$stmt = BasePeer::doCount($criteria, $con);
+
+		if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+			$count = (int) $row[0];
+		} else {
+			$count = 0; // no rows returned; we infer that means 0 matches.
+		}
+		$stmt->closeCursor();
+		return $count;
+	}
+
+
+	/**
+	 * Selects a collection of VisitMedicine objects pre-filled with their Patient objects.
 	 * @param      Criteria  $c
 	 * @param      PropelPDO $con
 	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
-	 * @return     array Array of LabReport objects.
+	 * @return     array Array of VisitMedicine objects.
 	 * @throws     PropelException Any exceptions caught during processing will be
 	 *		 rethrown wrapped into a PropelException.
 	 */
 	public static function doSelectJoinPatient(Criteria $c, $con = null, $join_behavior = Criteria::LEFT_JOIN)
 	{
 
-    foreach (sfMixer::getCallables('BaseLabReportPeer:doSelectJoin:doSelectJoin') as $callable)
+    foreach (sfMixer::getCallables('BaseVisitMedicinePeer:doSelectJoin:doSelectJoin') as $callable)
     {
-      call_user_func($callable, 'BaseLabReportPeer', $c, $con);
+      call_user_func($callable, 'BaseVisitMedicinePeer', $c, $con);
     }
 
 
@@ -644,28 +701,28 @@ abstract class BaseLabReportPeer {
 			$c->setDbName(self::DATABASE_NAME);
 		}
 
-		LabReportPeer::addSelectColumns($c);
-		$startcol = (LabReportPeer::NUM_COLUMNS - LabReportPeer::NUM_LAZY_LOAD_COLUMNS);
+		VisitMedicinePeer::addSelectColumns($c);
+		$startcol = (VisitMedicinePeer::NUM_COLUMNS - VisitMedicinePeer::NUM_LAZY_LOAD_COLUMNS);
 		PatientPeer::addSelectColumns($c);
 
-		$c->addJoin(array(LabReportPeer::PATIENT_ID,), array(PatientPeer::ID,), $join_behavior);
+		$c->addJoin(array(VisitMedicinePeer::PATIENT_ID,), array(PatientPeer::ID,), $join_behavior);
 		$stmt = BasePeer::doSelect($c, $con);
 		$results = array();
 
 		while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-			$key1 = LabReportPeer::getPrimaryKeyHashFromRow($row, 0);
-			if (null !== ($obj1 = LabReportPeer::getInstanceFromPool($key1))) {
+			$key1 = VisitMedicinePeer::getPrimaryKeyHashFromRow($row, 0);
+			if (null !== ($obj1 = VisitMedicinePeer::getInstanceFromPool($key1))) {
 				// We no longer rehydrate the object, since this can cause data loss.
 				// See http://propel.phpdb.org/trac/ticket/509
 				// $obj1->hydrate($row, 0, true); // rehydrate
 			} else {
 
-				$omClass = LabReportPeer::getOMClass();
+				$omClass = VisitMedicinePeer::getOMClass();
 
 				$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
 				$obj1 = new $cls();
 				$obj1->hydrate($row);
-				LabReportPeer::addInstanceToPool($obj1, $key1);
+				VisitMedicinePeer::addInstanceToPool($obj1, $key1);
 			} // if $obj1 already loaded
 
 			$key2 = PatientPeer::getPrimaryKeyHashFromRow($row, $startcol);
@@ -681,8 +738,8 @@ abstract class BaseLabReportPeer {
 					PatientPeer::addInstanceToPool($obj2, $key2);
 				} // if obj2 already loaded
 
-				// Add the $obj1 (LabReport) to $obj2 (Patient)
-				$obj2->addLabReport($obj1);
+				// Add the $obj1 (VisitMedicine) to $obj2 (Patient)
+				$obj2->addVisitMedicine($obj1);
 
 			} // if joined row was not null
 
@@ -694,11 +751,11 @@ abstract class BaseLabReportPeer {
 
 
 	/**
-	 * Selects a collection of LabReport objects pre-filled with their Visit objects.
+	 * Selects a collection of VisitMedicine objects pre-filled with their Visit objects.
 	 * @param      Criteria  $c
 	 * @param      PropelPDO $con
 	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
-	 * @return     array Array of LabReport objects.
+	 * @return     array Array of VisitMedicine objects.
 	 * @throws     PropelException Any exceptions caught during processing will be
 	 *		 rethrown wrapped into a PropelException.
 	 */
@@ -711,28 +768,28 @@ abstract class BaseLabReportPeer {
 			$c->setDbName(self::DATABASE_NAME);
 		}
 
-		LabReportPeer::addSelectColumns($c);
-		$startcol = (LabReportPeer::NUM_COLUMNS - LabReportPeer::NUM_LAZY_LOAD_COLUMNS);
+		VisitMedicinePeer::addSelectColumns($c);
+		$startcol = (VisitMedicinePeer::NUM_COLUMNS - VisitMedicinePeer::NUM_LAZY_LOAD_COLUMNS);
 		VisitPeer::addSelectColumns($c);
 
-		$c->addJoin(array(LabReportPeer::VISIT_ID,), array(VisitPeer::ID,), $join_behavior);
+		$c->addJoin(array(VisitMedicinePeer::VISIT_ID,), array(VisitPeer::ID,), $join_behavior);
 		$stmt = BasePeer::doSelect($c, $con);
 		$results = array();
 
 		while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-			$key1 = LabReportPeer::getPrimaryKeyHashFromRow($row, 0);
-			if (null !== ($obj1 = LabReportPeer::getInstanceFromPool($key1))) {
+			$key1 = VisitMedicinePeer::getPrimaryKeyHashFromRow($row, 0);
+			if (null !== ($obj1 = VisitMedicinePeer::getInstanceFromPool($key1))) {
 				// We no longer rehydrate the object, since this can cause data loss.
 				// See http://propel.phpdb.org/trac/ticket/509
 				// $obj1->hydrate($row, 0, true); // rehydrate
 			} else {
 
-				$omClass = LabReportPeer::getOMClass();
+				$omClass = VisitMedicinePeer::getOMClass();
 
 				$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
 				$obj1 = new $cls();
 				$obj1->hydrate($row);
-				LabReportPeer::addInstanceToPool($obj1, $key1);
+				VisitMedicinePeer::addInstanceToPool($obj1, $key1);
 			} // if $obj1 already loaded
 
 			$key2 = VisitPeer::getPrimaryKeyHashFromRow($row, $startcol);
@@ -748,8 +805,8 @@ abstract class BaseLabReportPeer {
 					VisitPeer::addInstanceToPool($obj2, $key2);
 				} // if obj2 already loaded
 
-				// Add the $obj1 (LabReport) to $obj2 (Visit)
-				$obj2->addLabReport($obj1);
+				// Add the $obj1 (VisitMedicine) to $obj2 (Visit)
+				$obj2->addVisitMedicine($obj1);
 
 			} // if joined row was not null
 
@@ -761,15 +818,15 @@ abstract class BaseLabReportPeer {
 
 
 	/**
-	 * Selects a collection of LabReport objects pre-filled with their LabTest objects.
+	 * Selects a collection of VisitMedicine objects pre-filled with their Pharma objects.
 	 * @param      Criteria  $c
 	 * @param      PropelPDO $con
 	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
-	 * @return     array Array of LabReport objects.
+	 * @return     array Array of VisitMedicine objects.
 	 * @throws     PropelException Any exceptions caught during processing will be
 	 *		 rethrown wrapped into a PropelException.
 	 */
-	public static function doSelectJoinLabTest(Criteria $c, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	public static function doSelectJoinPharma(Criteria $c, $con = null, $join_behavior = Criteria::LEFT_JOIN)
 	{
 		$c = clone $c;
 
@@ -778,45 +835,112 @@ abstract class BaseLabReportPeer {
 			$c->setDbName(self::DATABASE_NAME);
 		}
 
-		LabReportPeer::addSelectColumns($c);
-		$startcol = (LabReportPeer::NUM_COLUMNS - LabReportPeer::NUM_LAZY_LOAD_COLUMNS);
-		LabTestPeer::addSelectColumns($c);
+		VisitMedicinePeer::addSelectColumns($c);
+		$startcol = (VisitMedicinePeer::NUM_COLUMNS - VisitMedicinePeer::NUM_LAZY_LOAD_COLUMNS);
+		PharmaPeer::addSelectColumns($c);
 
-		$c->addJoin(array(LabReportPeer::LAB_TEST_ID,), array(LabTestPeer::ID,), $join_behavior);
+		$c->addJoin(array(VisitMedicinePeer::PHARMA_ID,), array(PharmaPeer::ID,), $join_behavior);
 		$stmt = BasePeer::doSelect($c, $con);
 		$results = array();
 
 		while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-			$key1 = LabReportPeer::getPrimaryKeyHashFromRow($row, 0);
-			if (null !== ($obj1 = LabReportPeer::getInstanceFromPool($key1))) {
+			$key1 = VisitMedicinePeer::getPrimaryKeyHashFromRow($row, 0);
+			if (null !== ($obj1 = VisitMedicinePeer::getInstanceFromPool($key1))) {
 				// We no longer rehydrate the object, since this can cause data loss.
 				// See http://propel.phpdb.org/trac/ticket/509
 				// $obj1->hydrate($row, 0, true); // rehydrate
 			} else {
 
-				$omClass = LabReportPeer::getOMClass();
+				$omClass = VisitMedicinePeer::getOMClass();
 
 				$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
 				$obj1 = new $cls();
 				$obj1->hydrate($row);
-				LabReportPeer::addInstanceToPool($obj1, $key1);
+				VisitMedicinePeer::addInstanceToPool($obj1, $key1);
 			} // if $obj1 already loaded
 
-			$key2 = LabTestPeer::getPrimaryKeyHashFromRow($row, $startcol);
+			$key2 = PharmaPeer::getPrimaryKeyHashFromRow($row, $startcol);
 			if ($key2 !== null) {
-				$obj2 = LabTestPeer::getInstanceFromPool($key2);
+				$obj2 = PharmaPeer::getInstanceFromPool($key2);
 				if (!$obj2) {
 
-					$omClass = LabTestPeer::getOMClass();
+					$omClass = PharmaPeer::getOMClass();
 
 					$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
 					$obj2 = new $cls();
 					$obj2->hydrate($row, $startcol);
-					LabTestPeer::addInstanceToPool($obj2, $key2);
+					PharmaPeer::addInstanceToPool($obj2, $key2);
 				} // if obj2 already loaded
 
-				// Add the $obj1 (LabReport) to $obj2 (LabTest)
-				$obj2->addLabReport($obj1);
+				// Add the $obj1 (VisitMedicine) to $obj2 (Pharma)
+				$obj2->addVisitMedicine($obj1);
+
+			} // if joined row was not null
+
+			$results[] = $obj1;
+		}
+		$stmt->closeCursor();
+		return $results;
+	}
+
+
+	/**
+	 * Selects a collection of VisitMedicine objects pre-filled with their Dosage objects.
+	 * @param      Criteria  $c
+	 * @param      PropelPDO $con
+	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+	 * @return     array Array of VisitMedicine objects.
+	 * @throws     PropelException Any exceptions caught during processing will be
+	 *		 rethrown wrapped into a PropelException.
+	 */
+	public static function doSelectJoinDosage(Criteria $c, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	{
+		$c = clone $c;
+
+		// Set the correct dbName if it has not been overridden
+		if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		VisitMedicinePeer::addSelectColumns($c);
+		$startcol = (VisitMedicinePeer::NUM_COLUMNS - VisitMedicinePeer::NUM_LAZY_LOAD_COLUMNS);
+		DosagePeer::addSelectColumns($c);
+
+		$c->addJoin(array(VisitMedicinePeer::DOSAGE_ID,), array(DosagePeer::ID,), $join_behavior);
+		$stmt = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+			$key1 = VisitMedicinePeer::getPrimaryKeyHashFromRow($row, 0);
+			if (null !== ($obj1 = VisitMedicinePeer::getInstanceFromPool($key1))) {
+				// We no longer rehydrate the object, since this can cause data loss.
+				// See http://propel.phpdb.org/trac/ticket/509
+				// $obj1->hydrate($row, 0, true); // rehydrate
+			} else {
+
+				$omClass = VisitMedicinePeer::getOMClass();
+
+				$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
+				$obj1 = new $cls();
+				$obj1->hydrate($row);
+				VisitMedicinePeer::addInstanceToPool($obj1, $key1);
+			} // if $obj1 already loaded
+
+			$key2 = DosagePeer::getPrimaryKeyHashFromRow($row, $startcol);
+			if ($key2 !== null) {
+				$obj2 = DosagePeer::getInstanceFromPool($key2);
+				if (!$obj2) {
+
+					$omClass = DosagePeer::getOMClass();
+
+					$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
+					$obj2 = new $cls();
+					$obj2->hydrate($row, $startcol);
+					DosagePeer::addInstanceToPool($obj2, $key2);
+				} // if obj2 already loaded
+
+				// Add the $obj1 (VisitMedicine) to $obj2 (Dosage)
+				$obj2->addVisitMedicine($obj1);
 
 			} // if joined row was not null
 
@@ -844,14 +968,14 @@ abstract class BaseLabReportPeer {
 		// We need to set the primary table name, since in the case that there are no WHERE columns
 		// it will be impossible for the BasePeer::createSelectSql() method to determine which
 		// tables go into the FROM clause.
-		$criteria->setPrimaryTableName(LabReportPeer::TABLE_NAME);
+		$criteria->setPrimaryTableName(VisitMedicinePeer::TABLE_NAME);
 
 		if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
 			$criteria->setDistinct();
 		}
 
 		if (!$criteria->hasSelectClause()) {
-			LabReportPeer::addSelectColumns($criteria);
+			VisitMedicinePeer::addSelectColumns($criteria);
 		}
 
 		$criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
@@ -860,16 +984,17 @@ abstract class BaseLabReportPeer {
 		$criteria->setDbName(self::DATABASE_NAME);
 
 		if ($con === null) {
-			$con = Propel::getConnection(LabReportPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(VisitMedicinePeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 
-		$criteria->addJoin(array(LabReportPeer::PATIENT_ID,), array(PatientPeer::ID,), $join_behavior);
-		$criteria->addJoin(array(LabReportPeer::VISIT_ID,), array(VisitPeer::ID,), $join_behavior);
-		$criteria->addJoin(array(LabReportPeer::LAB_TEST_ID,), array(LabTestPeer::ID,), $join_behavior);
+		$criteria->addJoin(array(VisitMedicinePeer::PATIENT_ID,), array(PatientPeer::ID,), $join_behavior);
+		$criteria->addJoin(array(VisitMedicinePeer::VISIT_ID,), array(VisitPeer::ID,), $join_behavior);
+		$criteria->addJoin(array(VisitMedicinePeer::PHARMA_ID,), array(PharmaPeer::ID,), $join_behavior);
+		$criteria->addJoin(array(VisitMedicinePeer::DOSAGE_ID,), array(DosagePeer::ID,), $join_behavior);
 
-    foreach (sfMixer::getCallables('BaseLabReportPeer:doCount:doCount') as $callable)
+    foreach (sfMixer::getCallables('BaseVisitMedicinePeer:doCount:doCount') as $callable)
     {
-      call_user_func($callable, 'BaseLabReportPeer', $criteria, $con);
+      call_user_func($callable, 'BaseVisitMedicinePeer', $criteria, $con);
     }
 
 
@@ -885,21 +1010,21 @@ abstract class BaseLabReportPeer {
 	}
 
 	/**
-	 * Selects a collection of LabReport objects pre-filled with all related objects.
+	 * Selects a collection of VisitMedicine objects pre-filled with all related objects.
 	 *
 	 * @param      Criteria  $c
 	 * @param      PropelPDO $con
 	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
-	 * @return     array Array of LabReport objects.
+	 * @return     array Array of VisitMedicine objects.
 	 * @throws     PropelException Any exceptions caught during processing will be
 	 *		 rethrown wrapped into a PropelException.
 	 */
 	public static function doSelectJoinAll(Criteria $c, $con = null, $join_behavior = Criteria::LEFT_JOIN)
 	{
 
-    foreach (sfMixer::getCallables('BaseLabReportPeer:doSelectJoinAll:doSelectJoinAll') as $callable)
+    foreach (sfMixer::getCallables('BaseVisitMedicinePeer:doSelectJoinAll:doSelectJoinAll') as $callable)
     {
-      call_user_func($callable, 'BaseLabReportPeer', $c, $con);
+      call_user_func($callable, 'BaseVisitMedicinePeer', $c, $con);
     }
 
 
@@ -910,8 +1035,8 @@ abstract class BaseLabReportPeer {
 			$c->setDbName(self::DATABASE_NAME);
 		}
 
-		LabReportPeer::addSelectColumns($c);
-		$startcol2 = (LabReportPeer::NUM_COLUMNS - LabReportPeer::NUM_LAZY_LOAD_COLUMNS);
+		VisitMedicinePeer::addSelectColumns($c);
+		$startcol2 = (VisitMedicinePeer::NUM_COLUMNS - VisitMedicinePeer::NUM_LAZY_LOAD_COLUMNS);
 
 		PatientPeer::addSelectColumns($c);
 		$startcol3 = $startcol2 + (PatientPeer::NUM_COLUMNS - PatientPeer::NUM_LAZY_LOAD_COLUMNS);
@@ -919,28 +1044,32 @@ abstract class BaseLabReportPeer {
 		VisitPeer::addSelectColumns($c);
 		$startcol4 = $startcol3 + (VisitPeer::NUM_COLUMNS - VisitPeer::NUM_LAZY_LOAD_COLUMNS);
 
-		LabTestPeer::addSelectColumns($c);
-		$startcol5 = $startcol4 + (LabTestPeer::NUM_COLUMNS - LabTestPeer::NUM_LAZY_LOAD_COLUMNS);
+		PharmaPeer::addSelectColumns($c);
+		$startcol5 = $startcol4 + (PharmaPeer::NUM_COLUMNS - PharmaPeer::NUM_LAZY_LOAD_COLUMNS);
 
-		$c->addJoin(array(LabReportPeer::PATIENT_ID,), array(PatientPeer::ID,), $join_behavior);
-		$c->addJoin(array(LabReportPeer::VISIT_ID,), array(VisitPeer::ID,), $join_behavior);
-		$c->addJoin(array(LabReportPeer::LAB_TEST_ID,), array(LabTestPeer::ID,), $join_behavior);
+		DosagePeer::addSelectColumns($c);
+		$startcol6 = $startcol5 + (DosagePeer::NUM_COLUMNS - DosagePeer::NUM_LAZY_LOAD_COLUMNS);
+
+		$c->addJoin(array(VisitMedicinePeer::PATIENT_ID,), array(PatientPeer::ID,), $join_behavior);
+		$c->addJoin(array(VisitMedicinePeer::VISIT_ID,), array(VisitPeer::ID,), $join_behavior);
+		$c->addJoin(array(VisitMedicinePeer::PHARMA_ID,), array(PharmaPeer::ID,), $join_behavior);
+		$c->addJoin(array(VisitMedicinePeer::DOSAGE_ID,), array(DosagePeer::ID,), $join_behavior);
 		$stmt = BasePeer::doSelect($c, $con);
 		$results = array();
 
 		while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-			$key1 = LabReportPeer::getPrimaryKeyHashFromRow($row, 0);
-			if (null !== ($obj1 = LabReportPeer::getInstanceFromPool($key1))) {
+			$key1 = VisitMedicinePeer::getPrimaryKeyHashFromRow($row, 0);
+			if (null !== ($obj1 = VisitMedicinePeer::getInstanceFromPool($key1))) {
 				// We no longer rehydrate the object, since this can cause data loss.
 				// See http://propel.phpdb.org/trac/ticket/509
 				// $obj1->hydrate($row, 0, true); // rehydrate
 			} else {
-				$omClass = LabReportPeer::getOMClass();
+				$omClass = VisitMedicinePeer::getOMClass();
 
 				$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
 				$obj1 = new $cls();
 				$obj1->hydrate($row);
-				LabReportPeer::addInstanceToPool($obj1, $key1);
+				VisitMedicinePeer::addInstanceToPool($obj1, $key1);
 			} // if obj1 already loaded
 
 			// Add objects for joined Patient rows
@@ -959,8 +1088,8 @@ abstract class BaseLabReportPeer {
 					PatientPeer::addInstanceToPool($obj2, $key2);
 				} // if obj2 loaded
 
-				// Add the $obj1 (LabReport) to the collection in $obj2 (Patient)
-				$obj2->addLabReport($obj1);
+				// Add the $obj1 (VisitMedicine) to the collection in $obj2 (Patient)
+				$obj2->addVisitMedicine($obj1);
 			} // if joined row not null
 
 			// Add objects for joined Visit rows
@@ -979,28 +1108,48 @@ abstract class BaseLabReportPeer {
 					VisitPeer::addInstanceToPool($obj3, $key3);
 				} // if obj3 loaded
 
-				// Add the $obj1 (LabReport) to the collection in $obj3 (Visit)
-				$obj3->addLabReport($obj1);
+				// Add the $obj1 (VisitMedicine) to the collection in $obj3 (Visit)
+				$obj3->addVisitMedicine($obj1);
 			} // if joined row not null
 
-			// Add objects for joined LabTest rows
+			// Add objects for joined Pharma rows
 
-			$key4 = LabTestPeer::getPrimaryKeyHashFromRow($row, $startcol4);
+			$key4 = PharmaPeer::getPrimaryKeyHashFromRow($row, $startcol4);
 			if ($key4 !== null) {
-				$obj4 = LabTestPeer::getInstanceFromPool($key4);
+				$obj4 = PharmaPeer::getInstanceFromPool($key4);
 				if (!$obj4) {
 
-					$omClass = LabTestPeer::getOMClass();
+					$omClass = PharmaPeer::getOMClass();
 
 
 					$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
 					$obj4 = new $cls();
 					$obj4->hydrate($row, $startcol4);
-					LabTestPeer::addInstanceToPool($obj4, $key4);
+					PharmaPeer::addInstanceToPool($obj4, $key4);
 				} // if obj4 loaded
 
-				// Add the $obj1 (LabReport) to the collection in $obj4 (LabTest)
-				$obj4->addLabReport($obj1);
+				// Add the $obj1 (VisitMedicine) to the collection in $obj4 (Pharma)
+				$obj4->addVisitMedicine($obj1);
+			} // if joined row not null
+
+			// Add objects for joined Dosage rows
+
+			$key5 = DosagePeer::getPrimaryKeyHashFromRow($row, $startcol5);
+			if ($key5 !== null) {
+				$obj5 = DosagePeer::getInstanceFromPool($key5);
+				if (!$obj5) {
+
+					$omClass = DosagePeer::getOMClass();
+
+
+					$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
+					$obj5 = new $cls();
+					$obj5->hydrate($row, $startcol5);
+					DosagePeer::addInstanceToPool($obj5, $key5);
+				} // if obj5 loaded
+
+				// Add the $obj1 (VisitMedicine) to the collection in $obj5 (Dosage)
+				$obj5->addVisitMedicine($obj1);
 			} // if joined row not null
 
 			$results[] = $obj1;
@@ -1029,7 +1178,7 @@ abstract class BaseLabReportPeer {
 		}
 
 		if (!$criteria->hasSelectClause()) {
-			LabReportPeer::addSelectColumns($criteria);
+			VisitMedicinePeer::addSelectColumns($criteria);
 		}
 
 		$criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
@@ -1038,15 +1187,16 @@ abstract class BaseLabReportPeer {
 		$criteria->setDbName(self::DATABASE_NAME);
 
 		if ($con === null) {
-			$con = Propel::getConnection(LabReportPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(VisitMedicinePeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 	
-				$criteria->addJoin(array(LabReportPeer::VISIT_ID,), array(VisitPeer::ID,), $join_behavior);
-				$criteria->addJoin(array(LabReportPeer::LAB_TEST_ID,), array(LabTestPeer::ID,), $join_behavior);
+				$criteria->addJoin(array(VisitMedicinePeer::VISIT_ID,), array(VisitPeer::ID,), $join_behavior);
+				$criteria->addJoin(array(VisitMedicinePeer::PHARMA_ID,), array(PharmaPeer::ID,), $join_behavior);
+				$criteria->addJoin(array(VisitMedicinePeer::DOSAGE_ID,), array(DosagePeer::ID,), $join_behavior);
 
-    foreach (sfMixer::getCallables('BaseLabReportPeer:doCount:doCount') as $callable)
+    foreach (sfMixer::getCallables('BaseVisitMedicinePeer:doCount:doCount') as $callable)
     {
-      call_user_func($callable, 'BaseLabReportPeer', $criteria, $con);
+      call_user_func($callable, 'BaseVisitMedicinePeer', $criteria, $con);
     }
 
 
@@ -1081,7 +1231,7 @@ abstract class BaseLabReportPeer {
 		}
 
 		if (!$criteria->hasSelectClause()) {
-			LabReportPeer::addSelectColumns($criteria);
+			VisitMedicinePeer::addSelectColumns($criteria);
 		}
 
 		$criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
@@ -1090,15 +1240,16 @@ abstract class BaseLabReportPeer {
 		$criteria->setDbName(self::DATABASE_NAME);
 
 		if ($con === null) {
-			$con = Propel::getConnection(LabReportPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(VisitMedicinePeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 	
-				$criteria->addJoin(array(LabReportPeer::PATIENT_ID,), array(PatientPeer::ID,), $join_behavior);
-				$criteria->addJoin(array(LabReportPeer::LAB_TEST_ID,), array(LabTestPeer::ID,), $join_behavior);
+				$criteria->addJoin(array(VisitMedicinePeer::PATIENT_ID,), array(PatientPeer::ID,), $join_behavior);
+				$criteria->addJoin(array(VisitMedicinePeer::PHARMA_ID,), array(PharmaPeer::ID,), $join_behavior);
+				$criteria->addJoin(array(VisitMedicinePeer::DOSAGE_ID,), array(DosagePeer::ID,), $join_behavior);
 
-    foreach (sfMixer::getCallables('BaseLabReportPeer:doCount:doCount') as $callable)
+    foreach (sfMixer::getCallables('BaseVisitMedicinePeer:doCount:doCount') as $callable)
     {
-      call_user_func($callable, 'BaseLabReportPeer', $criteria, $con);
+      call_user_func($callable, 'BaseVisitMedicinePeer', $criteria, $con);
     }
 
 
@@ -1115,7 +1266,7 @@ abstract class BaseLabReportPeer {
 
 
 	/**
-	 * Returns the number of rows matching criteria, joining the related LabTest table
+	 * Returns the number of rows matching criteria, joining the related Pharma table
 	 *
 	 * @param      Criteria $c
 	 * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
@@ -1123,7 +1274,7 @@ abstract class BaseLabReportPeer {
 	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
 	 * @return     int Number of matching rows.
 	 */
-	public static function doCountJoinAllExceptLabTest(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	public static function doCountJoinAllExceptPharma(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
 	{
 		// we're going to modify criteria, so copy it first
 		$criteria = clone $criteria;
@@ -1133,7 +1284,7 @@ abstract class BaseLabReportPeer {
 		}
 
 		if (!$criteria->hasSelectClause()) {
-			LabReportPeer::addSelectColumns($criteria);
+			VisitMedicinePeer::addSelectColumns($criteria);
 		}
 
 		$criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
@@ -1142,15 +1293,16 @@ abstract class BaseLabReportPeer {
 		$criteria->setDbName(self::DATABASE_NAME);
 
 		if ($con === null) {
-			$con = Propel::getConnection(LabReportPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(VisitMedicinePeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 	
-				$criteria->addJoin(array(LabReportPeer::PATIENT_ID,), array(PatientPeer::ID,), $join_behavior);
-				$criteria->addJoin(array(LabReportPeer::VISIT_ID,), array(VisitPeer::ID,), $join_behavior);
+				$criteria->addJoin(array(VisitMedicinePeer::PATIENT_ID,), array(PatientPeer::ID,), $join_behavior);
+				$criteria->addJoin(array(VisitMedicinePeer::VISIT_ID,), array(VisitPeer::ID,), $join_behavior);
+				$criteria->addJoin(array(VisitMedicinePeer::DOSAGE_ID,), array(DosagePeer::ID,), $join_behavior);
 
-    foreach (sfMixer::getCallables('BaseLabReportPeer:doCount:doCount') as $callable)
+    foreach (sfMixer::getCallables('BaseVisitMedicinePeer:doCount:doCount') as $callable)
     {
-      call_user_func($callable, 'BaseLabReportPeer', $criteria, $con);
+      call_user_func($callable, 'BaseVisitMedicinePeer', $criteria, $con);
     }
 
 
@@ -1167,21 +1319,74 @@ abstract class BaseLabReportPeer {
 
 
 	/**
-	 * Selects a collection of LabReport objects pre-filled with all related objects except Patient.
+	 * Returns the number of rows matching criteria, joining the related Dosage table
+	 *
+	 * @param      Criteria $c
+	 * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
+	 * @param      PropelPDO $con
+	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+	 * @return     int Number of matching rows.
+	 */
+	public static function doCountJoinAllExceptDosage(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	{
+		// we're going to modify criteria, so copy it first
+		$criteria = clone $criteria;
+
+		if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->setDistinct();
+		}
+
+		if (!$criteria->hasSelectClause()) {
+			VisitMedicinePeer::addSelectColumns($criteria);
+		}
+
+		$criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
+
+		// Set the correct dbName
+		$criteria->setDbName(self::DATABASE_NAME);
+
+		if ($con === null) {
+			$con = Propel::getConnection(VisitMedicinePeer::DATABASE_NAME, Propel::CONNECTION_READ);
+		}
+	
+				$criteria->addJoin(array(VisitMedicinePeer::PATIENT_ID,), array(PatientPeer::ID,), $join_behavior);
+				$criteria->addJoin(array(VisitMedicinePeer::VISIT_ID,), array(VisitPeer::ID,), $join_behavior);
+				$criteria->addJoin(array(VisitMedicinePeer::PHARMA_ID,), array(PharmaPeer::ID,), $join_behavior);
+
+    foreach (sfMixer::getCallables('BaseVisitMedicinePeer:doCount:doCount') as $callable)
+    {
+      call_user_func($callable, 'BaseVisitMedicinePeer', $criteria, $con);
+    }
+
+
+		$stmt = BasePeer::doCount($criteria, $con);
+
+		if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+			$count = (int) $row[0];
+		} else {
+			$count = 0; // no rows returned; we infer that means 0 matches.
+		}
+		$stmt->closeCursor();
+		return $count;
+	}
+
+
+	/**
+	 * Selects a collection of VisitMedicine objects pre-filled with all related objects except Patient.
 	 *
 	 * @param      Criteria  $c
 	 * @param      PropelPDO $con
 	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
-	 * @return     array Array of LabReport objects.
+	 * @return     array Array of VisitMedicine objects.
 	 * @throws     PropelException Any exceptions caught during processing will be
 	 *		 rethrown wrapped into a PropelException.
 	 */
 	public static function doSelectJoinAllExceptPatient(Criteria $c, $con = null, $join_behavior = Criteria::LEFT_JOIN)
 	{
 
-    foreach (sfMixer::getCallables('BaseLabReportPeer:doSelectJoinAllExcept:doSelectJoinAllExcept') as $callable)
+    foreach (sfMixer::getCallables('BaseVisitMedicinePeer:doSelectJoinAllExcept:doSelectJoinAllExcept') as $callable)
     {
-      call_user_func($callable, 'BaseLabReportPeer', $c, $con);
+      call_user_func($callable, 'BaseVisitMedicinePeer', $c, $con);
     }
 
 
@@ -1194,34 +1399,38 @@ abstract class BaseLabReportPeer {
 			$c->setDbName(self::DATABASE_NAME);
 		}
 
-		LabReportPeer::addSelectColumns($c);
-		$startcol2 = (LabReportPeer::NUM_COLUMNS - LabReportPeer::NUM_LAZY_LOAD_COLUMNS);
+		VisitMedicinePeer::addSelectColumns($c);
+		$startcol2 = (VisitMedicinePeer::NUM_COLUMNS - VisitMedicinePeer::NUM_LAZY_LOAD_COLUMNS);
 
 		VisitPeer::addSelectColumns($c);
 		$startcol3 = $startcol2 + (VisitPeer::NUM_COLUMNS - VisitPeer::NUM_LAZY_LOAD_COLUMNS);
 
-		LabTestPeer::addSelectColumns($c);
-		$startcol4 = $startcol3 + (LabTestPeer::NUM_COLUMNS - LabTestPeer::NUM_LAZY_LOAD_COLUMNS);
+		PharmaPeer::addSelectColumns($c);
+		$startcol4 = $startcol3 + (PharmaPeer::NUM_COLUMNS - PharmaPeer::NUM_LAZY_LOAD_COLUMNS);
 
-				$c->addJoin(array(LabReportPeer::VISIT_ID,), array(VisitPeer::ID,), $join_behavior);
-				$c->addJoin(array(LabReportPeer::LAB_TEST_ID,), array(LabTestPeer::ID,), $join_behavior);
+		DosagePeer::addSelectColumns($c);
+		$startcol5 = $startcol4 + (DosagePeer::NUM_COLUMNS - DosagePeer::NUM_LAZY_LOAD_COLUMNS);
+
+				$c->addJoin(array(VisitMedicinePeer::VISIT_ID,), array(VisitPeer::ID,), $join_behavior);
+				$c->addJoin(array(VisitMedicinePeer::PHARMA_ID,), array(PharmaPeer::ID,), $join_behavior);
+				$c->addJoin(array(VisitMedicinePeer::DOSAGE_ID,), array(DosagePeer::ID,), $join_behavior);
 
 		$stmt = BasePeer::doSelect($c, $con);
 		$results = array();
 
 		while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-			$key1 = LabReportPeer::getPrimaryKeyHashFromRow($row, 0);
-			if (null !== ($obj1 = LabReportPeer::getInstanceFromPool($key1))) {
+			$key1 = VisitMedicinePeer::getPrimaryKeyHashFromRow($row, 0);
+			if (null !== ($obj1 = VisitMedicinePeer::getInstanceFromPool($key1))) {
 				// We no longer rehydrate the object, since this can cause data loss.
 				// See http://propel.phpdb.org/trac/ticket/509
 				// $obj1->hydrate($row, 0, true); // rehydrate
 			} else {
-				$omClass = LabReportPeer::getOMClass();
+				$omClass = VisitMedicinePeer::getOMClass();
 
 				$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
 				$obj1 = new $cls();
 				$obj1->hydrate($row);
-				LabReportPeer::addInstanceToPool($obj1, $key1);
+				VisitMedicinePeer::addInstanceToPool($obj1, $key1);
 			} // if obj1 already loaded
 
 				// Add objects for joined Visit rows
@@ -1240,29 +1449,50 @@ abstract class BaseLabReportPeer {
 					VisitPeer::addInstanceToPool($obj2, $key2);
 				} // if $obj2 already loaded
 
-				// Add the $obj1 (LabReport) to the collection in $obj2 (Visit)
-				$obj2->addLabReport($obj1);
+				// Add the $obj1 (VisitMedicine) to the collection in $obj2 (Visit)
+				$obj2->addVisitMedicine($obj1);
 
 			} // if joined row is not null
 
-				// Add objects for joined LabTest rows
+				// Add objects for joined Pharma rows
 
-				$key3 = LabTestPeer::getPrimaryKeyHashFromRow($row, $startcol3);
+				$key3 = PharmaPeer::getPrimaryKeyHashFromRow($row, $startcol3);
 				if ($key3 !== null) {
-					$obj3 = LabTestPeer::getInstanceFromPool($key3);
+					$obj3 = PharmaPeer::getInstanceFromPool($key3);
 					if (!$obj3) {
 	
-						$omClass = LabTestPeer::getOMClass();
+						$omClass = PharmaPeer::getOMClass();
 
 
 					$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
 					$obj3 = new $cls();
 					$obj3->hydrate($row, $startcol3);
-					LabTestPeer::addInstanceToPool($obj3, $key3);
+					PharmaPeer::addInstanceToPool($obj3, $key3);
 				} // if $obj3 already loaded
 
-				// Add the $obj1 (LabReport) to the collection in $obj3 (LabTest)
-				$obj3->addLabReport($obj1);
+				// Add the $obj1 (VisitMedicine) to the collection in $obj3 (Pharma)
+				$obj3->addVisitMedicine($obj1);
+
+			} // if joined row is not null
+
+				// Add objects for joined Dosage rows
+
+				$key4 = DosagePeer::getPrimaryKeyHashFromRow($row, $startcol4);
+				if ($key4 !== null) {
+					$obj4 = DosagePeer::getInstanceFromPool($key4);
+					if (!$obj4) {
+	
+						$omClass = DosagePeer::getOMClass();
+
+
+					$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
+					$obj4 = new $cls();
+					$obj4->hydrate($row, $startcol4);
+					DosagePeer::addInstanceToPool($obj4, $key4);
+				} // if $obj4 already loaded
+
+				// Add the $obj1 (VisitMedicine) to the collection in $obj4 (Dosage)
+				$obj4->addVisitMedicine($obj1);
 
 			} // if joined row is not null
 
@@ -1274,12 +1504,12 @@ abstract class BaseLabReportPeer {
 
 
 	/**
-	 * Selects a collection of LabReport objects pre-filled with all related objects except Visit.
+	 * Selects a collection of VisitMedicine objects pre-filled with all related objects except Visit.
 	 *
 	 * @param      Criteria  $c
 	 * @param      PropelPDO $con
 	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
-	 * @return     array Array of LabReport objects.
+	 * @return     array Array of VisitMedicine objects.
 	 * @throws     PropelException Any exceptions caught during processing will be
 	 *		 rethrown wrapped into a PropelException.
 	 */
@@ -1294,34 +1524,38 @@ abstract class BaseLabReportPeer {
 			$c->setDbName(self::DATABASE_NAME);
 		}
 
-		LabReportPeer::addSelectColumns($c);
-		$startcol2 = (LabReportPeer::NUM_COLUMNS - LabReportPeer::NUM_LAZY_LOAD_COLUMNS);
+		VisitMedicinePeer::addSelectColumns($c);
+		$startcol2 = (VisitMedicinePeer::NUM_COLUMNS - VisitMedicinePeer::NUM_LAZY_LOAD_COLUMNS);
 
 		PatientPeer::addSelectColumns($c);
 		$startcol3 = $startcol2 + (PatientPeer::NUM_COLUMNS - PatientPeer::NUM_LAZY_LOAD_COLUMNS);
 
-		LabTestPeer::addSelectColumns($c);
-		$startcol4 = $startcol3 + (LabTestPeer::NUM_COLUMNS - LabTestPeer::NUM_LAZY_LOAD_COLUMNS);
+		PharmaPeer::addSelectColumns($c);
+		$startcol4 = $startcol3 + (PharmaPeer::NUM_COLUMNS - PharmaPeer::NUM_LAZY_LOAD_COLUMNS);
 
-				$c->addJoin(array(LabReportPeer::PATIENT_ID,), array(PatientPeer::ID,), $join_behavior);
-				$c->addJoin(array(LabReportPeer::LAB_TEST_ID,), array(LabTestPeer::ID,), $join_behavior);
+		DosagePeer::addSelectColumns($c);
+		$startcol5 = $startcol4 + (DosagePeer::NUM_COLUMNS - DosagePeer::NUM_LAZY_LOAD_COLUMNS);
+
+				$c->addJoin(array(VisitMedicinePeer::PATIENT_ID,), array(PatientPeer::ID,), $join_behavior);
+				$c->addJoin(array(VisitMedicinePeer::PHARMA_ID,), array(PharmaPeer::ID,), $join_behavior);
+				$c->addJoin(array(VisitMedicinePeer::DOSAGE_ID,), array(DosagePeer::ID,), $join_behavior);
 
 		$stmt = BasePeer::doSelect($c, $con);
 		$results = array();
 
 		while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-			$key1 = LabReportPeer::getPrimaryKeyHashFromRow($row, 0);
-			if (null !== ($obj1 = LabReportPeer::getInstanceFromPool($key1))) {
+			$key1 = VisitMedicinePeer::getPrimaryKeyHashFromRow($row, 0);
+			if (null !== ($obj1 = VisitMedicinePeer::getInstanceFromPool($key1))) {
 				// We no longer rehydrate the object, since this can cause data loss.
 				// See http://propel.phpdb.org/trac/ticket/509
 				// $obj1->hydrate($row, 0, true); // rehydrate
 			} else {
-				$omClass = LabReportPeer::getOMClass();
+				$omClass = VisitMedicinePeer::getOMClass();
 
 				$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
 				$obj1 = new $cls();
 				$obj1->hydrate($row);
-				LabReportPeer::addInstanceToPool($obj1, $key1);
+				VisitMedicinePeer::addInstanceToPool($obj1, $key1);
 			} // if obj1 already loaded
 
 				// Add objects for joined Patient rows
@@ -1340,29 +1574,50 @@ abstract class BaseLabReportPeer {
 					PatientPeer::addInstanceToPool($obj2, $key2);
 				} // if $obj2 already loaded
 
-				// Add the $obj1 (LabReport) to the collection in $obj2 (Patient)
-				$obj2->addLabReport($obj1);
+				// Add the $obj1 (VisitMedicine) to the collection in $obj2 (Patient)
+				$obj2->addVisitMedicine($obj1);
 
 			} // if joined row is not null
 
-				// Add objects for joined LabTest rows
+				// Add objects for joined Pharma rows
 
-				$key3 = LabTestPeer::getPrimaryKeyHashFromRow($row, $startcol3);
+				$key3 = PharmaPeer::getPrimaryKeyHashFromRow($row, $startcol3);
 				if ($key3 !== null) {
-					$obj3 = LabTestPeer::getInstanceFromPool($key3);
+					$obj3 = PharmaPeer::getInstanceFromPool($key3);
 					if (!$obj3) {
 	
-						$omClass = LabTestPeer::getOMClass();
+						$omClass = PharmaPeer::getOMClass();
 
 
 					$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
 					$obj3 = new $cls();
 					$obj3->hydrate($row, $startcol3);
-					LabTestPeer::addInstanceToPool($obj3, $key3);
+					PharmaPeer::addInstanceToPool($obj3, $key3);
 				} // if $obj3 already loaded
 
-				// Add the $obj1 (LabReport) to the collection in $obj3 (LabTest)
-				$obj3->addLabReport($obj1);
+				// Add the $obj1 (VisitMedicine) to the collection in $obj3 (Pharma)
+				$obj3->addVisitMedicine($obj1);
+
+			} // if joined row is not null
+
+				// Add objects for joined Dosage rows
+
+				$key4 = DosagePeer::getPrimaryKeyHashFromRow($row, $startcol4);
+				if ($key4 !== null) {
+					$obj4 = DosagePeer::getInstanceFromPool($key4);
+					if (!$obj4) {
+	
+						$omClass = DosagePeer::getOMClass();
+
+
+					$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
+					$obj4 = new $cls();
+					$obj4->hydrate($row, $startcol4);
+					DosagePeer::addInstanceToPool($obj4, $key4);
+				} // if $obj4 already loaded
+
+				// Add the $obj1 (VisitMedicine) to the collection in $obj4 (Dosage)
+				$obj4->addVisitMedicine($obj1);
 
 			} // if joined row is not null
 
@@ -1374,16 +1629,16 @@ abstract class BaseLabReportPeer {
 
 
 	/**
-	 * Selects a collection of LabReport objects pre-filled with all related objects except LabTest.
+	 * Selects a collection of VisitMedicine objects pre-filled with all related objects except Pharma.
 	 *
 	 * @param      Criteria  $c
 	 * @param      PropelPDO $con
 	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
-	 * @return     array Array of LabReport objects.
+	 * @return     array Array of VisitMedicine objects.
 	 * @throws     PropelException Any exceptions caught during processing will be
 	 *		 rethrown wrapped into a PropelException.
 	 */
-	public static function doSelectJoinAllExceptLabTest(Criteria $c, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	public static function doSelectJoinAllExceptPharma(Criteria $c, $con = null, $join_behavior = Criteria::LEFT_JOIN)
 	{
 		$c = clone $c;
 
@@ -1394,8 +1649,8 @@ abstract class BaseLabReportPeer {
 			$c->setDbName(self::DATABASE_NAME);
 		}
 
-		LabReportPeer::addSelectColumns($c);
-		$startcol2 = (LabReportPeer::NUM_COLUMNS - LabReportPeer::NUM_LAZY_LOAD_COLUMNS);
+		VisitMedicinePeer::addSelectColumns($c);
+		$startcol2 = (VisitMedicinePeer::NUM_COLUMNS - VisitMedicinePeer::NUM_LAZY_LOAD_COLUMNS);
 
 		PatientPeer::addSelectColumns($c);
 		$startcol3 = $startcol2 + (PatientPeer::NUM_COLUMNS - PatientPeer::NUM_LAZY_LOAD_COLUMNS);
@@ -1403,25 +1658,29 @@ abstract class BaseLabReportPeer {
 		VisitPeer::addSelectColumns($c);
 		$startcol4 = $startcol3 + (VisitPeer::NUM_COLUMNS - VisitPeer::NUM_LAZY_LOAD_COLUMNS);
 
-				$c->addJoin(array(LabReportPeer::PATIENT_ID,), array(PatientPeer::ID,), $join_behavior);
-				$c->addJoin(array(LabReportPeer::VISIT_ID,), array(VisitPeer::ID,), $join_behavior);
+		DosagePeer::addSelectColumns($c);
+		$startcol5 = $startcol4 + (DosagePeer::NUM_COLUMNS - DosagePeer::NUM_LAZY_LOAD_COLUMNS);
+
+				$c->addJoin(array(VisitMedicinePeer::PATIENT_ID,), array(PatientPeer::ID,), $join_behavior);
+				$c->addJoin(array(VisitMedicinePeer::VISIT_ID,), array(VisitPeer::ID,), $join_behavior);
+				$c->addJoin(array(VisitMedicinePeer::DOSAGE_ID,), array(DosagePeer::ID,), $join_behavior);
 
 		$stmt = BasePeer::doSelect($c, $con);
 		$results = array();
 
 		while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-			$key1 = LabReportPeer::getPrimaryKeyHashFromRow($row, 0);
-			if (null !== ($obj1 = LabReportPeer::getInstanceFromPool($key1))) {
+			$key1 = VisitMedicinePeer::getPrimaryKeyHashFromRow($row, 0);
+			if (null !== ($obj1 = VisitMedicinePeer::getInstanceFromPool($key1))) {
 				// We no longer rehydrate the object, since this can cause data loss.
 				// See http://propel.phpdb.org/trac/ticket/509
 				// $obj1->hydrate($row, 0, true); // rehydrate
 			} else {
-				$omClass = LabReportPeer::getOMClass();
+				$omClass = VisitMedicinePeer::getOMClass();
 
 				$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
 				$obj1 = new $cls();
 				$obj1->hydrate($row);
-				LabReportPeer::addInstanceToPool($obj1, $key1);
+				VisitMedicinePeer::addInstanceToPool($obj1, $key1);
 			} // if obj1 already loaded
 
 				// Add objects for joined Patient rows
@@ -1440,8 +1699,8 @@ abstract class BaseLabReportPeer {
 					PatientPeer::addInstanceToPool($obj2, $key2);
 				} // if $obj2 already loaded
 
-				// Add the $obj1 (LabReport) to the collection in $obj2 (Patient)
-				$obj2->addLabReport($obj1);
+				// Add the $obj1 (VisitMedicine) to the collection in $obj2 (Patient)
+				$obj2->addVisitMedicine($obj1);
 
 			} // if joined row is not null
 
@@ -1461,8 +1720,154 @@ abstract class BaseLabReportPeer {
 					VisitPeer::addInstanceToPool($obj3, $key3);
 				} // if $obj3 already loaded
 
-				// Add the $obj1 (LabReport) to the collection in $obj3 (Visit)
-				$obj3->addLabReport($obj1);
+				// Add the $obj1 (VisitMedicine) to the collection in $obj3 (Visit)
+				$obj3->addVisitMedicine($obj1);
+
+			} // if joined row is not null
+
+				// Add objects for joined Dosage rows
+
+				$key4 = DosagePeer::getPrimaryKeyHashFromRow($row, $startcol4);
+				if ($key4 !== null) {
+					$obj4 = DosagePeer::getInstanceFromPool($key4);
+					if (!$obj4) {
+	
+						$omClass = DosagePeer::getOMClass();
+
+
+					$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
+					$obj4 = new $cls();
+					$obj4->hydrate($row, $startcol4);
+					DosagePeer::addInstanceToPool($obj4, $key4);
+				} // if $obj4 already loaded
+
+				// Add the $obj1 (VisitMedicine) to the collection in $obj4 (Dosage)
+				$obj4->addVisitMedicine($obj1);
+
+			} // if joined row is not null
+
+			$results[] = $obj1;
+		}
+		$stmt->closeCursor();
+		return $results;
+	}
+
+
+	/**
+	 * Selects a collection of VisitMedicine objects pre-filled with all related objects except Dosage.
+	 *
+	 * @param      Criteria  $c
+	 * @param      PropelPDO $con
+	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+	 * @return     array Array of VisitMedicine objects.
+	 * @throws     PropelException Any exceptions caught during processing will be
+	 *		 rethrown wrapped into a PropelException.
+	 */
+	public static function doSelectJoinAllExceptDosage(Criteria $c, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	{
+		$c = clone $c;
+
+		// Set the correct dbName if it has not been overridden
+		// $c->getDbName() will return the same object if not set to another value
+		// so == check is okay and faster
+		if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		VisitMedicinePeer::addSelectColumns($c);
+		$startcol2 = (VisitMedicinePeer::NUM_COLUMNS - VisitMedicinePeer::NUM_LAZY_LOAD_COLUMNS);
+
+		PatientPeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + (PatientPeer::NUM_COLUMNS - PatientPeer::NUM_LAZY_LOAD_COLUMNS);
+
+		VisitPeer::addSelectColumns($c);
+		$startcol4 = $startcol3 + (VisitPeer::NUM_COLUMNS - VisitPeer::NUM_LAZY_LOAD_COLUMNS);
+
+		PharmaPeer::addSelectColumns($c);
+		$startcol5 = $startcol4 + (PharmaPeer::NUM_COLUMNS - PharmaPeer::NUM_LAZY_LOAD_COLUMNS);
+
+				$c->addJoin(array(VisitMedicinePeer::PATIENT_ID,), array(PatientPeer::ID,), $join_behavior);
+				$c->addJoin(array(VisitMedicinePeer::VISIT_ID,), array(VisitPeer::ID,), $join_behavior);
+				$c->addJoin(array(VisitMedicinePeer::PHARMA_ID,), array(PharmaPeer::ID,), $join_behavior);
+
+		$stmt = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+			$key1 = VisitMedicinePeer::getPrimaryKeyHashFromRow($row, 0);
+			if (null !== ($obj1 = VisitMedicinePeer::getInstanceFromPool($key1))) {
+				// We no longer rehydrate the object, since this can cause data loss.
+				// See http://propel.phpdb.org/trac/ticket/509
+				// $obj1->hydrate($row, 0, true); // rehydrate
+			} else {
+				$omClass = VisitMedicinePeer::getOMClass();
+
+				$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
+				$obj1 = new $cls();
+				$obj1->hydrate($row);
+				VisitMedicinePeer::addInstanceToPool($obj1, $key1);
+			} // if obj1 already loaded
+
+				// Add objects for joined Patient rows
+
+				$key2 = PatientPeer::getPrimaryKeyHashFromRow($row, $startcol2);
+				if ($key2 !== null) {
+					$obj2 = PatientPeer::getInstanceFromPool($key2);
+					if (!$obj2) {
+	
+						$omClass = PatientPeer::getOMClass();
+
+
+					$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
+					$obj2 = new $cls();
+					$obj2->hydrate($row, $startcol2);
+					PatientPeer::addInstanceToPool($obj2, $key2);
+				} // if $obj2 already loaded
+
+				// Add the $obj1 (VisitMedicine) to the collection in $obj2 (Patient)
+				$obj2->addVisitMedicine($obj1);
+
+			} // if joined row is not null
+
+				// Add objects for joined Visit rows
+
+				$key3 = VisitPeer::getPrimaryKeyHashFromRow($row, $startcol3);
+				if ($key3 !== null) {
+					$obj3 = VisitPeer::getInstanceFromPool($key3);
+					if (!$obj3) {
+	
+						$omClass = VisitPeer::getOMClass();
+
+
+					$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
+					$obj3 = new $cls();
+					$obj3->hydrate($row, $startcol3);
+					VisitPeer::addInstanceToPool($obj3, $key3);
+				} // if $obj3 already loaded
+
+				// Add the $obj1 (VisitMedicine) to the collection in $obj3 (Visit)
+				$obj3->addVisitMedicine($obj1);
+
+			} // if joined row is not null
+
+				// Add objects for joined Pharma rows
+
+				$key4 = PharmaPeer::getPrimaryKeyHashFromRow($row, $startcol4);
+				if ($key4 !== null) {
+					$obj4 = PharmaPeer::getInstanceFromPool($key4);
+					if (!$obj4) {
+	
+						$omClass = PharmaPeer::getOMClass();
+
+
+					$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
+					$obj4 = new $cls();
+					$obj4->hydrate($row, $startcol4);
+					PharmaPeer::addInstanceToPool($obj4, $key4);
+				} // if $obj4 already loaded
+
+				// Add the $obj1 (VisitMedicine) to the collection in $obj4 (Pharma)
+				$obj4->addVisitMedicine($obj1);
 
 			} // if joined row is not null
 
@@ -1500,13 +1905,13 @@ abstract class BaseLabReportPeer {
 	 */
 	public static function getOMClass()
 	{
-		return LabReportPeer::CLASS_DEFAULT;
+		return VisitMedicinePeer::CLASS_DEFAULT;
 	}
 
 	/**
-	 * Method perform an INSERT on the database, given a LabReport or Criteria object.
+	 * Method perform an INSERT on the database, given a VisitMedicine or Criteria object.
 	 *
-	 * @param      mixed $values Criteria or LabReport object containing data that is used to create the INSERT statement.
+	 * @param      mixed $values Criteria or VisitMedicine object containing data that is used to create the INSERT statement.
 	 * @param      PropelPDO $con the PropelPDO connection to use
 	 * @return     mixed The new primary key.
 	 * @throws     PropelException Any exceptions caught during processing will be
@@ -1515,9 +1920,9 @@ abstract class BaseLabReportPeer {
 	public static function doInsert($values, PropelPDO $con = null)
 	{
 
-    foreach (sfMixer::getCallables('BaseLabReportPeer:doInsert:pre') as $callable)
+    foreach (sfMixer::getCallables('BaseVisitMedicinePeer:doInsert:pre') as $callable)
     {
-      $ret = call_user_func($callable, 'BaseLabReportPeer', $values, $con);
+      $ret = call_user_func($callable, 'BaseVisitMedicinePeer', $values, $con);
       if (false !== $ret)
       {
         return $ret;
@@ -1526,17 +1931,17 @@ abstract class BaseLabReportPeer {
 
 
 		if ($con === null) {
-			$con = Propel::getConnection(LabReportPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+			$con = Propel::getConnection(VisitMedicinePeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; // rename for clarity
 		} else {
-			$criteria = $values->buildCriteria(); // build Criteria from LabReport object
+			$criteria = $values->buildCriteria(); // build Criteria from VisitMedicine object
 		}
 
-		if ($criteria->containsKey(LabReportPeer::ID) && $criteria->keyContainsValue(LabReportPeer::ID) ) {
-			throw new PropelException('Cannot insert a value for auto-increment primary key ('.LabReportPeer::ID.')');
+		if ($criteria->containsKey(VisitMedicinePeer::ID) && $criteria->keyContainsValue(VisitMedicinePeer::ID) ) {
+			throw new PropelException('Cannot insert a value for auto-increment primary key ('.VisitMedicinePeer::ID.')');
 		}
 
 
@@ -1555,18 +1960,18 @@ abstract class BaseLabReportPeer {
 		}
 
 		
-    foreach (sfMixer::getCallables('BaseLabReportPeer:doInsert:post') as $callable)
+    foreach (sfMixer::getCallables('BaseVisitMedicinePeer:doInsert:post') as $callable)
     {
-      call_user_func($callable, 'BaseLabReportPeer', $values, $con, $pk);
+      call_user_func($callable, 'BaseVisitMedicinePeer', $values, $con, $pk);
     }
 
     return $pk;
 	}
 
 	/**
-	 * Method perform an UPDATE on the database, given a LabReport or Criteria object.
+	 * Method perform an UPDATE on the database, given a VisitMedicine or Criteria object.
 	 *
-	 * @param      mixed $values Criteria or LabReport object containing data that is used to create the UPDATE statement.
+	 * @param      mixed $values Criteria or VisitMedicine object containing data that is used to create the UPDATE statement.
 	 * @param      PropelPDO $con The connection to use (specify PropelPDO connection object to exert more control over transactions).
 	 * @return     int The number of affected rows (if supported by underlying database driver).
 	 * @throws     PropelException Any exceptions caught during processing will be
@@ -1575,9 +1980,9 @@ abstract class BaseLabReportPeer {
 	public static function doUpdate($values, PropelPDO $con = null)
 	{
 
-    foreach (sfMixer::getCallables('BaseLabReportPeer:doUpdate:pre') as $callable)
+    foreach (sfMixer::getCallables('BaseVisitMedicinePeer:doUpdate:pre') as $callable)
     {
-      $ret = call_user_func($callable, 'BaseLabReportPeer', $values, $con);
+      $ret = call_user_func($callable, 'BaseVisitMedicinePeer', $values, $con);
       if (false !== $ret)
       {
         return $ret;
@@ -1586,7 +1991,7 @@ abstract class BaseLabReportPeer {
 
 
 		if ($con === null) {
-			$con = Propel::getConnection(LabReportPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+			$con = Propel::getConnection(VisitMedicinePeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
 
 		$selectCriteria = new Criteria(self::DATABASE_NAME);
@@ -1594,10 +1999,10 @@ abstract class BaseLabReportPeer {
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; // rename for clarity
 
-			$comparison = $criteria->getComparison(LabReportPeer::ID);
-			$selectCriteria->add(LabReportPeer::ID, $criteria->remove(LabReportPeer::ID), $comparison);
+			$comparison = $criteria->getComparison(VisitMedicinePeer::ID);
+			$selectCriteria->add(VisitMedicinePeer::ID, $criteria->remove(VisitMedicinePeer::ID), $comparison);
 
-		} else { // $values is LabReport object
+		} else { // $values is VisitMedicine object
 			$criteria = $values->buildCriteria(); // gets full criteria
 			$selectCriteria = $values->buildPkeyCriteria(); // gets criteria w/ primary key(s)
 		}
@@ -1608,30 +2013,30 @@ abstract class BaseLabReportPeer {
 		$ret = BasePeer::doUpdate($selectCriteria, $criteria, $con);
 	
 
-    foreach (sfMixer::getCallables('BaseLabReportPeer:doUpdate:post') as $callable)
+    foreach (sfMixer::getCallables('BaseVisitMedicinePeer:doUpdate:post') as $callable)
     {
-      call_user_func($callable, 'BaseLabReportPeer', $values, $con, $ret);
+      call_user_func($callable, 'BaseVisitMedicinePeer', $values, $con, $ret);
     }
 
     return $ret;
   }
 
 	/**
-	 * Method to DELETE all rows from the lab_report table.
+	 * Method to DELETE all rows from the visit_medicine table.
 	 *
 	 * @return     int The number of affected rows (if supported by underlying database driver).
 	 */
 	public static function doDeleteAll($con = null)
 	{
 		if ($con === null) {
-			$con = Propel::getConnection(LabReportPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+			$con = Propel::getConnection(VisitMedicinePeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
 		$affectedRows = 0; // initialize var to track total num of affected rows
 		try {
 			// use transaction because $criteria could contain info
 			// for more than one table or we could emulating ON DELETE CASCADE, etc.
 			$con->beginTransaction();
-			$affectedRows += BasePeer::doDeleteAll(LabReportPeer::TABLE_NAME, $con);
+			$affectedRows += BasePeer::doDeleteAll(VisitMedicinePeer::TABLE_NAME, $con);
 			$con->commit();
 			return $affectedRows;
 		} catch (PropelException $e) {
@@ -1641,9 +2046,9 @@ abstract class BaseLabReportPeer {
 	}
 
 	/**
-	 * Method perform a DELETE on the database, given a LabReport or Criteria object OR a primary key value.
+	 * Method perform a DELETE on the database, given a VisitMedicine or Criteria object OR a primary key value.
 	 *
-	 * @param      mixed $values Criteria or LabReport object or primary key or array of primary keys
+	 * @param      mixed $values Criteria or VisitMedicine object or primary key or array of primary keys
 	 *              which is used to create the DELETE statement
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int 	The number of affected rows (if supported by underlying database driver).  This includes CASCADE-related rows
@@ -1654,20 +2059,20 @@ abstract class BaseLabReportPeer {
 	 public static function doDelete($values, PropelPDO $con = null)
 	 {
 		if ($con === null) {
-			$con = Propel::getConnection(LabReportPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+			$con = Propel::getConnection(VisitMedicinePeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
 
 		if ($values instanceof Criteria) {
 			// invalidate the cache for all objects of this type, since we have no
 			// way of knowing (without running a query) what objects should be invalidated
 			// from the cache based on this Criteria.
-			LabReportPeer::clearInstancePool();
+			VisitMedicinePeer::clearInstancePool();
 
 			// rename for clarity
 			$criteria = clone $values;
-		} elseif ($values instanceof LabReport) {
+		} elseif ($values instanceof VisitMedicine) {
 			// invalidate the cache for this single object
-			LabReportPeer::removeInstanceFromPool($values);
+			VisitMedicinePeer::removeInstanceFromPool($values);
 			// create criteria based on pk values
 			$criteria = $values->buildPkeyCriteria();
 		} else {
@@ -1676,11 +2081,11 @@ abstract class BaseLabReportPeer {
 
 
 			$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(LabReportPeer::ID, (array) $values, Criteria::IN);
+			$criteria->add(VisitMedicinePeer::ID, (array) $values, Criteria::IN);
 
 			foreach ((array) $values as $singleval) {
 				// we can invalidate the cache for this single object
-				LabReportPeer::removeInstanceFromPool($singleval);
+				VisitMedicinePeer::removeInstanceFromPool($singleval);
 			}
 		}
 
@@ -1705,24 +2110,24 @@ abstract class BaseLabReportPeer {
 	}
 
 	/**
-	 * Validates all modified columns of given LabReport object.
+	 * Validates all modified columns of given VisitMedicine object.
 	 * If parameter $columns is either a single column name or an array of column names
 	 * than only those columns are validated.
 	 *
 	 * NOTICE: This does not apply to primary or foreign keys for now.
 	 *
-	 * @param      LabReport $obj The object to validate.
+	 * @param      VisitMedicine $obj The object to validate.
 	 * @param      mixed $cols Column name or array of column names.
 	 *
 	 * @return     mixed TRUE if all columns are valid or the error message of the first invalid column.
 	 */
-	public static function doValidate(LabReport $obj, $cols = null)
+	public static function doValidate(VisitMedicine $obj, $cols = null)
 	{
 		$columns = array();
 
 		if ($cols) {
-			$dbMap = Propel::getDatabaseMap(LabReportPeer::DATABASE_NAME);
-			$tableMap = $dbMap->getTable(LabReportPeer::TABLE_NAME);
+			$dbMap = Propel::getDatabaseMap(VisitMedicinePeer::DATABASE_NAME);
+			$tableMap = $dbMap->getTable(VisitMedicinePeer::TABLE_NAME);
 
 			if (! is_array($cols)) {
 				$cols = array($cols);
@@ -1738,11 +2143,11 @@ abstract class BaseLabReportPeer {
 
 		}
 
-		$res =  BasePeer::doValidate(LabReportPeer::DATABASE_NAME, LabReportPeer::TABLE_NAME, $columns);
+		$res =  BasePeer::doValidate(VisitMedicinePeer::DATABASE_NAME, VisitMedicinePeer::TABLE_NAME, $columns);
     if ($res !== true) {
         $request = sfContext::getInstance()->getRequest();
         foreach ($res as $failed) {
-            $col = LabReportPeer::translateFieldname($failed->getColumn(), BasePeer::TYPE_COLNAME, BasePeer::TYPE_PHPNAME);
+            $col = VisitMedicinePeer::translateFieldname($failed->getColumn(), BasePeer::TYPE_COLNAME, BasePeer::TYPE_PHPNAME);
         }
     }
 
@@ -1754,23 +2159,23 @@ abstract class BaseLabReportPeer {
 	 *
 	 * @param      int $pk the primary key.
 	 * @param      PropelPDO $con the connection to use
-	 * @return     LabReport
+	 * @return     VisitMedicine
 	 */
 	public static function retrieveByPK($pk, PropelPDO $con = null)
 	{
 
-		if (null !== ($obj = LabReportPeer::getInstanceFromPool((string) $pk))) {
+		if (null !== ($obj = VisitMedicinePeer::getInstanceFromPool((string) $pk))) {
 			return $obj;
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(LabReportPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(VisitMedicinePeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 
-		$criteria = new Criteria(LabReportPeer::DATABASE_NAME);
-		$criteria->add(LabReportPeer::ID, $pk);
+		$criteria = new Criteria(VisitMedicinePeer::DATABASE_NAME);
+		$criteria->add(VisitMedicinePeer::ID, $pk);
 
-		$v = LabReportPeer::doSelect($criteria, $con);
+		$v = VisitMedicinePeer::doSelect($criteria, $con);
 
 		return !empty($v) > 0 ? $v[0] : null;
 	}
@@ -1786,30 +2191,30 @@ abstract class BaseLabReportPeer {
 	public static function retrieveByPKs($pks, PropelPDO $con = null)
 	{
 		if ($con === null) {
-			$con = Propel::getConnection(LabReportPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(VisitMedicinePeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 
 		$objs = null;
 		if (empty($pks)) {
 			$objs = array();
 		} else {
-			$criteria = new Criteria(LabReportPeer::DATABASE_NAME);
-			$criteria->add(LabReportPeer::ID, $pks, Criteria::IN);
-			$objs = LabReportPeer::doSelect($criteria, $con);
+			$criteria = new Criteria(VisitMedicinePeer::DATABASE_NAME);
+			$criteria->add(VisitMedicinePeer::ID, $pks, Criteria::IN);
+			$objs = VisitMedicinePeer::doSelect($criteria, $con);
 		}
 		return $objs;
 	}
 
-} // BaseLabReportPeer
+} // BaseVisitMedicinePeer
 
 // This is the static code needed to register the MapBuilder for this table with the main Propel class.
 //
-// NOTE: This static code cannot call methods on the LabReportPeer class, because it is not defined yet.
-// If you need to use overridden methods, you can add this code to the bottom of the LabReportPeer class:
+// NOTE: This static code cannot call methods on the VisitMedicinePeer class, because it is not defined yet.
+// If you need to use overridden methods, you can add this code to the bottom of the VisitMedicinePeer class:
 //
-// Propel::getDatabaseMap(LabReportPeer::DATABASE_NAME)->addTableBuilder(LabReportPeer::TABLE_NAME, LabReportPeer::getMapBuilder());
+// Propel::getDatabaseMap(VisitMedicinePeer::DATABASE_NAME)->addTableBuilder(VisitMedicinePeer::TABLE_NAME, VisitMedicinePeer::getMapBuilder());
 //
 // Doing so will effectively overwrite the registration below.
 
-Propel::getDatabaseMap(BaseLabReportPeer::DATABASE_NAME)->addTableBuilder(BaseLabReportPeer::TABLE_NAME, BaseLabReportPeer::getMapBuilder());
+Propel::getDatabaseMap(BaseVisitMedicinePeer::DATABASE_NAME)->addTableBuilder(BaseVisitMedicinePeer::TABLE_NAME, BaseVisitMedicinePeer::getMapBuilder());
 

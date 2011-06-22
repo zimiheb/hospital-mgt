@@ -75,6 +75,7 @@ propel:
     visit_id: { type: INTEGER, size: '11', required: false, foreignTable: visit, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
     lab_test_id: { type: INTEGER, size: '11', required: false, foreignTable: lab_test, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
     description: { type: VARCHAR, size: '1024', required: false }
+    price: { type: INTEGER, size: '5', required: false }
     status: { type: VARCHAR, size: '10', required: false }
     created_at: { type: DATE, required: false }
     updated_at: { type: DATE, required: false }
@@ -84,6 +85,7 @@ propel:
     id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }
     title: { type: VARCHAR, size: '255', required: false }
     description: { type: VARCHAR, size: '500', required: false }
+    price: { type: INTEGER, size: '5', required: false }
     status: { type: VARCHAR, size: '10', required: false }
     created_at: { type: DATE, required: false }
     updated_at: { type: DATE, required: false }
@@ -117,7 +119,7 @@ propel:
     type: { type: VARCHAR, size: '50', required: false }
     strength: { type: VARCHAR, size: '10', required: false }
     company: { type: VARCHAR, size: '100', required: false }
-    price: { type: INTEGER, size: '6', required: false }
+    price: { type: INTEGER, size: '5', required: false }
     status: { type: VARCHAR, size: '10', required: false }
     created_at: { type: DATE, required: false }
     updated_at: { type: DATE, required: false }
@@ -131,6 +133,7 @@ propel:
     id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }
     title: { type: VARCHAR, size: '50', required: false }
     description: { type: VARCHAR, size: '255', required: false }
+    price: { type: INTEGER, size: '5', required: false }
     status: { type: VARCHAR, size: '10', required: false }
     created_at: { type: DATE, required: false }
     updated_at: { type: DATE, required: false }
@@ -153,11 +156,9 @@ propel:
     ward_bed_id: { type: INTEGER, size: '11', required: false, foreignTable: ward_bed, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
     ward_doc_id: { type: INTEGER, size: '11', required: false, foreignTable: employee, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
     visit_type: { type: VARCHAR, size: '10', required: false }
-    medicine: { type: VARCHAR, size: '500', required: false }
     bp: { type: VARCHAR, size: '10', required: false }
     temp: { type: VARCHAR, size: '10', required: false }
     pulse: { type: VARCHAR, size: '10', required: false }
-    injection: { type: VARCHAR, size: '500', required: false }
     diet: { type: VARCHAR, size: '500', required: false }
     description: { type: VARCHAR, size: '5000', required: false }
     time: { type: VARCHAR, size: '10', required: false }
@@ -168,6 +169,18 @@ propel:
     created_at: { type: DATE, required: false }
     updated_at: { type: DATE, required: false }
     _indexes: { FK_visit_patient: [patient_id], FK_visit_doctor: [doctor_id], FK_visit_ward_bed: [ward_bed_id], FK_visit_ward_doc: [ward_doc_id] }
+  visit_medicine:
+    _attributes: { phpName: VisitMedicine }
+    id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }
+    patient_id: { type: INTEGER, size: '11', required: false, foreignTable: patient, foreignReference: id, onDelete: CASCADE, onUpdate: CASCADE }
+    visit_id: { type: INTEGER, size: '11', required: false, foreignTable: visit, foreignReference: id, onDelete: CASCADE, onUpdate: CASCADE }
+    pharma_id: { type: INTEGER, size: '11', required: false, foreignTable: pharma, foreignReference: id, onDelete: CASCADE, onUpdate: CASCADE }
+    dosage_id: { type: INTEGER, size: '11', required: false, foreignTable: dosage, foreignReference: id, onDelete: CASCADE, onUpdate: CASCADE }
+    quantity: { type: INTEGER, size: '5', required: false }
+    price: { type: INTEGER, size: '5', required: false }
+    created_at: { type: DATE, required: false }
+    updated_at: { type: DATE, required: false }
+    _indexes: { FK_visit_medicine_visit: [visit_id], FK_visit_medicine_pharma: [pharma_id], FK_visit_medicine_dosage: [dosage_id], FK_visit_medicine_patient: [patient_id] }
   ward:
     _attributes: { phpName: Ward }
     id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }
@@ -178,5 +191,6 @@ propel:
     id: { type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }
     ward_id: { type: INTEGER, size: '11', required: false, foreignTable: ward, foreignReference: id, onDelete: CASCADE, onUpdate: CASCADE }
     bed: { type: VARCHAR, size: '100', required: false }
+    price: { type: INTEGER, size: '5', required: false }
     status: { type: VARCHAR, size: '10', required: false }
     _indexes: { FK_ward_bed_ward: [ward_id] }

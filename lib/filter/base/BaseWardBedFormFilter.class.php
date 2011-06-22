@@ -16,12 +16,14 @@ class BaseWardBedFormFilter extends BaseFormFilterPropel
     $this->setWidgets(array(
       'ward_id' => new sfWidgetFormPropelChoice(array('model' => 'Ward', 'add_empty' => true)),
       'bed'     => new sfWidgetFormFilterInput(),
+      'price'   => new sfWidgetFormFilterInput(),
       'status'  => new sfWidgetFormFilterInput(),
     ));
 
     $this->setValidators(array(
       'ward_id' => new sfValidatorPropelChoice(array('required' => false, 'model' => 'Ward', 'column' => 'id')),
       'bed'     => new sfValidatorPass(array('required' => false)),
+      'price'   => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'status'  => new sfValidatorPass(array('required' => false)),
     ));
 
@@ -43,6 +45,7 @@ class BaseWardBedFormFilter extends BaseFormFilterPropel
       'id'      => 'Number',
       'ward_id' => 'ForeignKey',
       'bed'     => 'Text',
+      'price'   => 'Number',
       'status'  => 'Text',
     );
   }
