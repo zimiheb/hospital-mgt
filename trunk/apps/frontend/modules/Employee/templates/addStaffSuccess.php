@@ -24,11 +24,16 @@
 			<script type="text/javascript">
 			var name = new LiveValidation('name', { validMessage: "<?php echo Constant::VALIDATION_SUCCESS;?>", wait:500});
 			name.add( Validate.Presence,{ failureMessage: "<?php echo Constant::VALIDATION_REQUIRED_FIELD;?>"});
+			name.add( Validate.Format, { pattern: /^[A-Za-z]*$/,failureMessage: "<?php echo 'Alphabets Only';  ?>"} );
 			</script>
 			</td>
 			
 			<td width="17%">CNIC:</td>
 			<td width="34%"><?php echo input_tag('cnic','','60'); ?></td>
+			<script type="text/javascript">
+			var cnic = new LiveValidation('cnic', { validMessage: "<?php echo Constant::VALIDATION_SUCCESS;?>", wait:500});
+			cnic.add( Validate.Format, { pattern: /^[\d\-\/\(\)]*$/,failureMessage: "<?php echo Constant::VALIDATION_INTEGER_FIELD;  ?>"} );
+			</script>
 		</tr>
 		
 		<tr height="40">

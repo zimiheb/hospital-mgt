@@ -1,6 +1,6 @@
 -- DBTools Manager Professional (Enterprise Edition)
 -- Database Dump for: hospital
--- Backup Generated in: 6/22/2011 1:07:20 AM
+-- Backup Generated in: 6/22/2011 9:33:47 AM
 -- Database Server Version: MySQL 5.1.33
 
 -- USEGO
@@ -89,7 +89,7 @@ CREATE TABLE `dosage`
 --
 BEGIN;
 -- GO
-INSERT INTO `dosage` (`id`, `title`, `status`) VALUES(1, 'Once a day', '1');
+INSERT INTO `dosage` (`id`, `title`, `status`) VALUES(1, 'Once a Day', '1');
 -- GO
 INSERT INTO `dosage` (`id`, `title`, `status`) VALUES(2, '1+1', '1');
 -- GO
@@ -258,6 +258,7 @@ CREATE TABLE `lab_report`
 	`visit_id` integer (11), 
 	`lab_test_id` integer (11), 
 	`description` varchar (1024), 
+	`price` integer (5), 
 	`status` varchar (10), 
 	`created_at` date, 
 	`updated_at` date,
@@ -269,6 +270,8 @@ CREATE TABLE `lab_report`
 -- Dumping Table Data: lab_report
 --
 BEGIN;
+-- GO
+INSERT INTO `lab_report` (`id`, `patient_id`, `visit_id`, `lab_test_id`, `description`, `price`, `status`, `created_at`, `updated_at`) VALUES(1, 1, 2, 1, NULL, 250, NULL, '2011-06-22', '2011-06-22');
 -- GO
 COMMIT;
 -- GO
@@ -299,6 +302,7 @@ CREATE TABLE `lab_test`
 	`id` integer (11) NOT NULL AUTO_INCREMENT , 
 	`title` varchar (255), 
 	`description` varchar (500), 
+	`price` integer (5), 
 	`status` varchar (10), 
 	`created_at` date, 
 	`updated_at` date,
@@ -311,7 +315,7 @@ CREATE TABLE `lab_test`
 --
 BEGIN;
 -- GO
-INSERT INTO `lab_test` (`id`, `title`, `description`, `status`, `created_at`, `updated_at`) VALUES(1, 'Blood CP', NULL, '1', '2011-05-29', '2011-05-29');
+INSERT INTO `lab_test` (`id`, `title`, `description`, `price`, `status`, `created_at`, `updated_at`) VALUES(1, 'Blood CP', NULL, 250, '1', '2011-05-29', '2011-05-29');
 -- GO
 COMMIT;
 -- GO
@@ -376,7 +380,7 @@ CREATE TABLE `pharma`
 	`type` varchar (50), 
 	`strength` varchar (10), 
 	`company` varchar (100), 
-	`price` integer (6), 
+	`price` integer (5), 
 	`status` varchar (10), 
 	`created_at` date, 
 	`updated_at` date,
@@ -442,6 +446,7 @@ CREATE TABLE `room`
 	`id` integer (11) NOT NULL AUTO_INCREMENT , 
 	`title` varchar (50), 
 	`description` varchar (255), 
+	`price` integer (5), 
 	`status` varchar (10), 
 	`created_at` date, 
 	`updated_at` date,
@@ -509,11 +514,9 @@ CREATE TABLE `visit`
 	`ward_bed_id` integer (11), 
 	`ward_doc_id` integer (11), 
 	`visit_type` varchar (10), 
-	`medicine` varchar (500), 
 	`bp` varchar (10), 
 	`temp` varchar (10), 
 	`pulse` varchar (10), 
-	`injection` varchar (500), 
 	`diet` varchar (500), 
 	`description` varchar (5000), 
 	`time` varchar (10), 
@@ -532,11 +535,11 @@ CREATE TABLE `visit`
 --
 BEGIN;
 -- GO
-INSERT INTO `visit` (`id`, `patient_id`, `doctor_id`, `ward_bed_id`, `ward_doc_id`, `visit_type`, `medicine`, `bp`, `temp`, `pulse`, `injection`, `diet`, `description`, `time`, `visit_date`, `fee`, `fee_paid`, `status`, `created_at`, `updated_at`) VALUES(2, 1, 1, NULL, 2, 'Indoor', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1350', '2011-06-22', NULL, NULL, '1', '2011-06-20', '2011-06-20');
+INSERT INTO `visit` (`id`, `patient_id`, `doctor_id`, `ward_bed_id`, `ward_doc_id`, `visit_type`, `bp`, `temp`, `pulse`, `diet`, `description`, `time`, `visit_date`, `fee`, `fee_paid`, `status`, `created_at`, `updated_at`) VALUES(2, 1, 1, NULL, 2, 'Indoor', NULL, NULL, NULL, NULL, NULL, '1350', '2011-06-22', NULL, NULL, '1', '2011-06-20', '2011-06-20');
 -- GO
-INSERT INTO `visit` (`id`, `patient_id`, `doctor_id`, `ward_bed_id`, `ward_doc_id`, `visit_type`, `medicine`, `bp`, `temp`, `pulse`, `injection`, `diet`, `description`, `time`, `visit_date`, `fee`, `fee_paid`, `status`, `created_at`, `updated_at`) VALUES(3, 2, 1, NULL, 2, 'Indoor', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1430', '2011-06-22', NULL, NULL, '1', '2011-06-20', '2011-06-20');
+INSERT INTO `visit` (`id`, `patient_id`, `doctor_id`, `ward_bed_id`, `ward_doc_id`, `visit_type`, `bp`, `temp`, `pulse`, `diet`, `description`, `time`, `visit_date`, `fee`, `fee_paid`, `status`, `created_at`, `updated_at`) VALUES(3, 2, 1, NULL, 2, 'Indoor', NULL, NULL, NULL, NULL, NULL, '1430', '2011-06-22', NULL, NULL, '1', '2011-06-20', '2011-06-20');
 -- GO
-INSERT INTO `visit` (`id`, `patient_id`, `doctor_id`, `ward_bed_id`, `ward_doc_id`, `visit_type`, `medicine`, `bp`, `temp`, `pulse`, `injection`, `diet`, `description`, `time`, `visit_date`, `fee`, `fee_paid`, `status`, `created_at`, `updated_at`) VALUES(4, 5, 2, NULL, 3, 'Indoor', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1500', '2011-06-22', NULL, NULL, '1', '2011-06-20', '2011-06-20');
+INSERT INTO `visit` (`id`, `patient_id`, `doctor_id`, `ward_bed_id`, `ward_doc_id`, `visit_type`, `bp`, `temp`, `pulse`, `diet`, `description`, `time`, `visit_date`, `fee`, `fee_paid`, `status`, `created_at`, `updated_at`) VALUES(4, 5, 2, NULL, 3, 'Indoor', NULL, NULL, NULL, NULL, NULL, '1500', '2011-06-22', NULL, NULL, '1', '2011-06-20', '2011-06-20');
 -- GO
 COMMIT;
 -- GO
@@ -563,6 +566,60 @@ ALTER TABLE `hospital`.`visit` ADD INDEX `FK_visit_ward_bed` (`ward_bed_id` );
 -- Index: FK_visit_ward_doc
 --
 ALTER TABLE `hospital`.`visit` ADD INDEX `FK_visit_ward_doc` (`ward_doc_id` );
+-- GO
+
+--
+-- Table: visit_medicine
+--
+CREATE TABLE `visit_medicine` 
+(
+	`id` integer (11) NOT NULL AUTO_INCREMENT , 
+	`patient_id` integer (11), 
+	`visit_id` integer (11), 
+	`pharma_id` integer (11), 
+	`dosage_id` integer (11), 
+	`quantity` integer (5), 
+	`price` integer (5), 
+	`created_at` date, 
+	`updated_at` date,
+	PRIMARY KEY (`id`)
+) TYPE=InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
+-- GO
+
+--
+-- Dumping Table Data: visit_medicine
+--
+BEGIN;
+-- GO
+INSERT INTO `visit_medicine` (`id`, `patient_id`, `visit_id`, `pharma_id`, `dosage_id`, `quantity`, `price`, `created_at`, `updated_at`) VALUES(1, 1, 2, 4, 4, 1, 45, '2011-06-22', '2011-06-22');
+-- GO
+INSERT INTO `visit_medicine` (`id`, `patient_id`, `visit_id`, `pharma_id`, `dosage_id`, `quantity`, `price`, `created_at`, `updated_at`) VALUES(2, 1, 2, 1, 1, 0, 0, '2011-06-22', '2011-06-22');
+-- GO
+COMMIT;
+-- GO
+
+--
+-- Index: FK_visit_medicine_visit
+--
+ALTER TABLE `hospital`.`visit_medicine` ADD INDEX `FK_visit_medicine_visit` (`visit_id` );
+-- GO
+
+--
+-- Index: FK_visit_medicine_pharma
+--
+ALTER TABLE `hospital`.`visit_medicine` ADD INDEX `FK_visit_medicine_pharma` (`pharma_id` );
+-- GO
+
+--
+-- Index: FK_visit_medicine_dosage
+--
+ALTER TABLE `hospital`.`visit_medicine` ADD INDEX `FK_visit_medicine_dosage` (`dosage_id` );
+-- GO
+
+--
+-- Index: FK_visit_medicine_patient
+--
+ALTER TABLE `hospital`.`visit_medicine` ADD INDEX `FK_visit_medicine_patient` (`patient_id` );
 -- GO
 
 --
@@ -599,6 +656,7 @@ CREATE TABLE `ward_bed`
 	`id` integer (11) NOT NULL AUTO_INCREMENT , 
 	`ward_id` integer (11), 
 	`bed` varchar (100), 
+	`price` integer (5), 
 	`status` varchar (10),
 	PRIMARY KEY (`id`)
 ) TYPE=InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
@@ -609,13 +667,13 @@ CREATE TABLE `ward_bed`
 --
 BEGIN;
 -- GO
-INSERT INTO `ward_bed` (`id`, `ward_id`, `bed`, `status`) VALUES(1, 1, 'Medical 1', '1');
+INSERT INTO `ward_bed` (`id`, `ward_id`, `bed`, `price`, `status`) VALUES(1, 1, 'Medical 1', 250, '1');
 -- GO
-INSERT INTO `ward_bed` (`id`, `ward_id`, `bed`, `status`) VALUES(2, 2, 'Surgical 1', '1');
+INSERT INTO `ward_bed` (`id`, `ward_id`, `bed`, `price`, `status`) VALUES(2, 2, 'Surgical 1', 500, '1');
 -- GO
-INSERT INTO `ward_bed` (`id`, `ward_id`, `bed`, `status`) VALUES(3, 1, 'Medical 2', '1');
+INSERT INTO `ward_bed` (`id`, `ward_id`, `bed`, `price`, `status`) VALUES(3, 1, 'Medical 2', 250, '1');
 -- GO
-INSERT INTO `ward_bed` (`id`, `ward_id`, `bed`, `status`) VALUES(4, 3, 'Burn 1', '1');
+INSERT INTO `ward_bed` (`id`, `ward_id`, `bed`, `price`, `status`) VALUES(4, 3, 'Burn 1', 1000, '1');
 -- GO
 COMMIT;
 -- GO
@@ -724,6 +782,30 @@ ALTER TABLE `visit` ADD CONSTRAINT `FK_visit_ward_bed` FOREIGN KEY (`ward_bed_id
 -- Foreign Key Constraint: FK_visit_ward_doc
 --
 ALTER TABLE `visit` ADD CONSTRAINT `FK_visit_ward_doc` FOREIGN KEY (`ward_doc_id`) REFERENCES `employee`(`id`);
+-- GO
+
+--
+-- Foreign Key Constraint: FK_visit_medicine_patient
+--
+ALTER TABLE `visit_medicine` ADD CONSTRAINT `FK_visit_medicine_patient` FOREIGN KEY (`patient_id`) REFERENCES `patient`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+-- GO
+
+--
+-- Foreign Key Constraint: FK_visit_medicine_dosage
+--
+ALTER TABLE `visit_medicine` ADD CONSTRAINT `FK_visit_medicine_dosage` FOREIGN KEY (`dosage_id`) REFERENCES `dosage`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+-- GO
+
+--
+-- Foreign Key Constraint: FK_visit_medicine_pharma
+--
+ALTER TABLE `visit_medicine` ADD CONSTRAINT `FK_visit_medicine_pharma` FOREIGN KEY (`pharma_id`) REFERENCES `pharma`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+-- GO
+
+--
+-- Foreign Key Constraint: FK_visit_medicine_visit
+--
+ALTER TABLE `visit_medicine` ADD CONSTRAINT `FK_visit_medicine_visit` FOREIGN KEY (`visit_id`) REFERENCES `visit`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 -- GO
 
 --

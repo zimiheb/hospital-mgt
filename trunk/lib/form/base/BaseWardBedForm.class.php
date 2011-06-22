@@ -15,6 +15,7 @@ class BaseWardBedForm extends BaseFormPropel
       'id'      => new sfWidgetFormInputHidden(),
       'ward_id' => new sfWidgetFormPropelChoice(array('model' => 'Ward', 'add_empty' => true)),
       'bed'     => new sfWidgetFormInput(),
+      'price'   => new sfWidgetFormInput(),
       'status'  => new sfWidgetFormInput(),
     ));
 
@@ -22,6 +23,7 @@ class BaseWardBedForm extends BaseFormPropel
       'id'      => new sfValidatorPropelChoice(array('model' => 'WardBed', 'column' => 'id', 'required' => false)),
       'ward_id' => new sfValidatorPropelChoice(array('model' => 'Ward', 'column' => 'id', 'required' => false)),
       'bed'     => new sfValidatorString(array('max_length' => 100, 'required' => false)),
+      'price'   => new sfValidatorInteger(array('required' => false)),
       'status'  => new sfValidatorString(array('max_length' => 10, 'required' => false)),
     ));
 
