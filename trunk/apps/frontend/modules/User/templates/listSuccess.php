@@ -42,7 +42,7 @@
 				<td align="left"><?php echo $user->getPassword(); ?></td>
 		
 		<td align="right" class="edit">
-		<?php echo link_to('&nbsp;','User/editUser?id='.Utility::EncryptQueryString($user->getId()),array('title'=>'Edit', 'class' => 'edit'))?>
+		<?php echo link_to('&nbsp;','User/edit?id='.Utility::EncryptQueryString($user->getId()),array('title'=>'Edit', 'class' => 'edit'))?>
 		<?php echo link_to('&nbsp;','User/deleteUser?id='.Utility::EncryptQueryString($user->getId()), array('confirm'=>'Are you sure you want to Delete this?', 'title'=>'Delete', 'class' => 'delete')); ?>
 		</td> 
 	  </tr>
