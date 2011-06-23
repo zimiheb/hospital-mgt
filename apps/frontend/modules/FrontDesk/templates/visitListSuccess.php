@@ -24,6 +24,7 @@
 		<th style="text-align:left;">Visit Time</th>
 		<th style="text-align:left;">Ward Doctor</th>
 		<th style="text-align:left;">Status</th>
+		<th style="text-align:left;">Fee (Rs.)</th>
 		<th style="text-align:left;">Operation</th>
 	  </tr>
 	  
@@ -42,6 +43,7 @@
 		<td align="left"><?php echo $visit->getTime(); ?> hrs.</td>
 		<td align="left"><?php echo $visit->getEmployeeRelatedByWardDocId(); ?></td>
 		<td align="left"><?php echo Constant::GetVisitStatusTitle($visit->getStatus()); ?></td>
+		<td align="left"><?php echo $visit->getFee(); ?></td>
 		<td align="right" class="edit">
 		<?php 
 		$visit_status = Constant::GetVisitStatusTitle($visit->getStatus());
