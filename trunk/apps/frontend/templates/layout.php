@@ -58,7 +58,7 @@
 				<ul>
 					<li><?php echo link_to ('Home', 'Home/index', array(/*'class'=>'current'*/)); ?></li>
 					<li><?php echo link_to ('Front Desk', 'FrontDesk/index', 'rel=dropmenu_2'); ?></li>
-                    <li><?php echo link_to ('Administrator', 'Employee/list'); ?></li>
+                    <li><?php echo link_to ('Administrator', 'Employee/list', 'rel=dropmenu_3'); ?></li>
 					<li><?php echo link_to ('Doctor', 'Visit/docList'); ?></li>
 					<li><?php echo link_to ('Settings', 'Home/settings', 'rel=dropmenu_1'); ?></li>
 				</ul>
@@ -81,6 +81,12 @@
 					<?php echo link_to ('Outdoor Patient Visits', 'FrontDesk/visitList'); ?>
 					<?php echo link_to ('Patient List', 'Patient/list'); ?>
 					<?php echo link_to ('Duty Roster', 'FrontDesk/dutyRoster'); ?>
+					</div>
+					
+					<div id="dropmenu_3" class="dropmenudiv" style="width: 150px; height:30px;">
+					<?php echo link_to ('Employee', 'Employee/List'); ?>
+					<?php echo link_to ('System Users', 'User/list'); ?>
+					
 					</div>
 					
 			
