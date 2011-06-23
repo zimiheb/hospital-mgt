@@ -40,21 +40,13 @@ class VisitActions extends sfActions
 		$quantity = $this->getRequestParameter('quantity');
 		$tests = $this->getRequestParameter('test');
 		
-		// Saving Visit Details
-		$visit = VisitPeer::retrieveByPk($visit_id);
-		
-		$visit->setBp($this->getRequestParameter('bp'));
-		$visit->setPulse($this->getRequestParameter('pulse'));
-		$visit->setTemp($this->getRequestParameter('temp'));
-		$visit->setDiet($this->getRequestParameter('diet'));
-		$visit->setDescription($this->getRequestParameter('description'));
+		$total_cost = 0;
 		
 		//Saving Medicines for Current Visit
 		foreach($meds as $i => $med)
 		{
-			
 			$pharma = PharmaPeer::retrieveByPk($med[0]);
-			echo $med_price = $pharma->getPrice();
+			$med_price = $pharma->getPrice();
 			
 			$visit_med = new VisitMedicine();
 			
@@ -64,8 +56,9 @@ class VisitActions extends sfActions
 			$visit_med->setDosageId($dose[$i]);
 			$visit_med->setQuantity($quantity[$i]);
 			$visit_med->setPrice($quantity[$i]*$med_price);
-			
 			$visit_med->save();
+			
+			$total_cost = ($quantity[$i]*$med_price) + $total_cost;
 		}
 		
 		foreach($tests as $j => $test)
@@ -79,9 +72,37 @@ class VisitActions extends sfActions
 			$visit_test->setVisitId($visit_id);
 			$visit_test->setLabTestId($test[0]);
 			$visit_test->setPrice($test_price);
-			
 			$visit_test->save();
+			
+			$total_cost =  $test_price + $total_cost;
 		}
+		
+		// Saving Visit Details
+		/*echo '<pre>';
+		print_r($visit = VisitPeer::retrieveByPk($visit_id));
+		echo '</pre>';
+		
+		echo $this->getRequestParameter('bp');
+		echo $this->getRequestParameter('pulse');
+		echo $this->getRequestParameter('temp');*/
+		
+		$visit = VisitPeer::retrieveByPk($visit_id);
+		$doc_id = $visit->getDoctorId();
+		$doc = EmployeePeer::retrieveByPk($doc_id);
+		$doc_fee = $doc->getVisitFee();
+		
+		$total_cost = $total_cost + $doc_fee;
+		
+		$visit->setBp($this->getRequestParameter('bp'));
+		$visit->setPulse($this->getRequestParameter('pulse'));
+		$visit->setTemp($this->getRequestParameter('temp'));
+		$visit->setDiet($this->getRequestParameter('diet'));
+		$visit->setDescription($this->getRequestParameter('description'));
+		$visit->setFee($total_cost);
+		$visit->setFeePaid(Constant::VISIT_FEE_NOT_PAID);
+		$visit->setStatus(Constant::VISIT_DONE);
+		$visit->save();
+		
 		$this->getUser()->setFlash('SUCCESS_MESSAGE', 'Patient Visit saves Successfully');
 		$this->redirect ('Visit/docList');
 	}

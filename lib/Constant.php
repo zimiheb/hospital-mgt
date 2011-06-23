@@ -2,17 +2,6 @@
 
 class Constant 
 {
-	/*
-	Production or Test enviorment
-	const APPLICATION_PATH_PROD = "/dil/web/";
-	const APPLICATION_FRONTEND_PATH_PROD = "/dil/web/";
-	const APPLICATION_BACKEND_PATH_PROD = "/dil/web/backend.php/";
-	//Development Enviorment
-	const APPLICATION_PATH_DEV = "/dil/web/frontend_dev.php/";
-	const APPLICATION_FRONTEND_PATH_DEV = "/dil/web/frontend_dev.php/";
-	const APPLICATION_BACKEND_PATH_DEV = "/dil/web/backend_dev.php/";
-	*/
-	
 	//Production or Test enviorment
 	const APPLICATION_PATH_PROD = "hospital/web/frontend.php/Login/";
 	const APPLICATION_FRONTEND_PATH_PROD = "hospital/web/frontend.php";
@@ -91,8 +80,6 @@ class Constant
 	const PASSWORD_MINIMUM_LENGTH_ERROR = " Password should be atleast 6 charactors long";
 	const PASSWORD_RESET_SUCCESSFULLY = "Password reset successfully";
 
-	const ALL_QUESTIONS_ALREADY_ADDED = "No more questions left to add, All questions already added.";
-	
 	//General
 	const PAGE_SIZE_GENERAL = 10;
 	const PAGE_SIZE_NOTIFICATIONS = 5;
@@ -116,45 +103,45 @@ class Constant
 	const UNKNOWN_STATUS_TITLE = 'Unknown Status';
 		
 	const VISIT_PENDING = 1;
-	const TICKET_PENDING_TITLE = 'Pending';
+	const VISIT_PENDING_TITLE = 'Pending';
 	
-	const TICKET_DONE = 2;
-	const TICKET_PAID_TITLE = 'Done';
+	const VISIT_DONE = 2;
+	const VISIT_DONE_TITLE = 'Done';
 	
-	const TICKET_SENT_TO_COURT = 3;
-	const TICKET_SENT_TO_COURT_TITLE = 'Sent To Court';
+	const VISIT_FEE_PAID = 1;
+	const VISIT_FEE_PAID_TITLE = 'Paid';
 	
-	const TICKET_OUT_STANDING = 4;
-	const TICKET_OUT_STANDING_TITLE = 'Out Standing';
+	const VISIT_FEE_NOT_PAID = 0;
+	const VISIT_FEE_NOT_PAID_TITLE = 'Not Paid';
 	
 	static public function GetVisitStatusArray ()
 	{
-		$statuses = array (	self::TICKET_PENDING => self::TICKET_PENDING_TITLE,
-							self::TICKET_PAID => self::TICKET_PAID_TITLE,
-							self::TICKET_SENT_TO_COURT => self::TICKET_SENT_TO_COURT_TITLE);
-							//self::TICKET_OUT_STANDING => self::TICKET_OUT_STANDING_TITLE);
+		$statuses = array (	self::VISIT_PENDING => self::VISIT_PENDING_TITLE,
+							self::VISIT_DONE => self::VISIT_DONE_TITLE,
+							self::VISIT_FEE_PAID => self::VISIT_FEE_PAID_TITLE,
+							self::VISIT_FEE_NOT_PAID => self::VISIT_FEE_NOT_PAID_TITLE);
 		return $statuses;	
 	}
 	
-	static public function GetVisitStatus($visit)
+	static public function GetVisitStatusTitle($visit)
 	{
 	//Compare Status and return appropriate title.
 		switch ($visit)
 		{
-			case self::TICKET_PENDING:
-				$title = self::TICKET_PENDING_TITLE;
+			case self::VISIT_PENDING:
+				$title = self::VISIT_PENDING_TITLE;
 				break;
 			
-			case self::TICKET_PAID:
-				$title = self::TICKET_PAID_TITLE;
+			case self::VISIT_DONE:
+				$title = self::VISIT_DONE_TITLE;
 				break;
 			
-			case self::TICKET_SENT_TO_COURT:
-				$title = self::TICKET_SENT_TO_COURT_TITLE;
+			case self::VISIT_FEE_PAID:
+				$title = self::VISIT_FEE_PAID_TITLE;
 				break;
 			
-			case self::TICKET_OUT_STANDING:
-				$title = self::TICKET_OUT_STANDING_TITLE;
+			case self::VISIT_FEE_NOT_PAID:
+				$title = self::VISIT_FEE_NOT_PAID_TITLE;
 				break;
 				
 			default:
@@ -171,6 +158,12 @@ class Constant
 		return $statuses;	
 	}
 	
+	static public function GetRecordStatusArray ()
+	{
+		$statuses = array (	self::RECORD_STATUS_ACTIVE => self::RECORD_STATUS_ACTIVE_TITLE,
+							self::RECORD_STATUS_DEACTIVE => self::RECORD_STATUS_DEACTIVE_TITLE);
+		return $statuses;	
+	}
 	
 	static public function GetRecordStatusTitle($status)
 	{
@@ -241,11 +234,5 @@ class Constant
 		return $title;		
 	}
 	
-	static public function GetRecordStatusArray ()
-	{
-		$statuses = array (	self::RECORD_STATUS_ACTIVE => self::RECORD_STATUS_ACTIVE_TITLE,
-							self::RECORD_STATUS_DEACTIVE => self::RECORD_STATUS_DEACTIVE_TITLE);
-		return $statuses;	
-	}
 }
 ?>

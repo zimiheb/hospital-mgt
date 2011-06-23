@@ -64,6 +64,7 @@ propel:
     employment_date: { type: DATE, required: false }
     local_resident: { type: VARCHAR, size: '3', required: false }
     qualification: { type: VARCHAR, size: '1000', required: false }
+    visit_fee: { type: INTEGER, size: '5', required: false }
     status: { type: VARCHAR, size: '10', required: false }
     created_at: { type: DATE, required: false }
     updated_at: { type: DATE, required: false }

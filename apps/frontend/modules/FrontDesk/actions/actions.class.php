@@ -141,7 +141,7 @@ public function executeVisitList(sfWebRequest $request)
 		$visit->setVisitDate($this->getRequestParameter('visit_date'));
 		$visit->setTime($this->getRequestParameter('time'));
 		$visit->setVisitType($this->getRequestParameter('visit_type'));
-		$visit->setStatus(Constant::RECORD_STATUS_ACTIVE);
+		$visit->setStatus(Constant::VISIT_PENDING);
 		
 		$visit->save();
 		
@@ -155,5 +155,17 @@ public function executeVisitList(sfWebRequest $request)
 	}
   } // -- END executeAddDuty
 
+public function executePayVisitFee(sfWebRequest $request)
+  {
+    
+	$visit = VisitPeer::retrieveByPk(Utility::DecryptqueryString($request->getParameter('visit')));
+	
+	$visit->setFeePaid(Constant::VISIT_FEE_PAID);
+	$visit->save();
+		
+		$this->getUser()->setFlash('SUCCESS_MESSAGE', 'Fee Paid for the visit Successfully');
+		$this->redirect ('FrontDesk/visitList');
+	
+  }//
 
 } // END Class

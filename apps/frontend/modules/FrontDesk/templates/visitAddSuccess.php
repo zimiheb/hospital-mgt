@@ -16,7 +16,7 @@
 		
 		<tr height="40">
 			<td width="15%">Doctor to Visit:</td>
-			<td width="41%"><?php echo object_select_tag('', '', array ( 'name'=>'doctor_id', 'id'=>'doctor_id', 'related_class' => 'Employee' , 'peer_method' => 'GetEmployee')); ?>			</td>
+			<td width="41%"><?php echo object_select_tag('', '', array ( 'name'=>'doctor_id', 'id'=>'doctor_id', 'related_class' => 'Employee' , 'peer_method' => 'GetDoctor')); ?>			</td>
 			
 			<td width="16%">Type of Visit</td>
 			<td  width="28%"><?php echo select_tag('visit_type', options_for_select(array(
@@ -34,7 +34,7 @@
 
 		<tr height="40">
 			<td width="15%">Doctor at Ward:</td>
-			<td width="41%"><?php echo object_select_tag('', '', array ( 'name'=>'ward_doc_id', 'id'=>'ward_doc_id', 'related_class' => 'Employee' , 'peer_method' => 'GetEmployee')); ?>			</td>
+			<td width="41%"><?php echo object_select_tag('', '', array ( 'name'=>'ward_doc_id', 'id'=>'ward_doc_id', 'related_class' => 'Employee' , 'peer_method' => 'GetDoctor')); ?>			</td>
 		</tr>
 		
 		
