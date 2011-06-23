@@ -22,7 +22,7 @@ public static function GetEmployee()
 	{
 	$c = new Criteria();
 	$c->add(EmployeePeer::STATUS, Constant::RECORD_STATUS_ACTIVE);
-	$c->add(EmployeePeer::EMP_CATEGORY, doc);
+	$c->add(EmployeePeer::EMP_CATEGORY, 'doc');
 	$employees = EmployeePeer::doSelect($c);
 	
 	if($employees){
@@ -38,7 +38,7 @@ public static function GetEmployee()
 	{
 	$c = new Criteria();
 	$c->add(EmployeePeer::STATUS, Constant::RECORD_STATUS_ACTIVE);
-	$c->add(EmployeePeer::EMP_CATEGORY, staff);
+	$c->add(EmployeePeer::EMP_CATEGORY, 'staff');
 	$employees = EmployeePeer::doSelect($c);
 	
 	if($employees){

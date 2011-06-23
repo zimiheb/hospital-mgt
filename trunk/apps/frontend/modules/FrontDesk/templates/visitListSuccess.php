@@ -21,9 +21,9 @@
 	  <tr>
 		<th style="text-align:left;">Patient's Name</th>
 		<th style="text-align:left;">OPD Doctor</th>
-		<th style="text-align:center;">Visit Time(2400 hrs)</th>
-		<th style="text-align:center;">Ward Doctor</th>
-		<!--<th style="text-align:left;">Status</th>-->
+		<th style="text-align:left;">Visit Time</th>
+		<th style="text-align:left;">Ward Doctor</th>
+		<th style="text-align:left;">Status</th>
 		<th style="text-align:left;">Operation</th>
 	  </tr>
 	  
@@ -39,10 +39,21 @@
 		<tr>
 		<td align="left"><?php echo $visit->getPatient(); ?> </td>
 		<td align="left"><?php echo $visit->getEmployeeRelatedByDoctorId(); ?></td>
-		<td style="text-align:center;"><?php echo $visit->getTime(); ?></td>
-		<td style="text-align:center;"><?php echo $visit->getEmployeeRelatedByWardDocId(); ?></td>
-		<!--<td align="left"><?php //echo Constant::GetRecordStatusTitle($visit->getStatus()); ?></td>-->
+		<td align="left"><?php echo $visit->getTime(); ?> hrs.</td>
+		<td align="left"><?php echo $visit->getEmployeeRelatedByWardDocId(); ?></td>
+		<td align="left"><?php echo Constant::GetVisitStatusTitle($visit->getStatus()); ?></td>
 		<td align="right" class="edit">
+		<?php 
+		$visit_status = Constant::GetVisitStatusTitle($visit->getStatus());
+		$fee_status = Constant::GetVisitStatusTitle($visit->getFeePaid());
+		
+		if (($visit_status == Constant::VISIT_DONE_TITLE) && ($fee_status == Constant::VISIT_FEE_NOT_PAID_TITLE)):
+		echo link_to('Pay Fee','FrontDesk/payVisitFee?visit='.Utility::EncryptQueryString($visit->getId()));
+		elseif (($visit_status == Constant::VISIT_DONE_TITLE) && ($fee_status == Constant::VISIT_FEE_PAID_TITLE)):
+		echo 'Fee Paid';
+		else:
+		echo '&nbsp;';
+		endif;?>
 		<?php //echo link_to('&nbsp;','FrontDesk/editvisit?id='.Utility::EncryptQueryString($visit->getId()),array('title'=>'Edit', 'class' => 'edit'))?>
 		<?php //echo link_to('&nbsp;','FrontDesk/deletevisit?id='.Utility::EncryptQueryString($visit->getId()), array('confirm'=>'Are you sure you want to Delete this?', 'title'=>'Delete', 'class' => 'delete')); ?>
 		</td>
