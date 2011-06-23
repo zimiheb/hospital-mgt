@@ -15,7 +15,7 @@
 	<div class="box_text">
 	<table width="100%" cellpadding="0" cellspacing="0"  align="left" border="0" class="form">
 		<tr>
-			<th colspan="4">Bio Data</td>
+			<th colspan="4"><h2>Bio Data</h2></td>
 		</tr>
 		
 		<tr height="40">
@@ -48,7 +48,7 @@
 		</tr>
 
 <tr>
-	<th colspan="4">Employee Information</th>
+	<th colspan="4"><h2>Employee Information</h2></th>
 </tr>
 
 <tr>
@@ -62,38 +62,28 @@
 			<td><?php echo input_date_tag('employment_date','','rich=true, size=20'); ?></td>
 		</tr>
 		
-		
-		
-		<!--<tr>
-			<td colspan="4"><h2><span class="dark_blue">Employee Registration</span></h2></td>
-		</tr>-->
-		
-		
-		
 		<tr height="40">
 			<td>Local Resident:</td>
 			<td> <?php echo radiobutton_tag('local[]', '1', true, array('class'=>'checkbox')) ?>Yes &nbsp;&nbsp;&nbsp;
 	<?php echo radiobutton_tag('local[]', '0', false, array('class'=>'checkbox')) ?>No </td>
 			
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
+			<td>System Role:</td>
+			<td><?php echo object_select_tag('', '', array ( 'title'=>'role_id', 'id'=>'role_id', 'related_class' => 'Role' , 'peer_method' => 'GetRole')); ?></td>
 		</tr>
 		
 		<tr height="40">
 			<td valign="top">Last Qualification:</td>
 			<td colspan="3"> <?php echo textarea_tag('qualification', '', array('style'=>'width:592px')) ?></td>
-	
 		</tr>
 		
 		<tr>
-			<th colspan="4">Contact Information</td>
+			<th colspan="4"><h2>Contact Information</h2></td>
 		</tr>
 
 		<tr>
 			<td height="15"></td>
 		</tr>
 
-		
 		<tr height="40">
 			<td>Mobile Number:</td>
 			<td><?php echo input_tag('contact_cell','','60'); ?>
@@ -130,8 +120,6 @@
 	
 		</tr>
 		
-		
-			
 			<tr>
 			<td>&nbsp;</td>
 			<td colspan="2">
@@ -147,9 +135,7 @@
 
 	</table>
 	</div>
-	<!--<a href="#" class="details">erawer</a>-->
 	</div>
-	
 	</div>
 
 <div class="clear"></div>    

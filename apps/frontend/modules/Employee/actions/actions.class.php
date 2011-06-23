@@ -55,6 +55,7 @@ class EmployeeActions extends sfActions
 		
 			$employee = new Employee();
 			
+			$employee->setRoleId($this->getRequestParameter('role_id'));
 			$employee->setName($this->getRequestParameter('name'));
 			$employee->setCnic($this->getRequestParameter('cnic'));
 			$employee->setDob($this->getRequestParameter('dob'));
@@ -142,6 +143,7 @@ class EmployeeActions extends sfActions
 		
 			$employee = new Employee();
 			
+			$employee->setRoleId($this->getRequestParameter('role_id'));
 			$employee->setName($this->getRequestParameter('name'));
 			$employee->setCnic($this->getRequestParameter('cnic'));
 			$employee->setDob($this->getRequestParameter('dob'));
