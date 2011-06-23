@@ -108,10 +108,10 @@ class Constant
 	const VISIT_DONE = 2;
 	const VISIT_DONE_TITLE = 'Done';
 	
-	const VISIT_FEE_PAID = 1;
+	const VISIT_FEE_PAID = 3;
 	const VISIT_FEE_PAID_TITLE = 'Paid';
 	
-	const VISIT_FEE_NOT_PAID = 0;
+	const VISIT_FEE_NOT_PAID = 4;
 	const VISIT_FEE_NOT_PAID_TITLE = 'Not Paid';
 	
 	static public function GetVisitStatusArray ()
