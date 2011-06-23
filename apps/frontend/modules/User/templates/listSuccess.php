@@ -87,8 +87,8 @@
 </tr>
   
   <tr>
-    <td width="148" height="30" style="padding-left:10px;">Employee Role:</td>
-	<td width="452" height="30" style="padding-left:10px;"><?php echo object_select_tag('', '', array ( 'title'=>'role_id', 'id'=>'role_id', 'related_class' => 'Role' , 'peer_method' => 'GetRole')); ?></td>
+    <td width="148" height="30" style="padding-left:10px;">System Role:</td>
+	<td width="452" height="30" style="padding-left:10px;"><?php echo object_select_tag('', '', array ( 'name'=>'role_id', 'id'=>'role_id', 'related_class' => 'Role' , 'peer_method' => 'GetRole')); ?></td>
   </tr>
   
   <tr>

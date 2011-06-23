@@ -24,7 +24,7 @@
 			<script type="text/javascript">
 			var name = new LiveValidation('name', { validMessage: "<?php echo Constant::VALIDATION_SUCCESS;?>", wait:500});
 			name.add( Validate.Presence,{ failureMessage: "<?php echo Constant::VALIDATION_REQUIRED_FIELD;?>"});
-			name.add( Validate.Format, { pattern: /^[A-Za-z]*$/,failureMessage: "<?php echo 'Alphabets Only';  ?>"} );
+			name.add( Validate.Format, { pattern: /^[A-Z a-z]*$/,failureMessage: "<?php echo 'Alphabets Only';  ?>"} );
 			</script>
 			</td>
 			
@@ -68,7 +68,7 @@
 	<?php echo radiobutton_tag('local[]', '0', false, array('class'=>'checkbox')) ?>No </td>
 			
 			<td>System Role:</td>
-			<td><?php echo object_select_tag('', '', array ( 'title'=>'role_id', 'id'=>'role_id', 'related_class' => 'Role' , 'peer_method' => 'GetRole')); ?></td>
+			<td><?php echo object_select_tag('', '', array ( 'name'=>'role_id', 'id'=>'role_id', 'related_class' => 'Role' , 'peer_method' => 'GetRole')); ?></td>
 		</tr>
 		
 		<tr height="40">
