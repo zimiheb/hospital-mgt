@@ -47,13 +47,17 @@
 		$visit_status = Constant::GetVisitStatusTitle($visit->getStatus());
 		$fee_status = Constant::GetVisitStatusTitle($visit->getFeePaid());
 		
-		if (($visit_status == Constant::VISIT_DONE_TITLE) && ($fee_status == Constant::VISIT_FEE_NOT_PAID_TITLE)):
-		echo link_to('Pay Fee','FrontDesk/payVisitFee?visit='.Utility::EncryptQueryString($visit->getId()));
-		elseif (($visit_status == Constant::VISIT_DONE_TITLE) && ($fee_status == Constant::VISIT_FEE_PAID_TITLE)):
+		if (($visit_status == Constant::VISIT_DONE_TITLE) && ($fee_status == Constant::VISIT_FEE_NOT_PAID_TITLE)){
+		echo link_to('Pay Fee','FrontDesk/payVisitFee?visit='.Utility::EncryptQueryString($visit->getId()), array('confirm'=>'Confirm Fee Payment!'));
+		}
+		elseif (($visit_status == Constant::VISIT_DONE_TITLE) && ($fee_status == Constant::VISIT_FEE_PAID_TITLE)){
 		echo 'Fee Paid';
-		else:
-		echo '&nbsp;';
-		endif;?>
+		}
+		else
+		{
+		echo 'None';
+		}
+		?>
 		<?php //echo link_to('&nbsp;','FrontDesk/editvisit?id='.Utility::EncryptQueryString($visit->getId()),array('title'=>'Edit', 'class' => 'edit'))?>
 		<?php //echo link_to('&nbsp;','FrontDesk/deletevisit?id='.Utility::EncryptQueryString($visit->getId()), array('confirm'=>'Are you sure you want to Delete this?', 'title'=>'Delete', 'class' => 'delete')); ?>
 		</td>
