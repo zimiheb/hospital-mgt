@@ -21,7 +21,7 @@ echo input_hidden_tag('patient_id', $patient->getId());
 * html .osX .jScrollPaneDragBottom {bottom: -1px;}
 /* /IE SPECIFIC HACKED STYLES */
 
-#pane4{height: 150px;width: 250px;overflow: hidden;background-color:#CCCCCC;border: 2px solid #000000;}
+#pane4{height: 150px;width: 250px;overflow: hidden;background-color:#EEEEEE;border: 1px solid #000000;}
 .left .jScrollPaneTrack {left: 0;right: auto;}
 .left a.jScrollArrowUp {left: 0;right: auto;}
 .left a.jScrollArrowDown {left: 0;right: auto;}

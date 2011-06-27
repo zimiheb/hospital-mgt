@@ -164,6 +164,8 @@ propel:
     description: { type: VARCHAR, size: '5000', required: false }
     time: { type: VARCHAR, size: '10', required: false }
     visit_date: { type: DATE, required: false }
+    admit_date: { type: DATE, required: false }
+    discharge_date: { type: DATE, required: false }
     fee: { type: VARCHAR, size: '10', required: false }
     fee_paid: { type: VARCHAR, size: '10', required: false }
     status: { type: VARCHAR, size: '10', required: false }

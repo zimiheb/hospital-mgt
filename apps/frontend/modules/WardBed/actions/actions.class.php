@@ -12,7 +12,7 @@ class WardBedActions extends sfActions
   {
 	  $c = new Criteria();
 	  //$c->add(WardBedPeer::TITLE, 'None', Criteria::NOT_EQUAL);
-	  $c->add(WardBedPeer::STATUS, Constant::RECORD_STATUS_DELETED, Criteria::NOT_EQUAL);
+	  $c->add(WardBedPeer::STATUS, Constant::BED_DELETE, Criteria::NOT_EQUAL);
 	  $c->addAscendingOrderByColumn(WardBedPeer::WARD_ID);
 	  $c->addAscendingOrderByColumn(WardBedPeer::BED);
 	  $this->beds = WardBedPeer::doSelect ($c);
@@ -36,8 +36,8 @@ public function executeAdd(sfWebRequest $request)
 			
 			$bed->setWardId($this->getRequestParameter('ward_id'));
 			$bed->setBed($this->getRequestParameter('bed'));
-			//$bed->setDescription($this->getRequestParameter('description'));
-			$bed->setStatus(Constant::RECORD_STATUS_ACTIVE);
+			$bed->setPrice($this->getRequestParameter('price'));
+			$bed->setStatus(Constant::BED_AVAILABLE);
 			
 			$bed->save();
 			
@@ -49,28 +49,20 @@ public function executeAdd(sfWebRequest $request)
  
   } // - END - executeAdd
   
- 
-  
-
 public function executeEdit (sfWebRequest $request)
 	{
-
-		//$this->response->setBed(Constant::TITLE_EDIT_QUESTION   );
 		if ($this->getRequest()->getMethod() == sfRequest::POST)
 		{
-			//Create User and set object attributes
 			$bed = WardBedPeer::retrieveByPk($this->getRequestParameter('id'));
 
 			$bed->setWardId($this->getRequestParameter('ward_id'));
 			$bed->setBed($this->getRequestParameter('bed'));
-			//$bed->setDescription($this->getRequestParameter('description'));
-			//$bed->setStatus($this->getRequestParameter('status'));
-			
-			//Save object to database
+			$bed->setPrice($this->getRequestParameter('price'));
+
 			if($bed->save())
 			{
 				$this->getUser()->setFlash('SUCCESS_MESSAGE', Constant::RECORD_EDITED_SUCCESSFULLY);
-			$this->redirect ('WardBed/list');
+				$this->redirect ('WardBed/list');
 			}
 			else
 			{

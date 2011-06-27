@@ -18,7 +18,93 @@ class Constant
 	const ROLE_ADMINISTRATOR = 2;
 	const ROLE_ADMINISTRATOR_TITLE = "Administrator";	
 	const ROLE_EMPLOYEE = 3;	
-	const ROLE_EMPLOYEE_TITLE = "Employee";	
+	const ROLE_EMPLOYEE_TITLE = "Employee";
+	
+	//Visit Constants
+	const VISIT_PENDING = 1;
+	const VISIT_PENDING_TITLE = 'Pending';
+	const VISIT_DONE = 2;
+	const VISIT_DONE_TITLE = 'Done';
+	const VISIT_FEE_PAID = 3;
+	const VISIT_FEE_PAID_TITLE = 'Paid';
+	const VISIT_FEE_NOT_PAID = 4;
+	const VISIT_FEE_NOT_PAID_TITLE = 'Not Paid';
+	
+	//Ward Bed Constants
+	const BED_DELETE = 0;
+	const BED_DELETE_TITLE = 'Deleted';
+	const BED_AVAILABLE = 1;
+	const BED_AVAILABLE_TITLE = 'Available';
+	const BED_OCCUPIED = 2;
+	const BED_OCCUPIED_TITLE = 'Occupied';
+	
+	
+	static public function GetVisitStatusArray ()
+	{
+		$statuses = array (	self::VISIT_PENDING => self::VISIT_PENDING_TITLE,
+							self::VISIT_DONE => self::VISIT_DONE_TITLE,
+							self::VISIT_FEE_PAID => self::VISIT_FEE_PAID_TITLE,
+							self::VISIT_FEE_NOT_PAID => self::VISIT_FEE_NOT_PAID_TITLE);
+		return $statuses;	
+	}
+	
+	static public function GetVisitStatusTitle($visit)
+	{
+	//Compare Status and return appropriate title.
+		switch ($visit)
+		{
+			case self::VISIT_PENDING:
+				$title = self::VISIT_PENDING_TITLE;
+				break;
+			
+			case self::VISIT_DONE:
+				$title = self::VISIT_DONE_TITLE;
+				break;
+			
+			case self::VISIT_FEE_PAID:
+				$title = self::VISIT_FEE_PAID_TITLE;
+				break;
+			
+			case self::VISIT_FEE_NOT_PAID:
+				$title = self::VISIT_FEE_NOT_PAID_TITLE;
+				break;
+				
+			default:
+				$title = self::UNKNOWN_STATUS_TITLE;
+		}			
+		return $title;
+	}
+	
+	static public function GetWardBedStatusArray ()
+	{
+		$statuses = array (	self::BED_DELETE => self::BED_DELETE_TITLE,
+							self::BED_AVAILABLE => self::BED_AVAILABLE_TITLE,
+							self::BED_OCCUPIED => self::BED_OCCUPIED_TITLE);
+		return $statuses;	
+	}
+	
+	static public function GetWardBedStatusTitle($bed)
+	{
+	//Compare Status and return appropriate title.
+		switch ($bed)
+		{
+			case self::BED_DELETE:
+				$title = self::BED_DELETE_TITLE;
+				break;
+			
+			case self::BED_AVAILABLE:
+				$title = self::BED_AVAILABLE_TITLE;
+				break;
+			
+			case self::BED_OCCUPIED:
+				$title = self::BED_OCCUPIED_TITLE;
+				break;
+			
+			default:
+				$title = self::UNKNOWN_STATUS_TITLE;
+		}			
+		return $title;
+	}	
 	
 	//Login Constants
 	const LOGIN_INVALID_USER_EMAIL_PASSWORD = "Seems like you have forgotten your EMAIL or PASSWORD";
@@ -102,53 +188,7 @@ class Constant
 	const RECORD_STATUS_DEACTIVE_TITLE = 'Disabled';
 	const UNKNOWN_STATUS_TITLE = 'Unknown Status';
 		
-	const VISIT_PENDING = 1;
-	const VISIT_PENDING_TITLE = 'Pending';
 	
-	const VISIT_DONE = 2;
-	const VISIT_DONE_TITLE = 'Done';
-	
-	const VISIT_FEE_PAID = 3;
-	const VISIT_FEE_PAID_TITLE = 'Paid';
-	
-	const VISIT_FEE_NOT_PAID = 4;
-	const VISIT_FEE_NOT_PAID_TITLE = 'Not Paid';
-	
-	static public function GetVisitStatusArray ()
-	{
-		$statuses = array (	self::VISIT_PENDING => self::VISIT_PENDING_TITLE,
-							self::VISIT_DONE => self::VISIT_DONE_TITLE,
-							self::VISIT_FEE_PAID => self::VISIT_FEE_PAID_TITLE,
-							self::VISIT_FEE_NOT_PAID => self::VISIT_FEE_NOT_PAID_TITLE);
-		return $statuses;	
-	}
-	
-	static public function GetVisitStatusTitle($visit)
-	{
-	//Compare Status and return appropriate title.
-		switch ($visit)
-		{
-			case self::VISIT_PENDING:
-				$title = self::VISIT_PENDING_TITLE;
-				break;
-			
-			case self::VISIT_DONE:
-				$title = self::VISIT_DONE_TITLE;
-				break;
-			
-			case self::VISIT_FEE_PAID:
-				$title = self::VISIT_FEE_PAID_TITLE;
-				break;
-			
-			case self::VISIT_FEE_NOT_PAID:
-				$title = self::VISIT_FEE_NOT_PAID_TITLE;
-				break;
-				
-			default:
-				$title = self::UNKNOWN_STATUS_TITLE;
-		}			
-		return $title;
-	}
 	
 	static public function GetReviewStatusArray ()
 	{

@@ -20,7 +20,7 @@
 </tr>
   
   <tr>
-  	<td height="30">Department:</td>
+  	<td height="30">Ward Name:</td>
 	<td height="30"> <?php echo object_select_tag($bed, 'getWardId', array ('related_class' => 'Ward' , 'peer_method' => 'GetWard'), $bed->getWardId());?> </td>
   </tr>
   
@@ -34,14 +34,15 @@
 	</td>
   </tr>
 
- <!-- <tr>
-    <td valign="top">Description: </td>
-    <td><?php //echo textarea_tag('description', $bed->getDescription(), 'size=40x6') ?></td>
-  </tr>
   <tr>
-    <td height="30">Status:</td>
-    <td height="30"><?php //echo select_tag ('status',options_for_select(Constant::GetRecordStatusArray(), $bed->getStatus())); ?></td>
-  </tr>-->
+    <td height="30">Bed Rent Price:<span class="error"> *</span></td>
+	<td height="30"> <?php echo input_tag('price',$bed->getPrice(),'size=38') ?></td>
+	<script type="text/javascript">
+	var price = new LiveValidation('price', { validMessage: "<?php echo Constant::VALIDATION_SUCCESS; ?>"});
+	price.add( Validate.Presence,{ failureMessage: "<?php echo Constant::VALIDATION_REQUIRED_FIELD; ?>"});
+	price.add( Validate.Numericality,{ failureMessage: "<?php echo 'Numbers only'; ?>"});
+	</script>
+  </tr>
   
   
   <tr>

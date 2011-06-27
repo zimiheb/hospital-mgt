@@ -22,7 +22,7 @@
 		<th style="text-align:left;">Patient's Name</th>
 		<th style="text-align:left;">OPD Doctor</th>
 		<th style="text-align:left;">Visit Time</th>
-		<th style="text-align:left;">Ward Doctor</th>
+		<!--<th style="text-align:left;">Ward Doctor</th>-->
 		<th style="text-align:left;">Status</th>
 		<th style="text-align:left;">Fee (Rs.)</th>
 		<th style="text-align:left;">Operation</th>
@@ -41,7 +41,7 @@
 		<td align="left"><?php echo $visit->getPatient(); ?> </td>
 		<td align="left"><?php echo $visit->getEmployeeRelatedByDoctorId(); ?></td>
 		<td align="left"><?php echo $visit->getTime(); ?> hrs.</td>
-		<td align="left"><?php echo $visit->getEmployeeRelatedByWardDocId(); ?></td>
+		<!--<td align="left"><?php //echo $visit->getEmployeeRelatedByWardDocId(); ?></td>-->
 		<td align="left"><?php echo Constant::GetVisitStatusTitle($visit->getStatus()); ?></td>
 		<td align="left"><?php echo $visit->getFee(); ?></td>
 		<td align="right" class="edit">
@@ -57,10 +57,10 @@
 		}
 		else
 		{
-		echo 'None';
+		echo '';
 		}
 		?>
-		<?php //echo link_to('&nbsp;','FrontDesk/editvisit?id='.Utility::EncryptQueryString($visit->getId()),array('title'=>'Edit', 'class' => 'edit'))?>
+		<?php echo link_to('&nbsp;','FrontDesk/visitedit?id='.Utility::EncryptQueryString($visit->getId()),array('title'=>'Edit', 'class' => 'edit'))?>
 		<?php //echo link_to('&nbsp;','FrontDesk/deletevisit?id='.Utility::EncryptQueryString($visit->getId()), array('confirm'=>'Are you sure you want to Delete this?', 'title'=>'Delete', 'class' => 'delete')); ?>
 		</td>
 	  </tr>

@@ -21,8 +21,8 @@
              
 			  <tr>
 				<th style="text-align:left";>Room Name</th>
+				<th style="text-align:left;">Rent Price</th>
 				<th style="text-align:left";>Status</th>
-				<th style="text-align:left";>Last Updated</th>
                 <th style="text-align:left;">Operation</th>
               </tr>
 			  
@@ -37,8 +37,9 @@
 				
               <tr>
                 <td align="left"><?php echo $room->getTitle(); ?> </td>
-				<td align="center"><?php echo Constant::GetRecordStatusTitle($room->getStatus()); ?></td>
-				<td align="center"><?php echo $room->getUpdatedAt('d-M-Y'); ?>
+				<td align="left"><?php echo $room->getPrice(); ?> </td>
+				<td align="center"><?php echo Constant::GetWardBedStatusTitle($room->getStatus()); ?></td>
+				
 				<td align="right">
 				<?php echo link_to('&nbsp;','Room/edit?id='.Utility::EncryptQueryString($room->getId()),array('title'=>'Edit', 'class' => 'edit'))?>
 				
@@ -90,6 +91,15 @@
 	</script>
   </tr>
   
+  <tr>
+    <td width="155" height="30" style="padding-left:10px;">Room Rent Price:<span class="error"> *</span></td>
+	<td width="445" height="30" style="padding-left:10px;"> <?php echo input_tag('price','','size=38') ?></td>
+	<script type="text/javascript">
+	var price = new LiveValidation('price', { validMessage: "<?php echo Constant::VALIDATION_SUCCESS; ?>"});
+	price.add( Validate.Presence,{ failureMessage: "<?php echo Constant::VALIDATION_REQUIRED_FIELD; ?>"});
+	price.add( Validate.Numericality,{ failureMessage: "<?php echo 'Numbers only'; ?>"});
+	</script>
+  </tr>
  
   <tr>
     <td colspan="2">&nbsp;</td>

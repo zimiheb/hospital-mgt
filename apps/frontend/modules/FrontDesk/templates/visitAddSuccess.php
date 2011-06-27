@@ -16,7 +16,7 @@
 		
 		<tr height="40">
 			<td width="15%">Doctor to Visit:</td>
-			<td width="41%"><?php echo object_select_tag('', '', array ( 'name'=>'doctor_id', 'id'=>'doctor_id', 'related_class' => 'Employee' , 'peer_method' => 'GetDoctor')); ?>			</td>
+			<td width="41%"><?php echo object_select_tag('', '', array ( 'name'=>'doctor_id', 'id'=>'doctor_id', 'related_class' => 'Employee' , 'peer_method' => 'GetDoctor', 'include_custom' => 'None')); ?>			</td>
 			
 			<td width="16%">Type of Visit</td>
 			<td  width="28%"><?php echo select_tag('visit_type', options_for_select(array(
@@ -32,9 +32,18 @@
 			<td><?php echo input_tag('time','','60'); ?></td>
 		</tr>
 
+		<tr>
+			<td colspan="2"><h2>Ward Detail</h2> </td>
+		</tr>
+		
 		<tr height="40">
 			<td width="15%">Doctor at Ward:</td>
-			<td width="41%"><?php echo object_select_tag('', '', array ( 'name'=>'ward_doc_id', 'id'=>'ward_doc_id', 'related_class' => 'Employee' , 'peer_method' => 'GetDoctor')); ?>			</td>
+			<td width="41%"><?php echo object_select_tag('', '', array ( 'name'=>'ward_doc_id', 'id'=>'ward_doc_id', 'related_class' => 'Employee' , 'peer_method' => 'GetDoctor', 'include_custom' => 'None')); ?>			</td>
+		</tr>
+		
+		<tr height="40">
+			<td width="15%">Ward Bed:</td>
+			<td width="41%"><?php echo object_select_tag('', '', array ( 'name'=>'ward_bed_id', 'id'=>'ward_bed_id', 'related_class' => 'WardBed' , 'peer_method' => 'GetWardBed', 'include_custom' => 'None')); ?>			</td>
 		</tr>
 		
 		
