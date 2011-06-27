@@ -72,7 +72,7 @@
 						<?php echo link_to ('Duty Places', 'DutyPlace/list'); ?>
 						<?php echo link_to ('Ward', 'Ward/list'); ?>
 						<?php echo link_to ('Beds in Ward', 'WardBed/list'); ?>
-						<?php echo link_to ('Rooms', 'Rooms/list'); ?>
+						<?php echo link_to ('Rooms', 'Room/list'); ?>
 						<?php echo link_to ('Dosage', 'Dosage/list'); ?>
 						
 					</div>

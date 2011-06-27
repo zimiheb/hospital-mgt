@@ -17,10 +17,11 @@
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="datagrid">
 	  <tr>
 		<th style="text-align:left;">Patient's Name</th>
+		<th style="text-align:left;">Age</th>
+		<th style="text-align:left;">Gender</th>
+		<th style="text-align:center;">Visit Time</th>
 		<th style="text-align:left;">OPD Doctor</th>
-		<th style="text-align:center;">Visit Time(2400 hrs)</th>
-		<th style="text-align:center;">Ward Doctor</th>
-		<!--<th style="text-align:left;">Status</th>-->
+		<th style="text-align:left;">Ward Doctor</th>
 		<th style="text-align:left;">Operation</th>
 	  </tr>
 	  
@@ -35,8 +36,10 @@
 		
 		<tr>
 		<td align="left"><?php echo link_to($visit->getPatient(), 'Visit/checkup?patient='.Utility::EncryptQueryString($visit->getPatientId()).'&visit='.Utility::EncryptQueryString($visit->getId())); ?> </td>
+		<td align="left"><?php echo Utility::getAge($visit->getPatient()->getDob('Y-m-d'), date('Y-m-d'));?> years</td>
+		<td align="left"><?php echo $visit->getPatient()->getGender();?></td>
+		<td style="text-align:center;"><?php echo $visit->getTime(); ?> hrs.</td>
 		<td align="left"><?php echo $visit->getEmployeeRelatedByDoctorId(); ?></td>
-		<td style="text-align:center;"><?php echo $visit->getTime(); ?></td>
 		<td style="text-align:center;"><?php echo $visit->getEmployeeRelatedByWardDocId(); ?></td>
 		<!--<td align="left"><?php //echo Constant::GetRecordStatusTitle($visit->getStatus()); ?></td>-->
 		<td align="right" class="edit">

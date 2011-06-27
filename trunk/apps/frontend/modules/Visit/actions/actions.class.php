@@ -23,7 +23,7 @@ class VisitActions extends sfActions
   public function executeDocList(sfWebRequest $request)
   {
     $c = new Criteria();
-	$c->add(VisitPeer::STATUS, Constant::RECORD_STATUS_DELETED, Criteria::NOT_EQUAL);
+	$c->add(VisitPeer::STATUS, Constant::VISIT_PENDING);
 	$c->add(VisitPeer::VISIT_DATE, date('Y-m-d'));
 	$c->addAscendingOrderByColumn(VisitPeer::ID);
 	$this->visits = VisitPeer::doSelect($c);

@@ -19,11 +19,11 @@
 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="datagrid">
              
 	  <tr>
-		<th style="text-align:left;">Patient ID</th>
-		<th style="text-align:left;">Name</th>
-		<th style="text-align:left;">CNIC</th>
-		<th style="text-align:left;">Date of Birth</th>
-		<th style="text-align:left;">Gender</th>
+		<th width="11%" style="text-align:left;">ID No.</th>
+		<th width="39%" style="text-align:left;">Name</th>
+		<th width="17%" style="text-align:left;">CNIC</th>
+		<th width="15%" style="text-align:left;">Date of Birth</th>
+		<th width="9%" style="text-align:left;">Gender</th>
 		<th width="9%" style="text-align:left;">Operation</th>
 	  </tr>
 			  

@@ -1,6 +1,6 @@
 -- DBTools Manager Professional (Enterprise Edition)
 -- Database Dump for: hospital
--- Backup Generated in: 6/23/2011 1:57:39 PM
+-- Backup Generated in: 6/28/2011 3:33:39 AM
 -- Database Server Version: MySQL 5.1.33
 
 -- USEGO
@@ -278,7 +278,7 @@ CREATE TABLE `lab_report`
 --
 BEGIN;
 -- GO
-INSERT INTO `lab_report` (`id`, `patient_id`, `visit_id`, `lab_test_id`, `description`, `price`, `status`, `created_at`, `updated_at`) VALUES(1, 1, 2, 1, NULL, 250, NULL, '2011-06-23', '2011-06-23');
+INSERT INTO `lab_report` (`id`, `patient_id`, `visit_id`, `lab_test_id`, `description`, `price`, `status`, `created_at`, `updated_at`) VALUES(1, 1, 1, 1, NULL, 250, NULL, '2011-06-23', '2011-06-23');
 -- GO
 COMMIT;
 -- GO
@@ -362,7 +362,7 @@ CREATE TABLE `patient`
 --
 BEGIN;
 -- GO
-INSERT INTO `patient` (`id`, `id_number`, `cnic`, `username`, `password`, `name`, `father_name`, `dob`, `gender`, `address`, `contact_res`, `contact_cell`, `emergency_contact`, `email`, `blood_group`, `disease`, `allergy`, `drug_allergy`, `status`, `created_at`, `updated_at`) VALUES(1, '01', '61145-5847592-5', NULL, NULL, 'Nazeer Hussain xz', NULL, '1985-03-08', 'Male', ' kug uy rfuy tf j h', '0515548365', '03122354618', '021835246', NULL, 'A+', 'Hyper Tension', 'NILL', 'NILL', '1', '2011-05-17', '2011-05-17');
+INSERT INTO `patient` (`id`, `id_number`, `cnic`, `username`, `password`, `name`, `father_name`, `dob`, `gender`, `address`, `contact_res`, `contact_cell`, `emergency_contact`, `email`, `blood_group`, `disease`, `allergy`, `drug_allergy`, `status`, `created_at`, `updated_at`) VALUES(1, '01', '61145-5847592-5', NULL, NULL, 'Nazeer Hussain xz', NULL, '1985-03-08', 'Male', ' kug uy rfuy tf j h', '0515548365', '03122354618', '021835246', NULL, 'A+', 'Hyper Tension', 'NILL', 'NILL', '1', '2011-05-17', '2011-06-27');
 -- GO
 INSERT INTO `patient` (`id`, `id_number`, `cnic`, `username`, `password`, `name`, `father_name`, `dob`, `gender`, `address`, `contact_res`, `contact_cell`, `emergency_contact`, `email`, `blood_group`, `disease`, `allergy`, `drug_allergy`, `status`, `created_at`, `updated_at`) VALUES(2, NULL, '514244-8528483-8', NULL, NULL, 'Shakeela Khanum xz', NULL, '1969-09-15', 'Female', NULL, NULL, '0333-5642147', NULL, NULL, NULL, NULL, NULL, NULL, '1', '2011-05-17', '2011-05-17');
 -- GO
@@ -466,6 +466,12 @@ CREATE TABLE `room`
 --
 BEGIN;
 -- GO
+INSERT INTO `room` (`id`, `title`, `description`, `price`, `status`, `created_at`, `updated_at`) VALUES(1, 'VIP Room 1', '', 750, '1', '2011-06-28', '2011-06-28');
+-- GO
+INSERT INTO `room` (`id`, `title`, `description`, `price`, `status`, `created_at`, `updated_at`) VALUES(2, 'VIP Room 2', '', 750, '1', '2011-06-28', '2011-06-28');
+-- GO
+INSERT INTO `room` (`id`, `title`, `description`, `price`, `status`, `created_at`, `updated_at`) VALUES(3, 'VIP Room 3', NULL, 875, '1', '2011-06-28', '2011-06-28');
+-- GO
 COMMIT;
 -- GO
 
@@ -528,6 +534,8 @@ CREATE TABLE `visit`
 	`description` varchar (5000), 
 	`time` varchar (10), 
 	`visit_date` date, 
+	`admit_date` date, 
+	`discharge_date` date, 
 	`fee` varchar (10), 
 	`fee_paid` varchar (10), 
 	`status` varchar (10), 
@@ -542,13 +550,9 @@ CREATE TABLE `visit`
 --
 BEGIN;
 -- GO
-INSERT INTO `visit` (`id`, `patient_id`, `doctor_id`, `ward_bed_id`, `ward_doc_id`, `visit_type`, `bp`, `temp`, `pulse`, `diet`, `description`, `time`, `visit_date`, `fee`, `fee_paid`, `status`, `created_at`, `updated_at`) VALUES(2, 1, 1, NULL, 2, 'Indoor', '120/80', '100', '86', 'Normal', 'Treated for temperature. Blood CP suggested', '1350', '2011-06-23', '577', '1', '2', '2011-06-20', '2011-06-23');
+INSERT INTO `visit` (`id`, `patient_id`, `doctor_id`, `ward_bed_id`, `ward_doc_id`, `visit_type`, `bp`, `temp`, `pulse`, `diet`, `description`, `time`, `visit_date`, `admit_date`, `discharge_date`, `fee`, `fee_paid`, `status`, `created_at`, `updated_at`) VALUES(1, 1, 1, NULL, 2, 'Indoor', '120/80', '100', '86', 'Normal', 'treated for fever', '1200', '2011-06-27', NULL, NULL, '558', '3', '2', '2011-06-23', '2011-06-23');
 -- GO
-INSERT INTO `visit` (`id`, `patient_id`, `doctor_id`, `ward_bed_id`, `ward_doc_id`, `visit_type`, `bp`, `temp`, `pulse`, `diet`, `description`, `time`, `visit_date`, `fee`, `fee_paid`, `status`, `created_at`, `updated_at`) VALUES(3, 2, 1, NULL, 2, 'Indoor', NULL, NULL, NULL, NULL, NULL, '1430', '2011-06-23', NULL, NULL, '1', '2011-06-20', '2011-06-20');
--- GO
-INSERT INTO `visit` (`id`, `patient_id`, `doctor_id`, `ward_bed_id`, `ward_doc_id`, `visit_type`, `bp`, `temp`, `pulse`, `diet`, `description`, `time`, `visit_date`, `fee`, `fee_paid`, `status`, `created_at`, `updated_at`) VALUES(4, 5, 2, NULL, 3, 'Indoor', NULL, NULL, NULL, NULL, NULL, '1500', '2011-06-23', NULL, NULL, '1', '2011-06-20', '2011-06-20');
--- GO
-INSERT INTO `visit` (`id`, `patient_id`, `doctor_id`, `ward_bed_id`, `ward_doc_id`, `visit_type`, `bp`, `temp`, `pulse`, `diet`, `description`, `time`, `visit_date`, `fee`, `fee_paid`, `status`, `created_at`, `updated_at`) VALUES(5, 6, 2, NULL, 5, 'Indoor', NULL, NULL, NULL, NULL, NULL, '1700', '2011-06-23', NULL, NULL, '1', '2011-06-23', '2011-06-23');
+INSERT INTO `visit` (`id`, `patient_id`, `doctor_id`, `ward_bed_id`, `ward_doc_id`, `visit_type`, `bp`, `temp`, `pulse`, `diet`, `description`, `time`, `visit_date`, `admit_date`, `discharge_date`, `fee`, `fee_paid`, `status`, `created_at`, `updated_at`) VALUES(2, 5, 1, NULL, 1, 'Indoor', NULL, NULL, NULL, NULL, NULL, '1230', '2011-06-27', NULL, NULL, NULL, NULL, '1', '2011-06-23', '2011-06-23');
 -- GO
 COMMIT;
 -- GO
@@ -600,11 +604,11 @@ CREATE TABLE `visit_medicine`
 --
 BEGIN;
 -- GO
-INSERT INTO `visit_medicine` (`id`, `patient_id`, `visit_id`, `pharma_id`, `dosage_id`, `quantity`, `price`, `created_at`, `updated_at`) VALUES(1, 1, 2, 4, 4, 1, 45, '2011-06-23', '2011-06-23');
+INSERT INTO `visit_medicine` (`id`, `patient_id`, `visit_id`, `pharma_id`, `dosage_id`, `quantity`, `price`, `created_at`, `updated_at`) VALUES(1, 1, 1, 4, 4, 1, 45, '2011-06-23', '2011-06-23');
 -- GO
-INSERT INTO `visit_medicine` (`id`, `patient_id`, `visit_id`, `pharma_id`, `dosage_id`, `quantity`, `price`, `created_at`, `updated_at`) VALUES(2, 1, 2, 1, 1, 6, 12, '2011-06-23', '2011-06-23');
+INSERT INTO `visit_medicine` (`id`, `patient_id`, `visit_id`, `pharma_id`, `dosage_id`, `quantity`, `price`, `created_at`, `updated_at`) VALUES(2, 1, 1, 2, 2, 3, 45, '2011-06-23', '2011-06-23');
 -- GO
-INSERT INTO `visit_medicine` (`id`, `patient_id`, `visit_id`, `pharma_id`, `dosage_id`, `quantity`, `price`, `created_at`, `updated_at`) VALUES(3, 1, 2, 5, 5, 2, 70, '2011-06-23', '2011-06-23');
+INSERT INTO `visit_medicine` (`id`, `patient_id`, `visit_id`, `pharma_id`, `dosage_id`, `quantity`, `price`, `created_at`, `updated_at`) VALUES(3, 1, 1, 1, 1, 9, 18, '2011-06-23', '2011-06-23');
 -- GO
 COMMIT;
 -- GO
@@ -678,13 +682,15 @@ CREATE TABLE `ward_bed`
 --
 BEGIN;
 -- GO
-INSERT INTO `ward_bed` (`id`, `ward_id`, `bed`, `price`, `status`) VALUES(1, 1, 'Medical 1', 250, '1');
+INSERT INTO `ward_bed` (`id`, `ward_id`, `bed`, `price`, `status`) VALUES(1, 1, 'Medical 1', 270, '1');
 -- GO
 INSERT INTO `ward_bed` (`id`, `ward_id`, `bed`, `price`, `status`) VALUES(2, 2, 'Surgical 1', 500, '1');
 -- GO
 INSERT INTO `ward_bed` (`id`, `ward_id`, `bed`, `price`, `status`) VALUES(3, 1, 'Medical 2', 250, '1');
 -- GO
 INSERT INTO `ward_bed` (`id`, `ward_id`, `bed`, `price`, `status`) VALUES(4, 3, 'Burn 1', 1000, '1');
+-- GO
+INSERT INTO `ward_bed` (`id`, `ward_id`, `bed`, `price`, `status`) VALUES(5, 3, 'Burn 2', 1050, '1');
 -- GO
 COMMIT;
 -- GO

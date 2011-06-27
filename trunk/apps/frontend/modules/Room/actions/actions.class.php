@@ -1,21 +1,8 @@
 <?php
 
-/**
- * Room actions.
- *
- * @package    itp
- * @subpackage Room
- * @author     Your name here
- * @version    SVN: $Id: actions.class.php 12479 2008-10-31 10:54:40Z fabien $
- */
 class RoomActions extends sfActions
 {
- /**
-  * Executes index action
-  *
-  * @param sfRequest $request A request object
-  */
-  public function executeIndex(sfWebRequest $request)
+public function executeIndex(sfWebRequest $request)
   {
     $this->forward('Room', 'list');
   } 
@@ -23,7 +10,7 @@ class RoomActions extends sfActions
 public function executeList()
 	{
 	  $c = new Criteria();
-	  $c->add(RoomPeer::STATUS, Constant::RECORD_STATUS_DELETED, Criteria::NOT_EQUAL);
+	  $c->add(RoomPeer::STATUS, Constant::BED_DELETE, Criteria::NOT_EQUAL);
 	  $c->addAscendingOrderByColumn(RoomPeer::TITLE);
 	  $this->rooms = RoomPeer::doSelect ($c);
   }
@@ -33,10 +20,10 @@ public function executeAdd(sfWebRequest $request)
   
   	if ($request->isMethod('Post'))
   	{
-		
 		$room = new Room();
-		$room->setTitle($request->getParameter('title'));
-		$room->setStatus(Constant::RECORD_STATUS_ACTIVE);
+		$room->setTitle($this->getRequestParameter('title'));
+		$room->setPrice($this->getRequestParameter('price'));
+		$room->setStatus(Constant::BED_AVAILABLE);
 		
 		$room->save();
 		
@@ -56,8 +43,8 @@ public function executeEdit (sfWebRequest $request)
 			$room = RoomPeer::retrieveByPk($this->getRequestParameter('id'));
 
 			$room->setTitle($this->getRequestParameter('title'));
+			$room->setPrice($this->getRequestParameter('price'));
 			$room->setDescription($this->getRequestParameter('description'));
-			//$department->setStatus($this->getRequestParameter('status'));
 			
 			//Save object to database
 			if($room->save())

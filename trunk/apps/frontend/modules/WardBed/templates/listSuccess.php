@@ -21,6 +21,7 @@
 	  <tr>
 		<th style="text-align:left;">Bed No.</th>
 		<th style="text-align:left;">Ward</th>
+		<th style="text-align:left;">Rent Price</th>
 		<th style="text-align:left;">Status</th>
 		<th style="text-align:left;">Operation</th>
 	  </tr>
@@ -35,7 +36,8 @@
 		<tr>
 		<td align="left"><?php echo $bed->getBed(); ?> </td>
 		<td align="left">&nbsp;<?php echo $bed->getWard(); ?></td>
-		<td align="center"><?php echo Constant::GetRecordStatusTitle($bed->getStatus()); ?></td>
+		<td align="left">&nbsp;<?php echo $bed->getPrice(); ?></td>
+		<td align="center"><?php echo Constant::GetWardBedStatusTitle($bed->getStatus()); ?></td>
 				<td align="right" class="edit">
 		<?php echo link_to('&nbsp;','WardBed/edit?id='.Utility::EncryptQueryString($bed->getId()),array('title'=>'Edit', 'class' => 'edit'))?>
 		<?php echo link_to('&nbsp;','WardBed/delete?id='.Utility::EncryptQueryString($bed->getId()), array('confirm'=>'Are you sure you want to Delete this?', 'title'=>'Delete', 'class' => 'delete')); ?>
@@ -83,8 +85,18 @@
     <td width="148" height="30" style="padding-left:10px;">Bed No.:<span class="error"> *</span></td>
 	<td width="452" height="30" style="padding-left:10px;"> <?php echo input_tag('bed','','size=38') ?></td>
 	<script type="text/javascript">
-	var title = new LiveValidation('title', { validMessage: "<?php echo Constant::VALIDATION_SUCCESS; ?>"});
-	title.add( Validate.Presence,{ failureMessage: "<?php echo Constant::VALIDATION_REQUIRED_FIELD; ?>"});
+	var bed = new LiveValidation('bed', { validMessage: "<?php echo Constant::VALIDATION_SUCCESS; ?>"});
+	bed.add( Validate.Presence,{ failureMessage: "<?php echo Constant::VALIDATION_REQUIRED_FIELD; ?>"});
+	</script>
+  </tr>
+  
+   <tr>
+    <td width="148" height="30" style="padding-left:10px;">Bed Rent Price:<span class="error"> *</span></td>
+	<td width="452" height="30" style="padding-left:10px;"> <?php echo input_tag('price','','size=38') ?></td>
+	<script type="text/javascript">
+	var price = new LiveValidation('price', { validMessage: "<?php echo Constant::VALIDATION_SUCCESS; ?>"});
+	price.add( Validate.Presence,{ failureMessage: "<?php echo Constant::VALIDATION_REQUIRED_FIELD; ?>"});
+	price.add( Validate.Numericality,{ failureMessage: "<?php echo 'Numbers only'; ?>"});
 	</script>
   </tr>
  

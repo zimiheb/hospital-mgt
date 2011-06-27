@@ -15,11 +15,23 @@
 
   <tr>
     <td width="16%" height="30">Room Name:<span class="error"> *</span> </td>
-    <td width="84%" height="30"><?php echo input_tag ('title', $room->getTitle(),'size=38'); ?>
+    <td width="84%" height="30"><?php echo input_tag ('title', $room->getTitle(),'size=38'); ?></td>
 	<script type="text/javascript">
 	var title = new LiveValidation('title', { validMessage: "<?php echo Constant::VALIDATION_SUCCESS; ?>"});
 	title.add( Validate.Presence,{ failureMessage: "<?php echo Constant::VALIDATION_REQUIRED_FIELD; ?>"});
 	</script>
+	
+	<tr>
+    <td height="30">Room Rent Price:<span class="error"> *</span></td>
+	<td height="30"> <?php echo input_tag('price',$room->getPrice(),'size=38') ?></td>
+	<script type="text/javascript">
+	var price = new LiveValidation('price', { validMessage: "<?php echo Constant::VALIDATION_SUCCESS; ?>"});
+	price.add( Validate.Presence,{ failureMessage: "<?php echo Constant::VALIDATION_REQUIRED_FIELD; ?>"});
+	price.add( Validate.Numericality,{ failureMessage: "<?php echo 'Numbers only'; ?>"});
+	</script>
+  </tr>
+	
+	
 	<tr height="30">
 	<td valign="top">Description:</td>
 	<td><?php echo textarea_tag('description',$room->getDescription(),'size=30x4'); ?></td>
