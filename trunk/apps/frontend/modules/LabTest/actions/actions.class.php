@@ -35,7 +35,8 @@ public function executeAdd(sfWebRequest $request)
   	{
 		
 		$lab_test = new LabTest();
-		$lab_test->setTitle($request->getParameter('title'));
+		$lab_test->setTitle($this->getRequestParameter('title'));
+		$lab_test->setPrice($this->getRequestParameter('price'));
 		$lab_test->setStatus(Constant::RECORD_STATUS_ACTIVE);
 		
 		$lab_test->save();
@@ -56,8 +57,8 @@ public function executeEdit (sfWebRequest $request)
 			$lab_test = LabTestPeer::retrieveByPk($this->getRequestParameter('id'));
 
 			$lab_test->setTitle($this->getRequestParameter('title'));
+			$lab_test->setPrice($this->getRequestParameter('price'));
 			$lab_test->setDescription($this->getRequestParameter('description'));
-			//$department->setStatus($this->getRequestParameter('status'));
 			
 			//Save object to database
 			if($lab_test->save())
@@ -74,8 +75,6 @@ public function executeEdit (sfWebRequest $request)
 
 		else
 		{
-			
-			//$this->AllDataAvailable();
 			$this->lab_test = LabTestPeer::retrieveByPk(Utility::DecryptQueryString($request->getParameter('id')));
 			
 		}
