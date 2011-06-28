@@ -1,11 +1,15 @@
-<span class="heading">Change Password</<br /><br />
-<br />
-
-
-
-<?php use_helper ('Form') ?>
-
+<?php use_javascript('jquery-1.3.2.min.js') ?>
+<?php use_helper ('Form','Javascript','Object') ?>
 <?php echo form_tag('Login/changePassword') ?>
+
+<div id="main_content">
+	<div class="box_content">
+	<div class="box_title">
+		<h2><span class="dark_blue">Change Password</span></h2>
+	</div>
+	<div class="box_text_content">
+	<div class="box_text">
+	
 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="form">
 
                 <tr>
@@ -59,7 +63,8 @@
                 
 				
 </table>
-
-
-
-                           
+	</div>
+	</div>
+	</div>
+<div class="clear"></div>    
+</div>

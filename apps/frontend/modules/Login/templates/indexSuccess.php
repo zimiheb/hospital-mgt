@@ -25,12 +25,12 @@
   <td width="45%" rowspan="10" align="left"><table width="320" border="0" align="right" cellpadding="0" cellspacing="0">
     <tr>
       <td width="23" valign="top" style="padding-top: 4px;"><?php echo image_tag('arrow.gif','border="0"');?></td>
-      <td width="277">Please enter your login ID and Password to continue.<br />
+      <td width="277">Please enter your Username and Password to continue.<br />
         <br /></td>
       </tr>
     <tr>
        <td width="23" valign="top" style="padding-top: 4px;"><?php echo image_tag('arrow.gif','border="0"');?></td>
-      <td><a href="#">Click here</a> for more   information about your accounts and passwords.<br />
+      <td>If you do not have the credentials, please contact <a href="mailto:admin@hmis.com">System Administrator</a> for Username and Password.<br />
         <br /></td>
       </tr>
     <tr>

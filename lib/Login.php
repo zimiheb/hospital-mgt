@@ -103,21 +103,13 @@ class Login {
 		//get User ID from session and get user object
 		$user_id = sfContext::getInstance ()->getUser ()->getAttribute ( 'USER_ID' );
 		$user = UserPeer::retrieveByPk ( $user_id );
-		
 		//Get post data
-		
-
 		//if old password is correct then set new one
 		
 
 		if (strcmp ( $user->getPassword (), self::EncryptPassword ( $old_password ) ) == 0) {
 			$new_password = self::EncryptPassword ( $new_password );
 			$user->setPassword ( $new_password );
-			//also change the staus that password is updated atleast once
-			//$user->setPasswordUpdated ( Constant::PASSWORD_UPDATED );
-			// also update users session
-			//sfContext::getInstance ()->getUser ()->setAttribute ( 'PASSWORD_UPDATED', $user->getPasswordUpdated () );
-			
 			//Save password
 			if ($user->save ()) {
 				return Constant::LOGIN_PASSWORD_CHANGED_SUCCESS;

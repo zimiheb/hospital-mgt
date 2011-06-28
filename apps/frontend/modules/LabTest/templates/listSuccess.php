@@ -21,6 +21,7 @@
              
 			  <tr>
 				<th style="text-align:left";>Test Name</th>
+				<th style="text-align:left;">Test Price</th>
 				<th style="text-align:left";>Status</th>
 				<th style="text-align:left";>Last Updated</th>
                 <th style="text-align:left;">Operation</th>
@@ -37,6 +38,7 @@
 				
               <tr>
                 <td align="left"><?php echo $lab_test->getTitle(); ?> </td>
+				<td align="left"><?php echo $lab_test->getPrice(); ?></td>
 				<td align="center"><?php echo Constant::GetRecordStatusTitle($lab_test->getStatus()); ?></td>
 				<td align="center"><?php echo $lab_test->getUpdatedAt('d-M-Y'); ?>
 				<td align="right">
@@ -57,12 +59,10 @@
 					
 			  <?php endif; ?>
             </table>
-			</div>
-	
-	</div>
-	
-	</div>
 
+	</div>
+	</div>
+	</div>
 <div class="clear"></div>    
 </div>
 			
@@ -72,7 +72,7 @@
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="form">
   <tr>
-    <td style="padding-left:10px" height="30"><span class="heading">Add New Test</span></td>
+    <td style="padding-left:10px" height="30"><span class="heading">Add New Lab Test</span></td>
     <td align="right" style="padding-right:10px"><a class="popup_closebox" href="#"><?php echo image_tag('btn_x.gif', 'border=0'); ?></a></td>
   </tr>
 </table>
@@ -90,6 +90,15 @@
 	</script>
   </tr>
   
+  <tr>
+    <td width="155" height="30" style="padding-left:10px;">Lab Test Price:<span class="error"> *</span></td>
+	<td width="445" height="30" style="padding-left:10px;"> <?php echo input_tag('price','','size=38') ?></td>
+	<script type="text/javascript">
+	var price = new LiveValidation('price', { validMessage: "<?php echo Constant::VALIDATION_SUCCESS; ?>"});
+	price.add( Validate.Presence,{ failureMessage: "<?php echo Constant::VALIDATION_REQUIRED_FIELD; ?>"});
+	price.add( Validate.Numericality,{ failureMessage: "<?php echo 'Numbers only'; ?>"});
+	</script>
+  </tr>
  
   <tr>
     <td colspan="2">&nbsp;</td>
