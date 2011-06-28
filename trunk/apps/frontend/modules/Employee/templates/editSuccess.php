@@ -34,6 +34,7 @@
 	<script type="text/javascript">
 	var name = new LiveValidation('name', { validMessage: "<?php echo Constant::VALIDATION_SUCCESS; ?>"});
 	name.add( Validate.Presence,{ failureMessage: "<?php echo Constant::VALIDATION_REQUIRED_FIELD; ?>"});
+	name.add( Validate.Format, { pattern: /^[A-Z a-z]*$/,failureMessage: "<?php echo 'Alphabets Only';  ?>"} );
 	</script>
 	</td>
 

@@ -156,6 +156,7 @@ propel:
     doctor_id: { type: INTEGER, size: '11', required: false, foreignTable: employee, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
     ward_bed_id: { type: INTEGER, size: '11', required: false, foreignTable: ward_bed, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
     ward_doc_id: { type: INTEGER, size: '11', required: false, foreignTable: employee, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    room_id: { type: INTEGER, size: '11', required: false }
     visit_type: { type: VARCHAR, size: '10', required: false }
     bp: { type: VARCHAR, size: '10', required: false }
     temp: { type: VARCHAR, size: '10', required: false }

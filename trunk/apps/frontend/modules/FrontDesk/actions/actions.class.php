@@ -136,8 +136,12 @@ public function executeVisitList(sfWebRequest $request)
 		$visit = new Visit();
 		
 		$visit->setPatientId($this->getRequestParameter('patient_id'));
-		$visit->setDoctorId($this->getRequestParameter('doctor_id'));
-		$visit->setWardDocId($this->getRequestParameter('ward_doc_id'));
+		
+		if ($this->getRequestParameter('doctor_id')) $visit->setDoctorId($this->getRequestParameter('doctor_id'));
+		if ($this->getRequestParameter('ward_doc_id')) $visit->setWardDocId($this->getRequestParameter('ward_doc_id'));
+		if ($this->getRequestParameter('ward_bed_id')) $visit->setWardBedId($this->getRequestParameter('ward_bed_id'));
+		if ($this->getRequestParameter('room_id')) $visit->setRoomId($this->getRequestParameter('room_id'));
+		if ($this->getRequestParameter('admit_date')) $visit->setAdmitDate($this->getRequestParameter('admit_date'));
 		$visit->setVisitDate($this->getRequestParameter('visit_date'));
 		$visit->setTime($this->getRequestParameter('time'));
 		$visit->setVisitType($this->getRequestParameter('visit_type'));
@@ -153,7 +157,35 @@ public function executeVisitList(sfWebRequest $request)
 	{
 	$this->patient = PatientPeer::retrieveByPk(Utility::DecryptQueryString($request->getParameter('patient')));
 	}
-  } // -- END executeAddDuty
+  } // -- END executeVisitAdd
+  
+    public function executeVisitEdit(sfWebRequest $request)
+  {
+    if ($request->isMethod('POST'))
+	{
+		$visit = VisitPeer::retrieveByPk($this->getRequestParameter('visit_id'));
+		
+		if ($this->getRequestParameter('doctor_id')) $visit->setDoctorId($this->getRequestParameter('doctor_id'));
+		if ($this->getRequestParameter('ward_doc_id')) $visit->setWardDocId($this->getRequestParameter('ward_doc_id'));
+		if ($this->getRequestParameter('ward_bed_id')) $visit->setWardBedId($this->getRequestParameter('ward_bed_id'));
+		if ($this->getRequestParameter('room_id')) $visit->setRoomId($this->getRequestParameter('room_id'));
+		if ($this->getRequestParameter('admit_date')) $visit->setAdmitDate($this->getRequestParameter('admit_date'));
+		$visit->setVisitDate($this->getRequestParameter('visit_date'));
+		$visit->setTime($this->getRequestParameter('time'));
+		$visit->setVisitType($this->getRequestParameter('visit_type'));
+		
+		$visit->save();
+		
+		$this->getUser ()->setFlash ( 'SUCCESS_MESSAGE', 'Visit to Doctor edited Successfully.' );
+		$this->redirect('FrontDesk/visitList');
+	}
+	
+	else
+	{
+	$this->visit = VisitPeer::retrieveByPk(Utility::DecryptQueryString($request->getParameter('visit')));
+	}
+  } // -- END executeVisitEdit
+
 
 public function executePayVisitFee(sfWebRequest $request)
   {

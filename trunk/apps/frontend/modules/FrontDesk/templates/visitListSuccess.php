@@ -60,7 +60,7 @@
 		echo '';
 		}
 		?>
-		<?php echo link_to('&nbsp;','FrontDesk/visitedit?id='.Utility::EncryptQueryString($visit->getId()),array('title'=>'Edit', 'class' => 'edit'))?>
+		<?php echo link_to('&nbsp;','FrontDesk/visitEdit?visit='.Utility::EncryptQueryString($visit->getId()),array('title'=>'Edit', 'class' => 'edit'))?>
 		<?php //echo link_to('&nbsp;','FrontDesk/deletevisit?id='.Utility::EncryptQueryString($visit->getId()), array('confirm'=>'Are you sure you want to Delete this?', 'title'=>'Delete', 'class' => 'delete')); ?>
 		</td>
 	  </tr>
