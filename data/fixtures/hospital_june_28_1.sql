@@ -1,6 +1,6 @@
 -- DBTools Manager Professional (Enterprise Edition)
 -- Database Dump for: hospital
--- Backup Generated in: 6/28/2011 3:33:39 AM
+-- Backup Generated in: 6/28/2011 2:45:34 PM
 -- Database Server Version: MySQL 5.1.33
 
 -- USEGO
@@ -324,6 +324,12 @@ BEGIN;
 -- GO
 INSERT INTO `lab_test` (`id`, `title`, `description`, `price`, `status`, `created_at`, `updated_at`) VALUES(1, 'Blood CP', NULL, 250, '1', '2011-05-29', '2011-05-29');
 -- GO
+INSERT INTO `lab_test` (`id`, `title`, `description`, `price`, `status`, `created_at`, `updated_at`) VALUES(2, 'Urien RE', NULL, 400, '1', '2011-06-28', '2011-06-28');
+-- GO
+INSERT INTO `lab_test` (`id`, `title`, `description`, `price`, `status`, `created_at`, `updated_at`) VALUES(3, 'LFT', NULL, 350, '1', '2011-06-28', '2011-06-28');
+-- GO
+INSERT INTO `lab_test` (`id`, `title`, `description`, `price`, `status`, `created_at`, `updated_at`) VALUES(4, 'RFT', NULL, 350, '1', '2011-06-28', '2011-06-28');
+-- GO
 COMMIT;
 -- GO
 
@@ -497,7 +503,7 @@ CREATE TABLE `user`
 --
 BEGIN;
 -- GO
-INSERT INTO `user` (`id`, `role_id`, `employee_id`, `user`, `password`, `status`, `created_at`, `updated_at`) VALUES(1, 1, 4, 'admin', '4e075844d2e00e4c800c8c62716bed8c', '1', '2011-05-27', '2011-05-27');
+INSERT INTO `user` (`id`, `role_id`, `employee_id`, `user`, `password`, `status`, `created_at`, `updated_at`) VALUES(1, 1, 4, 'admin', '4e075844d2e00e4c800c8c62716bed8c', '1', '2011-05-27', '2011-06-28');
 -- GO
 INSERT INTO `user` (`id`, `role_id`, `employee_id`, `user`, `password`, `status`, `created_at`, `updated_at`) VALUES(2, 3, 1, 'zeeshancheema', '4e075844d2e00e4c800c8c62716bed8c', '1', '2011-06-20', '2011-06-20');
 -- GO
@@ -526,6 +532,7 @@ CREATE TABLE `visit`
 	`doctor_id` integer (11), 
 	`ward_bed_id` integer (11), 
 	`ward_doc_id` integer (11), 
+	`room_id` integer (11), 
 	`visit_type` varchar (10), 
 	`bp` varchar (10), 
 	`temp` varchar (10), 
@@ -550,9 +557,11 @@ CREATE TABLE `visit`
 --
 BEGIN;
 -- GO
-INSERT INTO `visit` (`id`, `patient_id`, `doctor_id`, `ward_bed_id`, `ward_doc_id`, `visit_type`, `bp`, `temp`, `pulse`, `diet`, `description`, `time`, `visit_date`, `admit_date`, `discharge_date`, `fee`, `fee_paid`, `status`, `created_at`, `updated_at`) VALUES(1, 1, 1, NULL, 2, 'Indoor', '120/80', '100', '86', 'Normal', 'treated for fever', '1200', '2011-06-27', NULL, NULL, '558', '3', '2', '2011-06-23', '2011-06-23');
+INSERT INTO `visit` (`id`, `patient_id`, `doctor_id`, `ward_bed_id`, `ward_doc_id`, `room_id`, `visit_type`, `bp`, `temp`, `pulse`, `diet`, `description`, `time`, `visit_date`, `admit_date`, `discharge_date`, `fee`, `fee_paid`, `status`, `created_at`, `updated_at`) VALUES(1, 1, 1, NULL, 2, NULL, 'Indoor', '120/80', '100', '86', 'Normal', 'treated for fever', '1200', '2011-06-27', NULL, NULL, '558', '3', '2', '2011-06-23', '2011-06-23');
 -- GO
-INSERT INTO `visit` (`id`, `patient_id`, `doctor_id`, `ward_bed_id`, `ward_doc_id`, `visit_type`, `bp`, `temp`, `pulse`, `diet`, `description`, `time`, `visit_date`, `admit_date`, `discharge_date`, `fee`, `fee_paid`, `status`, `created_at`, `updated_at`) VALUES(2, 5, 1, NULL, 1, 'Indoor', NULL, NULL, NULL, NULL, NULL, '1230', '2011-06-27', NULL, NULL, NULL, NULL, '1', '2011-06-23', '2011-06-23');
+INSERT INTO `visit` (`id`, `patient_id`, `doctor_id`, `ward_bed_id`, `ward_doc_id`, `room_id`, `visit_type`, `bp`, `temp`, `pulse`, `diet`, `description`, `time`, `visit_date`, `admit_date`, `discharge_date`, `fee`, `fee_paid`, `status`, `created_at`, `updated_at`) VALUES(2, 5, 1, NULL, 1, NULL, 'Indoor', NULL, NULL, NULL, NULL, NULL, '1230', '2011-06-27', NULL, NULL, NULL, NULL, '1', '2011-06-23', '2011-06-23');
+-- GO
+INSERT INTO `visit` (`id`, `patient_id`, `doctor_id`, `ward_bed_id`, `ward_doc_id`, `room_id`, `visit_type`, `bp`, `temp`, `pulse`, `diet`, `description`, `time`, `visit_date`, `admit_date`, `discharge_date`, `fee`, `fee_paid`, `status`, `created_at`, `updated_at`) VALUES(9, 4, 5, NULL, 2, 1, 'Outdoor', NULL, NULL, NULL, NULL, NULL, '1130', '2011-06-28', '2011-06-28', NULL, NULL, NULL, '1', '2011-06-28', '2011-06-28');
 -- GO
 COMMIT;
 -- GO
@@ -579,6 +588,12 @@ ALTER TABLE `hospital`.`visit` ADD INDEX `FK_visit_ward_bed` (`ward_bed_id` );
 -- Index: FK_visit_ward_doc
 --
 ALTER TABLE `hospital`.`visit` ADD INDEX `FK_visit_ward_doc` (`ward_doc_id` );
+-- GO
+
+--
+-- Index: FK_visit_room
+--
+ALTER TABLE `hospital`.`visit` ADD INDEX `FK_visit_room` (`room_id` );
 -- GO
 
 --
@@ -775,6 +790,12 @@ ALTER TABLE `user` ADD CONSTRAINT `FK_user_employee` FOREIGN KEY (`employee_id`)
 -- Foreign Key Constraint: FK_user_role
 --
 ALTER TABLE `user` ADD CONSTRAINT `FK_user_role` FOREIGN KEY (`role_id`) REFERENCES `role`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+-- GO
+
+--
+-- Foreign Key Constraint: FK_visit_room
+--
+ALTER TABLE `visit` ADD CONSTRAINT `FK_visit_room` FOREIGN KEY (`room_id`) REFERENCES `room`(`id`);
 -- GO
 
 --
