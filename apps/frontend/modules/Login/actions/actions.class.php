@@ -1,21 +1,8 @@
 <?php
 
-/**
- * Login actions.
- *
- * @package    itp
- * @subpackage Login
- * @author     Your name here
- * @version    SVN: $Id: actions.class.php 12479 2008-10-31 10:54:40Z fabien $
- */
 class LoginActions extends sfActions
 {
- /**
-  * Executes index action
-  *
-  * @param sfRequest $request A request object
-  */
-
+ 
 public function executeIndex(sfWebRequest $request)
   {
     
@@ -39,12 +26,10 @@ public function executeIndex(sfWebRequest $request)
 			sfContext::getInstance ()->getUser ()->setAttribute ( 'USER_ID', $user->getId() );
 			sfContext::getInstance ()->getUser ()->setAttribute ( 'USERNAME', $user->getUser() );
 			sfContext::getInstance ()->getUser ()->setAttribute ( 'NAME', $user->getEmployee()->getName() );
-			//sfContext::getInstance ()->getUser ()->setAttribute ( 'ROLE', 'OTHER' );
+			sfContext::getInstance ()->getUser ()->setAttribute ( 'ROLE',  $user->getRole());
 			sfContext::getInstance ()->getUser ()->setAttribute ( 'LOGGED_IN', true );
 			sfContext::getInstance ()->getUser ()->setAuthenticated ( true );
-			
-			// - TODO - Set Permissions
-			
+
 			$this->redirect ( 'Home/index' );
 			}
 		

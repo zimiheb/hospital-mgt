@@ -48,14 +48,12 @@ class UserActions extends sfActions
 		if ($this->getRequest()->getMethod() == sfRequest::POST)
 		{
 			//Create User and set object attributes
-			$password = md5($this->getRequestParameter('password'));
+			
 			$user = UserPeer::retrieveByPk($this->getRequestParameter('id'));
 
-			$user->setEmployeeId($this->getRequestParameter('employee_id'));
 			$user->setRoleId($this->getRequestParameter('role_id'));
 			$user->setUser($request->getParameter('user'));
-			$user->setPassword($password);
-		
+			
 			if($user->save())
 				{
 				$this->getUser()->setFlash('SUCCESS_MESSAGE', Constant::RECORD_EDITED_SUCCESSFULLY);
