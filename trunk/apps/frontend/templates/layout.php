@@ -55,15 +55,44 @@
             <div id="menu">
 			<div class="chromestyle" id="chromemenu">
 				<?php if ($sf_user->isAuthenticated()): ?>
+				<?php $user_role = $sf_user->getAttribute('ROLE') ?>
+				<?php if ($user_role == 'Administrator'): ?>
 				<ul>
 					<li><?php echo link_to ('Home', 'Home/index', array(/*'class'=>'current'*/)); ?></li>
 					<li><?php echo link_to ('Front Desk', 'FrontDesk/index', 'rel=dropmenu_2'); ?></li>
                     <li><?php echo link_to ('Administrator', 'Employee/list', 'rel=dropmenu_3'); ?></li>
-					<li><?php echo link_to ('Doctor', 'Visit/docList'); ?></li>
+					<li><?php echo link_to ('Doctor', 'Visit/docList', 'rel=dropmenu_4'); ?></li>
 					<li><?php echo link_to ('Settings', 'Home/settings', 'rel=dropmenu_1'); ?></li>
 				</ul>
+				
+				<?php elseif ($user_role == 'Doctor'): ?>
+				<ul>
+					<li><?php echo link_to ('Patient Visit', 'Visit/docList'); ?></li>
+					<li><?php echo link_to ('Lab Reports', 'LabReport/list'); ?></li>
+					<li><?php echo link_to ('Search Report', 'LabReport/previousReport'); ?></li>
+
+				</ul>
+				
+				<?php elseif ( $user_role == 'Front Desk'): ?>
+				<ul>
+					<li><?php echo link_to ('OPD Visits', 'FrontDesk/visitList'); ?></li>
+					<li><?php echo link_to ('Patient List', 'Patient/list'); ?></li>
+					<li><?php echo link_to ('Duty Roster', 'FrontDesk/dutyRoster'); ?></li>
+					<li><?php echo link_to ('Previous Visits', 'FrontDesk/visitPrevious'); ?></li>
+				</ul>
+				
+				<?php elseif ( $user_role == 'Employee'): ?>
+				<ul>
+				<li><?php echo link_to ('Home', 'Home/index'); ?></li>
+				<li><?php echo link_to ('Medical', 'Home/med', 'rel=dropmenu_5'); ?></li>
+				<li><?php echo link_to ('Surgical', 'Home/cardiac', 'rel=dropmenu_6'); ?></li>
+				<li><?php echo link_to ('About Us', 'Home/about'); ?></li>
+				<li><?php echo link_to ('Contact Us', 'Home/contact'); ?></li>
+			</ul>
+				<?php endif ;?>
 			</div>
 	
+				<!--DROP DOWNS FOR AUTHENTICATED USERS-->
 					<div id="dropmenu_1" class="dropmenudiv" style="width: 150px; height:30px;">
 						<?php echo link_to ('Department', 'Department/list'); ?>
 						<?php echo link_to ('Designation', 'Designation/list'); ?>
@@ -81,36 +110,55 @@
 					<?php echo link_to ('Outdoor Patient Visits', 'FrontDesk/visitList'); ?>
 					<?php echo link_to ('Patient List', 'Patient/list'); ?>
 					<?php echo link_to ('Duty Roster', 'FrontDesk/dutyRoster'); ?>
+					<?php echo link_to ('Previous Visits', 'FrontDesk/visitPrevious'); ?>
 					</div>
 					
 					<div id="dropmenu_3" class="dropmenudiv" style="width: 150px; height:30px;">
-					<?php echo link_to ('Employee', 'Employee/List'); ?>
+					<?php echo link_to ('Employee', 'Employee/list'); ?>
 					<?php echo link_to ('System Users', 'User/list'); ?>
+					</div>
 					
+					<div id="dropmenu_4" class="dropmenudiv" style="width: 150px; height:30px;">
+					<?php echo link_to ('Patient Visit', 'Visit/docList'); ?>
+					<?php echo link_to ('Lab Reports', 'LabReport/list'); ?>
+					<?php echo link_to ('Search Lab Reports', 'LabReport/previousReport'); ?>
+					</div>
+					
+					<div id="dropmenu_5" class="dropmenudiv" style="width: 150px; height:30px; ">
+					<?php echo link_to ('General Madication', 'Home/med'); ?>
+					<?php echo link_to ('Cardioloy', 'Home/cardiacs'); ?>
+					<?php echo link_to ('Neurology', 'Home/neuros'); ?>
+					</div>
+				
+					<div id="dropmenu_6" class="dropmenudiv" style="width: 150px; height:30px; ">
+					<?php echo link_to ('Cardiac Surgery', 'Home/cardiac'); ?>
+					<?php echo link_to ('General Surgery', 'Home/general'); ?>
+					<?php echo link_to ('Neuro Surgery', 'Home/neuro'); ?>
+					<?php echo link_to ('Ent Surgery', 'Home/ent'); ?>
 					</div>
 					
 			
 			<?php else: ?>
 			<ul>
 				<li><?php echo link_to ('Home', 'Home/index'); ?></li>
-				<li><?php echo link_to ('Medical', 'Home/med', 'rel=dropmenu_3'); ?></li>
-				<li><?php echo link_to ('Surgical', 'Home/cardiac', 'rel=dropmenu_4'); ?></li>
+				<li><?php echo link_to ('Medical', 'Home/med', 'rel=dropmenu_5'); ?></li>
+				<li><?php echo link_to ('Surgical', 'Home/cardiac', 'rel=dropmenu_6'); ?></li>
 				<li><?php echo link_to ('About Us', 'Home/about'); ?></li>
 				<li><?php echo link_to ('Contact Us', 'Home/contact'); ?></li>
 			</ul>
 				
-				<div id="dropmenu_3" class="dropmenudiv" style="width: 150px; height:30px; ">
+					<div id="dropmenu_5" class="dropmenudiv" style="width: 150px; height:30px; ">
 					<?php echo link_to ('General Madication', 'Home/med'); ?>
 					<?php echo link_to ('Cardioloy', 'Home/cardiacs'); ?>
 					<?php echo link_to ('Neurology', 'Home/neuros'); ?>
-				</div>
+					</div>
 				
-				<div id="dropmenu_4" class="dropmenudiv" style="width: 150px; height:30px; ">
+					<div id="dropmenu_6" class="dropmenudiv" style="width: 150px; height:30px; ">
 					<?php echo link_to ('Cardiac Surgery', 'Home/cardiac'); ?>
 					<?php echo link_to ('General Surgery', 'Home/general'); ?>
 					<?php echo link_to ('Neuro Surgery', 'Home/neuro'); ?>
 					<?php echo link_to ('Ent Surgery', 'Home/ent'); ?>
-				</div>
+					</div>
 
 			</div>
 				<?php endif ?>

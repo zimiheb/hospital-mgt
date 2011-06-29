@@ -36,7 +36,7 @@ class VisitActions extends sfActions
 		$visit_id = $this->getRequestParameter('visit_id');
 		$patient_id = $this->getRequestParameter('patient_id');
 		$meds = $this->getRequestParameter('med');
-		$dose = $this->getRequestParameter('med');
+		$dose = $this->getRequestParameter('dose');
 		$quantity = $this->getRequestParameter('quantity');
 		$tests = $this->getRequestParameter('test');
 		
@@ -61,6 +61,7 @@ class VisitActions extends sfActions
 			$total_cost = ($quantity[$i]*$med_price) + $total_cost;
 		}
 		
+		//Saving Lab Tests for Current Visit
 		foreach($tests as $j => $test)
 		{
 			$lab_test = LabTestPeer::retrieveByPk($test[0]);
@@ -72,20 +73,13 @@ class VisitActions extends sfActions
 			$visit_test->setVisitId($visit_id);
 			$visit_test->setLabTestId($test[0]);
 			$visit_test->setPrice($test_price);
+			$visit_test->setStatus(Constant::RECORD_STATUS_ACTIVE);
 			$visit_test->save();
 			
 			$total_cost =  $test_price + $total_cost;
 		}
 		
-		// Saving Visit Details
-		/*echo '<pre>';
-		print_r($visit = VisitPeer::retrieveByPk($visit_id));
-		echo '</pre>';
-		
-		echo $this->getRequestParameter('bp');
-		echo $this->getRequestParameter('pulse');
-		echo $this->getRequestParameter('temp');*/
-		
+		//Saving Current Visit
 		$visit = VisitPeer::retrieveByPk($visit_id);
 		$doc_id = $visit->getDoctorId();
 		$doc = EmployeePeer::retrieveByPk($doc_id);

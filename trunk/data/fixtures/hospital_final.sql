@@ -1,6 +1,6 @@
 -- DBTools Manager Professional (Enterprise Edition)
 -- Database Dump for: hospital
--- Backup Generated in: 6/28/2011 2:45:34 PM
+-- Backup Generated in: 6/29/2011 6:47:55 AM
 -- Database Server Version: MySQL 5.1.33
 
 -- USEGO
@@ -99,6 +99,8 @@ INSERT INTO `dosage` (`id`, `title`, `status`) VALUES(4, 'Once a Week', '1');
 -- GO
 INSERT INTO `dosage` (`id`, `title`, `status`) VALUES(5, 'Once a Month', '1');
 -- GO
+INSERT INTO `dosage` (`id`, `title`, `status`) VALUES(6, '1', '0');
+-- GO
 COMMIT;
 -- GO
 
@@ -126,7 +128,9 @@ INSERT INTO `duty_place` (`id`, `title`, `description`, `status`, `created_at`, 
 -- GO
 INSERT INTO `duty_place` (`id`, `title`, `description`, `status`, `created_at`, `updated_at`) VALUES(2, 'Emergency Room', NULL, '1', '2011-06-03', '2011-06-03');
 -- GO
-INSERT INTO `duty_place` (`id`, `title`, `description`, `status`, `created_at`, `updated_at`) VALUES(3, 'Trauma Center', NULL, '1', '2011-06-03', '2011-06-03');
+INSERT INTO `duty_place` (`id`, `title`, `description`, `status`, `created_at`, `updated_at`) VALUES(3, 'Operation Theater', '', '1', '2011-06-03', '2011-06-29');
+-- GO
+INSERT INTO `duty_place` (`id`, `title`, `description`, `status`, `created_at`, `updated_at`) VALUES(4, 'Pharmacy', NULL, '1', '2011-06-29', '2011-06-29');
 -- GO
 COMMIT;
 -- GO
@@ -220,19 +224,27 @@ CREATE TABLE `employee`
 --
 BEGIN;
 -- GO
-INSERT INTO `employee` (`id`, `department_id`, `designation_id`, `role_id`, `emp_category`, `name`, `cnic`, `dob`, `gender`, `mail_address`, `contact_res`, `contact_cell`, `contact_off`, `emergency_contact`, `employment_date`, `local_resident`, `qualification`, `visit_fee`, `status`, `created_at`, `updated_at`) VALUES(1, 1, 1, 3, 'doc', 'Zeeshan Cheema', '61101-5487541-5', '1980-05-01', 'Male', 'sadfsadf', '654321', '123456', '1111111', '2222222', '2011-05-12', '1', 'hgjghjryfu', 200, '1', '2011-05-12', '2011-05-12');
+INSERT INTO `employee` (`id`, `department_id`, `designation_id`, `role_id`, `emp_category`, `name`, `cnic`, `dob`, `gender`, `mail_address`, `contact_res`, `contact_cell`, `contact_off`, `emergency_contact`, `employment_date`, `local_resident`, `qualification`, `visit_fee`, `status`, `created_at`, `updated_at`) VALUES(1, 1, 1, 3, 'doc', 'Zeeshan Cheema', '61101-5487541-5', '1980-05-01', 'Male', 'C101 islamabad', '654321', '03214524514', '03245122454', '2222222', '2011-05-12', '1', 'hgjghjryfu', 200, '1', '2011-05-12', '2011-06-29');
 -- GO
-INSERT INTO `employee` (`id`, `department_id`, `designation_id`, `role_id`, `emp_category`, `name`, `cnic`, `dob`, `gender`, `mail_address`, `contact_res`, `contact_cell`, `contact_off`, `emergency_contact`, `employment_date`, `local_resident`, `qualification`, `visit_fee`, `status`, `created_at`, `updated_at`) VALUES(2, 1, 1, 3, 'doc', 'Kashif Hussain', '61246-58457875-5', '1987-05-17', 'Male', '', '', '', '', '', '2011-05-17', '0', '', 200, '1', '2011-05-17', '2011-05-17');
+INSERT INTO `employee` (`id`, `department_id`, `designation_id`, `role_id`, `emp_category`, `name`, `cnic`, `dob`, `gender`, `mail_address`, `contact_res`, `contact_cell`, `contact_off`, `emergency_contact`, `employment_date`, `local_resident`, `qualification`, `visit_fee`, `status`, `created_at`, `updated_at`) VALUES(2, 1, 1, 3, 'doc', 'Kashif Hussain', '61246-58457875-5', '1987-05-17', 'Male', '', '', '03004554885', '03251564524', '', '2011-05-17', '0', '', 200, '1', '2011-05-17', '2011-06-29');
 -- GO
-INSERT INTO `employee` (`id`, `department_id`, `designation_id`, `role_id`, `emp_category`, `name`, `cnic`, `dob`, `gender`, `mail_address`, `contact_res`, `contact_cell`, `contact_off`, `emergency_contact`, `employment_date`, `local_resident`, `qualification`, `visit_fee`, `status`, `created_at`, `updated_at`) VALUES(3, 2, 2, 4, 'staff', 'Fareeha Khan', '', '1988-06-20', 'Female', '', '', '', '', '', NULL, '1', '', NULL, '1', '2011-05-17', '2011-05-17');
+INSERT INTO `employee` (`id`, `department_id`, `designation_id`, `role_id`, `emp_category`, `name`, `cnic`, `dob`, `gender`, `mail_address`, `contact_res`, `contact_cell`, `contact_off`, `emergency_contact`, `employment_date`, `local_resident`, `qualification`, `visit_fee`, `status`, `created_at`, `updated_at`) VALUES(3, 2, 2, 4, 'staff', 'Fareeha Khan', '', '1988-06-20', 'Female', '', '', '03211234567', '0514532187', '', NULL, '1', '', NULL, '1', '2011-05-17', '2011-06-29');
 -- GO
-INSERT INTO `employee` (`id`, `department_id`, `designation_id`, `role_id`, `emp_category`, `name`, `cnic`, `dob`, `gender`, `mail_address`, `contact_res`, `contact_cell`, `contact_off`, `emergency_contact`, `employment_date`, `local_resident`, `qualification`, `visit_fee`, `status`, `created_at`, `updated_at`) VALUES(4, NULL, NULL, 1, '1', 'Super Administrator', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '2011-05-27', '2011-05-27');
+INSERT INTO `employee` (`id`, `department_id`, `designation_id`, `role_id`, `emp_category`, `name`, `cnic`, `dob`, `gender`, `mail_address`, `contact_res`, `contact_cell`, `contact_off`, `emergency_contact`, `employment_date`, `local_resident`, `qualification`, `visit_fee`, `status`, `created_at`, `updated_at`) VALUES(4, NULL, NULL, 2, '1', 'Super Administrator', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '2011-05-27', '2011-05-27');
 -- GO
-INSERT INTO `employee` (`id`, `department_id`, `designation_id`, `role_id`, `emp_category`, `name`, `cnic`, `dob`, `gender`, `mail_address`, `contact_res`, `contact_cell`, `contact_off`, `emergency_contact`, `employment_date`, `local_resident`, `qualification`, `visit_fee`, `status`, `created_at`, `updated_at`) VALUES(5, 1, 1, 3, 'doc', 'Shehnaz', '3215487-5562157-6', NULL, 'Female', '', '', '', '', '', '2011-06-22', '0', 'dsfg', 200, '1', '2011-06-22', '2011-06-22');
+INSERT INTO `employee` (`id`, `department_id`, `designation_id`, `role_id`, `emp_category`, `name`, `cnic`, `dob`, `gender`, `mail_address`, `contact_res`, `contact_cell`, `contact_off`, `emergency_contact`, `employment_date`, `local_resident`, `qualification`, `visit_fee`, `status`, `created_at`, `updated_at`) VALUES(5, 1, 1, 3, 'doc', 'Shehnaz Sheikh', '3215487-5562157-6', NULL, 'Female', '', '', '03005522111', '05124521412', '', '2011-06-22', '0', 'dsfg', 200, '1', '2011-06-22', '2011-06-29');
 -- GO
-INSERT INTO `employee` (`id`, `department_id`, `designation_id`, `role_id`, `emp_category`, `name`, `cnic`, `dob`, `gender`, `mail_address`, `contact_res`, `contact_cell`, `contact_off`, `emergency_contact`, `employment_date`, `local_resident`, `qualification`, `visit_fee`, `status`, `created_at`, `updated_at`) VALUES(7, 2, 2, 6, 'staff', 'Zaeem Hussain', '', NULL, 'Male', '', '', '', '', '', NULL, '1', '', NULL, '1', '2011-06-23', '2011-06-23');
+INSERT INTO `employee` (`id`, `department_id`, `designation_id`, `role_id`, `emp_category`, `name`, `cnic`, `dob`, `gender`, `mail_address`, `contact_res`, `contact_cell`, `contact_off`, `emergency_contact`, `employment_date`, `local_resident`, `qualification`, `visit_fee`, `status`, `created_at`, `updated_at`) VALUES(7, 2, 2, 6, 'staff', 'Zaeem Hussain', '', NULL, 'Male', '', '', '03002505342', '03245648487', '', NULL, '1', '', NULL, '1', '2011-06-23', '2011-06-29');
 -- GO
-INSERT INTO `employee` (`id`, `department_id`, `designation_id`, `role_id`, `emp_category`, `name`, `cnic`, `dob`, `gender`, `mail_address`, `contact_res`, `contact_cell`, `contact_off`, `emergency_contact`, `employment_date`, `local_resident`, `qualification`, `visit_fee`, `status`, `created_at`, `updated_at`) VALUES(8, 2, 2, 4, 'staff', 'Khalid Rafiq', '', NULL, 'Male', '', '', '', '', '', NULL, '0', '', NULL, '1', '2011-06-23', '2011-06-23');
+INSERT INTO `employee` (`id`, `department_id`, `designation_id`, `role_id`, `emp_category`, `name`, `cnic`, `dob`, `gender`, `mail_address`, `contact_res`, `contact_cell`, `contact_off`, `emergency_contact`, `employment_date`, `local_resident`, `qualification`, `visit_fee`, `status`, `created_at`, `updated_at`) VALUES(8, 2, 2, 4, 'staff', 'Khalid Rafiq', '', NULL, 'Male', '', '', '009265584779', '03145635464', '', NULL, '0', '', NULL, '1', '2011-06-23', '2011-06-29');
+-- GO
+INSERT INTO `employee` (`id`, `department_id`, `designation_id`, `role_id`, `emp_category`, `name`, `cnic`, `dob`, `gender`, `mail_address`, `contact_res`, `contact_cell`, `contact_off`, `emergency_contact`, `employment_date`, `local_resident`, `qualification`, `visit_fee`, `status`, `created_at`, `updated_at`) VALUES(9, 1, 1, 2, 'doc', 'Athar Khan', '132564-23545-1', '1979-06-29', 'Male', '', '', '0325424554', '0900342212', '', NULL, '1', '', NULL, '0', '2011-06-29', '2011-06-29');
+-- GO
+INSERT INTO `employee` (`id`, `department_id`, `designation_id`, `role_id`, `emp_category`, `name`, `cnic`, `dob`, `gender`, `mail_address`, `contact_res`, `contact_cell`, `contact_off`, `emergency_contact`, `employment_date`, `local_resident`, `qualification`, `visit_fee`, `status`, `created_at`, `updated_at`) VALUES(10, 1, 1, 3, 'doc', 'Khuram Nawaz', '123554-665458-32', '1983-06-29', 'Male', '', '', '0300454801', '0324523412', '', '2011-06-12', '1', '', NULL, '1', '2011-06-29', '2011-06-29');
+-- GO
+INSERT INTO `employee` (`id`, `department_id`, `designation_id`, `role_id`, `emp_category`, `name`, `cnic`, `dob`, `gender`, `mail_address`, `contact_res`, `contact_cell`, `contact_off`, `emergency_contact`, `employment_date`, `local_resident`, `qualification`, `visit_fee`, `status`, `created_at`, `updated_at`) VALUES(11, 1, 1, 3, 'doc', 'Athar Khan', '', '1969-06-29', 'Male', '', '', '03005522121', '03453342212', '', NULL, '1', '', NULL, '1', '2011-06-29', '2011-06-29');
+-- GO
+INSERT INTO `employee` (`id`, `department_id`, `designation_id`, `role_id`, `emp_category`, `name`, `cnic`, `dob`, `gender`, `mail_address`, `contact_res`, `contact_cell`, `contact_off`, `emergency_contact`, `employment_date`, `local_resident`, `qualification`, `visit_fee`, `status`, `created_at`, `updated_at`) VALUES(12, 2, 2, 4, 'staff', 'Nauman Khan', '123554-665458-32', NULL, 'Male', '', '', '03004554801', '05124521412', '', '2011-06-15', '1', '', NULL, '1', '2011-06-29', '2011-06-29');
 -- GO
 COMMIT;
 -- GO
@@ -278,7 +290,11 @@ CREATE TABLE `lab_report`
 --
 BEGIN;
 -- GO
-INSERT INTO `lab_report` (`id`, `patient_id`, `visit_id`, `lab_test_id`, `description`, `price`, `status`, `created_at`, `updated_at`) VALUES(1, 1, 1, 1, NULL, 250, NULL, '2011-06-23', '2011-06-23');
+INSERT INTO `lab_report` (`id`, `patient_id`, `visit_id`, `lab_test_id`, `description`, `price`, `status`, `created_at`, `updated_at`) VALUES(1, 1, 1, 1, 'The test is clear. There are no bacteria of any disease in the blood.', 250, NULL, '2011-06-23', '2011-06-23');
+-- GO
+INSERT INTO `lab_report` (`id`, `patient_id`, `visit_id`, `lab_test_id`, `description`, `price`, `status`, `created_at`, `updated_at`) VALUES(5, 1, 11, 1, 'There are some fungal bacteria in the blood. further tests must be carried out for proper diagnosis.', 250, '2', '2011-06-29', '2011-06-29');
+-- GO
+INSERT INTO `lab_report` (`id`, `patient_id`, `visit_id`, `lab_test_id`, `description`, `price`, `status`, `created_at`, `updated_at`) VALUES(6, 1, 11, 1, NULL, 250, '1', '2011-06-29', '2011-06-29');
 -- GO
 COMMIT;
 -- GO
@@ -330,6 +346,10 @@ INSERT INTO `lab_test` (`id`, `title`, `description`, `price`, `status`, `create
 -- GO
 INSERT INTO `lab_test` (`id`, `title`, `description`, `price`, `status`, `created_at`, `updated_at`) VALUES(4, 'RFT', NULL, 350, '1', '2011-06-28', '2011-06-28');
 -- GO
+INSERT INTO `lab_test` (`id`, `title`, `description`, `price`, `status`, `created_at`, `updated_at`) VALUES(5, 'Ultrasound', NULL, 2000, '1', '2011-06-29', '2011-06-29');
+-- GO
+INSERT INTO `lab_test` (`id`, `title`, `description`, `price`, `status`, `created_at`, `updated_at`) VALUES(6, 'X-Ray', NULL, 1000, '1', '2011-06-29', '2011-06-29');
+-- GO
 COMMIT;
 -- GO
 
@@ -368,17 +388,17 @@ CREATE TABLE `patient`
 --
 BEGIN;
 -- GO
-INSERT INTO `patient` (`id`, `id_number`, `cnic`, `username`, `password`, `name`, `father_name`, `dob`, `gender`, `address`, `contact_res`, `contact_cell`, `emergency_contact`, `email`, `blood_group`, `disease`, `allergy`, `drug_allergy`, `status`, `created_at`, `updated_at`) VALUES(1, '01', '61145-5847592-5', NULL, NULL, 'Nazeer Hussain xz', NULL, '1985-03-08', 'Male', ' kug uy rfuy tf j h', '0515548365', '03122354618', '021835246', NULL, 'A+', 'Hyper Tension', 'NILL', 'NILL', '1', '2011-05-17', '2011-06-27');
+INSERT INTO `patient` (`id`, `id_number`, `cnic`, `username`, `password`, `name`, `father_name`, `dob`, `gender`, `address`, `contact_res`, `contact_cell`, `emergency_contact`, `email`, `blood_group`, `disease`, `allergy`, `drug_allergy`, `status`, `created_at`, `updated_at`) VALUES(1, '01', '61145-5847592-5', NULL, NULL, 'Nazeer Hussain', NULL, '1985-03-08', 'Male', ' kug uy rfuy tf j h', '0515548365', '03122354618', '021835246', NULL, 'A+', 'Hyper Tension', 'NILL', 'Allergic to calcium', '1', '2011-05-17', '2011-06-29');
 -- GO
-INSERT INTO `patient` (`id`, `id_number`, `cnic`, `username`, `password`, `name`, `father_name`, `dob`, `gender`, `address`, `contact_res`, `contact_cell`, `emergency_contact`, `email`, `blood_group`, `disease`, `allergy`, `drug_allergy`, `status`, `created_at`, `updated_at`) VALUES(2, NULL, '514244-8528483-8', NULL, NULL, 'Shakeela Khanum xz', NULL, '1969-09-15', 'Female', NULL, NULL, '0333-5642147', NULL, NULL, NULL, NULL, NULL, NULL, '1', '2011-05-17', '2011-05-17');
+INSERT INTO `patient` (`id`, `id_number`, `cnic`, `username`, `password`, `name`, `father_name`, `dob`, `gender`, `address`, `contact_res`, `contact_cell`, `emergency_contact`, `email`, `blood_group`, `disease`, `allergy`, `drug_allergy`, `status`, `created_at`, `updated_at`) VALUES(2, NULL, '514244-8528483-8', NULL, NULL, 'Shakeela Khanum', NULL, '1969-09-15', 'Female', '', '', '03335642147', '', NULL, NULL, 'Stomach Disorder', 'Anticonvulsants', 'Sulfa drugs', '1', '2011-05-17', '2011-06-29');
 -- GO
-INSERT INTO `patient` (`id`, `id_number`, `cnic`, `username`, `password`, `name`, `father_name`, `dob`, `gender`, `address`, `contact_res`, `contact_cell`, `emergency_contact`, `email`, `blood_group`, `disease`, `allergy`, `drug_allergy`, `status`, `created_at`, `updated_at`) VALUES(3, NULL, '25448-5245478-5', NULL, NULL, 'Masood Aslam', NULL, '1967-01-01', 'Male', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, '1', '2011-06-20', '2011-06-20');
+INSERT INTO `patient` (`id`, `id_number`, `cnic`, `username`, `password`, `name`, `father_name`, `dob`, `gender`, `address`, `contact_res`, `contact_cell`, `emergency_contact`, `email`, `blood_group`, `disease`, `allergy`, `drug_allergy`, `status`, `created_at`, `updated_at`) VALUES(3, NULL, '25448-5245478-5', NULL, NULL, 'Masood Aslam', NULL, '1967-01-01', 'Male', '', '', '', '', NULL, NULL, 'Head Ache', 'Itching ', 'Insulin preparations', '1', '2011-06-20', '2011-06-29');
 -- GO
 INSERT INTO `patient` (`id`, `id_number`, `cnic`, `username`, `password`, `name`, `father_name`, `dob`, `gender`, `address`, `contact_res`, `contact_cell`, `emergency_contact`, `email`, `blood_group`, `disease`, `allergy`, `drug_allergy`, `status`, `created_at`, `updated_at`) VALUES(4, NULL, '21542-5665384-5', NULL, NULL, 'Yahiya Khan', NULL, '1985-08-06', 'Male', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, '1', '2011-06-20', '2011-06-20');
 -- GO
 INSERT INTO `patient` (`id`, `id_number`, `cnic`, `username`, `password`, `name`, `father_name`, `dob`, `gender`, `address`, `contact_res`, `contact_cell`, `emergency_contact`, `email`, `blood_group`, `disease`, `allergy`, `drug_allergy`, `status`, `created_at`, `updated_at`) VALUES(5, NULL, '61101-9356487-7', NULL, NULL, 'Tehmina Dawood', NULL, '1992-03-10', 'Female', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, '1', '2011-06-20', '2011-06-20');
 -- GO
-INSERT INTO `patient` (`id`, `id_number`, `cnic`, `username`, `password`, `name`, `father_name`, `dob`, `gender`, `address`, `contact_res`, `contact_cell`, `emergency_contact`, `email`, `blood_group`, `disease`, `allergy`, `drug_allergy`, `status`, `created_at`, `updated_at`) VALUES(6, NULL, '20476-5847543-2', NULL, NULL, 'Fatima Baber', NULL, '1982-10-20', 'Female', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, '1', '2011-06-20', '2011-06-20');
+INSERT INTO `patient` (`id`, `id_number`, `cnic`, `username`, `password`, `name`, `father_name`, `dob`, `gender`, `address`, `contact_res`, `contact_cell`, `emergency_contact`, `email`, `blood_group`, `disease`, `allergy`, `drug_allergy`, `status`, `created_at`, `updated_at`) VALUES(6, NULL, '20476-5847543-2', NULL, NULL, 'Fatima Baber', NULL, '1982-10-20', 'Female', '', '', '03002505665', '', NULL, NULL, 'Stomach Disorder', 'None', 'Allergic to Vitamin ', '1', '2011-06-20', '2011-06-28');
 -- GO
 COMMIT;
 -- GO
@@ -406,7 +426,7 @@ CREATE TABLE `pharma`
 --
 BEGIN;
 -- GO
-INSERT INTO `pharma` (`id`, `name`, `type`, `strength`, `company`, `price`, `status`, `created_at`, `updated_at`) VALUES(1, 'Paracetamol', 'Tab', '100 mg', 'Werrik', 2, '1', '2011-05-23', '2011-06-21');
+INSERT INTO `pharma` (`id`, `name`, `type`, `strength`, `company`, `price`, `status`, `created_at`, `updated_at`) VALUES(1, 'Paracetamol', 'Tab', '100 mg', 'Werrik', 30, '1', '2011-05-23', '2011-06-29');
 -- GO
 INSERT INTO `pharma` (`id`, `name`, `type`, `strength`, `company`, `price`, `status`, `created_at`, `updated_at`) VALUES(2, 'Intox', 'Tab', '100 mg', 'Abbot', 15, '1', '2011-06-21', '2011-06-21');
 -- GO
@@ -415,6 +435,12 @@ INSERT INTO `pharma` (`id`, `name`, `type`, `strength`, `company`, `price`, `sta
 INSERT INTO `pharma` (`id`, `name`, `type`, `strength`, `company`, `price`, `status`, `created_at`, `updated_at`) VALUES(4, 'Decloran', 'Inj', '10 cc', 'Pak Labs', 45, '1', '2011-06-21', '2011-06-21');
 -- GO
 INSERT INTO `pharma` (`id`, `name`, `type`, `strength`, `company`, `price`, `status`, `created_at`, `updated_at`) VALUES(5, 'Pholchodine', 'Syp', '100 ml', 'Pak Labs', 35, '1', '2011-06-21', '2011-06-21');
+-- GO
+INSERT INTO `pharma` (`id`, `name`, `type`, `strength`, `company`, `price`, `status`, `created_at`, `updated_at`) VALUES(6, 'Indrol', 'Tab', '50mg', 'Bhakai Laboratories', 160, '1', '2011-06-29', '2011-06-29');
+-- GO
+INSERT INTO `pharma` (`id`, `name`, `type`, `strength`, `company`, `price`, `status`, `created_at`, `updated_at`) VALUES(7, 'Antiminizol', 'Cap', '500mg', 'Bhakai Laboratories', 250, '1', '2011-06-29', '2011-06-29');
+-- GO
+INSERT INTO `pharma` (`id`, `name`, `type`, `strength`, `company`, `price`, `status`, `created_at`, `updated_at`) VALUES(8, 'Amoxil', 'Tab', '1000mg', 'Abot Laboratory', 300, '1', '2011-06-29', '2011-06-29');
 -- GO
 COMMIT;
 -- GO
@@ -478,6 +504,8 @@ INSERT INTO `room` (`id`, `title`, `description`, `price`, `status`, `created_at
 -- GO
 INSERT INTO `room` (`id`, `title`, `description`, `price`, `status`, `created_at`, `updated_at`) VALUES(3, 'VIP Room 3', NULL, 875, '1', '2011-06-28', '2011-06-28');
 -- GO
+INSERT INTO `room` (`id`, `title`, `description`, `price`, `status`, `created_at`, `updated_at`) VALUES(4, 'Vip Room 4', NULL, 1500, '1', '2011-06-29', '2011-06-29');
+-- GO
 COMMIT;
 -- GO
 
@@ -503,9 +531,11 @@ CREATE TABLE `user`
 --
 BEGIN;
 -- GO
-INSERT INTO `user` (`id`, `role_id`, `employee_id`, `user`, `password`, `status`, `created_at`, `updated_at`) VALUES(1, 1, 4, 'admin', '4e075844d2e00e4c800c8c62716bed8c', '1', '2011-05-27', '2011-06-28');
+INSERT INTO `user` (`id`, `role_id`, `employee_id`, `user`, `password`, `status`, `created_at`, `updated_at`) VALUES(1, 2, 4, 'admin', '4e075844d2e00e4c800c8c62716bed8c', '1', '2011-05-27', '2011-06-29');
 -- GO
 INSERT INTO `user` (`id`, `role_id`, `employee_id`, `user`, `password`, `status`, `created_at`, `updated_at`) VALUES(2, 3, 1, 'zeeshancheema', '4e075844d2e00e4c800c8c62716bed8c', '1', '2011-06-20', '2011-06-20');
+-- GO
+INSERT INTO `user` (`id`, `role_id`, `employee_id`, `user`, `password`, `status`, `created_at`, `updated_at`) VALUES(5, 4, 3, 'fareeha', '4e075844d2e00e4c800c8c62716bed8c', '1', '2011-06-29', '2011-06-29');
 -- GO
 COMMIT;
 -- GO
@@ -557,11 +587,15 @@ CREATE TABLE `visit`
 --
 BEGIN;
 -- GO
-INSERT INTO `visit` (`id`, `patient_id`, `doctor_id`, `ward_bed_id`, `ward_doc_id`, `room_id`, `visit_type`, `bp`, `temp`, `pulse`, `diet`, `description`, `time`, `visit_date`, `admit_date`, `discharge_date`, `fee`, `fee_paid`, `status`, `created_at`, `updated_at`) VALUES(1, 1, 1, NULL, 2, NULL, 'Indoor', '120/80', '100', '86', 'Normal', 'treated for fever', '1200', '2011-06-27', NULL, NULL, '558', '3', '2', '2011-06-23', '2011-06-23');
+INSERT INTO `visit` (`id`, `patient_id`, `doctor_id`, `ward_bed_id`, `ward_doc_id`, `room_id`, `visit_type`, `bp`, `temp`, `pulse`, `diet`, `description`, `time`, `visit_date`, `admit_date`, `discharge_date`, `fee`, `fee_paid`, `status`, `created_at`, `updated_at`) VALUES(1, 1, 1, NULL, 2, NULL, 'Indoor', '120/80', '100', '86', 'Normal', 'treated for fever', '1200', '2011-06-29', NULL, NULL, '558', '3', '2', '2011-06-23', '2011-06-23');
 -- GO
 INSERT INTO `visit` (`id`, `patient_id`, `doctor_id`, `ward_bed_id`, `ward_doc_id`, `room_id`, `visit_type`, `bp`, `temp`, `pulse`, `diet`, `description`, `time`, `visit_date`, `admit_date`, `discharge_date`, `fee`, `fee_paid`, `status`, `created_at`, `updated_at`) VALUES(2, 5, 1, NULL, 1, NULL, 'Indoor', NULL, NULL, NULL, NULL, NULL, '1230', '2011-06-27', NULL, NULL, NULL, NULL, '1', '2011-06-23', '2011-06-23');
 -- GO
-INSERT INTO `visit` (`id`, `patient_id`, `doctor_id`, `ward_bed_id`, `ward_doc_id`, `room_id`, `visit_type`, `bp`, `temp`, `pulse`, `diet`, `description`, `time`, `visit_date`, `admit_date`, `discharge_date`, `fee`, `fee_paid`, `status`, `created_at`, `updated_at`) VALUES(9, 4, 5, NULL, 2, 1, 'Outdoor', NULL, NULL, NULL, NULL, NULL, '1130', '2011-06-28', '2011-06-28', NULL, NULL, NULL, '1', '2011-06-28', '2011-06-28');
+INSERT INTO `visit` (`id`, `patient_id`, `doctor_id`, `ward_bed_id`, `ward_doc_id`, `room_id`, `visit_type`, `bp`, `temp`, `pulse`, `diet`, `description`, `time`, `visit_date`, `admit_date`, `discharge_date`, `fee`, `fee_paid`, `status`, `created_at`, `updated_at`) VALUES(9, 4, 5, 4, 2, 1, 'Outdoor', '', '', '', '', '', '1130', '2011-06-28', '2011-06-28', NULL, '200', '3', '2', '2011-06-28', '2011-06-28');
+-- GO
+INSERT INTO `visit` (`id`, `patient_id`, `doctor_id`, `ward_bed_id`, `ward_doc_id`, `room_id`, `visit_type`, `bp`, `temp`, `pulse`, `diet`, `description`, `time`, `visit_date`, `admit_date`, `discharge_date`, `fee`, `fee_paid`, `status`, `created_at`, `updated_at`) VALUES(10, 6, 5, 2, 2, NULL, 'Outdoor', '', '', '', '', '', '0900', '2011-06-28', '2011-06-28', NULL, '950', '4', '2', '2011-06-28', '2011-06-28');
+-- GO
+INSERT INTO `visit` (`id`, `patient_id`, `doctor_id`, `ward_bed_id`, `ward_doc_id`, `room_id`, `visit_type`, `bp`, `temp`, `pulse`, `diet`, `description`, `time`, `visit_date`, `admit_date`, `discharge_date`, `fee`, `fee_paid`, `status`, `created_at`, `updated_at`) VALUES(11, 1, 11, 6, 10, NULL, 'Indoor', '150 / 100', '99', '96', 'On light diet because of stomact disorder', 'Treated for stomach disorder. BP and Pulse high, test suggested', '0900', '2011-06-29', '2011-06-29', NULL, '3260', '4', '2', '2011-06-29', '2011-06-29');
 -- GO
 COMMIT;
 -- GO
@@ -624,6 +658,16 @@ INSERT INTO `visit_medicine` (`id`, `patient_id`, `visit_id`, `pharma_id`, `dosa
 INSERT INTO `visit_medicine` (`id`, `patient_id`, `visit_id`, `pharma_id`, `dosage_id`, `quantity`, `price`, `created_at`, `updated_at`) VALUES(2, 1, 1, 2, 2, 3, 45, '2011-06-23', '2011-06-23');
 -- GO
 INSERT INTO `visit_medicine` (`id`, `patient_id`, `visit_id`, `pharma_id`, `dosage_id`, `quantity`, `price`, `created_at`, `updated_at`) VALUES(3, 1, 1, 1, 1, 9, 18, '2011-06-23', '2011-06-23');
+-- GO
+INSERT INTO `visit_medicine` (`id`, `patient_id`, `visit_id`, `pharma_id`, `dosage_id`, `quantity`, `price`, `created_at`, `updated_at`) VALUES(4, 6, 10, 2, 2, 0, 0, '2011-06-28', '2011-06-28');
+-- GO
+INSERT INTO `visit_medicine` (`id`, `patient_id`, `visit_id`, `pharma_id`, `dosage_id`, `quantity`, `price`, `created_at`, `updated_at`) VALUES(5, 6, 10, 1, 1, 0, 0, '2011-06-28', '2011-06-28');
+-- GO
+INSERT INTO `visit_medicine` (`id`, `patient_id`, `visit_id`, `pharma_id`, `dosage_id`, `quantity`, `price`, `created_at`, `updated_at`) VALUES(6, 6, 10, 5, 5, 0, 0, '2011-06-28', '2011-06-28');
+-- GO
+INSERT INTO `visit_medicine` (`id`, `patient_id`, `visit_id`, `pharma_id`, `dosage_id`, `quantity`, `price`, `created_at`, `updated_at`) VALUES(12, 1, 11, 8, 2, 6, 1800, '2011-06-29', '2011-06-29');
+-- GO
+INSERT INTO `visit_medicine` (`id`, `patient_id`, `visit_id`, `pharma_id`, `dosage_id`, `quantity`, `price`, `created_at`, `updated_at`) VALUES(13, 1, 11, 6, 2, 6, 960, '2011-06-29', '2011-06-29');
 -- GO
 COMMIT;
 -- GO
@@ -706,6 +750,10 @@ INSERT INTO `ward_bed` (`id`, `ward_id`, `bed`, `price`, `status`) VALUES(3, 1, 
 INSERT INTO `ward_bed` (`id`, `ward_id`, `bed`, `price`, `status`) VALUES(4, 3, 'Burn 1', 1000, '1');
 -- GO
 INSERT INTO `ward_bed` (`id`, `ward_id`, `bed`, `price`, `status`) VALUES(5, 3, 'Burn 2', 1050, '1');
+-- GO
+INSERT INTO `ward_bed` (`id`, `ward_id`, `bed`, `price`, `status`) VALUES(6, 2, 'Surgical 2', 200, '1');
+-- GO
+INSERT INTO `ward_bed` (`id`, `ward_id`, `bed`, `price`, `status`) VALUES(7, 2, 'Surgical 3', 500, '1');
 -- GO
 COMMIT;
 -- GO
@@ -793,12 +841,6 @@ ALTER TABLE `user` ADD CONSTRAINT `FK_user_role` FOREIGN KEY (`role_id`) REFEREN
 -- GO
 
 --
--- Foreign Key Constraint: FK_visit_room
---
-ALTER TABLE `visit` ADD CONSTRAINT `FK_visit_room` FOREIGN KEY (`room_id`) REFERENCES `room`(`id`);
--- GO
-
---
 -- Foreign Key Constraint: FK_visit_doctor
 --
 ALTER TABLE `visit` ADD CONSTRAINT `FK_visit_doctor` FOREIGN KEY (`doctor_id`) REFERENCES `employee`(`id`);
@@ -808,6 +850,12 @@ ALTER TABLE `visit` ADD CONSTRAINT `FK_visit_doctor` FOREIGN KEY (`doctor_id`) R
 -- Foreign Key Constraint: FK_visit_patient
 --
 ALTER TABLE `visit` ADD CONSTRAINT `FK_visit_patient` FOREIGN KEY (`patient_id`) REFERENCES `patient`(`id`);
+-- GO
+
+--
+-- Foreign Key Constraint: FK_visit_room
+--
+ALTER TABLE `visit` ADD CONSTRAINT `FK_visit_room` FOREIGN KEY (`room_id`) REFERENCES `room`(`id`);
 -- GO
 
 --

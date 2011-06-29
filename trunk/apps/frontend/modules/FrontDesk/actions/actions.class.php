@@ -109,8 +109,6 @@ public function executeVisitList(sfWebRequest $request)
 	$c->add(VisitPeer::VISIT_DATE, date('Y-m-d'));
 	$c->addAscendingOrderByColumn(VisitPeer::ID);
 	$this->visits = VisitPeer::doSelect($c);
-	
-	
   } // -- END executeVisitList
   
   public function executeSearchPatient(sfWebRequest $request)
@@ -190,6 +188,7 @@ public function executeVisitList(sfWebRequest $request)
 public function executePayVisitFee(sfWebRequest $request)
   {
     
+	
 	$visit = VisitPeer::retrieveByPk(Utility::DecryptqueryString($request->getParameter('visit')));
 	
 	$visit->setFeePaid(Constant::VISIT_FEE_PAID);
@@ -198,6 +197,45 @@ public function executePayVisitFee(sfWebRequest $request)
 		$this->getUser()->setFlash('SUCCESS_MESSAGE', 'Fee Paid for the visit Successfully');
 		$this->redirect ('FrontDesk/visitList');
 	
-  }//
+  }// END executePayVisitFee
+
+public function executeVisitPrevious(sfWebRequest $request)
+  {
+    if($request->isMethod('POST'))
+		{
+		
+		$this->flag = true;
+		$visit_date = $this->getRequestParameter('visit_date');
+		
+		$c = new Criteria();
+		$c->add(VisitPeer::STATUS, Constant::RECORD_STATUS_DELETED, Criteria::NOT_EQUAL);
+		$c->add(VisitPeer::VISIT_DATE, $visit_date);
+		$c->addAscendingOrderByColumn(VisitPeer::ID);
+		$this->visits = VisitPeer::doSelect($c);
+		}
+	else
+		{
+		$this->flag = false;
+		}// end else
+  } // -- END executeVisitList
+  
+public function executeVisitDetail(sfWebRequest $request)
+  {
+		$this->visit = VisitPeer::retrieveByPk(Utility::DecryptQueryString($request->getParameter('visit')));
+		
+		$visit = VisitPeer::retrieveByPk(Utility::DecryptQueryString($request->getParameter('visit')));
+		$visit_id = $visit->getId();
+		
+		$c = new Criteria();
+		//$c->add(LabReportPeer::STATUS, Constant::RECORD_STATUS_DELETED, Criteria::NOT_EQUAL);
+		$c->add(LabReportPeer::VISIT_ID, $visit_id);
+		$this->tests = LabReportPeer::doSelect($c);
+		
+		$d = new Criteria();
+		//$d->add(VisitMedicinePeer::STATUS, Constant::RECORD_STATUS_DELETED, Criteria::NOT_EQUAL);
+		$d->add(VisitMedicinePeer::VISIT_ID, $visit_id);
+		$this->medicines = VisitMedicinePeer::doSelect($d);
+		
+  } // -- END executeVisitDetail
 
 } // END Class

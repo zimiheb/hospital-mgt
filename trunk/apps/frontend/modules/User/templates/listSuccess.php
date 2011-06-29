@@ -19,11 +19,10 @@
 
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="datagrid">
 	  <tr>
-		<th style="text-align:left;">Employee Name</th>
-		<th style="text-align:left;">Role</th>
-		<th style="text-align:center;">User</th>
-		<th style="text-align:center;">Password</th>
-		<th style="text-align:left;">Operation</th>
+		<th width="32%" style="text-align:left;">Employee Name</th>
+		<th width="26%" style="text-align:left;">Username</th>
+		<th width="24%" style="text-align:left;">System Role</th>
+		<th width="18%" style="text-align:left;">Operation</th>
 	  </tr>
 	  
 	 <!-- Populating the List -->
@@ -37,11 +36,9 @@
 		
 		<tr>
 		<td align="left"><?php echo $user->getEmployee(); ?> </td>
-		<td align="left"><?php echo $user->getRole(); ?></td>
 		<td align="left"><?php echo $user->getUser(); ?></td>
-				<td align="left"><?php echo $user->getPassword(); ?></td>
-		
-		<td align="right" class="edit">
+		<td align="left"><?php echo $user->getRole(); ?></td>
+		<td align="left" class="edit">
 		<?php echo link_to('&nbsp;','User/edit?id='.Utility::EncryptQueryString($user->getId()),array('title'=>'Edit', 'class' => 'edit'))?>
 		<?php echo link_to('&nbsp;','User/deleteUser?id='.Utility::EncryptQueryString($user->getId()), array('confirm'=>'Are you sure you want to Delete this?', 'title'=>'Delete', 'class' => 'delete')); ?>
 		</td> 
